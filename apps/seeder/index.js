@@ -3,7 +3,14 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 if (!process.env.PRISMA_SCHEMA_PATH) {
-  process.env.PRISMA_SCHEMA_PATH = path.resolve(__dirname, '..', 'packages', 'prisma', 'schema.prisma');
+  process.env.PRISMA_SCHEMA_PATH = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    'packages',
+    'prisma',
+    'schema.prisma'
+  );
 }
 
 if (!process.env.DATABASE_URL) {

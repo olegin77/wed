@@ -8,7 +8,15 @@ function hexhmac(key: crypto.BinaryLike | NodeJS.ArrayBufferView, data: string) 
   return crypto.createHmac("sha256", key).update(data).digest("hex");
 }
 
-export function presignPut({ key, contentType }: { key: string; contentType: string }) {
+export function presignPut({
+  key,
+  contentType,
+  payloadHash,
+}: {
+  key: string;
+  contentType: string;
+  payloadHash?: string;
+}) {
   const access = process.env.SPACES_KEY || "";
   const secret = process.env.SPACES_SECRET || "";
   const region = process.env.SPACES_REGION || "ams3";
@@ -22,9 +30,20 @@ export function presignPut({ key, contentType }: { key: string; contentType: str
     .replace(/\.\d{3}Z/, "Z");
   const datestamp = amzdate.slice(0, 8);
   const credentialScope = `${datestamp}/${region}/${service}/aws4_request`;
-  const signedHeaders = "host;x-amz-content-sha256;x-amz-date";
-  const payloadHash = crypto.createHash("sha256").update("").digest("hex");
-  const canonicalRequest = `PUT\n/${key}\n\nhost:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzdate}\n\n${signedHeaders}\n${payloadHash}`;
+    const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
+  const headerEntries: Array<[string, string]> = [
+    ["host", host],
+    ["x-amz-date", amzdate],
+  ];
+  if (payloadHash) {
+    headerEntries.push(["x-amz-content-sha256", payloadHash]);
+  }
+  headerEntries.sort(([a], [b]) => a.localeCompare(b));
+  const canonicalHeaders = `${headerEntries
+    .map(([name, value]) => `${name}:${value}`)
+    .join("\n")}\n`;
+  const signedHeaders = headerEntries.map(([name]) => name).join(";");
+  const canonicalRequest = `PUT\n/${key}\n\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
   const stringToSign = `${algorithm}\n${amzdate}\n${credentialScope}\n${crypto
     .createHash("sha256")
     .update(canonicalRequest)
@@ -40,10 +59,10 @@ export function presignPut({ key, contentType }: { key: string; contentType: str
   return {
     url,
     headers: {
-      "x-amz-content-sha256": payloadHash,
       "x-amz-date": amzdate,
       Host: host,
       "Content-Type": contentType,
+      ...(payloadHash ? { "x-amz-content-sha256": payloadHash } : {}),
     },
   };
 }
