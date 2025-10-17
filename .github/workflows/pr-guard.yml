@@ -1,0 +1,9 @@
+name: PR Guard
+on: { pull_request: { branches: [ main ] } }
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure docs/CODEX_TASKS.md exists and non-empty
+        run: test -s docs/CODEX_TASKS.md
