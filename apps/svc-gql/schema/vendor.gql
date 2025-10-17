@@ -1,0 +1,11 @@
+type Vendor {
+  id: ID!
+  name: String!
+  city: String!
+  rating: Float
+}
+
+type Query {
+  vendor(id: ID!): Vendor
+  vendors(city: String): [Vendor!]!
+}
