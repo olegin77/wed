@@ -33,11 +33,9 @@ export function presignPut({
   const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
   const headerEntries: Array<[string, string]> = [
     ["host", host],
+    ["x-amz-content-sha256", hashedPayload],
     ["x-amz-date", amzdate],
   ];
-  if (payloadHash) {
-    headerEntries.push(["x-amz-content-sha256", payloadHash]);
-  }
   headerEntries.sort(([a], [b]) => a.localeCompare(b));
   const canonicalHeaders = `${headerEntries
     .map(([name, value]) => `${name}:${value}`)
@@ -62,7 +60,7 @@ export function presignPut({
       "x-amz-date": amzdate,
       Host: host,
       "Content-Type": contentType,
-      ...(payloadHash ? { "x-amz-content-sha256": payloadHash } : {}),
+      "x-amz-content-sha256": hashedPayload,
     },
   };
 }
