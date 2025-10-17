@@ -30,7 +30,7 @@ export function presignPut({
     .replace(/\.\d{3}Z/, "Z");
   const datestamp = amzdate.slice(0, 8);
   const credentialScope = `${datestamp}/${region}/${service}/aws4_request`;
-  const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
+    const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
   const headerEntries: Array<[string, string]> = [
     ["host", host],
     ["x-amz-date", amzdate],
