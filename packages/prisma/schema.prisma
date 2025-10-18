@@ -39,6 +39,12 @@ enum AvailabilityStatus {
   LATE
 }
 
+/// AgencyRole enumerates the access level a member has within an agency account.
+enum AgencyRole {
+  OWNER
+  AGENT
+}
+
 /// User keeps authentication credentials and links to domain profiles.
 model User {
   id           String   @id @default(cuid())
@@ -62,6 +68,8 @@ model User {
   slotLocks   SlotLock[] @relation("UserSlotLocks")
   /// Vendors bookmarked by the account for quick access.
   favourites  Favourite[]
+  /// List of agency memberships that allow acting on behalf of collectives.
+  agencyMemberships AgencyMember[]
 }
 
 /// Couple stores extended profile and planning context for the pair.
@@ -86,6 +94,7 @@ model Couple {
 model Vendor {
   id            String            @id @default(cuid())
   ownerUserId   String
+  agencyId      String?
   type          String
   title         String
   city          String
@@ -100,6 +109,8 @@ model Vendor {
   updatedAt     DateTime          @updatedAt
 
   owner         User              @relation(fields: [ownerUserId], references: [id])
+  /// Owning agency when the vendor is operated by a collective account.
+  agency        Agency?           @relation(fields: [agencyId], references: [id])
   venues        Venue[]
   offers        Offer[]
   availabilities AvailabilitySlot[]
@@ -111,6 +122,33 @@ model Vendor {
   documents     VendorDocument[]
   /// Accounts that favourited the vendor profile.
   favourites    Favourite[]
+}
+
+/// Agency groups multiple vendor operators under a shared organisation account.
+model Agency {
+  id        String          @id @default(cuid())
+  title     String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  /// Members that can act on behalf of the agency.
+  members   AgencyMember[]
+  /// Vendors managed collectively by the agency.
+  vendors   Vendor[]
+}
+
+/// AgencyMember links a platform user to an agency with a defined responsibility.
+model AgencyMember {
+  id        String      @id @default(cuid())
+  agencyId  String
+  userId    String
+  role      AgencyRole  @default(AGENT)
+  createdAt DateTime    @default(now())
+
+  agency Agency @relation(fields: [agencyId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([agencyId, userId])
 }
 
 /// CatalogCity keeps a curated list of geographies exposed to couples

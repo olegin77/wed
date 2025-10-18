@@ -98,6 +98,24 @@ type DemoVendorSeed = {
   };
 };
 
+type DemoAgencyMemberSeed = {
+  user: {
+    id: string;
+    email: string;
+    phone: string;
+  };
+  role: "OWNER" | "AGENT";
+};
+
+type DemoAgencySeed = {
+  agency: {
+    id: string;
+    title: string;
+  };
+  vendorIds: string[];
+  members: ReadonlyArray<DemoAgencyMemberSeed>;
+};
+
 /**
  * Specification for each demo vendor. The structure keeps IDs deterministic so
  * rerunning the seed reconciles records without creating duplicates.
@@ -213,6 +231,65 @@ const demoVendors: ReadonlyArray<DemoVendorSeed> = [
       description: "Выездная съёмка в старом городе и постобработка 60 фотографий.",
       price: 1350,
     },
+  },
+];
+
+/**
+ * Agency fixtures emulate multi-account usage when several agents collaborate on
+ * the same vendor portfolio. The members list intentionally reuses vendor
+ * owners so personal accounts remain linked to their original profiles while
+ * new operator identities demonstrate shared access.
+ */
+const demoAgencies: ReadonlyArray<DemoAgencySeed> = [
+  {
+    agency: {
+      id: "seed-agency-royal-collective",
+      title: "Royal Collective",
+    },
+    vendorIds: ["seed-vendor-royal-hall"],
+    members: [
+      {
+        user: {
+          id: "seed-owner-royal-hall",
+          email: "royal.hall@demo.uz",
+          phone: "+998 90 000 0001",
+        },
+        role: "OWNER",
+      },
+      {
+        user: {
+          id: "seed-agent-royal-ops",
+          email: "royal.ops@demo.uz",
+          phone: "+998 90 000 0500",
+        },
+        role: "AGENT",
+      },
+    ],
+  },
+  {
+    agency: {
+      id: "seed-agency-samarkand-bureau",
+      title: "Samarkand Events Bureau",
+    },
+    vendorIds: ["seed-vendor-oriental-table", "seed-vendor-aurora-studio"],
+    members: [
+      {
+        user: {
+          id: "seed-owner-samarkand-catering",
+          email: "oriental.table@demo.uz",
+          phone: "+998 90 000 0002",
+        },
+        role: "OWNER",
+      },
+      {
+        user: {
+          id: "seed-agent-nargiza",
+          email: "nargiza.events@demo.uz",
+          phone: "+998 90 000 0501",
+        },
+        role: "AGENT",
+      },
+    ],
   },
 ];
 
@@ -398,16 +475,92 @@ async function seedDemoVendors() {
 }
 
 /**
+ * Seeds demo agencies with deterministic identifiers, ensuring members are
+ * linked to the relevant organisations and that shared vendor ownership is
+ * reflected through the new relation.
+ */
+async function seedDemoAgencies() {
+  const summary: { agencyId: string; memberCount: number; vendorCount: number }[] = [];
+
+  for (const spec of demoAgencies) {
+    const agency = await prisma.agency.upsert({
+      where: { id: spec.agency.id },
+      create: {
+        id: spec.agency.id,
+        title: spec.agency.title,
+      },
+      update: {
+        title: spec.agency.title,
+      },
+    });
+
+    let members = 0;
+
+    for (const member of spec.members) {
+      const user = await prisma.user.upsert({
+        where: { id: member.user.id },
+        create: {
+          id: member.user.id,
+          email: member.user.email,
+          phone: member.user.phone,
+          role: "VENDOR",
+          locale: "ru",
+          passwordHash: member.role === "OWNER" ? "seed-owner" : "seed-agent",
+        },
+        update: {
+          email: member.user.email,
+          phone: member.user.phone,
+          role: "VENDOR",
+          locale: "ru",
+        },
+      });
+
+      await prisma.agencyMember.upsert({
+        where: { id: `${agency.id}-${user.id}` },
+        create: {
+          id: `${agency.id}-${user.id}`,
+          agencyId: agency.id,
+          userId: user.id,
+          role: member.role,
+        },
+        update: {
+          role: member.role,
+        },
+      });
+
+      members += 1;
+    }
+
+    if (spec.vendorIds.length > 0) {
+      await prisma.vendor.updateMany({
+        where: { id: { in: spec.vendorIds } },
+        data: { agencyId: agency.id },
+      });
+    }
+
+    summary.push({
+      agencyId: agency.id,
+      vendorCount: spec.vendorIds.length,
+      memberCount: members,
+    });
+  }
+
+  return summary;
+}
+
+/**
  * Executes seed routines sequentially and prints a compact summary so developers
  * can immediately confirm which fixtures were reconciled.
  */
 async function main() {
   try {
-    const [cities, categories, vendors] = await Promise.all([
+    const [cities, categories] = await Promise.all([
       seedCatalogCities(),
       seedCatalogCategories(),
-      seedDemoVendors(),
     ]);
+
+    const vendors = await seedDemoVendors();
+    const agencies = await seedDemoAgencies();
 
     console.log("[seed] Catalogue cities:");
     console.table(cities);
@@ -417,6 +570,9 @@ async function main() {
 
     console.log("[seed] Demo vendors and venues:");
     console.table(vendors);
+
+    console.log("[seed] Agencies and members:");
+    console.table(agencies);
   } catch (error) {
     console.error("[seed] Failed to populate demo data", error);
     process.exitCode = 1;

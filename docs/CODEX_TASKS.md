@@ -8980,7 +8980,7 @@ JS
     git add apps/svc-catalog/src/hooks/invalidate.ts
     ```
 
-- [ ] T-0497 | Мультиаккаунт для агентств: Agency/AgencyMember
+- [x] T-0497 | Мультиаккаунт для агентств: Agency/AgencyMember
   - depends: [T-0226]
   - apply:
     ```bash
@@ -9005,7 +9005,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0498 | UI: переключение контекста (личный/агентство)
+- [x] T-0498 | UI: переключение контекста (личный/агентство)
   - depends: [T-0497, T-0207]
   - apply:
     ```bash
