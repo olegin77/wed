@@ -1,0 +1,20 @@
+name: Lighthouse (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Public URL'
+        required: true
+
+jobs:
+  lh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install lighthouse
+        run: npm i -g lighthouse
+      - name: Run lighthouse
+        run: lighthouse "${{ github.event.inputs.url }}" --quiet --chrome-flags="--headless" --only-categories=performance,accessibility,seo,best-practices
