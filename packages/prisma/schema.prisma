@@ -68,6 +68,10 @@ model User {
   slotLocks   SlotLock[] @relation("UserSlotLocks")
   /// Vendors bookmarked by the account for quick access.
   favourites  Favourite[]
+  /// Chat channels where the account represents a vendor or agency.
+  vendorChatChannels EnquiryChannel[] @relation("EnquiryVendorChannelUser")
+  /// Chat channels anchored to the couple owner account.
+  coupleChatChannels EnquiryChannel[] @relation("EnquiryCoupleChannelUser")
   /// List of agency memberships that allow acting on behalf of collectives.
   agencyMemberships AgencyMember[]
 }
@@ -88,6 +92,8 @@ model Couple {
   budget   BudgetItem[]
   website  Website?
   enquiries Enquiry[]
+  /// Channels opened to facilitate direct vendor communication.
+  chatChannels EnquiryChannel[]
 }
 
 /// Vendor represents a commercial supplier listed in the marketplace.
@@ -118,6 +124,8 @@ model Vendor {
   rankSignals   RankSignal[]
   bookings      Booking[]
   slotLocks     SlotLock[]
+  /// Conversation channels initiated from enquiries with this vendor.
+  chatChannels  EnquiryChannel[]
   /// Structured compliance documents uploaded by the vendor.
   documents     VendorDocument[]
   /// Accounts that favourited the vendor profile.
@@ -248,8 +256,31 @@ model Enquiry {
   notes  EnquiryNote[]
   reviews Review[]
   booking Booking?
+  /// Chat channel connecting the couple and the vendor for this enquiry.
+  channel EnquiryChannel?
 
   @@index([status, eventDate])
+}
+
+/// EnquiryChannel stores the conversation channel metadata for a specific enquiry.
+model EnquiryChannel {
+  id                   String   @id @default(cuid())
+  enquiryId            String   @unique
+  coupleId             String
+  vendorId             String
+  coupleUserId         String?
+  primaryVendorUserId  String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  enquiry Enquiry @relation(fields: [enquiryId], references: [id])
+  couple  Couple  @relation(fields: [coupleId], references: [id])
+  vendor  Vendor  @relation(fields: [vendorId], references: [id])
+  coupleUser        User?   @relation("EnquiryCoupleChannelUser", fields: [coupleUserId], references: [id])
+  primaryVendorUser User?   @relation("EnquiryVendorChannelUser", fields: [primaryVendorUserId], references: [id])
+
+  @@index([vendorId])
+  @@index([coupleId])
 }
 
 /// EnquiryNote records internal collaboration between teammates.

@@ -421,7 +421,7 @@ async function seedVendor(vendorUser) {
  * @param {import('@prisma/client').Venue} venue - Venue linked to the enquiry.
  * @param {import('@prisma/client').User} admin - Admin user to author the note.
  * @param {import('@prisma/client').User} coupleUser - Couple owner to attribute audit trail.
- * @returns {Promise<{enquiry: import('@prisma/client').Enquiry, note: import('@prisma/client').EnquiryNote, review: import('@prisma/client').Review, auditEvent: import('@prisma/client').AuditEvent}>}
+ * @returns {Promise<{enquiry: import('@prisma/client').Enquiry, note: import('@prisma/client').EnquiryNote, review: import('@prisma/client').Review, auditEvent: import('@prisma/client').AuditEvent, channel: import('@prisma/client').EnquiryChannel}>}
  */
 async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
   const enquiry = await prisma.enquiry.upsert({
@@ -446,6 +446,24 @@ async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
       guests: 180,
       budget: 5000,
       status: 'QUOTE_SENT',
+    },
+  });
+
+  const channel = await prisma.enquiryChannel.upsert({
+    where: { enquiryId: enquiry.id },
+    update: {
+      coupleId: couple.id,
+      vendorId: vendor.id,
+      coupleUserId: coupleUser.id,
+      primaryVendorUserId: vendor.ownerUserId,
+    },
+    create: {
+      id: 'seed-enquiry-channel',
+      enquiryId: enquiry.id,
+      coupleId: couple.id,
+      vendorId: vendor.id,
+      coupleUserId: coupleUser.id,
+      primaryVendorUserId: vendor.ownerUserId,
     },
   });
 
@@ -502,7 +520,7 @@ async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
     },
   });
 
-  return { enquiry, note, review, auditEvent };
+  return { enquiry, note, review, auditEvent, channel };
 }
 
 /**
@@ -555,6 +573,11 @@ async function main() {
       rankSignal: vendorData.rankSignal.signalType,
       vendorDocument: vendorData.document.title,
       enquiry: enquiryData.enquiry.id,
+      enquiryChannel: {
+        id: enquiryData.channel.id,
+        coupleUser: coupleUser.email,
+        vendorOwner: vendorUser.email,
+      },
       favourite: favourite.id,
     });
     console.info('[seed] Completed successfully');

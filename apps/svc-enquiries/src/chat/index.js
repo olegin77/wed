@@ -1,53 +1,42 @@
-import { PrismaClient, type Prisma } from "@prisma/client";
+// @ts-check
+import { PrismaClient } from "@prisma/client";
 
 /**
- * Participants that form a chat channel. Each participant is tied to a user
- * account but we also surface a display name so UI layers can present a
- * friendly label without performing extra lookups.
+ * @typedef {Object} ChannelParticipant
+ * @property {"couple"|"vendor"} role
+ * @property {string} userId
+ * @property {string} displayName
+ * @property {string | null | undefined} [email]
  */
-export type ChannelParticipant = {
-  role: "couple" | "vendor";
-  userId: string;
-  displayName: string;
-  email?: string | null;
-};
 
 /**
- * Summary describing a chat channel that belongs to an enquiry. The structure
- * is intentionally compact so it can be serialised to JSON responses without
- * leaking internal Prisma details.
+ * @typedef {Object} ChannelSummary
+ * @property {string} id
+ * @property {string} enquiryId
+ * @property {string} coupleId
+ * @property {string} vendorId
+ * @property {ChannelParticipant[]} participants
+ * @property {Date} createdAt
+ * @property {Date} updatedAt
  */
-export type ChannelSummary = {
-  id: string;
-  enquiryId: string;
-  coupleId: string;
-  vendorId: string;
-  participants: ChannelParticipant[];
-  createdAt: Date;
-  updatedAt: Date;
-};
 
 /**
  * Error raised by chat channel operations. Consumers can inspect the `code`
  * property to tailor HTTP responses.
  */
 export class EnquiryChatError extends Error {
-  constructor(
-    readonly code:
-      | "enquiry_not_found"
-      | "enquiry_missing_couple"
-      | "enquiry_missing_vendor",
-    message: string,
-  ) {
+  /**
+   * @param {"enquiry_not_found"|"enquiry_missing_couple"|"enquiry_missing_vendor"} code
+   * @param {string} message
+   */
+  constructor(code, message) {
     super(message);
+    this.code = code;
     this.name = "EnquiryChatError";
   }
 }
 
-/**
- * Prisma include configuration reused across channel lookups. The definition is
- * hoisted to a constant so both runtime logic and TypeScript types stay in sync.
- */
+/** @type {import("@prisma/client").Prisma.EnquiryChannelInclude} */
 const channelInclude = {
   enquiry: {
     include: {
@@ -60,18 +49,15 @@ const channelInclude = {
   vendor: { include: { owner: true } },
   coupleUser: true,
   primaryVendorUser: true,
-} satisfies Prisma.EnquiryChannelInclude;
-
-type ChannelWithRelations = Prisma.EnquiryChannelGetPayload<{
-  include: typeof channelInclude;
-}>;
+};
 
 /**
- * Narrowed Prisma client requirements so the service stays easy to test. Any
- * object that implements these methods (including transaction clients) can back
- * the channel service.
+ * @typedef {import("@prisma/client").Prisma.EnquiryChannelGetPayload<{ include: typeof channelInclude }>} ChannelWithRelations
  */
-export type ChatPrismaClient = Pick<PrismaClient, "enquiry" | "enquiryChannel">;
+
+/**
+ * @typedef {Pick<import("@prisma/client").PrismaClient, "enquiry"|"enquiryChannel">} ChatPrismaClient
+ */
 
 /**
  * Service responsible for reconciling chat channels for enquiries. It ensures
@@ -79,13 +65,21 @@ export type ChatPrismaClient = Pick<PrismaClient, "enquiry" | "enquiryChannel">;
  * layers.
  */
 export class EnquiryChatChannelService {
-  constructor(private readonly prisma: ChatPrismaClient) {}
+  /**
+   * @param {ChatPrismaClient} prisma
+   */
+  constructor(prisma) {
+    this.prisma = prisma;
+  }
 
   /**
    * Ensures a channel exists for the provided enquiry. The operation is
    * idempotent and will reconcile participant information on subsequent calls.
+   *
+   * @param {string} enquiryId
+   * @returns {Promise<ChannelSummary>}
    */
-  async ensureForEnquiry(enquiryId: string): Promise<ChannelSummary> {
+  async ensureForEnquiry(enquiryId) {
     const enquiry = await this.prisma.enquiry.findUnique({
       where: { id: enquiryId },
       include: {
@@ -118,7 +112,7 @@ export class EnquiryChatChannelService {
     }
 
     if (enquiry.channel) {
-      return this.buildSummary(enquiry.channel);
+      return this.#buildSummary(enquiry.channel);
     }
 
     const coupleOwner = enquiry.user ?? enquiry.couple.user ?? null;
@@ -140,14 +134,17 @@ export class EnquiryChatChannelService {
       include: channelInclude,
     });
 
-    return this.buildSummary(channel);
+    return this.#buildSummary(channel);
   }
 
   /**
    * Lists all chat channels visible to a user. Vendors see conversations they
    * own or manage, while couples see threads linked to their enquiries.
+   *
+   * @param {string} userId
+   * @returns {Promise<ChannelSummary[]>}
    */
-  async listForUser(userId: string): Promise<ChannelSummary[]> {
+  async listForUser(userId) {
     const channels = await this.prisma.enquiryChannel.findMany({
       where: {
         OR: [
@@ -161,11 +158,16 @@ export class EnquiryChatChannelService {
       include: channelInclude,
     });
 
-    return channels.map((channel) => this.buildSummary(channel));
+    return channels.map((channel) => this.#buildSummary(channel));
   }
 
-  private buildSummary(channel: ChannelWithRelations): ChannelSummary {
-    const participants: ChannelParticipant[] = [];
+  /**
+   * @param {ChannelWithRelations} channel
+   * @returns {ChannelSummary}
+   */
+  #buildSummary(channel) {
+    /** @type {ChannelParticipant[]} */
+    const participants = [];
 
     const coupleAccount =
       channel.coupleUser ?? channel.enquiry.user ?? channel.couple.user ?? null;
@@ -202,10 +204,11 @@ export class EnquiryChatChannelService {
  * Factory helper that instantiates the chat channel service with a dedicated
  * Prisma client. Services may prefer to inject their own client, but providing
  * a default keeps simple scripts ergonomic.
+ *
+ * @param {ChatPrismaClient} [prisma]
+ * @returns {EnquiryChatChannelService}
  */
-export function createEnquiryChatChannelService(
-  prisma: ChatPrismaClient = new PrismaClient(),
-) {
+export function createEnquiryChatChannelService(prisma = new PrismaClient()) {
   return new EnquiryChatChannelService(prisma);
 }
 
@@ -214,14 +217,17 @@ export function createEnquiryChatChannelService(
  * lifecycle (for example, HTTP handlers). Consumers are encouraged to manage
  * the returned client's lifecycle explicitly in long-running services.
  */
-let defaultService: EnquiryChatChannelService | null = null;
+let defaultService = null;
 
 /**
  * Returns a cached enquiry chat channel service. When a Prisma client is
  * supplied we reuse it, otherwise a singleton backed by its own client is
  * created lazily on first access.
+ *
+ * @param {ChatPrismaClient} [prisma]
+ * @returns {EnquiryChatChannelService}
  */
-export function getEnquiryChatChannels(prisma?: ChatPrismaClient) {
+export function getEnquiryChatChannels(prisma) {
   if (prisma) {
     defaultService = new EnquiryChatChannelService(prisma);
     return defaultService;
