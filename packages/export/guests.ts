@@ -24,7 +24,10 @@ export function guestsToVCard(guests: GuestRecord[]): string {
 }
 
 function escapeCsv(value: string): string {
-  if (value.includes('"') || value.includes(',') || value.includes('\n')) {
+  if (value === "") {
+    return value;
+  }
+  if (/[",\r\n]/.test(value)) {
     return `"${value.replace(/"/g, '""')}"`;
   }
   return value;

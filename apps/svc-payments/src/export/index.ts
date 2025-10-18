@@ -11,7 +11,7 @@ type FinanceRow = {
 const escapeCsv = (value: string | number | null | undefined): string => {
   if (value === null || value === undefined) return '';
   const str = String(value);
-  return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
+  return /[",\r\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
 };
 
 export const financeCsv = (rows: FinanceRow[]): string => {

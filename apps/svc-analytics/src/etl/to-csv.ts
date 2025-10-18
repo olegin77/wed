@@ -9,7 +9,7 @@ function escape(value: unknown): string {
     return "";
   }
   const text = String(value);
-  return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
 export function toCsv(rows: EventRow[]): string {

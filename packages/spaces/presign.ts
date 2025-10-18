@@ -8,6 +8,19 @@ function hexhmac(key: crypto.BinaryLike | NodeJS.ArrayBufferView, data: string) 
   return crypto.createHmac("sha256", key).update(data).digest("hex");
 }
 
+function encodeRfc3986(value: string): string {
+  return encodeURIComponent(value).replace(/[!*'()]/g, (char) =>
+    `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
+  );
+}
+
+function canonicaliseKey(key: string): string {
+  return key
+    .split("/")
+    .map((segment) => encodeRfc3986(segment))
+    .join("/");
+}
+
 export function presignPut({
   key,
   contentType,
@@ -31,6 +44,7 @@ export function presignPut({
   const datestamp = amzdate.slice(0, 8);
   const credentialScope = `${datestamp}/${region}/${service}/aws4_request`;
   const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
+  const canonicalKey = canonicaliseKey(key);
   const headerEntries: Array<[string, string]> = [
     ["host", host],
     ["x-amz-content-sha256", hashedPayload],
@@ -50,9 +64,9 @@ export function presignPut({
   ];
   queryEntries.sort(([a], [b]) => a.localeCompare(b));
   const canonicalQueryString = queryEntries
-    .map(([name, value]) => `${encodeURIComponent(name)}=${encodeURIComponent(value)}`)
+    .map(([name, value]) => `${encodeRfc3986(name)}=${encodeRfc3986(value)}`)
     .join("&");
-  const canonicalRequest = `PUT\n/${key}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
+  const canonicalRequest = `PUT\n/${canonicalKey}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
   const stringToSign = `${algorithm}\n${amzdate}\n${credentialScope}\n${crypto
     .createHash("sha256")
     .update(canonicalRequest)
@@ -63,7 +77,7 @@ export function presignPut({
   const kSigning = hmac(kService as any, "aws4_request");
   const signature = hexhmac(kSigning as any, stringToSign);
   const queryString = `${canonicalQueryString}&X-Amz-Signature=${signature}`;
-  const url = `https://${host}/${key}?${queryString}`;
+  const url = `https://${host}/${canonicalKey}?${queryString}`;
   return {
     url,
     headers: {
