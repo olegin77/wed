@@ -4676,7 +4676,7 @@ TS
     git add e2e/smoke.spec.ts
     ```
 
-- [ ] T-0250 | ESLint + Prettier + Husky pre-commit
+- [x] T-0250 | ESLint + Prettier + Husky pre-commit
   - depends: []
   - apply:
     ```bash
