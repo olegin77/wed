@@ -1,29 +1,30 @@
-name: wed-platform
-region: ams
-services:
-  - name: website
-    environment_slug: node-js
-    instance_size_slug: basic-xxs
-    instance_count: 1
-    git:
-      repo_clone_url: https://github.com/wed/wed.git
-      branch: main
-    source_dir: .
-    build_command: |
-      npm install -g pnpm
-      pnpm install --frozen-lockfile
-    run_command: node apps/svc-website/src/main.js
-    routes:
-      - path: /
-workers:
-  - name: seeder
-    environment_slug: node-js
-    git:
-      repo_clone_url: https://github.com/wed/wed.git
-      branch: main
-    source_dir: .
-    build_command: |
-      npm install -g pnpm
-      pnpm install --frozen-lockfile
-    run_command: pnpm run seed
-    kind: PRE_DEPLOY
+spec:
+  name: wed-platform
+  region: ams
+  services:
+    - name: website
+      environment_slug: node-js
+      instance_size_slug: basic-xxs
+      instance_count: 1
+      github:
+        repo: wed/wed
+        branch: main
+      source_dir: .
+      build_command: |
+        npm install -g pnpm
+        pnpm install --frozen-lockfile
+      run_command: node apps/svc-website/src/main.js
+      routes:
+        - path: /
+  workers:
+    - name: seeder
+      environment_slug: node-js
+      github:
+        repo: wed/wed
+        branch: main
+      source_dir: .
+      build_command: |
+        npm install -g pnpm
+        pnpm install --frozen-lockfile
+      run_command: pnpm run seed
+      kind: PRE_DEPLOY
