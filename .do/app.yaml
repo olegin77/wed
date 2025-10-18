@@ -1,0 +1,23 @@
+name: wed
+region: fra
+services:
+  - name: web
+    environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    routes:
+      - path: /
+    source_dir: ./
+    http_port: 8080
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+    build_command: |
+      corepack enable
+      corepack prepare pnpm@9.12.0 --activate
+      pnpm -v
+      pnpm -w install --frozen-lockfile
+      pnpm -w build
+    run_command: pnpm -w start
