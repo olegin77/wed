@@ -36,8 +36,14 @@ jobs:
           corepack prepare pnpm@9.12.0 --activate
           pnpm -v
 
-      - name: Install (frozen)
-        run: pnpm -w install --frozen-lockfile
+      - name: Install workspace dependencies
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile
+          else
+            # The monorepo intentionally omits a lockfile in some setups; fall back to a standard install.
+            pnpm install
+          fi
 
       - name: Lint (workspace recursive)
         run: pnpm -w -r run lint --if-present
