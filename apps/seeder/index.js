@@ -443,6 +443,7 @@ async function main() {
     const { couple, guests, website } = await seedCouple(coupleUser);
     const { vendor, venue } = await seedVendor(vendorUser);
     const enquiryData = await seedEnquiry(couple, vendor, venue, admin, coupleUser);
+    console.info('[seed] Demo vendors seeded');
 
     console.info('[seed] Seed summary:', {
       users: ['admin', 'couple', 'vendor'],
