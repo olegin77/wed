@@ -11,8 +11,11 @@
     "lint": "pnpm -w -r run lint --if-present",
     "test": "pnpm -w -r run test --if-present",
     "build": "pnpm -w -r run build --if-present",
-    "prisma:generate": "pnpm -C packages/prisma run generate",
-    "prisma:migrate": "pnpm -C packages/prisma run migrate:dev",
+    "prisma:gen": "pnpm exec prisma generate --schema packages/prisma/schema.prisma",
+    "prisma:generate": "pnpm run prisma:gen",
+    "prisma:migrate": "pnpm exec prisma migrate dev --schema packages/prisma/schema.prisma",
+    "prisma:deploy": "pnpm exec prisma migrate deploy --schema packages/prisma/schema.prisma",
+    "prisma:studio": "pnpm exec prisma studio --schema packages/prisma/schema.prisma",
     "seed": "node apps/seeder/index.js",
     "do:appspec": "node scripts/generate-do-appspec.js"
   }
