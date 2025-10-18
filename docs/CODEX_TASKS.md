@@ -9902,3 +9902,2192 @@ export async function botReply(threadId){
 JS
     git add apps/svc-chat/src/bot/faq.js
     ```
+## ЭТАП 282. Расширенный UI/UX Дизайн и Компоненты
+
+- [ ] T-0551 | UI Kit: Добавить компоненты (Dropdown, Tooltip, Breadcrumbs, Pagination, Skeleton Loader)
+    - depends: [T-0024]
+    - apply:
+        ```bash
+        mkdir -p packages/ui/src/feedback packages/ui/src/navigation packages/ui/src/layout
+        touch packages/ui/src/feedback/{Tooltip,SkeletonLoader}.tsx packages/ui/src/navigation/{Breadcrumbs,Pagination}.tsx packages/ui/src/extended/Dropdown.tsx
+        git add packages/ui/src/feedback/*.tsx packages/ui/src/navigation/*.tsx packages/ui/src/extended/Dropdown.tsx
+        ```
+- [ ] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
+    - depends: [T-0020]
+    - apply:
+        ```bash
+        # Обновить tokens.css или Tailwind config с правилами типографики
+        echo "// TODO: Define typography rules in design system" > packages/ui/typography.todo
+        git add packages/ui/typography.todo
+        ```
+- [ ] T-0553 | Дизайн-система: Определить сетку и лейауты
+    - depends: [T-0020]
+    - apply:
+        ```bash
+        # Документировать правила сетки (grid system) и основные макеты страниц
+        echo "# Grid System and Layouts" > docs/design/layout.mdx
+        git add docs/design/layout.mdx
+        ```
+- [ ] T-0554 | UX: Детализированные User Flow для ключевых сценариев (бронирование, добавление гостя, создание сайта)
+    - depends: [T-0028]
+    - apply:
+        ```bash
+        echo "# Detailed User Flows (Booking, Guest Add, Website Creation)" > docs/ux/research/user_flows.md
+        git add docs/ux/research/user_flows.md
+        ```
+- [ ] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
+    - depends: [T-0021, T-0024]
+    - apply:
+        ```bash
+        # Обновить стили компонентов для всех состояний в @wt/ui
+        echo "// TODO: Implement all component states (hover, focus, etc.)" > packages/ui/component_states.todo
+        git add packages/ui/component_states.todo
+        ```
+- [ ] T-0556 | UI: Дизайн пустых состояний (Empty States) для списков и дашбордов
+    - depends: [T-0022]
+    - apply:
+        ```bash
+        mkdir -p packages/ui/src/states
+        touch packages/ui/src/states/EmptyState.tsx
+        git add packages/ui/src/states/EmptyState.tsx
+        ```
+- [ ] T-0557 | UI: Дизайн экранов ошибок (404, 500, нет доступа)
+    - depends: [T-0022]
+    - apply:
+        ```bash
+        mkdir -p apps/website-mvp/src/error_pages
+        touch apps/website-mvp/src/error_pages/{NotFound,ServerError,Forbidden}.tsx
+        git add apps/website-mvp/src/error_pages/*.tsx
+        ```
+- [ ] T-0558 | Анимации и переходы: Базовые правила для UI
+    - depends: [T-0020]
+    - apply:
+        ```bash
+        # Определить базовые CSS-переходы/анимации в Tailwind config или tokens.css
+        echo "// TODO: Define UI animations and transitions" > packages/ui/animations.todo
+        git add packages/ui/animations.todo
+        ```
+- [ ] T-0559 | Accessibility (A11y): Аудит базовых компонентов на соответствие WCAG AA
+    - depends: [T-0021, T-0024, T-0196]
+    - apply:
+        ```bash
+        echo "# A11y Audit Report for Base UI Components" > docs/a11y/audit_report_base.md
+        git add docs/a11y/audit_report_base.md
+        ```
+- [ ] T-0560 | UX: Проведение юзабилити-тестирования прототипов (5-7 респондентов)
+    - depends: [T-0029]
+    - apply:
+        ```bash
+        echo "# Usability Testing Report (Prototypes)" > docs/ux/research/usability_report_proto.md
+        git add docs/ux/research/usability_report_proto.md
+        ```
+
+---
+
+## ЭТАП 283. Расширенные Инструменты для Пары
+
+- [ ] T-0561 | Бюджет: Умные подсказки по категориям на основе данных (средние расходы)
+    - depends: [T-0042, T-0168]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-guests/src/budget/suggestions
+        echo "export const budgetSuggestions={};" > apps/svc-guests/src/budget/suggestions/index.ts
+        git add apps/svc-guests/src/budget/suggestions/index.ts
+        ```
+- [ ] T-0562 | Бюджет: Визуализация (диаграммы расходов по категориям)
+    - depends: [T-0042]
+    - apply:
+        ```bash
+        mkdir -p packages/ui/src/charts
+        touch packages/ui/src/charts/BudgetChart.tsx
+        git add packages/ui/src/charts/BudgetChart.tsx
+        ```
+- [ ] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
+    - depends: [T-0011, T-0040]
+    - apply:
+        ```bash
+        # Обновить UI для отображения полной информации о госте
+        echo "// TODO: Enhance Guest Card UI" > apps/website-mvp/src/guest_card_enhancement.todo
+        git add apps/website-mvp/src/guest_card_enhancement.todo
+        ```
+- [ ] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        # Добавить поле 'group' в модель Guest в schema.prisma
+        echo "// TODO: Add 'group' field to Guest model" > packages/prisma/guest_group.todo
+        git add packages/prisma/guest_group.todo
+        ```
+- [ ] T-0565 | Гости: Инструмент рассылки приглашений (Email/SMS через svc-notifier)
+    - depends: [T-0040, T-0120, T-0121, T-0720]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-guests/src/invitations
+        echo "export const sendInvitations=1;" > apps/svc-guests/src/invitations/sender.ts
+        git add apps/svc-guests/src/invitations/sender.ts
+        ```
+- [ ] T-0566 | Гости: Визуальный конструктор рассадки (Drag-and-drop столов и гостей)
+    - depends: [T-0041]
+    - apply:
+        ```bash
+        mkdir -p packages/ui/src/seating
+        touch packages/ui/src/seating/SeatingPlanEditor.tsx
+        git add packages/ui/src/seating/SeatingPlanEditor.tsx
+        ```
+- [ ] T-0567 | Чек-лист: Шаблоны чек-листов (по типу свадьбы, бюджету, срокам)
+    - depends: [T-0043, T-0570]
+    - apply:
+        ```bash
+        # Добавить JSON/MD файлы с шаблонами чек-листов
+        mkdir -p apps/svc-guests/src/checklist/templates
+        touch apps/svc-guests/src/checklist/templates/default.json
+        git add apps/svc-guests/src/checklist/templates/default.json
+        ```
+- [ ] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
+    - depends: [T-0043]
+    - apply:
+        ```bash
+        # Добавить поле 'assignee' в модель задачи чек-листа (если она есть) или в JSON
+        echo "// TODO: Add 'assignee' field to Checklist tasks" > apps/svc-guests/src/checklist/assignee.todo
+        git add apps/svc-guests/src/checklist/assignee.todo
+        ```
+- [ ] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
+    - depends: [T-0320]
+    - apply:
+        ```bash
+        # Добавить новые темы в apps/svc-website/themes
+        echo "// TODO: Add new themes (Modern, Rustic, Minimalist)" > apps/svc-website/themes/new_themes.todo
+        git add apps/svc-website/themes/new_themes.todo
+        ```
+- [ ] T-0570 | Сайт Пары: Конструктор страниц (добавление/удаление блоков: фото, текст, карта, таймлайн)
+    - depends: [T-0372]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/couples/editor
+        touch apps/svc-website/src/couples/editor/PageBuilder.tsx
+        git add apps/svc-website/src/couples/editor/PageBuilder.tsx
+        ```
+- [ ] T-0571 | Сайт Пары: Интеграция с Gift Registry
+    - depends: [T-0373, T-0408]
+    - apply:
+        ```bash
+        # Добавить блок 'GiftRegistry' в конструктор сайта пары
+        echo "// TODO: Add GiftRegistry block to Couple Site Builder" > apps/svc-website/src/couples/gift_registry_block.todo
+        git add apps/svc-website/src/couples/gift_registry_block.todo
+        ```
+- [ ] T-0572 | Inspiration Board (Доска вдохновения): Сохранение фото/идей
+    - depends: [T-0011, T-0700]
+    - apply:
+        ```bash
+        # Добавить модель InspirationBoard/BoardItem в schema.prisma
+        echo "// TODO: Add Inspiration Board models to schema.prisma" > packages/prisma/inspiration_board.todo
+        git add packages/prisma/inspiration_board.todo
+        ```
+- [ ] T-0573 | Inspiration Board: Интеграция с Pinterest (API/сохранение по ссылке)
+    - depends: [T-0572]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/pinterest
+        echo "export const savePin=1;" > packages/integrations/pinterest/index.ts
+        git add packages/integrations/pinterest/index.ts
+        ```
+
+---
+
+## ЭТАП 284. Расширенный Маркетплейс и B2B Инструменты
+
+- [ ] T-0574 | Профиль Вендора: Расширенные поля (опыт, награды, языки, команда, соцсети)
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        # Добавить поля experience, awards, languages, teamInfo, socialLinks в модель Vendor
+        echo "// TODO: Extend Vendor model in schema.prisma" > packages/prisma/vendor_extended_profile.todo
+        git add packages/prisma/vendor_extended_profile.todo
+        ```
+- [ ] T-0575 | Профиль Вендора: Видео-визитка (загрузка/встраивание Youtube/Vimeo)
+    - depends: [T-0574, T-0270]
+    - apply:
+        ```bash
+        # Добавить поле videoUrl в модель Vendor
+        echo "// TODO: Add videoUrl field to Vendor model" > packages/prisma/vendor_video.todo
+        git add packages/prisma/vendor_video.todo
+        ```
+- [ ] T-0576 | Профиль Вендора: Интеграция 3D туров (Matterport/Kuula)
+    - depends: [T-0192]
+    - apply:
+        ```bash
+        # Добавить поле 'toursJson' в модель Venue в schema.prisma
+        echo "// TODO: Add 3D tours field to Venue model" > packages/prisma/venue_3d_tours.todo
+        git add packages/prisma/venue_3d_tours.todo
+        ```
+- [ ] T-0577 | Календарь Вендора: Синхронизация с Google Calendar (2-way sync)
+    - depends: [T-0051, T-0166]
+    - apply:
+        ```bash
+        # Реализовать полноценную интеграцию с Google Calendar API
+        echo "// TODO: Implement Google Calendar 2-way sync" > packages/ical/google/two_way_sync.todo
+        git add packages/ical/google/two_way_sync.todo
+        ```
+- [ ] T-0578 | Календарь Вендора: Настройка буферного времени до/после бронирования
+    - depends: [T-0051]
+    - apply:
+        ```bash
+        # Добавить поля bufferBeforeMinutes, bufferAfterMinutes в настройки календаря вендора
+        echo "// TODO: Add buffer time settings for vendor calendar" > apps/svc-vendors/src/availability/buffer_time.todo
+        git add apps/svc-vendors/src/availability/buffer_time.todo
+        ```
+- [ ] T-0579 | Enquiry Manager (B2B): Канбан-доска заявок (статусы: Новая, В работе, Контракт, Оплачено, Отказ)
+    - depends: [T-0052, T-0188]
+    - apply:
+        ```bash
+        mkdir -p packages/ui/src/kanban
+        touch packages/ui/src/kanban/EnquiryKanban.tsx
+        git add packages/ui/src/kanban/EnquiryKanban.tsx
+        ```
+- [ ] T-0580 | Enquiry Manager (B2B): Шаблоны ответов на заявки
+    - depends: [T-0052, T-0174]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/enquiries/templates
+        echo "export const enquiryResponseTemplates = [];" > apps/svc-vendors/src/enquiries/templates/index.ts
+        git add apps/svc-vendors/src/enquiries/templates/index.ts
+        ```
+- [ ] T-0581 | Enquiry Manager (B2B): Напоминания по заявкам (follow-up)
+    - depends: [T-0052, T-0720]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/enquiries/reminders
+        echo "export const setEnquiryReminder = 1;" > apps/svc-vendors/src/enquiries/reminders/index.ts
+        git add apps/svc-vendors/src/enquiries/reminders/index.ts
+        ```
+- [ ] T-0582 | Аналитика Вендора (B2B): Воронка (просмотры → клики → заявки → контракты → оплаты)
+    - depends: [T-0090, T-0193]
+    - apply:
+        ```bash
+        # Расширить svc-analytics для сбора и визуализации воронки вендора
+        echo "// TODO: Implement Vendor Funnel Analytics" > apps/svc-analytics/src/funnels/vendor_funnel.todo
+        git add apps/svc-analytics/src/funnels/vendor_funnel.todo
+        ```
+- [ ] T-0583 | Аналитика Вендора (B2B): Сравнение с конкурентами (анонимно, по категории/городу)
+    - depends: [T-0090]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-analytics/src/benchmarking
+        echo "export const vendorBenchmark = 1;" > apps/svc-analytics/src/benchmarking/index.ts
+        git add apps/svc-analytics/src/benchmarking/index.ts
+        ```
+- [ ] T-0584 | Отзывы: Возможность ответа вендора на отзыв
+    - depends: [T-0070]
+    - apply:
+        ```bash
+        # Добавить поле 'vendorReplyText' в модель Review
+        echo "// TODO: Add vendor reply field to Review model" > packages/prisma/review_vendor_reply.todo
+        git add packages/prisma/review_vendor_reply.todo
+        ```
+- [ ] T-0585 | Отзывы: Запрос отзыва у пары после завершения контракта
+    - depends: [T-0070, T-0188, T-0720]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-enquiries/src/reviews/request
+        echo "export const requestReview = 1;" > apps/svc-enquiries/src/reviews/request/index.ts
+        git add apps/svc-enquiries/src/reviews/request/index.ts
+        ```
+
+---
+
+## ЭТАП 285. FinTech и Платежи (Углубление)
+
+- [ ] T-0586 | Платежи: Реализация интеграции с Payme
+    - depends: [T-01061, T-0357]
+    - apply:
+        ```bash
+        # Заполнить адаптер apps/svc-payments/providers/payme.ts
+        echo "// TODO: Implement Payme payment provider" > apps/svc-payments/providers/payme_impl.todo
+        git add apps/svc-payments/providers/payme_impl.todo
+        ```
+- [ ] T-0587 | Платежи: Реализация интеграции с Click
+    - depends: [T-01062, T-0357]
+    - apply:
+        ```bash
+        # Заполнить адаптер apps/svc-payments/providers/click.ts
+        echo "// TODO: Implement Click payment provider" > apps/svc-payments/providers/click_impl.todo
+        git add apps/svc-payments/providers/click_impl.todo
+        ```
+- [ ] T-0588 | Платежи: Реализация интеграции с UzPay (если актуально)
+    - depends: [T-01060, T-0357]
+    - apply:
+        ```bash
+        # Заполнить адаптер apps/svc-payments/providers/uzpay.ts
+        echo "// TODO: Implement UzPay payment provider" > apps/svc-payments/providers/uzpay_impl.todo
+        git add apps/svc-payments/providers/uzpay_impl.todo
+        ```
+- [ ] T-0589 | Платежи: Поддержка возвратов (Refund API) через провайдера
+    - depends: [T-0357, T-0362]
+    - apply:
+        ```bash
+        # Убедиться, что все провайдеры поддерживают refund и API /pay/refund работает корректно
+        echo "// TODO: Ensure refund functionality works across all providers" > apps/svc-billing/refund_check.todo
+        git add apps/svc-billing/refund_check.todo
+        ```
+- [ ] T-0590 | Эскроу: UI и флоу для подтверждения выполнения услуги парой
+    - depends: [T-0790, T-1021]
+    - apply:
+        ```bash
+        mkdir -p apps/website-mvp/src/escrow
+        touch apps/website-mvp/src/escrow/ConfirmService.tsx
+        git add apps/website-mvp/src/escrow/ConfirmService.tsx
+        ```
+- [ ] T-0591 | Эскроу: Автоматический релиз средств вендору через N дней после даты свадьбы
+    - depends: [T-1021, T-0394]
+    - apply:
+        ```bash
+        # Добавить cron-задачу для проверки и релиза эскроу-платежей
+        echo "// TODO: Add cron job for escrow release" > apps/worker/src/cron_escrow.todo
+        git add apps/worker/src/cron_escrow.todo
+        ```
+- [ ] T-0592 | Рассрочка/Кредитование: Интеграция с местными банками/сервисами (API stub)
+    - depends: [T-0112]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/installment
+        echo "export const checkInstallment=1;" > packages/integrations/installment/index.ts
+        git add packages/integrations/installment/index.ts
+        ```
+- [ ] T-0593 | Фискализация: Отправка данных в ГНК (API stub)
+    - depends: [T-0118]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/fiscal
+        echo "export const sendFiscalReceipt=1;" > packages/integrations/fiscal/index.ts
+        git add packages/integrations/fiscal/index.ts
+        ```
+
+---
+
+## ЭТАП 286. Мобильная Адаптация и PWA
+
+- [ ] T-0594 | UI: Адаптивная верстка всех ключевых страниц (Mobile-first)
+    - depends: [T-0022, T-0553]
+    - apply:
+        ```bash
+        # Провести аудит и доработку Tailwind классов для мобильных разрешений
+        echo "// TODO: Ensure all pages are responsive (mobile-first)" > apps/svc-website/responsive_audit.todo
+        git add apps/svc-website/responsive_audit.todo
+        ```
+- [ ] T-0595 | PWA: Оффлайн-доступ к избранному и чек-листу (Service Worker caching)
+    - depends: [T-0451, T-0236, T-0043]
+    - apply:
+        ```bash
+        # Обновить sw.js для кэширования API-запросов избранного и чек-листа
+        echo "// TODO: Update sw.js for offline caching (favorites, checklist)" > public/sw_offline_cache.todo
+        git add public/sw_offline_cache.todo
+        ```
+- [ ] T-0596 | PWA: Push-уведомления (реализация подписки и получения на клиенте)
+    - depends: [T-0301, T-0304]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/pwa
+        touch apps/svc-website/src/pwa/usePushNotifications.ts
+        git add apps/svc-website/src/pwa/usePushNotifications.ts
+        ```
+- [ ] T-0597 | PWA: Добавить на главный экран (Add to Home Screen) - A2HS
+    - depends: [T-0308]
+    - apply:
+        ```bash
+        # Убедиться, что manifest.json корректен и Service Worker активен для A2HS
+        echo "// TODO: Verify A2HS requirements" > apps/svc-website/a2hs.todo
+        git add apps/svc-website/a2hs.todo
+        ```
+- [ ] T-0598 | Производительность: Оптимизация изображений (WebP, AVIF)
+    - depends: [T-0215]
+    - apply:
+        ```bash
+        # Обновить скрипт resize в @wt/media для генерации WebP/AVIF
+        echo "// TODO: Update image optimization script for WebP/AVIF" > packages/media/src/webp_avif.todo
+        git add packages/media/src/webp_avif.todo
+        ```
+- [ ] T-0599 | Производительность: Code Splitting и Lazy Loading компонентов/страниц
+    - depends: [T-0060]
+    - apply:
+        ```bash
+        # Настроить динамические импорты в Next.js/React для разделения кода
+        echo "// TODO: Implement code splitting and lazy loading" > apps/svc-website/code_splitting.todo
+        git add apps/svc-website/code_splitting.todo
+        ```
+
+---
+
+## ЭТАП 287. Сообщество и Контент
+
+- [ ] T-0600 | Блог/Гайды: Комментарии к статьям (интеграция Disqus/собственная реализация)
+    - depends: [T-0180, T-0442]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/comments
+        echo "export const commentsWidget=1;" > packages/integrations/comments/index.ts
+        git add packages/integrations/comments/index.ts
+        ```
+- [ ] T-0601 | Блог/Гайды: Рейтинг статей (лайки/оценки)
+    - depends: [T-0180]
+    - apply:
+        ```bash
+        # Добавить модель ArticleRating в schema.prisma
+        echo "// TODO: Add ArticleRating model to schema.prisma" > packages/prisma/article_rating.todo
+        git add packages/prisma/article_rating.todo
+        ```
+- [ ] T-0602 | Форум: Базовая структура (разделы, темы, посты) - скелет
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-forum/src
+        # Добавить модели ForumSection, ForumThread, ForumPost в schema.prisma
+        echo "// TODO: Add Forum models to schema.prisma" > packages/prisma/forum_models.todo
+        git add packages/prisma/forum_models.todo packages/prisma/forum_models.todo
+        touch apps/svc-forum/src/main.js
+        git add apps/svc-forum/src/main.js
+        ```
+- [ ] T-0603 | Реальные свадьбы: Раздел с историями и фотоотчетами пар
+    - depends: [T-0011, T-0180]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/pages/real_weddings
+        # Добавить модель RealWedding в schema.prisma
+        echo "// TODO: Add RealWedding model to schema.prisma" > packages/prisma/real_wedding.todo
+        git add packages/prisma/real_wedding.todo apps/svc-website/src/pages/real_weddings
+        ```
+- [ ] T-0604 | Q&A Сервис: Вопросы и ответы от пар и экспертов
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-qna/src
+        # Добавить модели Question, Answer в schema.prisma
+        echo "// TODO: Add Q&A models to schema.prisma" > packages/prisma/qna_models.todo
+        git add packages/prisma/qna_models.todo apps/svc-qna/src
+        ```
+- [ ] T-0605 | Конкурсы и акции для пар и вендоров
+    - depends: [T-0011, T-0180]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/pages/contests
+        # Добавить модель Contest в schema.prisma
+        echo "// TODO: Add Contest model to schema.prisma" > packages/prisma/contest_model.todo
+        git add packages/prisma/contest_model.todo apps/svc-website/src/pages/contests
+        ```
+
+---
+
+## ЭТАП 288. Локализация и Региональная Специфика
+
+- [ ] T-0606 | I18n: Перевод интерфейса на узбекский (латиница)
+    - depends: [T-0100, T-0210]
+    - apply:
+        ```bash
+        # Добавить и заполнить файл uz_latin.json в packages/i18n
+        touch packages/i18n/locales/uz_latin.json
+        git add packages/i18n/locales/uz_latin.json
+        ```
+- [ ] T-0607 | I18n: Локализация контента (блог, гайды) - механизм
+    - depends: [T-0180]
+    - apply:
+        ```bash
+        # Внедрить систему управления локализованным контентом (например, папки по языкам)
+        echo "// TODO: Implement content localization mechanism" > docs/content/localization_strategy.md
+        git add docs/content/localization_strategy.md
+        ```
+- [ ] T-0608 | Гео: Справочник регионов Узбекистана (области)
+    - depends: [T-0580]
+    - apply:
+        ```bash
+        # Дополнить packages/geo/uz.ts областями
+        echo "// TODO: Add regions of Uzbekistan to geo package" > packages/geo/uz_regions.todo
+        git add packages/geo/uz_regions.todo
+        ```
+- [ ] T-0609 | Каталог: Фильтр по регионам/областям
+    - depends: [T-0608, T-0234]
+    - apply:
+        ```bash
+        # Добавить фильтр 'region' в API /catalog/search
+        echo "// TODO: Add region filter to catalog search API" > apps/svc-catalog/src/api/region_filter.todo
+        git add apps/svc-catalog/src/api/region_filter.todo
+        ```
+- [ ] T-0610 | Контент: Статьи о свадебных традициях Узбекистана (Никох, Келин Салом и др.)
+    - depends: [T-0180]
+    - apply:
+        ```bash
+        mkdir -p content/blog/traditions
+        touch content/blog/traditions/nikoh.md content/blog/traditions/kelin_salom.md
+        git add content/blog/traditions/*.md
+        ```
+
+---
+
+## ЭТАП 289. AI и Персонализация (Углубление)
+
+- [ ] T-0611 | AI: Чат-бот поддержки (интеграция с Dialogflow/Rasa или аналогом) - скелет
+    - depends: [T-0455]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/chatbot
+        echo "export const chatbotQuery=1;" > packages/integrations/chatbot/index.ts
+        git add packages/integrations/chatbot/index.ts
+        ```
+- [ ] T-0612 | AI: Умные рекомендации вендоров (на основе стиля свадьбы, бюджета, отзывов) - модель v2
+    - depends: [T-0404, T-0378]
+    - apply:
+        ```bash
+        # Разработать улучшенную модель рекомендаций
+        echo "// TODO: Develop v2 recommendation model" > apps/svc-catalog/src/reco/model_v2.todo
+        git add apps/svc-catalog/src/reco/model_v2.todo
+        ```
+- [ ] T-0613 | AI: Автоматическое тегирование фото вендоров (CV API stub)
+    - depends: [T-0215]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/cv
+        echo "export const tagImage=1;" > packages/integrations/cv/index.ts
+        git add packages/integrations/cv/index.ts
+        ```
+- [ ] T-0614 | Персонализация: Уведомления о скидках/новых вендорах по интересам пользователя
+    - depends: [T-0401, T-0720]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-notifier/src/personalized
+        echo "export const sendPersonalizedAlerts=1;" > apps/svc-notifier/src/personalized/index.ts
+        git add apps/svc-notifier/src/personalized/index.ts
+        ```
+- [ ] T-0615 | Персонализация: Динамический контент на главной странице (подборки, статьи)
+    - depends: [T-0401, T-0441]
+    - apply:
+        ```bash
+        # Доработать главную страницу для показа персонализированного контента
+        echo "// TODO: Implement dynamic content on homepage" > apps/svc-website/src/pages/home_personalization.todo
+        git add apps/svc-website/src/pages/home_personalization.todo
+        ```
+
+---
+
+## ЭТАП 290. Интеграции с Внешними Сервисами
+
+- [ ] T-0616 | Интеграция: Экспорт гостей в Google Contacts
+    - depends: [T-0040]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/google_contacts
+        echo "export const exportGuestsToGoogle=1;" > packages/integrations/google_contacts/index.ts
+        git add packages/integrations/google_contacts/index.ts
+        ```
+- [ ] T-0617 | Интеграция: Авторизация через Google/Facebook/Telegram
+    - depends: [T-0030]
+    - apply:
+        ```bash
+        # Настроить OAuth 2.0 провайдеры в svc-auth
+        echo "// TODO: Implement OAuth providers (Google, Facebook, Telegram)" > apps/svc-auth/oauth.todo
+        git add apps/svc-auth/oauth.todo
+        ```
+- [ ] T-0618 | Интеграция: API для свадебных агентств (доступ к каталогу, заявкам)
+    - depends: [T-0314, T-0497]
+    - apply:
+        ```bash
+        # Спроектировать и документировать Agency API
+        echo "# Agency API Specification (v1)" > docs/api/agency_api.mdx
+        git add docs/api/agency_api.mdx
+        ```
+- [ ] T-0619 | Интеграция: Виджет каталога для сайтов-партнеров
+    - depends: [T-0234]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-widget/src
+        touch apps/svc-widget/src/main.js
+        git add apps/svc-widget/src/main.js
+        ```
+- [ ] T-0620 | Интеграция: Zapier/Integromat коннектор (базовые триггеры/действия) - скелет
+    - depends: [T-0367]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/zapier
+        echo "export const zapierTriggers = ['new_enquiry'];" > packages/integrations/zapier/index.ts
+        git add packages/integrations/zapier/index.ts
+        ```
+
+---
+
+## ЭТАП 291. Админ Панель (Расширение)
+
+- [ ] T-0621 | Админка: Управление пользователями (просмотр, бан, смена роли)
+    - depends: [T-0080, T-0226]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/users
+        touch apps/admin/pages/users/index.tsx apps/admin/pages/users/[id].tsx
+        git add apps/admin/pages/users/*.tsx
+        ```
+- [ ] T-0622 | Админка: Управление вендорами (просмотр, редактирование, верификация, бейджи)
+    - depends: [T-0080, T-0226, T-0536]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/vendors
+        touch apps/admin/pages/vendors/index.tsx apps/admin/pages/vendors/[id].tsx
+        git add apps/admin/pages/vendors/*.tsx
+        ```
+- [ ] T-0623 | Админка: Управление контентом (блог, гайды, FAQ)
+    - depends: [T-0080, T-0180, T-0442]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/content
+        touch apps/admin/pages/content/index.tsx apps/admin/pages/content/editor.tsx
+        git add apps/admin/pages/content/*.tsx
+        ```
+- [ ] T-0624 | Админка: Просмотр и управление очередью модерации
+    - depends: [T-0080, T-0485, T-0487]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/moderation
+        touch apps/admin/pages/moderation/index.tsx
+        git add apps/admin/pages/moderation/index.tsx
+        ```
+- [ ] T-0625 | Админка: Статистика и отчеты (пользователи, вендоры, финансы, ROI)
+    - depends: [T-0080, T-0477, T-0355]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/reports
+        touch apps/admin/pages/reports/index.tsx apps/admin/pages/reports/revenue.tsx
+        git add apps/admin/pages/reports/*.tsx
+        ```
+- [ ] T-0626 | Админка: Управление промокодами и подарочными картами
+    - depends: [T-0080, T-0541, T-0481]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/marketing
+        touch apps/admin/pages/marketing/promos.tsx apps/admin/pages/marketing/giftcards.tsx
+        git add apps/admin/pages/marketing/*.tsx
+        ```
+- [ ] T-0627 | Админка: Просмотр логов аудита
+    - depends: [T-0080, T-0255]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/logs
+        touch apps/admin/pages/logs/audit.tsx
+        git add apps/admin/pages/logs/audit.tsx
+        ```
+- [ ] T-0628 | Админка: Настройки системы (лимиты, комиссии, флаги)
+    - depends: [T-0080, T-0310]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/pages/settings
+        touch apps/admin/pages/settings/index.tsx
+        git add apps/admin/pages/settings/index.tsx
+        ```
+
+---
+
+## ЭТАП 292. Тестирование (Расширенное Покрытие)
+
+- [ ] T-0629 | Тесты: Увеличение покрытия юнит-тестами (цель >70%)
+    - depends: [T-0248]
+    - apply:
+        ```bash
+        # Добавить команду для отчета о покрытии в package.json
+        echo "// TODO: Add test coverage reporting and increase coverage" > tests/coverage.todo
+        git add tests/coverage.todo
+        ```
+- [ ] T-0630 | Тесты: Интеграционные тесты для связки сервисов (Auth+Catalog, Enquiry+Billing)
+    - depends: [T-0248]
+    - apply:
+        ```bash
+        mkdir -p tests/integration
+        touch tests/integration/auth_catalog.test.ts tests/integration/enquiry_billing.test.ts
+        git add tests/integration/*.test.ts
+        ```
+- [ ] T-0631 | Тесты: E2E тесты Playwright для основных сценариев (регистрация, поиск, бронирование, создание сайта пары)
+    - depends: [T-0249, T-0422]
+    - apply:
+        ```bash
+        # Добавить больше e2e тестов в папку e2e/
+        touch e2e/registration.spec.ts e2e/search.spec.ts e2e/couple_site.spec.ts
+        git add e2e/*.spec.ts
+        ```
+- [ ] T-0632 | Тесты: Нагрузочное тестирование (k6) для API бронирования и чата
+    - depends: [T-0150, T-1380, T-0272, T-0452]
+    - apply:
+        ```bash
+        # Добавить скрипты k6 для booking и chat API
+        touch infra/k6/booking.js infra/k6/chat.js
+        git add infra/k6/*.js
+        ```
+- [ ] T-0633 | Тесты: Визуальное регрессионное тестирование (Percy/Chromatic) - настройка
+    - depends: [T-0025]
+    - apply:
+        ```bash
+        # Настроить интеграцию со Storybook и сервисом визуального тестирования
+        echo "// TODO: Setup visual regression testing (Percy/Chromatic)" > infra/visual_testing.todo
+        git add infra/visual_testing.todo
+        ```
+- [ ] T-0634 | Тесты: Тестирование безопасности (OWASP ZAP/SAST сканеры) - интеграция в CI
+    - depends: [T-0005]
+    - apply:
+        ```bash
+        # Добавить шаги SAST и DAST сканирования в ci.yml
+        echo "// TODO: Add security scanning steps to CI workflow" > .github/workflows/security_scan.todo
+        git add .github/workflows/security_scan.todo
+        ```
+- [ ] T-0635 | Тесты: A11y тестирование (axe-core) в E2E тестах
+    - depends: [T-0249, T-0559]
+    - apply:
+        ```bash
+        # Интегрировать axe-core в Playwright тесты
+        echo "// TODO: Integrate axe-core into E2E tests" > e2e/a11y.todo
+        git add e2e/a11y.todo
+        ```
+
+---
+
+## ЭТАП 293. DevOps и Инфраструктура (Углубление)
+
+- [ ] T-0636 | Мониторинг: Настройка Prometheus + Grafana для сбора метрик
+    - depends: [T-0324]
+    - apply:
+        ```bash
+        mkdir -p infra/monitoring
+        touch infra/monitoring/prometheus.yml infra/monitoring/grafana_dashboard.json
+        git add infra/monitoring/*
+        ```
+- [ ] T-0637 | Логирование: Настройка ELK/Loki стека для централизованного сбора логов
+    - depends: [T-0492]
+    - apply:
+        ```bash
+        # Документировать настройку ELK/Loki
+        echo "# Centralized Logging Setup (ELK/Loki)" > docs/ops/logging/centralized_setup.md
+        git add docs/ops/logging/centralized_setup.md
+        ```
+- [ ] T-0638 | Алертing: Настройка Alertmanager для критических событий (падения, ошибки, SLA)
+    - depends: [T-0636, T-0437]
+    - apply:
+        ```bash
+        touch infra/monitoring/alertmanager.yml
+        git add infra/monitoring/alertmanager.yml
+        ```
+- [ ] T-0639 | CI/CD: Оптимизация сборки (кэширование Docker слоев, pnpm кэш)
+    - depends: [T-0005]
+    - apply:
+        ```bash
+        # Оптимизировать шаги сборки в ci.yml
+        echo "// TODO: Optimize CI build times (caching)" > .github/workflows/ci_optimization.todo
+        git add .github/workflows/ci_optimization.todo
+        ```
+- [ ] T-0640 | IaC: Расширение Terraform (Сеть, Load Balancer, CDN)
+    - depends: [T-0341, T-0342, T-0343]
+    - apply:
+        ```bash
+        # Добавить ресурсы для сети, LB, CDN в infra/tf
+        touch infra/tf/network.tf infra/tf/cdn.tf
+        git add infra/tf/network.tf infra/tf/cdn.tf
+        ```
+- [ ] T-0641 | База данных: Настройка репликации чтения (Read Replicas) для каталога
+    - depends: [T-0342]
+    - apply:
+        ```bash
+        # Обновить db.tf для создания read replica
+        echo "// TODO: Add read replica configuration to db.tf" > infra/tf/db_replica.todo
+        git add infra/tf/db_replica.todo
+        ```
+- [ ] T-0642 | Безопасность: Настройка WAF (Web Application Firewall)
+    - depends: [T-0640]
+    - apply:
+        ```bash
+        # Добавить конфигурацию WAF (например, Cloudflare или DO WAF)
+        echo "# WAF Configuration" > docs/ops/security/waf.md
+        git add docs/ops/security/waf.md
+        ```
+- [ ] T-0643 | Управление секретами: Интеграция с HashiCorp Vault / DO Secrets (вместо env) - скелет
+    - depends: [T-0349]
+    - apply:
+        ```bash
+        mkdir -p packages/secrets
+        echo "export const getSecret=1;" > packages/secrets/index.ts
+        git add packages/secrets/index.ts
+        ```
+
+---
+
+## ЭТАП 294. Запуск и Маркетинг
+
+- [ ] T-0644 | Маркетинг: Настройка систем аналитики (Google Analytics, Yandex Metrika)
+    - depends: [T-0441]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/analytics/integrations
+        touch apps/svc-website/src/analytics/integrations/ga.ts apps/svc-website/src/analytics/integrations/metrika.ts
+        git add apps/svc-website/src/analytics/integrations/*.ts
+        ```
+- [ ] T-0645 | Маркетинг: Создание прелендинга/страницы "Скоро запуск"
+    - depends: [T-0441]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/pages/landing
+        touch apps/svc-website/src/pages/landing/coming-soon.tsx
+        git add apps/svc-website/src/pages/landing/coming-soon.tsx
+        ```
+- [ ] T-0646 | Маркетинг: Настройка email-рассылки для сбора лидов
+    - depends: [T-0645, T-0120]
+    - apply:
+        ```bash
+        # Настроить форму подписки и интеграцию с сервисом рассылок (Mailchimp/Sendgrid)
+        echo "// TODO: Setup prelaunch email subscription form" > apps/svc-website/prelaunch_signup.todo
+        git add apps/svc-website/prelaunch_signup.todo
+        ```
+- [ ] T-0647 | PR: Подготовка пресс-релиза и медиа-кита
+    - depends: []
+    - apply:
+        ```bash
+        mkdir -p docs/marketing/pr
+        touch docs/marketing/pr/press_release_draft.md docs/marketing/pr/media_kit.zip
+        git add docs/marketing/pr/*
+        ```
+- [ ] T-0648 | Поддержка: Создание базы знаний / Help Center
+    - depends: [T-0180, T-0443]
+    - apply:
+        ```bash
+        # Структурировать и наполнить docs/help статьями
+        echo "// TODO: Populate Help Center articles" > docs/help/populate.todo
+        git add docs/help/populate.todo
+        ```
+- [ ] T-0649 | Поддержка: Настройка системы тикетов (Zendesk/Intercom stub)
+    - depends: [T-0648]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/support
+        echo "export const createSupportTicket=1;" > packages/integrations/support/index.ts
+        git add packages/integrations/support/index.ts
+        ```
+- [ ] T-0650 | Запуск: Финальный чек-лист перед запуском (Go-Live Checklist)
+    - depends: [T-0350, T-0450]
+    - apply:
+        ```bash
+        echo "# Go-Live Checklist" > docs/release/go_live.md
+        git add docs/release/go_live.md
+        ```
+
+---
+
+## ЭТАП 295. Пост-Запуск и Рост
+
+- [ ] T-0651 | Аналитика: Настройка дашбордов для отслеживания ключевых метрик (DAU/MAU, Retention, Conversion Rate)
+    - depends: [T-0356, T-0478]
+    - apply:
+        ```bash
+        # Создать дашборды в Grafana/Metabase/etc.
+        echo "# Key Metrics Dashboard Configuration" > docs/dashboards/main_kpi.md
+        git add docs/dashboards/main_kpi.md
+        ```
+- [ ] T-0652 | A/B Тестирование: Запуск первых экспериментов (CTA кнопки, заголовки)
+    - depends: [T-0311, T-0449]
+    - apply:
+        ```bash
+        # Запланировать и запустить A/B тесты
+        echo "# A/B Test Plan: Q4 2025" > docs/ab_testing/plan_q4_2025.md
+        git add docs/ab_testing/plan_q4_2025.md
+        ```
+- [ ] T-0653 | Сбор обратной связи: NPS опросы и виджеты фидбека
+    - depends: [T-0090, T-0960]
+    - apply:
+        ```bash
+        # Интегрировать виджеты сбора обратной связи (Hotjar/Custom)
+        echo "// TODO: Integrate feedback collection widgets" > apps/svc-website/feedback_widget.todo
+        git add apps/svc-website/feedback_widget.todo
+        ```
+- [ ] T-0654 | SEO: Оптимизация контента и ссылочного профиля (пост-запуск)
+    - depends: [T-0130, T-0445]
+    - apply:
+        ```bash
+        # Провести SEO-аудит после запуска и составить план оптимизации
+        echo "# Post-Launch SEO Audit and Optimization Plan" > docs/seo/post_launch_plan.md
+        git add docs/seo/post_launch_plan.md
+        ```
+- [ ] T-0655 | Развитие продукта: Сбор и приоритизация фич-реквестов (Product Board/Canny)
+    - depends: [T-0653]
+    - apply:
+        ```bash
+        # Настроить систему сбора и управления фич-реквестами
+        echo "# Feature Request Management Process" > docs/product/feature_requests.md
+        git add docs/product/feature_requests.md
+        ```
+- [ ] T-0656 | Масштабирование: План масштабирования инфраструктуры (DB, App Servers)
+    - depends: [T-0641, T-0293]
+    - apply:
+        ```bash
+        # Разработать план масштабирования на следующие 12 месяцев
+        echo "# Infrastructure Scaling Plan (12 months)" > docs/ops/scaling_plan.md
+        git add docs/ops/scaling_plan.md
+        ```
+
+---
+
+## ЭТАП 296. Расширенная Модерация и Безопасность
+
+- [ ] T-0657 | Модерация: AI-фильтры для текста (токсичность, спам) - API stub
+    - depends: [T-0488]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/content_filter
+        echo "export const checkText=1;" > packages/integrations/content_filter/index.ts
+        git add packages/integrations/content_filter/index.ts
+        ```
+- [ ] T-0658 | Модерация: AI-фильтры для изображений (NSFW) - API stub
+    - depends: [T-0488, T-0613]
+    - apply:
+        ```bash
+        # Добавить функцию проверки NSFW в packages/integrations/cv
+        echo "// TODO: Add NSFW check to CV package" > packages/integrations/cv/nsfw.todo
+        git add packages/integrations/cv/nsfw.todo
+        ```
+- [ ] T-0659 | Безопасность: Двухфакторная аутентификация (2FA) для пользователей/админов (SMS/TOTP)
+    - depends: [T-0030, T-0458]
+    - apply:
+        ```bash
+        # Добавить логику 2FA в svc-auth
+        echo "// TODO: Implement 2FA (SMS/TOTP)" > apps/svc-auth/2fa.todo
+        git add apps/svc-auth/2fa.todo
+        ```
+- [ ] T-0660 | Безопасность: Регулярные Security-аудиты (внешние/внутренние) - план
+    - depends: [T-0634]
+    - apply:
+        ```bash
+        echo "# Security Audit Plan (Quarterly)" > docs/security/audit_plan.md
+        git add docs/security/audit_plan.md
+        ```
+- [ ] T-0661 | Безопасность: Политика управления инцидентами (Incident Response Plan)
+    - depends: [T-0638]
+    - apply:
+        ```bash
+        echo "# Incident Response Plan" > docs/ops/incident_response.md
+        git add docs/ops/incident_response.md
+        ```
+
+---
+## ЭТАП 297. Дополнительные B2B Фичи для Вендоров
+- [ ] T-0662 | Вендор: Инструмент создания и отправки коммерческих предложений (Quotes)
+    - depends: [T-0052]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/quotes
+        echo "export const createQuote=1;" > apps/svc-vendors/src/quotes/index.ts
+        git add apps/svc-vendors/src/quotes/index.ts
+        ```
+- [ ] T-0663 | Вендор: CRM-интеграции (HubSpot, Salesforce) - скелет
+    - depends: [T-0579]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/crm
+        echo "export const syncToHubspot=1;" > packages/integrations/crm/hubspot.ts
+        git add packages/integrations/crm/hubspot.ts
+        ```
+- [ ] T-0664 | Вендор: Управление командой и правами доступа (расширение VendorMember)
+    - depends: [T-0418]
+    - apply:
+        ```bash
+        # Добавить детальные права доступа в модель VendorMember
+        echo "// TODO: Add granular permissions to VendorMember" > packages/prisma/vendor_member_permissions.todo
+        git add packages/prisma/vendor_member_permissions.todo
+        ```
+- [ ] T-0665 | Вендор: Программа лояльности для пар (бонусы за повторные заказы/рекомендации)
+    - depends: [T-0171, T-0850]
+    - apply:
+        ```bash
+        # Разработать механику лояльности для вендоров
+        echo "// TODO: Develop vendor-specific loyalty program logic" > apps/svc-payments/src/loyalty/vendor_loyalty.todo
+        git add apps/svc-payments/src/loyalty/vendor_loyalty.todo
+        ```
+- [ ] T-0666 | Вендор: Инструменты маркетинга (создание акций, email-рассылки своей базе)
+    - depends: [T-0172, T-0860, T-0120]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/marketing
+        echo "export const createVendorPromotion=1;" > apps/svc-vendors/src/marketing/index.ts
+        git add apps/svc-vendors/src/marketing/index.ts
+        ```
+
+---
+## ЭТАП 298. Расширенная Аналитика и Отчетность
+- [ ] T-0667 | Аналитика: Отслеживание пользовательского пути (Customer Journey Mapping) в системе
+    - depends: [T-0351]
+    - apply:
+        ```bash
+        # Настроить сбор событий для отслеживания пути пользователя
+        echo "// TODO: Setup event tracking for Customer Journey analysis" > apps/svc-analytics/src/customer_journey.todo
+        git add apps/svc-analytics/src/customer_journey.todo
+        ```
+- [ ] T-0668 | Аналитика: LTV (Lifetime Value) пользователя/вендора - расчет
+    - depends: [T-0474, T-0351]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-analytics/src/ltv
+        echo "export const calculateLTV=1;" > apps/svc-analytics/src/ltv/index.ts
+        git add apps/svc-analytics/src/ltv/index.ts
+        ```
+- [ ] T-0669 | Аналитика: Сегментация пользователей/вендоров (RFM-анализ)
+    - depends: [T-01590]
+    - apply:
+        ```bash
+        # Реализовать расчет RFM-сегментов
+        echo "// TODO: Implement RFM segmentation calculation" > apps/svc-analytics/src/segmentation/rfm_impl.todo
+        git add apps/svc-analytics/src/segmentation/rfm_impl.todo
+        ```
+- [ ] T-0670 | Аналитика: Предиктивная аналитика (прогноз оттока - Churn Prediction) - модель v1
+    - depends: [T-1500]
+    - apply:
+        ```bash
+        # Разработать простую модель прогноза оттока
+        echo "// TODO: Develop v1 churn prediction model" > apps/svc-analytics/src/churn/model_v1.todo
+        git add apps/svc-analytics/src/churn/model_v1.todo
+        ```
+- [ ] T-0671 | Отчетность: Интеграция с BI-системами (Tableau/PowerBI) - экспорт данных
+    - depends: [T-0499, T-0500]
+    - apply:
+        ```bash
+        # Настроить коннекторы или регулярные выгрузки для BI
+        echo "# BI Integration Strategy (Data Export)" > docs/analytics/bi_integration.md
+        git add docs/analytics/bi_integration.md
+        ```
+
+---
+## ЭТАП 299. Юридические Аспекты и Compliance
+- [ ] T-0672 | Compliance: Соответствие GDPR / местному законодательству о ПДн - аудит и доработка
+    - depends: [T-0201, T-0439]
+    - apply:
+        ```bash
+        echo "# Data Privacy Compliance Audit (GDPR/Local Law)" > docs/legal/privacy_audit.md
+        git add docs/legal/privacy_audit.md
+        ```
+- [ ] T-0673 | Юридическое: Обновление Пользовательского Соглашения и Политики Конфиденциальности
+    - depends: [T-0257]
+    - apply:
+        ```bash
+        # Пересмотреть и обновить юридические документы
+        echo "// TODO: Update Terms of Service and Privacy Policy" > docs/legal/updates_q1_2026.todo
+        git add docs/legal/updates_q1_2026.todo
+        ```
+- [ ] T-0674 | Юридическое: Шаблоны договоров для вендоров (с учетом местных норм)
+    - depends: [T-0522]
+    - apply:
+        ```bash
+        # Подготовить локализованные шаблоны договоров
+        mkdir -p packages/contracts/templates_uz
+        touch packages/contracts/templates_uz/service_agreement.html
+        git add packages/contracts/templates_uz/*.html
+        ```
+- [ ] T-0675 | Compliance: Политика обработки cookie и баннер согласия
+    - depends: [T-0440]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/ui/consent
+        touch apps/svc-website/src/ui/consent/CookieBanner.tsx
+        git add apps/svc-website/src/ui/consent/CookieBanner.tsx
+        ```
+
+---
+## ЭТАП 300. Финальная Полировка и Документация v1.x
+- [ ] T-0676 | Документация: Обновление README (полное описание, стек, запуск)
+    - depends: [T-0267]
+    - apply:
+        ```bash
+        # Расширить README.md
+        echo "// TODO: Expand README with full project details" > README_expansion.todo
+        git add README_expansion.todo
+        ```
+- [ ] T-0677 | Документация: Руководство пользователя (для пары и вендора)
+    - depends: [T-0648]
+    - apply:
+        ```bash
+        mkdir -p docs/user_guides
+        touch docs/user_guides/couple_guide.md docs/user_guides/vendor_guide.md
+        git add docs/user_guides/*.md
+        ```
+- [ ] T-0678 | Документация: Архитектурная диаграмма и описание сервисов
+    - depends: [T-0262]
+    - apply:
+        ```bash
+        echo "# System Architecture Diagram" > docs/architecture/diagram.md
+        git add docs/architecture/diagram.md
+        ```
+- [ ] T-0679 | Рефакторинг: Code Cleanup и устранение техдолга (по результатам стат. анализа)
+    - depends: [T-0250]
+    - apply:
+        ```bash
+        # Запустить SonarQube/аналог и исправить замечания
+        echo "// TODO: Run static analysis and refactor based on results" > tech_debt_cleanup.todo
+        git add tech_debt_cleanup.todo
+        ```
+- [ ] T-0680 | Производительность: Финальная оптимизация бандлов и LCP/CLS/TTI
+    - depends: [T-0599, T-0309]
+    - apply:
+        ```bash
+        # Провести финальный прогон Lighthouse и оптимизацию
+        echo "// TODO: Final performance optimization based on Lighthouse report" > perf_final_optimization.todo
+        git add perf_final_optimization.todo
+        ```
+
+---
+
+## ЭТАП 301. Углубленные B2B Инструменты и Аналитика для Вендоров
+
+- [ ] T-0681 | B2B CRM: Базовые функции (управление контактами пар, история заявок)
+    - depends: [T-0579]
+    - apply:
+        ```bash
+        # Добавить модели Contact, EnquiryHistory в schema.prisma
+        echo "// TODO: Add B2B CRM models (Contact, EnquiryHistory) to schema.prisma" > packages/prisma/b2b_crm_models.todo
+        git add packages/prisma/b2b_crm_models.todo
+        ```
+- [ ] T-0682 | B2B CRM: Сегментация пар (по бюджету, дате, стилю)
+    - depends: [T-0681]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/crm/segmentation
+        echo "export const segmentContacts = 1;" > apps/svc-vendors/src/crm/segmentation/index.ts
+        git add apps/svc-vendors/src/crm/segmentation/index.ts
+        ```
+- [ ] T-0683 | B2B Аналитика: Прогноз спроса (на основе исторических данных заявок и сезонности) - v1
+    - depends: [T-0090, T-0582]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-analytics/src/forecasting
+        echo "export const forecastDemand = 1;" > apps/svc-analytics/src/forecasting/index.ts
+        git add apps/svc-analytics/src/forecasting/index.ts
+        ```
+- [ ] T-0684 | B2B Аналитика: Отчет по эффективности рекламных каналов (если вендор использует UTM)
+    - depends: [T-0090, T-0300]
+    - apply:
+        ```bash
+        # Расширить аналитику для отслеживания UTM-меток вендора
+        echo "// TODO: Implement vendor UTM tracking analytics" > apps/svc-analytics/src/vendor_utm.todo
+        git add apps/svc-analytics/src/vendor_utm.todo
+        ```
+- [ ] T-0685 | B2B Инструменты: Конструктор пакетов услуг (динамическое формирование предложений)
+    - depends: [T-0278, T-0662]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/packages/builder
+        touch apps/svc-vendors/src/packages/builder/PackageBuilderUI.tsx
+        git add apps/svc-vendors/src/packages/builder/PackageBuilderUI.tsx
+        ```
+- [ ] T-0686 | B2B Инструменты: Управление скидками и акциями для вендора
+    - depends: [T-0172, T-0860]
+    - apply:
+        ```bash
+        # Расширить API и UI для управления акциями вендора
+        echo "// TODO: Enhance vendor promotion management UI/API" > apps/svc-vendors/src/marketing/enhancements.todo
+        git add apps/svc-vendors/src/marketing/enhancements.todo
+        ```
+- [ ] T-0687 | B2B Инструменты: API для интеграции с внешними CRM вендоров (Webhook outbound)
+    - depends: [T-0367, T-0663]
+    - apply:
+        ```bash
+        # Настроить отправку webhooks по событиям вендора (новая заявка, оплата)
+        echo "// TODO: Setup vendor-specific outbound webhooks" > apps/svc-vendors/src/webhooks/outbound.todo
+        git add apps/svc-vendors/src/webhooks/outbound.todo
+        ```
+- [ ] T-0688 | B2B FinTech: Выставление счетов напрямую паре через платформу
+    - depends: [T-0238, T-0504]
+    - apply:
+        ```bash
+        # Разработать API и UI для выставления инвойсов вендором
+        echo "// TODO: Implement vendor invoicing functionality" > apps/svc-billing/src/vendor_invoicing.todo
+        git add apps/svc-billing/src/vendor_invoicing.todo
+        ```
+
+---
+
+## ЭТАП 302. Расширенные Возможности Чата и Коммуникаций
+
+- [ ] T-0689 | Чат: Статусы сообщений (отправлено, доставлено, прочитано) - UI + Backend stub
+    - depends: [T-0451]
+    - apply:
+        ```bash
+        # Добавить поле 'status' в модель ChatMessage
+        echo "// TODO: Add status field to ChatMessage model" > packages/prisma/chat_message_status.todo
+        git add packages/prisma/chat_message_status.todo
+        ```
+- [ ] T-0690 | Чат: Уведомления о новых сообщениях (Web Push / In-App)
+    - depends: [T-0453, T-0596]
+    - apply:
+        ```bash
+        # Интегрировать отправку push-уведомлений при получении нового сообщения
+        echo "// TODO: Implement new chat message notifications" > apps/svc-chat/src/notifications.todo
+        git add apps/svc-chat/src/notifications.todo
+        ```
+- [ ] T-0691 | Чат: Поддержка видео-звонков (интеграция WebRTC / Jitsi / Zoom API) - скелет
+    - depends: [T-0455]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/video_call
+        echo "export const createVideoCallLink = 1;" > packages/integrations/video_call/index.ts
+        git add packages/integrations/video_call/index.ts
+        ```
+- [ ] T-0692 | Чат: Возможность прикрепления документов (договоры, сметы)
+    - depends: [T-0453, T-0454]
+    - apply:
+        ```bash
+        # Доработать API отправки сообщения для поддержки 'document' типа медиа
+        echo "// TODO: Add document support to chat message API" > apps/svc-chat/src/api/send_document.todo
+        git add apps/svc-chat/src/api/send_document.todo
+        ```
+- [ ] T-0693 | Чат: Поиск по истории сообщений
+    - depends: [T-0452]
+    - apply:
+        ```bash
+        # Добавить эндпоинт API для поиска по сообщениям треда
+        echo "// TODO: Implement chat history search API" > apps/svc-chat/src/api/search.todo
+        git add apps/svc-chat/src/api/search.todo
+        ```
+- [ ] T-0694 | Коммуникации: Центр уведомлений для пользователя (агрегация всех нотификаций)
+    - depends: [T-0720]
+    - apply:
+        ```bash
+        # Разработать UI и API для центра уведомлений
+        mkdir -p apps/svc-website/src/pages/notifications
+        touch apps/svc-website/src/pages/notifications/index.tsx
+        git add apps/svc-website/src/pages/notifications/index.tsx
+        ```
+- [ ] T-0695 | Коммуникации: Настройка предпочтений уведомлений (Email/SMS/Push/Частота)
+    - depends: [T-0694, T-0226]
+    - apply:
+        ```bash
+        # Добавить модель UserNotificationPrefs в schema.prisma
+        echo "// TODO: Add UserNotificationPrefs model" > packages/prisma/user_notification_prefs.todo
+        git add packages/prisma/user_notification_prefs.todo
+        ```
+
+---
+
+## ЭТАП 303. Продвинутый AI/ML и Рекомендации
+
+- [ ] T-0696 | AI: Рекомендация статей/гайдов на основе профиля пары
+    - depends: [T-0401, T-0180]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-catalog/src/reco/content
+        echo "export const recommendArticles = 1;" > apps/svc-catalog/src/reco/content/index.ts
+        git add apps/svc-catalog/src/reco/content/index.ts
+        ```
+- [ ] T-0697 | AI: Генерация описания для сайта пары (на основе анкеты) - API stub (GPT/Llama)
+    - depends: [T-0370, T-0401]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/llm
+        echo "export const generateCoupleSiteText = 1;" > packages/integrations/llm/index.ts
+        git add packages/integrations/llm/index.ts
+        ```
+- [ ] T-0698 | AI: Кластеризация вендоров по стилю (на основе фото) - CV model v1
+    - depends: [T-0613]
+    - apply:
+        ```bash
+        # Разработать модель кластеризации стилей
+        echo "// TODO: Develop vendor style clustering model" > packages/integrations/cv/style_clustering.todo
+        git add packages/integrations/cv/style_clustering.todo
+        ```
+- [ ] T-0699 | AI: Определение оптимальной цены для вендора (на основе рынка и профиля) - Аналитический отчет
+    - depends: [T-0583]
+    - apply:
+        ```bash
+        # Добавить функционал расчета рекомендуемой цены в svc-analytics
+        echo "// TODO: Implement optimal price suggestion logic" > apps/svc-analytics/src/benchmarking/price_suggestion.todo
+        git add apps/svc-analytics/src/benchmarking/price_suggestion.todo
+        ```
+- [ ] T-0700 | ML: Улучшение модели ранжирования (Feature Engineering, XGBoost/LightGBM) - v2
+    - depends: [T-0377, T-1011]
+    - apply:
+        ```bash
+        # Переобучить модель ранжирования с новыми фичами/алгоритмом
+        echo "// TODO: Retrain ranking model (v2)" > apps/svc-catalog/src/ml/model_v2.todo
+        git add apps/svc-catalog/src/ml/model_v2.todo
+        ```
+- [ ] T-0701 | ML: Feature Store v2 (интеграция с Feast/Tecton) - скелет
+    - depends: [T-1420]
+    - apply:
+        ```bash
+        # Начать интеграцию с полноценным Feature Store
+        echo "// TODO: Integrate with Feast/Tecton" > infra/feast/integration_v2.todo
+        git add infra/feast/integration_v2.todo
+        ```
+
+---
+
+## ЭТАП 304. Операционная Эффективность и Поддержка
+
+- [ ] T-0702 | Поддержка: Интеграция онлайн-чата поддержки (Intercom/JivoSite)
+    - depends: [T-0649]
+    - apply:
+        ```bash
+        # Добавить виджет чата поддержки на сайт
+        echo "// TODO: Integrate live support chat widget" > apps/svc-website/support_chat_widget.todo
+        git add apps/svc-website/support_chat_widget.todo
+        ```
+- [ ] T-0703 | Поддержка: База знаний (Help Center) с поиском
+    - depends: [T-0648, T-01570]
+    - apply:
+        ```bash
+        # Внедрить поиск по базе знаний (возможно, с T-01570)
+        echo "// TODO: Implement search functionality for Help Center" > docs/help/search_implementation.todo
+        git add docs/help/search_implementation.todo
+        ```
+- [ ] T-0704 | Админка: Инструменты массовых операций (рассылки, смена статусов)
+    - depends: [T-0621, T-0622]
+    - apply:
+        ```bash
+        mkdir -p apps/admin/src/bulk_actions
+        echo "export const bulkUpdateUsers = 1;" > apps/admin/src/bulk_actions/users.ts
+        git add apps/admin/src/bulk_actions/users.ts
+        ```
+- [ ] T-0705 | DevOps: Blue/Green Deployment стратегия - настройка
+    - depends: [T-0182, T-0639]
+    - apply:
+        ```bash
+        # Обновить app.yaml или CI/CD для поддержки Blue/Green
+        echo "// TODO: Implement Blue/Green deployment strategy" > infra/do/blue_green.todo
+        git add infra/do/blue_green.todo
+        ```
+- [ ] T-0706 | DevOps: Канареечные релизы (Canary Releases) - автоматизация
+    - depends: [T-01480, T-0335]
+    - apply:
+        ```bash
+        # Автоматизировать процесс канареечных релизов в CI/CD
+        echo "// TODO: Automate Canary Releases in CI/CD" > .github/workflows/canary_release.todo
+        git add .github/workflows/canary_release.todo
+        ```
+- [ ] T-0707 | Мониторинг: Трассировка запросов (OpenTelemetry/Jaeger) - интеграция
+    - depends: [T-0161, T-0636]
+    - apply:
+        ```bash
+        mkdir -p packages/tracing
+        echo "export const initTracer = 1;" > packages/tracing/index.ts
+        git add packages/tracing/index.ts
+        ```
+- [ ] T-0708 | Мониторинг: Real User Monitoring (RUM) - интеграция (Sentry/Datadog)
+    - depends: [T-0254]
+    - apply:
+        ```bash
+        # Настроить RUM-провайдера на фронтенде
+        echo "// TODO: Setup Real User Monitoring (RUM)" > apps/svc-website/rum_setup.todo
+        git add apps/svc-website/rum_setup.todo
+        ```
+
+---
+
+## ЭТАП 305. Расширение Географии и Партнерства
+
+- [ ] T-0709 | Гео: Поддержка других стран СНГ (KZ, KG) - локализация, валюты, справочники
+    - depends: [T-01130, T-01131, T-0389]
+    - apply:
+        ```bash
+        # Добавить валюты KZT, KGS и соответствующие справочники
+        echo "// TODO: Add support for KZ/KG (currencies, geo, localization)" > packages/i18n/kz_kg_support.todo
+        git add packages/i18n/kz_kg_support.todo
+        ```
+- [ ] T-0710 | Партнерства: Интеграция с агрегаторами свадебных услуг (API/фиды)
+    - depends: [T-0618]
+    - apply:
+        ```bash
+        # Разработать экспортные фиды (XML/JSON) для агрегаторов
+        mkdir -p apps/svc-catalog/src/feeds
+        echo "export const generateAggregatorFeed = 1;" > apps/svc-catalog/src/feeds/index.ts
+        git add apps/svc-catalog/src/feeds/index.ts
+        ```
+- [ ] T-0711 | Партнерства: Программа для свадебных организаторов (Planner Dashboard)
+    - depends: [T-0497]
+    - apply:
+        ```bash
+        # Создать отдельный дашборд для организаторов
+        mkdir -p apps/svc-planner/src/dashboard
+        touch apps/svc-planner/src/dashboard/index.tsx
+        git add apps/svc-planner/src/dashboard/index.tsx
+        ```
+- [ ] T-0712 | Партнерства: White Label решение для агентств/организаторов
+    - depends: [T-01560, T-0711]
+    - apply:
+        ```bash
+        # Разработать механизм White Label (темизация, домены)
+        echo "// TODO: Develop White Label functionality" > apps/svc-website/white_label.todo
+        git add apps/svc-website/white_label.todo
+        ```
+
+---
+## ЭТАП 306. Дополнительные Сервисы и Монетизация
+- [ ] T-0713 | Сервис: Подбор свадебного образа (AI-стилист) - концепт/API stub
+    - depends: [T-0612]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-stylist/src
+        echo "export const suggestLook = 1;" > apps/svc-stylist/src/index.ts
+        git add apps/svc-stylist/src/index.ts
+        ```
+- [ ] T-0714 | Сервис: Организация медового месяца (интеграция с туроператорами) - API stub
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/travel
+        echo "export const searchHoneymoonTours = 1;" > packages/integrations/travel/index.ts
+        git add packages/integrations/travel/index.ts
+        ```
+- [ ] T-0715 | Сервис: Свадебная страховка (интеграция со страховыми) - API stub
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/insurance
+        echo "export const getWeddingInsuranceQuote = 1;" > packages/integrations/insurance/index.ts
+        git add packages/integrations/insurance/index.ts
+        ```
+- [ ] T-0716 | Монетизация: Платные темы/шаблоны для сайта пары
+    - depends: [T-0569, T-0504]
+    - apply:
+        ```bash
+        # Добавить признак 'isPremium' к темам и проверку подписки
+        echo "// TODO: Implement premium themes for couple site" > apps/svc-website/themes/premium_themes.todo
+        git add apps/svc-website/themes/premium_themes.todo
+        ```
+- [ ] T-0717 | Монетизация: "Featured" размещение для вендоров (повышение в поиске)
+    - depends: [T-0501, T-0379]
+    - apply:
+        ```bash
+        # Добавить бустинг в алгоритм ранжирования для платных размещений
+        echo "// TODO: Implement 'Featured' vendor boosting in ranking" > apps/svc-catalog/src/rank/featured_boost.todo
+        git add apps/svc-catalog/src/rank/featured_boost.todo
+        ```
+- [ ] T-0718 | Монетизация: Комиссия с транзакций (Marketplace Fee) - расчет и учет
+    - depends: [T-01360, T-0474]
+    - apply:
+        ```bash
+        # Внедрить расчет комиссии платформы при записи RevenueEvent
+        echo "// TODO: Implement marketplace fee calculation in revenue tracking" > apps/svc-billing/marketplace_fee.todo
+        git add apps/svc-billing/marketplace_fee.todo
+        ```
+
+---
+## ЭТАП 307. Управление Данными и GDPR (Углубление)
+- [ ] T-0719 | GDPR: Автоматизация запросов на экспорт/удаление данных
+    - depends: [T-0438, T-0439]
+    - apply:
+        ```bash
+        # Создать API эндпоинты для инициирования экспорта/удаления
+        mkdir -p apps/svc-privacy/src/api
+        touch apps/svc-privacy/src/api/request_export.js apps/svc-privacy/src/api/request_delete.js
+        git add apps/svc-privacy/src/api/*.js
+        ```
+- [ ] T-0720 | GDPR: Менеджер согласий (Consent Management Platform) - интеграция/реализация
+    - depends: [T-0675]
+    - apply:
+        ```bash
+        # Внедрить UI и логику для управления согласиями пользователя
+        mkdir -p apps/svc-website/src/pages/privacy
+        touch apps/svc-website/src/pages/privacy/consents.tsx
+        git add apps/svc-website/src/pages/privacy/consents.tsx
+        ```
+- [ ] T-0721 | Данные: Политика Data Retention (автоматическое удаление старых данных)
+    - depends: [T-0201]
+    - apply:
+        ```bash
+        # Создать cron-скрипт для удаления старых неактивных данных
+        mkdir -p scripts/data_retention
+        touch scripts/data_retention/cleanup.js
+        git add scripts/data_retention/cleanup.js
+        ```
+- [ ] T-0722 | Данные: Анонимизация данных для аналитики/тестирования
+    - depends: [T-0439]
+    - apply:
+        ```bash
+        # Разработать скрипт анонимизации данных БД
+        touch scripts/data_anonymization/run.js
+        git add scripts/data_anonymization/run.js
+        ```
+
+---
+## ЭТАП 308. Технологическое Развитие и Рефакторинг
+- [ ] T-0723 | Архитектура: Переход на GraphQL Gateway (если еще не сделано)
+    - depends: [T-1070, T-1600]
+    - apply:
+        ```bash
+        # Продолжить развитие svc-gql, покрывая больше API
+        echo "// TODO: Expand GraphQL schema coverage" > apps/svc-gql/schema_expansion.todo
+        git add apps/svc-gql/schema_expansion.todo
+        ```
+- [ ] T-0724 | Технологии: Обновление ключевых зависимостей (Node.js, React, Next.js, Prisma)
+    - depends: [T-0679]
+    - apply:
+        ```bash
+        # Запланировать и провести обновление зависимостей
+        echo "// TODO: Plan and execute major dependency upgrades" > dependency_upgrade_plan.todo
+        git add dependency_upgrade_plan.todo
+        ```
+- [ ] T-0725 | Рефакторинг: Выделение общих модулей (например, пагинация, ошибки) в отдельные пакеты
+    - depends: [T-0679, T-0321]
+    - apply:
+        ```bash
+        # Провести рефакторинг для улучшения переиспользования кода
+        echo "// TODO: Refactor common modules into shared packages" > refactoring_shared_modules.todo
+        git add refactoring_shared_modules.todo
+        ```
+- [ ] T-0726 | Тестирование: Внедрение контрактного тестирования (Pact/аналог) для микросервисов
+    - depends: [T-0630]
+    - apply:
+        ```bash
+        # Настроить инструменты контрактного тестирования
+        echo "// TODO: Setup contract testing framework (e.g., Pact)" > infra/contract_testing.todo
+        git add infra/contract_testing.todo
+        ```
+- [ ] T-0727 | Производительность: Оптимизация запросов к БД (анализ медленных запросов, индексация)
+    - depends: [T-0680, T-0011]
+    - apply:
+        ```bash
+        # Настроить мониторинг производительности БД и провести оптимизацию
+        echo "// TODO: Setup DB performance monitoring and optimize queries" > docs/ops/db_performance.md
+        git add docs/ops/db_performance.md
+        ```
+
+Хорошо, я внимательно проанализировал предыдущие списки задач (до T-0727), экспертный отчет, структуру вашего репозитория (судя по списку файлов) и функционал конкурентов. Вот дополнительные этапы и задачи, начиная с **ЭТАПА 309 / T-0728**, которые помогут сделать проект еще более полным и конкурентоспособным, с акцентом на B2B, AI, операционные процессы и уникальные рыночные потребности:
+
+````markdown
+---
+
+## ЭТАП 309. Глубокая Интеграция FinTech и B2B Платежей
+
+- [ ] T-0728 | FinTech: Подключение эквайринга для онлайн-оплат B2C (карты UZCARD/HUMO/Visa/MC)
+    - depends: [T-0359, T-0586, T-0587]
+    - apply:
+        ```bash
+        # Реализовать UI checkout-формы и интеграцию с API платежных шлюзов
+        mkdir -p apps/svc-website/src/checkout
+        touch apps/svc-website/src/checkout/PaymentForm.tsx
+        git add apps/svc-website/src/checkout/PaymentForm.tsx
+        ```
+- [ ] T-0729 | FinTech: B2B Выплаты вендорам (интеграция с банковским API/сервисами массовых выплат) - скелет
+    - depends: [T-0474, T-0533]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-billing/src/payouts
+        echo "export const processVendorPayouts = 1;" > apps/svc-billing/src/payouts/processor.ts
+        git add apps/svc-billing/src/payouts/processor.ts
+        ```
+- [ ] T-0730 | FinTech: Автоматическая сверка платежей и выплат (реконсиляция)
+    - depends: [T-0729, T-1031]
+    - apply:
+        ```bash
+        # Разработать скрипт автоматической сверки банковских выписок с внутренними данными
+        touch scripts/finance/reconciliation.js
+        git add scripts/finance/reconciliation.js
+        ```
+- [ ] T-0731 | FinTech: Поддержка мультивалютных платежей (USD/EUR для иностранных клиентов/вендоров)
+    - depends: [T-0390, T-0728]
+    - apply:
+        ```bash
+        # Доработать платежные интеграции для приема USD/EUR
+        echo "// TODO: Implement multi-currency payment acceptance" > apps/svc-billing/multi_currency.todo
+        git add apps/svc-billing/multi_currency.todo
+        ```
+- [ ] T-0732 | FinTech: Холдирование средств (Escrow) - полная реализация с арбитражем
+    - depends: [T-0590, T-0591]
+    - apply:
+        ```bash
+        # Реализовать механизм арбитража и управления спорами по эскроу-сделкам
+        mkdir -p apps/svc-billing/src/escrow/arbitrage
+        touch apps/svc-billing/src/escrow/arbitrage/process.ts
+        git add apps/svc-billing/src/escrow/arbitrage/process.ts
+        ```
+- [ ] T-0733 | FinTech: Динамическое ценообразование/комиссии (в зависимости от плана вендора/объема)
+    - depends: [T-0718, T-0501]
+    - apply:
+        ```bash
+        # Усложнить логику расчета комиссии в T-0718
+        echo "// TODO: Implement dynamic fee calculation logic" > apps/svc-billing/dynamic_fees.todo
+        git add apps/svc-billing/dynamic_fees.todo
+        ```
+
+---
+
+## ЭТАП 310. Продвинутые Инструменты Коллаборации и Планирования
+
+- [ ] T-0734 | Коллаборация: Общий доступ к проекту свадьбы (пара + организатор + родители)
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        # Добавить модель WeddingProject Collaborator в schema.prisma
+        echo "// TODO: Add collaboration models to schema.prisma" > packages/prisma/collaboration_models.todo
+        git add packages/prisma/collaboration_models.todo
+        ```
+- [ ] T-0735 | Коллаборация: Комментарии к задачам чек-листа и элементам бюджета
+    - depends: [T-0042, T-0043]
+    - apply:
+        ```bash
+        # Добавить модели Comment (связанные с BudgetItem, ChecklistTask)
+        echo "// TODO: Add Comment models for Budget/Checklist" > packages/prisma/comments_models.todo
+        git add packages/prisma/comments_models.todo
+        ```
+- [ ] T-0736 | Планирование: Интеграция с внешними календарями (Google/Outlook) для задач и встреч
+    - depends: [T-0620, T-0577]
+    - apply:
+        ```bash
+        # Реализовать API для синхронизации событий с внешними календарями
+        echo "// TODO: Implement external calendar sync API for couple tasks" > apps/svc-guests/src/calendar/external_sync.todo
+        git add apps/svc-guests/src/calendar/external_sync.todo
+        ```
+- [ ] T-0737 | Планирование: Шаблоны бюджета (люкс, средний, эконом) с авто-заполнением категорий
+    - depends: [T-0042]
+    - apply:
+        ```bash
+        # Создать JSON/MD файлы с шаблонами бюджета
+        mkdir -p apps/svc-guests/src/budget/templates
+        touch apps/svc-guests/src/budget/templates/luxury.json apps/svc-guests/src/budget/templates/standard.json
+        git add apps/svc-guests/src/budget/templates/*.json
+        ```
+- [ ] T-0738 | Планирование: Трекер платежей по вендорам (связь бюджета и инвойсов)
+    - depends: [T-0042, T-0238, T-0688]
+    - apply:
+        ```bash
+        # Добавить связь между BudgetItem и Invoice, обновить UI бюджета
+        echo "// TODO: Link BudgetItem and Invoice models, update Budget UI" > apps/svc-guests/src/budget/payment_tracking.todo
+        git add apps/svc-guests/src/budget/payment_tracking.todo
+        ```
+- [ ] T-0739 | Сайт Пары: Защита паролем для определенных секций (например, фото)
+    - depends: [T-0370]
+    - apply:
+        ```bash
+        # Добавить поле 'passwordProtectedBlocks' в модель CoupleSite
+        echo "// TODO: Add password protection setting to CoupleSite model" > packages/prisma/couple_site_password.todo
+        git add packages/prisma/couple_site_password.todo
+        ```
+
+---
+
+## ЭТАП 311. Углубленная Локализация и Культурная Адаптация (UZ)
+
+- [ ] T-0740 | Локализация: Полный перевод интерфейса админки на узбекский (латиница)
+    - depends: [T-0080, T-0606]
+    - apply:
+        ```bash
+        # Создать файлы локализации для админ-панели
+        mkdir -p apps/admin/src/locales
+        touch apps/admin/src/locales/uz_latin.json apps/admin/src/locales/ru.json
+        git add apps/admin/src/locales/*.json
+        ```
+- [ ] T-0741 | Контент: Справочник свадебных традиций Узбекистана (интерактивный гид)
+    - depends: [T-0610]
+    - apply:
+        ```bash
+        # Создать отдельный раздел на сайте с описанием традиций
+        mkdir -p apps/svc-website/src/pages/traditions
+        touch apps/svc-website/src/pages/traditions/index.tsx
+        git add apps/svc-website/src/pages/traditions/index.tsx
+        ```
+- [ ] T-0742 | Каталог: Специальные фильтры для Тойхона (наличие сцены, национальная кухня, парковка)
+    - depends: [T-0011, T-0234]
+    - apply:
+        ```bash
+        # Добавить специфичные атрибуты в модель Venue (или как JSON поле) и в фильтры поиска
+        echo "// TODO: Add Toyhona-specific attributes/filters" > packages/prisma/toyhona_attributes.todo
+        git add packages/prisma/toyhona_attributes.todo
+        ```
+- [ ] T-0743 | Каталог: Отдельная категория "Национальные музыканты/Артисты"
+    - depends: [T-0530, T-0226]
+    - apply:
+        ```bash
+        # Добавить новую категорию вендоров
+        echo "// TODO: Add 'national_artists' vendor category" > packages/catalog/national_artists_category.todo
+        git add packages/catalog/national_artists_category.todo
+        ```
+- [ ] T-0744 | Планирование: Чек-лист с учетом этапов традиционной узбекской свадьбы
+    - depends: [T-0567]
+    - apply:
+        ```bash
+        # Создать шаблон чек-листа 'uzbek_traditional.json'
+        touch apps/svc-guests/src/checklist/templates/uzbek_traditional.json
+        git add apps/svc-guests/src/checklist/templates/uzbek_traditional.json
+        ```
+- [ ] T-0745 | Поддержка: База знаний на узбекском языке
+    - depends: [T-0648, T-0703]
+    - apply:
+        ```bash
+        # Создать структуру для локализованных статей в docs/help
+        mkdir -p docs/help/uz_latin
+        touch docs/help/uz_latin/faq.mdx
+        git add docs/help/uz_latin/faq.mdx
+        ```
+
+---
+
+## ЭТАП 312. Масштабируемость и Оптимизация Производительности
+
+- [ ] T-0746 | База данных: Шардирование/партиционирование таблиц (EventLog, ChatMessage) - исследование
+    - depends: [T-0351, T-0451, T-0727]
+    - apply:
+        ```bash
+        # Провести исследование и документировать стратегию шардирования/партиционирования
+        echo "# Database Sharding/Partitioning Strategy" > docs/ops/db_scaling.md
+        git add docs/ops/db_scaling.md
+        ```
+- [ ] T-0747 | Кэширование: Внедрение распределенного кэша (Redis/Memcached) вместо in-memory
+    - depends: [T-0242, T-0003]
+    - apply:
+        ```bash
+        # Заменить реализацию в packages/cache на Redis/Memcached клиент
+        echo "// TODO: Replace in-memory cache with Redis/Memcached implementation" > packages/cache/distributed_cache.todo
+        git add packages/cache/distributed_cache.todo
+        ```
+- [ ] T-0748 | Очереди: Внедрение RabbitMQ/Kafka вместо BullMQ stub для фоновых задач
+    - depends: [T-0199, T-0317]
+    - apply:
+        ```bash
+        # Заменить реализацию в packages/queue на RabbitMQ/Kafka клиент
+        echo "// TODO: Replace queue stub with RabbitMQ/Kafka implementation" > packages/queue/message_broker.todo
+        git add packages/queue/message_broker.todo
+        ```
+- [ ] T-0749 | Медиа: Использование CDN для раздачи пользовательского контента (фото/видео)
+    - depends: [T-0491, T-0640]
+    - apply:
+        ```bash
+        # Настроить CDN (DO Spaces CDN / Cloudflare) для бакета медиа
+        echo "// TODO: Configure CDN for media bucket" > infra/tf/cdn_media.todo
+        git add infra/tf/cdn_media.todo
+        ```
+- [ ] T-0750 | Фронтенд: Server-Side Rendering (SSR) / Static Site Generation (SSG) для SEO-страниц (города, категории, блог)
+    - depends: [T-0060, T-0398, T-0442]
+    - apply:
+        ```bash
+        # Оптимизировать Next.js страницы для SSR/SSG где это применимо
+        echo "// TODO: Implement SSR/SSG for SEO-critical pages" > apps/svc-website/ssr_ssg_optimization.todo
+        git add apps/svc-website/ssr_ssg_optimization.todo
+        ```
+- [ ] T-0751 | API: Оптимизация GraphQL запросов (DataLoader, кэширование)
+    - depends: [T-0723]
+    - apply:
+        ```bash
+        # Внедрить DataLoader и стратегии кэширования в svc-gql
+        echo "// TODO: Optimize GraphQL resolvers (DataLoader, caching)" > apps/svc-gql/optimization.todo
+        git add apps/svc-gql/optimization.todo
+        ```
+- [ ] T-0752 | Нагрузочное тестирование: Сценарии для симуляции пиковой нагрузки (сезон свадеб)
+    - depends: [T-0632]
+    - apply:
+        ```bash
+        # Разработать k6 скрипты для пиковой нагрузки
+        touch infra/k6/peak_load_scenario.js
+        git add infra/k6/peak_load_scenario.js
+        ```
+
+---
+
+## ЭТАП 313. Безопасность (Углубление) и Compliance
+
+- [ ] T-0753 | Безопасность: Аудит прав доступа (RBAC) - регулярная проверка
+    - depends: [T-0032, T-01240]
+    - apply:
+        ```bash
+        # Добавить скрипт или процедуру для регулярного аудита RBAC
+        echo "# RBAC Audit Procedure (Quarterly)" > docs/security/rbac_audit.md
+        git add docs/security/rbac_audit.md
+        ```
+- [ ] T-0754 | Безопасность: Защита от DDoS (на уровне Cloudflare/DO) - настройка
+    - depends: [T-0642]
+    - apply:
+        ```bash
+        # Настроить правила защиты от DDoS
+        echo "// TODO: Configure DDoS protection rules" > infra/security/ddos_protection.todo
+        git add infra/security/ddos_protection.todo
+        ```
+- [ ] T-0755 | Безопасность: Сканирование контейнеров на уязвимости (Trivy/Snyk) в CI
+    - depends: [T-0005, T-0634]
+    - apply:
+        ```bash
+        # Добавить шаг сканирования Docker-образов в ci.yml
+        echo "// TODO: Add container vulnerability scanning to CI" > .github/workflows/container_scan.todo
+        git add .github/workflows/container_scan.todo
+        ```
+- [ ] T-0756 | Безопасность: Шифрование чувствительных данных в БД (PII) - исследование/реализация
+    - depends: [T-0011, T-0202]
+    - apply:
+        ```bash
+        # Исследовать и внедрить шифрование на уровне приложения или БД
+        echo "# Database Encryption Strategy for PII" > docs/security/db_encryption.md
+        git add docs/security/db_encryption.md
+        ```
+- [ ] T-0757 | Compliance: Прохождение сертификации PCI DSS (если применимо для прямых платежей) - подготовка
+    - depends: [T-0728]
+    - apply:
+        ```bash
+        # Провести аудит на соответствие требованиям PCI DSS
+        echo "# PCI DSS Compliance Readiness Assessment" > docs/legal/pci_dss_assessment.md
+        git add docs/legal/pci_dss_assessment.md
+        ```
+- [ ] T-0758 | Compliance: Политика Bug Bounty - разработка и публикация
+    - depends: [T-0660]
+    - apply:
+        ```bash
+        echo "# Bug Bounty Program Policy" > docs/security/bug_bounty_policy.md
+        git add docs/security/bug_bounty_policy.md
+        ```
+
+---
+## ЭТАП 314. Дополнительные UX/UI Улучшения
+- [ ] T-0759 | UX: Онбординг для пар (интерактивный тур по платформе)
+    - depends: [T-0710]
+    - apply:
+        ```bash
+        # Внедрить библиотеку для интерактивных туров (напр., react-joyride)
+        echo "// TODO: Implement interactive onboarding tour for couples" > apps/svc-website/onboarding/interactive_tour.todo
+        git add apps/svc-website/onboarding/interactive_tour.todo
+        ```
+- [ ] T-0760 | UI: Геймификация (прогресс-бары, бейджи за выполнение задач)
+    - depends: [T-0880]
+    - apply:
+        ```bash
+        # Разработать систему бейджей и достижений для пар
+        mkdir -p apps/svc-gamification/src
+        echo "// TODO: Add Achievement model to schema.prisma" > packages/prisma/achievement_model.todo
+        git add packages/prisma/achievement_model.todo apps/svc-gamification/src
+        ```
+- [ ] T-0761 | UI: Улучшенный поиск (с автодополнением, фильтрами "на лету")
+    - depends: [T-0234, T-0510]
+    - apply:
+        ```bash
+        # Переработать UI компоненты поиска
+        echo "// TODO: Enhance search UI components (autocomplete, live filters)" > packages/ui/src/search/enhancements.todo
+        git add packages/ui/src/search/enhancements.todo
+        ```
+- [ ] T-0762 | UI: Визуальное сравнение вендоров (таблица характеристик)
+    - depends: [T-0560]
+    - apply:
+        ```bash
+        # Реализовать UI для страницы сравнения
+        mkdir -p apps/svc-website/src/pages/compare
+        touch apps/svc-website/src/pages/compare/index.tsx
+        git add apps/svc-website/src/pages/compare/index.tsx
+        ```
+- [ ] T-0763 | UX: Офлайн-режим для мобильного приложения/PWA (критичные данные)
+    - depends: [T-0595]
+    - apply:
+        ```bash
+        # Расширить кэширование в Service Worker для большего объема данных
+        echo "// TODO: Extend offline capabilities in PWA/Service Worker" > public/sw_offline_extended.todo
+        git add public/sw_offline_extended.todo
+        ```
+- [ ] T-0764 | Дизайн: Обновление дизайн-системы (v2) на основе фидбека и трендов
+    - depends: [T-0551, T-0653]
+    - apply:
+        ```bash
+        # Запланировать и провести редизайн ключевых элементов/компонентов
+        echo "# Design System v2 - Plan and Scope" > docs/design/v2_plan.mdx
+        git add docs/design/v2_plan.mdx
+        ```
+
+````
+
+---
+
+## ЭТАП 315. Нативные Мобильные Приложения (iOS/Android) - Основа
+
+- [ ] T-0765 | Мобильное Приложение (Пара): Выбор технологического стека (React Native/Flutter/Native)
+    - depends: []
+    - apply:
+        ```bash
+        echo "# Mobile App (Couple): Technology Stack Decision" > docs/mobile/couple_stack.md
+        git add docs/mobile/couple_stack.md
+        ```
+- [ ] T-0766 | Мобильное Приложение (Пара): Настройка базового проекта (iOS + Android)
+    - depends: [T-0765]
+    - apply:
+        ```bash
+        mkdir -p mobile/app-couple
+        # Инициализировать проект React Native / Flutter / Native
+        echo "// TODO: Initialize Couple Mobile App Project" > mobile/app-couple/init.todo
+        git add mobile/app-couple/init.todo
+        ```
+- [ ] T-0767 | Мобильное Приложение (Пара): UI Kit мобильных компонентов (адаптация @wt/ui или нативный)
+    - depends: [T-0766, T-0021]
+    - apply:
+        ```bash
+        # Создать или адаптировать UI компоненты для мобильного приложения
+        echo "// TODO: Develop/Adapt UI Kit for Couple Mobile App" > mobile/app-couple/ui_kit.todo
+        git add mobile/app-couple/ui_kit.todo
+        ```
+- [ ] T-0768 | Мобильное Приложение (Пара): Аутентификация (интеграция с svc-auth)
+    - depends: [T-0766, T-0232]
+    - apply:
+        ```bash
+        # Реализовать экраны логина/регистрации и работу с JWT/сессиями
+        echo "// TODO: Implement Authentication in Couple Mobile App" > mobile/app-couple/auth.todo
+        git add mobile/app-couple/auth.todo
+        ```
+- [ ] T-0769 | Мобильное Приложение (Пара): Базовый дашборд (чек-лист, бюджет, гости - read-only)
+    - depends: [T-0768]
+    - apply:
+        ```bash
+        # Создать основные экраны дашборда
+        echo "// TODO: Implement basic Dashboard screens in Couple Mobile App" > mobile/app-couple/dashboard.todo
+        git add mobile/app-couple/dashboard.todo
+        ```
+- [ ] T-0770 | Мобильное Приложение (Вендор): Выбор технологического стека
+    - depends: []
+    - apply:
+        ```bash
+        echo "# Mobile App (Vendor): Technology Stack Decision" > docs/mobile/vendor_stack.md
+        git add docs/mobile/vendor_stack.md
+        ```
+- [ ] T-0771 | Мобильное Приложение (Вендор): Настройка базового проекта (iOS + Android)
+    - depends: [T-0770]
+    - apply:
+        ```bash
+        mkdir -p mobile/app-vendor
+        echo "// TODO: Initialize Vendor Mobile App Project" > mobile/app-vendor/init.todo
+        git add mobile/app-vendor/init.todo
+        ```
+- [ ] T-0772 | Мобильное Приложение (Вендор): UI Kit и аутентификация
+    - depends: [T-0771, T-0021, T-0232]
+    - apply:
+        ```bash
+        echo "// TODO: Implement UI Kit and Authentication in Vendor Mobile App" > mobile/app-vendor/ui_auth.todo
+        git add mobile/app-vendor/ui_auth.todo
+        ```
+- [ ] T-0773 | Мобильное Приложение (Вендор): Просмотр новых заявок (Enquiries) - read-only
+    - depends: [T-0772, T-0052]
+    - apply:
+        ```bash
+        # Создать экран списка заявок
+        echo "// TODO: Implement Enquiry List screen in Vendor Mobile App" > mobile/app-vendor/enquiries.todo
+        git add mobile/app-vendor/enquiries.todo
+        ```
+- [ ] T-0774 | Мобильные Приложения: Настройка CI/CD для сборки и публикации (App Store / Google Play) - скелет
+    - depends: [T-0766, T-0771]
+    - apply:
+        ```bash
+        # Создать workflows для сборки мобильных приложений
+        touch .github/workflows/mobile_build_couple.yml .github/workflows/mobile_build_vendor.yml
+        git add .github/workflows/mobile_build_*.yml
+        ```
+
+---
+
+## ЭТАП 316. Инновационные Технологии (AR/VR/AI)
+
+- [ ] T-0775 | AR: Примерка свадебных платьев/костюмов (интеграция с AR SDK) - Proof of Concept
+    - depends: [T-0766]
+    - apply:
+        ```bash
+        mkdir -p mobile/app-couple/features/ar_tryon
+        echo "// TODO: Implement AR Try-On Proof of Concept" > mobile/app-couple/features/ar_tryon/poc.todo
+        git add mobile/app-couple/features/ar_tryon/poc.todo
+        ```
+- [ ] T-0776 | VR: Виртуальные туры по площадкам (интеграция с VR-плеерами/WebXR)
+    - depends: [T-0576]
+    - apply:
+        ```bash
+        # Добавить поддержку VR-плееров на страницах площадок
+        echo "// TODO: Implement VR Tour player integration" > apps/svc-website/src/vr_player.todo
+        git add apps/svc-website/src/vr_player.todo
+        ```
+- [ ] T-0777 | AI: Генерация персонализированного таймлайна свадьбы (на основе анкеты)
+    - depends: [T-0415, T-0697]
+    - apply:
+        ```bash
+        # Доработать API генерации таймлайна с использованием LLM
+        echo "// TODO: Implement AI-powered timeline generation" > apps/svc-planner/src/ai_timeline.todo
+        git add apps/svc-planner/src/ai_timeline.todo
+        ```
+- [ ] T-0778 | AI: Подбор музыки для свадьбы (на основе предпочтений/стиля) - интеграция API
+    - depends: [T-0696]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/music_reco
+        echo "export const recommendMusic = 1;" > packages/integrations/music_reco/index.ts
+        git add packages/integrations/music_reco/index.ts
+        ```
+- [ ] T-0779 | AI: Анализ сметы и поиск возможностей для оптимизации бюджета
+    - depends: [T-0042, T-0699]
+    - apply:
+        ```bash
+        # Разработать AI-модель для анализа и оптимизации сметы
+        echo "// TODO: Implement AI budget optimization analysis" > apps/svc-guests/src/budget/ai_optimizer.todo
+        git add apps/svc-guests/src/budget/ai_optimizer.todo
+        ```
+- [ ] T-0780 | AI: Автоматическое создание фотоальбома/видеоролика (на основе загруженных медиа) - API stub
+    - depends: [T-0215]
+    - apply:
+        ```bash
+        mkdir -p packages/integrations/video_gen
+        echo "export const generateWeddingHighlight = 1;" > packages/integrations/video_gen/index.ts
+        git add packages/integrations/video_gen/index.ts
+        ```
+
+---
+
+## ЭТАП 317. Расширенные Социальные и Комьюнити Функции
+
+- [ ] T-0781 | Комьюнити: Возможность создания публичных профилей пар (с разрешения)
+    - depends: [T-0226]
+    - apply:
+        ```bash
+        # Добавить поля isPublic, profileSlug в модель User/Couple
+        echo "// TODO: Add public profile fields to User/Couple model" > packages/prisma/public_profile.todo
+        git add packages/prisma/public_profile.todo
+        ```
+- [ ] T-0782 | Комьюнити: Система "друзей"/подписок между парами
+    - depends: [T-0781]
+    - apply:
+        ```bash
+        # Добавить модель Follow (followerId, followingId)
+        echo "// TODO: Add Follow model to schema.prisma" > packages/prisma/follow_model.todo
+        git add packages/prisma/follow_model.todo
+        ```
+- [ ] T-0783 | Комьюнити: Лента активности (новые посты в блоге, реальные свадьбы, Q&A)
+    - depends: [T-0601, T-0603, T-0604]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-website/src/pages/feed
+        touch apps/svc-website/src/pages/feed/index.tsx
+        git add apps/svc-website/src/pages/feed/index.tsx
+        ```
+- [ ] T-0784 | Комьюнити: Группы по интересам/городам/датам свадьбы
+    - depends: [T-0602]
+    - apply:
+        ```bash
+        # Расширить функционал форума для поддержки групп
+        echo "// TODO: Implement Groups functionality in Forum" > apps/svc-forum/groups.todo
+        git add apps/svc-forum/groups.todo
+        ```
+- [ ] T-0785 | Комьюнити: Внутренняя система личных сообщений между пользователями
+    - depends: [T-0781]
+    - apply:
+        ```bash
+        # Добавить модели DirectMessageThread, DirectMessage
+        echo "// TODO: Add Direct Message models to schema.prisma" > packages/prisma/dm_models.todo
+        git add packages/prisma/dm_models.todo
+        ```
+- [ ] T-0786 | Комьюнити: Система бейджей/репутации для активных пользователей
+    - depends: [T-0760]
+    - apply:
+        ```bash
+        # Расширить svc-gamification для пользовательской репутации
+        echo "// TODO: Implement user reputation system" > apps/svc-gamification/user_reputation.todo
+        git add apps/svc-gamification/user_reputation.todo
+        ```
+
+---
+
+## ЭТАП 318. Углубление B2B: Маркетинг и Рост для Вендоров
+
+- [ ] T-0787 | B2B Маркетинг: Возможность запуска платных рекламных кампаний вендором внутри платформы (PPC/Featured)
+    - depends: [T-0717]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-ads/src
+        # Добавить модели AdCampaign, AdPlacement, AdBid
+        echo "// TODO: Add Advertising models to schema.prisma" > packages/prisma/ads_models.todo
+        git add packages/prisma/ads_models.todo apps/svc-ads/src
+        ```
+- [ ] T-0788 | B2B Маркетинг: Конструктор лендингов для вендоров (на базе платформы)
+    - depends: [T-01700, T-0501]
+    - apply:
+        ```bash
+        # Разработать отдельный конструктор лендингов для вендоров
+        mkdir -p apps/svc-vendors/src/landing_builder
+        touch apps/svc-vendors/src/landing_builder/index.tsx
+        git add apps/svc-vendors/src/landing_builder/index.tsx
+        ```
+- [ ] T-0789 | B2B Рост: Партнерская программа для вендоров (приведи другого вендора)
+    - depends: [T-0284]
+    - apply:
+        ```bash
+        # Расширить систему рефералов для B2B
+        echo "// TODO: Implement B2B referral program logic" > apps/svc-auth/src/ref/b2b_referrals.todo
+        git add apps/svc-auth/src/ref/b2b_referrals.todo
+        ```
+- [ ] T-0790 | B2B Рост: Аналитика по конкурентам (анонимная: средний чек, конверсия, популярные даты)
+    - depends: [T-0583]
+    - apply:
+        ```bash
+        # Расширить отчеты бенчмаркинга в svc-analytics
+        echo "// TODO: Expand vendor benchmarking reports" > apps/svc-analytics/src/benchmarking/enhancements.todo
+        git add apps/svc-analytics/src/benchmarking/enhancements.todo
+        ```
+- [ ] T-0791 | B2B Сервис: Юридическая/бухгалтерская консультация (интеграция с партнерами) - форма запроса
+    - depends: [T-0011]
+    - apply:
+        ```bash
+        mkdir -p apps/svc-vendors/src/pages/support
+        touch apps/svc-vendors/src/pages/support/legal_consult.tsx
+        git add apps/svc-vendors/src/pages/support/legal_consult.tsx
+        ```
+- [ ] T-0792 | B2B Образование: База знаний и вебинары для вендоров (по маркетингу, продажам)
+    - depends: [T-0648]
+    - apply:
+        ```bash
+        # Создать раздел базы знаний для вендоров
+        mkdir -p docs/help/vendors
+        touch docs/help/vendors/marketing_guide.mdx
+        git add docs/help/vendors/marketing_guide.mdx
+        ```
+
+---
+
+## ЭТАП 319. Мобильные Приложения (Расширенный Функционал)
+
+- [ ] T-0793 | Мобильное Приложение (Пара): Оффлайн-доступ к основным данным (чек-лист, гости, бюджет)
+    - depends: [T-0769, T-0763]
+    - apply:
+        ```bash
+        # Реализовать локальное хранение данных (SQLite/Realm)
+        echo "// TODO: Implement offline data storage in Couple App" > mobile/app-couple/offline_storage.todo
+        git add mobile/app-couple/offline_storage.todo
+        ```
+- [ ] T-0794 | Мобильное Приложение (Пара): Управление гостями и RSVP с телефона
+    - depends: [T-0769, T-0040]
+    - apply:
+        ```bash
+        # Добавить экраны управления гостями
+        echo "// TODO: Implement Guest Management screens in Couple App" > mobile/app-couple/guest_management.todo
+        git add mobile/app-couple/guest_management.todo
+        ```
+- [ ] T-0795 | Мобильное Приложение (Пара): Чат с вендорами
+    - depends: [T-0769, T-0455]
+    - apply:
+        ```bash
+        # Интегрировать компонент чата в мобильное приложение
+        echo "// TODO: Integrate Chat component into Couple App" > mobile/app-couple/chat_integration.todo
+        git add mobile/app-couple/chat_integration.todo
+        ```
+- [ ] T-0796 | Мобильное Приложение (Пара): Сканер QR-кодов (для приглашений/вендоров)
+    - depends: [T-0766]
+    - apply:
+        ```bash
+        # Интегрировать библиотеку сканирования QR-кодов
+        echo "// TODO: Implement QR Code Scanner in Couple App" > mobile/app-couple/qr_scanner.todo
+        git add mobile/app-couple/qr_scanner.todo
+        ```
+- [ ] T-0797 | Мобильное Приложение (Вендор): Управление календарем доступности
+    - depends: [T-0773, T-0051]
+    - apply:
+        ```bash
+        # Добавить экраны управления календарем
+        echo "// TODO: Implement Calendar Management in Vendor App" > mobile/app-vendor/calendar_management.todo
+        git add mobile/app-vendor/calendar_management.todo
+        ```
+- [ ] T-0798 | Мобильное Приложение (Вендор): Ответы на заявки и чат с парами
+    - depends: [T-0773, T-0455]
+    - apply:
+        ```bash
+        # Реализовать функционал ответа на заявки и чата
+        echo "// TODO: Implement Enquiry Response and Chat in Vendor App" > mobile/app-vendor/chat_enquiry_response.todo
+        git add mobile/app-vendor/chat_enquiry_response.todo
+        ```
+- [ ] T-0799 | Мобильное Приложение (Вендор): Push-уведомления о новых заявках/сообщениях
+    - depends: [T-0773, T-0596]
+    - apply:
+        ```bash
+        # Настроить получение push-уведомлений
+        echo "// TODO: Implement Push Notifications in Vendor App" > mobile/app-vendor/push_notifications.todo
+        git add mobile/app-vendor/push_notifications.todo
+        ```
+- [ ] T-0800 | Мобильные Приложения: Публикация в App Store и Google Play (полный процесс)
+    - depends: [T-0774]
+    - apply:
+        ```bash
+        # Подготовить все необходимое и опубликовать приложения
+        echo "# App Store / Google Play Submission Checklist" > docs/mobile/submission_checklist.md
+        git add docs/mobile/submission_checklist.md
+        ```
