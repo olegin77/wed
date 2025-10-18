@@ -1,0 +1,30 @@
+name: weddingtech-uz
+services:
+  - name: svc-website
+    github:
+      repo: wed/wed
+      branch: main
+      deploy_on_push: true
+      source_dir: apps/svc-website
+    http_port: 8080
+    run_command: "pnpm start:migrate"
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+  - name: svc-enquiries
+    github:
+      repo: wed/wed
+      branch: main
+      deploy_on_push: true
+      source_dir: apps/svc-enquiries
+    http_port: 8080
+    run_command: "pnpm start:migrate"
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
