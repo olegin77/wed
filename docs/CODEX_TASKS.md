@@ -3166,7 +3166,7 @@ TS
 
 ## ЭТАП 181. DigitalOcean App Platform (Auto-Deploy)
 
-- [ ] T-0181 | Per-service package.json (build/start/start:migrate)
+- [x] T-0181 | Per-service package.json (build/start/start:migrate)
   - depends: [T-0004, T-0010]
   - apply:
     ```bash
