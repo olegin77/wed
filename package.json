@@ -12,6 +12,7 @@
     "build": "echo build ok",
     "prisma:generate": "pnpm -C packages/prisma run generate",
     "prisma:migrate": "pnpm -C packages/prisma run migrate:dev",
-    "seed": "node apps/seeder/index.js"
+    "seed": "node apps/seeder/index.js",
+    "do:appspec": "node scripts/generate-do-appspec.js"
   }
 }

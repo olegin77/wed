@@ -3194,7 +3194,7 @@ JSON
     git add apps/svc-*/package.json
     ```
 
-- [ ] T-0182 | DigitalOcean App Spec (infra/do/app.yaml) c автоподстановкой origin
+- [x] T-0182 | DigitalOcean App Spec (infra/do/app.yaml) c автоподстановкой origin
   - depends: [T-0181]
   - apply:
     ```bash
@@ -3243,7 +3243,7 @@ YML
     git add infra/do/app.yaml
     ```
 
-- [ ] T-0183 | GitHub Action: Manual Deploy to DO App (`apps/{id}/deployments`)
+- [x] T-0183 | GitHub Action: Manual Deploy to DO App (`apps/{id}/deployments`)
   - depends: [T-0182]
   - apply:
     ```bash
@@ -3276,7 +3276,7 @@ YML
     git add .github/workflows/do-deploy.yml
     ```
 
-- [ ] T-0184 | GitHub Action: Lint `infra/do/app.yaml`
+- [x] T-0184 | GitHub Action: Lint `infra/do/app.yaml`
   - depends: [T-0182]
   - apply:
     ```bash
@@ -3303,7 +3303,7 @@ YML
     git add .github/workflows/do-appspec-lint.yml
     ```
 
-- [ ] T-0185 | Расширенный `/health`: признак доступности БД (`db:true|false`)
+- [x] T-0185 | Расширенный `/health`: признак доступности БД (`db:true|false`)
   - depends: [T-0011, T-0004]
   - apply:
     ```bash
@@ -3319,7 +3319,7 @@ YML
     git add apps/svc-*/src/main.js || true
     ```
 
-- [ ] T-0186 | Скрипт «миграции на старте»
+- [x] T-0186 | Скрипт «миграции на старте»
   - depends: [T-0012]
   - apply:
     ```bash
@@ -3335,7 +3335,7 @@ SH
     git add scripts/start-with-migrations.sh
     ```
 
-- [ ] T-0187 | DO Docs: one-click deploy (секреты/процедура)
+- [x] T-0187 | DO Docs: one-click deploy (секреты/процедура)
   - depends: [T-0183]
   - apply:
     ```bash
@@ -3355,7 +3355,7 @@ MD
 
 ## ЭТАП 182. B2B & Bridebook Extensions
 
-- [ ] T-0188 | Enquiry workflow: состояния и валидация переходов
+- [x] T-0188 | Enquiry workflow: состояния и валидация переходов
   - depends: [T-0052, T-0091]
   - apply:
     ```bash
@@ -3373,7 +3373,7 @@ TS
     git add apps/svc-enquiries/src/workflow/states.ts
     ```
 
-- [ ] T-0189 | Targeted enquiries (Premium)
+- [x] T-0189 | Targeted enquiries (Premium)
   - depends: [T-0188, T-0170]
   - apply:
     ```bash
@@ -3386,7 +3386,7 @@ TS
     git add apps/svc-enquiries/src/types/targeted.ts
     ```
 
-- [ ] T-0190 | Contract-based reviews: правило допуска
+- [x] T-0190 | Contract-based reviews: правило допуска
   - depends: [T-0070, T-0350]
   - apply:
     ```bash
@@ -3398,7 +3398,7 @@ TS
     git add apps/svc-enquiries/src/reviews/contract-verify.ts
     ```
 
-- [ ] T-0191 | Late availability: тип оффера для тойхан
+- [x] T-0191 | Late availability: тип оффера для тойхан
   - depends: [T-0051, T-0052]
   - apply:
     ```bash
