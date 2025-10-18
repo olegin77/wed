@@ -1,6 +1,9 @@
 import { createServer } from "node:http";
-import fs from "node:fs";
+import { appendFile, mkdir } from "node:fs/promises";
 
+/**
+ * TCP port on which the ingestion service listens.
+ */
 const port = process.env.PORT || 3200;
 
 /**
@@ -17,17 +20,24 @@ function resolveLogFile() {
  */
 createServer(async (req, res) => {
   if (req.method === "POST" && req.url === "/logs/ingest") {
-    fs.mkdirSync("logs", { recursive: true });
+    try {
+      await mkdir("logs", { recursive: true });
 
-    const chunks = [];
-    for await (const chunk of req) {
-      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+      /** @type {Buffer[]} */
+      const chunks = [];
+      for await (const chunk of req) {
+        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+      }
+
+      await appendFile(resolveLogFile(), Buffer.concat(chunks).toString() + "\n");
+      res.writeHead(204);
+      res.end();
+      return;
+    } catch (error) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "failed_to_persist_log" }));
+      return;
     }
-
-    fs.appendFileSync(resolveLogFile(), Buffer.concat(chunks).toString() + "\n");
-    res.writeHead(204);
-    res.end();
-    return;
   }
 
   res.writeHead(404);

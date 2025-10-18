@@ -1,5 +1,24 @@
 export type LogLevel = "info" | "warn" | "error";
 
+type ShipModule = typeof import("../remote/ship.js");
+
+let shipModulePromise: Promise<ShipModule> | null = null;
+
+/**
+ * Lazily loads the remote shipping helper and forwards the serialized log entry.
+ *
+ * @param serialized - Already serialized JSON log entry.
+ */
+async function forwardToRemote(serialized: string): Promise<void> {
+  try {
+    shipModulePromise ??= import("../remote/ship.js");
+    const module = await shipModulePromise;
+    await module.ship(serialized);
+  } catch (_) {
+    // Errors are intentionally ignored to keep logging non-blocking.
+  }
+}
+
 /**
  * Logs a structured JSON entry to stdout and forwards errors to the remote collector.
  *
@@ -19,8 +38,6 @@ export function logj(level: LogLevel, msg: string, extra: Record<string, unknown
   console.log(serialized);
 
   if (level === "error") {
-    void import("../remote/ship.js")
-      .then((module) => module.ship(serialized))
-      .catch(() => undefined);
+    void forwardToRemote(serialized);
   }
 }
