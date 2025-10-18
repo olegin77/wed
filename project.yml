@@ -1,4 +1,3 @@
-# project.yml — валидная схема для Codex/агентного пайплайна
 agent:
   mode: fully_automatic
   approvals:
