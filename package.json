@@ -1,0 +1,19 @@
+{
+  "name": "weddingtech-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "infra/*"
+  ],
+  "scripts": {
+    "start": "pnpm -w -r run start --if-present",
+    "lint": "pnpm -w -r run lint --if-present",
+    "test": "pnpm -w -r run test --if-present",
+    "build": "pnpm -w -r run build --if-present",
+    "prisma:generate": "pnpm -C packages/prisma run generate",
+    "prisma:migrate": "pnpm -C packages/prisma run migrate:dev",
+    "seed": "node apps/seeder/index.js",
+    "do:appspec": "node scripts/generate-do-appspec.js"
+  }
+}
