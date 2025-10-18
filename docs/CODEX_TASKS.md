@@ -219,7 +219,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0012 | Prisma скрипты в корне
+- [x] T-0012 | Prisma скрипты в корне
   - depends: [T-0010]
   - apply:
     ```bash
@@ -231,7 +231,7 @@ PRISMA
     git add package.json
     ```
 
-- [ ] T-0013 | Первичная миграция (файл-плейсхолдер для отслеживания)
+- [x] T-0013 | Первичная миграция (файл-плейсхолдер для отслеживания)
   - depends: [T-0011,T-0012]
   - apply:
     ```bash
@@ -272,7 +272,7 @@ TSX
     git add packages/ui/src/*.tsx
     ```
 
-- [ ] T-0022 | Шаблоны экранов: доска пары и каталог поставщиков
+- [x] T-0022 | Шаблоны экранов: доска пары и каталог поставщиков
   - depends: [T-0021]
   - apply:
     ```bash
@@ -312,7 +312,7 @@ TS
     git add apps/svc-auth/src/auth.controller.ts
     ```
 
-- [ ] T-0031 | DTO register/login/refresh
+- [x] T-0031 | DTO register/login/refresh
   - depends: [T-0030]
   - apply:
     ```bash
@@ -321,7 +321,7 @@ TS
     git add apps/svc-auth/src/dto/index.ts
     ```
 
-- [ ] T-0032 | RBAC скелет (PAIR/VENDOR/ADMIN)
+- [x] T-0032 | RBAC скелет (PAIR/VENDOR/ADMIN)
   - depends: [T-0030]
   - apply:
     ```bash
@@ -343,7 +343,7 @@ TS
     git add apps/svc-guests/src/import/index.ts
     ```
 
-- [ ] T-0041 | Посадка за столы (модель + API скелет)
+- [x] T-0041 | Посадка за столы (модель + API скелет)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -361,7 +361,7 @@ TS
     git add apps/svc-guests/src/budget/index.ts
     ```
 
-- [ ] T-0043 | Планировщик задач пары (to-do/checklist)
+- [x] T-0043 | Планировщик задач пары (to-do/checklist)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -459,7 +459,7 @@ TS
 
 ## ЭТАП 8. Админ-панель
 
-- [ ] T-0080 | Admin (Next.js) скелет
+- [x] T-0080 | Admin (Next.js) скелет
   - depends: [T-0004]
   - apply:
     ```bash
@@ -468,7 +468,7 @@ TS
     git add apps/admin/pages/index.js
     ```
 
-- [ ] T-0081 | RBAC-страницы (модули по ролям)
+- [x] T-0081 | RBAC-страницы (модули по ролям)
   - depends: [T-0032,T-0080]
   - apply:
     ```bash
@@ -551,7 +551,7 @@ TS
     git add apps/svc-payments/src/index.ts
     ```
 
-- [ ] T-0113 | Платежные вебхуки (скелет)
+- [x] T-0113 | Платежные вебхуки (скелет)
   - depends: [T-0112]
   - apply:
     ```bash
@@ -609,7 +609,7 @@ TS
 
 ## ЭТАП 14. Безопасность, политика, экспорт данных
 
-- [ ] T-0140 | ESLint/tsconfig базовые
+- [x] T-0140 | ESLint/tsconfig базовые
   - depends: [T-0001]
   - apply:
     ```bash
@@ -648,7 +648,7 @@ JSON
 
 ## ЭТАП 16. Журналирование/наблюдаемость
 
-- [ ] T-0160 | Пакет `@wt/logger`
+- [x] T-0160 | Пакет `@wt/logger`
   - depends: [T-0001]
   - apply:
     ```bash
@@ -657,7 +657,7 @@ JSON
     git add packages/logger/index.ts
     ```
 
-- [ ] T-0161 | Корреляционные ID в запросах
+- [x] T-0161 | Корреляционные ID в запросах
   - depends: [T-0160]
   - apply:
     ```bash
@@ -670,7 +670,7 @@ JSON
 
 ## ЭТАП 17. Монетизация: тарифы, рефералка, промокоды
 
-- [ ] T-0170 | Тарифные планы (модель/скелет API)
+- [x] T-0170 | Тарифные планы (модель/скелет API)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -679,7 +679,7 @@ JSON
     git add apps/svc-payments/src/plans/index.ts
     ```
 
-- [ ] T-0171 | Реферальная программа
+- [x] T-0171 | Реферальная программа
   - depends: [T-0170]
   - apply:
     ```bash
@@ -688,7 +688,7 @@ JSON
     git add apps/svc-payments/src/referrals/index.ts
     ```
 
-- [ ] T-0172 | Промокоды/купоны
+- [x] T-0172 | Промокоды/купоны
   - depends: [T-0170]
   - apply:
     ```bash
@@ -714,7 +714,7 @@ JSON
 
 ## ЭТАП 19. Тесты и покрытия
 
-- [ ] T-0190 | Структура юнит-тестов
+- [x] T-0190 | Структура юнит-тестов
   - depends: [T-0001]
   - apply:
     ```bash
@@ -723,7 +723,7 @@ JSON
     git add tests/smoke.test.ts
     ```
 
-- [ ] T-0191 | E2E (Playwright) smoke
+- [x] T-0191 | E2E (Playwright) smoke
   - depends: [T-0060]
   - apply:
     ```bash
@@ -749,7 +749,7 @@ JSON
 
 ## ЭТАП 21. Импорт/экспорт каталога поставщиков для СНГ
 
-- [ ] T-0210 | Импорт CSV поставщиков (RU/UZ/EN)
+- [x] T-0210 | Импорт CSV поставщиков (RU/UZ/EN)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -762,7 +762,7 @@ JSON
 
 ## ЭТАП 22. Legal/политики
 
-- [ ] T-0220 | Terms/Privacy/Offer (mdx)
+- [x] T-0220 | Terms/Privacy/Offer (mdx)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -790,7 +790,7 @@ JSON
 
 ## ЭТАП 24. ЛК поставщика
 
-- [ ] T-0240 | Профиль/площадки/расписание
+- [x] T-0240 | Профиль/площадки/расписание
   - depends: [T-0021,T-0051]
   - apply:
     ```bash
@@ -842,7 +842,7 @@ JSON
 
 ## ЭТАП 28. Почтовые шаблоны
 
-- [ ] T-0280 | Invite/Invoice MJML
+- [x] T-0280 | Invite/Invoice MJML
   - depends: [T-0120]
   - apply:
     ```bash
@@ -868,7 +868,7 @@ JSON
 
 ## ЭТАП 30. Рефссылки/UTM
 
-- [ ] T-0300 | Генератор UTM/рефералок
+- [x] T-0300 | Генератор UTM/рефералок
   - depends: [T-0171]
   - apply:
     ```bash
@@ -894,7 +894,7 @@ JSON
 
 ## ЭТАП 32. Темы сайта пары
 
-- [ ] T-0320 | Темы (light/dark/minimal/royal)
+- [x] T-0320 | Темы (light/dark/minimal/royal)
   - depends: [T-0020]
   - apply:
     ```bash
@@ -907,7 +907,7 @@ JSON
 
 ## ЭТАП 33. Таймлайн подготовки
 
-- [ ] T-0330 | Таймлайн событий
+- [x] T-0330 | Таймлайн событий
   - depends: [T-0091]
   - apply:
     ```bash
@@ -933,7 +933,7 @@ JSON
 
 ## ЭТАП 35. Договоры и подписи
 
-- [ ] T-0350 | Генерация договора (md → pdf)
+- [x] T-0350 | Генерация договора (md → pdf)
   - depends: [T-0290]
   - apply:
     ```bash
@@ -946,7 +946,7 @@ JSON
 
 ## ЭТАП 36. Экспорт CSV/XLSX
 
-- [ ] T-0360 | Экспорт гостей/бюджета/столов
+- [x] T-0360 | Экспорт гостей/бюджета/столов
   - depends: [T-0040,T-0042,T-0041]
   - apply:
     ```bash
@@ -985,7 +985,7 @@ JSON
 
 ## ЭТАП 39. Аптайм/смоук
 
-- [ ] T-0390 | Smoke скрипты /health
+- [x] T-0390 | Smoke скрипты /health
   - depends: [T-0004]
   - apply:
     ```bash
@@ -1000,7 +1000,7 @@ curl -sf http://localhost:3000/health" > infra/smoke/health.sh
 
 ## ЭТАП 40. SEO-категории и гайды (продолжаем)
 
-- [ ] T-0400 | Категории блог-гидов
+- [x] T-0400 | Категории блог-гидов
   - depends: [T-0180]
   - apply:
     ```bash
@@ -1016,7 +1016,7 @@ MDX
     git add docs/blog/categories/*.mdx
     ```
 
-- [ ] T-0401 | Гайды по городам (UZ/RU/EN)
+- [x] T-0401 | Гайды по городам (UZ/RU/EN)
   - depends: [T-0400]
   - apply:
     ```bash
@@ -1040,7 +1040,7 @@ TS
     git add packages/ab/index.ts
     ```
 
-- [ ] T-0411 | Эксперимент карточки поставщика V2
+- [x] T-0411 | Эксперимент карточки поставщика V2
   - depends: [T-0410, T-0050]
   - apply:
     ```bash
@@ -1053,7 +1053,7 @@ TS
 
 ## ЭТАП 42. Кэш/CDN
 
-- [ ] T-0420 | In-memory кэш каталога
+- [x] T-0420 | In-memory кэш каталога
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1066,7 +1066,7 @@ TS
     git add packages/cache/index.ts
     ```
 
-- [ ] T-0421 | Заголовки CDN (Next.js)
+- [x] T-0421 | Заголовки CDN (Next.js)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -1092,7 +1092,7 @@ TS
     git add packages/security/headers.ts
     ```
 
-- [ ] T-0431 | Политика паролей/брутфорс
+- [x] T-0431 | Политика паролей/брутфорс
   - depends: [T-0030]
   - apply:
     ```bash
@@ -1107,7 +1107,7 @@ TS
 
 ## ЭТАП 44. KYC поставщиков
 
-- [ ] T-0440 | Чек-лист и документы
+- [x] T-0440 | Чек-лист и документы
   - depends: [T-0011, T-0270]
   - apply:
     ```bash
@@ -1125,7 +1125,7 @@ MD
 
 ## ЭТАП 45. PWA
 
-- [ ] T-0450 | Manifest/иконки
+- [x] T-0450 | Manifest/иконки
   - depends: [T-0060]
   - apply:
     ```bash
@@ -1136,7 +1136,7 @@ JSON
     git add apps/svc-website/public/manifest.json
     ```
 
-- [ ] T-0451 | Service Worker
+- [x] T-0451 | Service Worker
   - depends: [T-0450]
   - apply:
     ```bash
@@ -1151,7 +1151,7 @@ JS
 
 ## ЭТАП 46. Перформанс-баджеты
 
-- [ ] T-0460 | budgets.json
+- [x] T-0460 | budgets.json
   - depends: [T-0005]
   - apply:
     ```bash
@@ -1166,7 +1166,7 @@ JSON
 
 ## ЭТАП 47. Миграции данных
 
-- [ ] T-0470 | Шаблон миграций
+- [x] T-0470 | Шаблон миграций
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1182,7 +1182,7 @@ MD
 
 ## ЭТАП 48. Дашборды
 
-- [ ] T-0480 | Docs: продуктовые метрики
+- [x] T-0480 | Docs: продуктовые метрики
   - depends: [T-0090]
   - apply:
     ```bash
@@ -1198,7 +1198,7 @@ MD
 
 ## ЭТАП 49. Виральность/шэринг
 
-- [ ] T-0490 | Шэринг/UTM
+- [x] T-0490 | Шэринг/UTM
   - depends: [T-0300, T-0050]
   - apply:
     ```bash
@@ -1213,7 +1213,7 @@ TS
 
 ## ЭТАП 50. Legal UZ/RU
 
-- [ ] T-0500 | Политики под Узбекистан
+- [x] T-0500 | Политики под Узбекистан
   - depends: [T-0220]
   - apply:
     ```bash
@@ -1279,7 +1279,7 @@ TS
 
 ## ЭТАП 55. Сохранённые списки/избранное
 
-- [ ] T-0550 | Избранное пары (скелет)
+- [x] T-0550 | Избранное пары (скелет)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1292,7 +1292,7 @@ TS
 
 ## ЭТАП 56. Сравнение поставщиков
 
-- [ ] T-0560 | Таблица сравнения (скелет)
+- [x] T-0560 | Таблица сравнения (скелет)
   - depends: [T-0550]
   - apply:
     ```bash
@@ -1305,7 +1305,7 @@ TS
 
 ## ЭТАП 57. Генератор чек-листа подготовки
 
-- [ ] T-0570 | Пресеты этапов планирования
+- [x] T-0570 | Пресеты этапов планирования
   - depends: [T-0043]
   - apply:
     ```bash
@@ -1330,7 +1330,7 @@ TS
 
 ## ЭТАП 59. Анти-спам в отзывах (правила)
 
-- [ ] T-0590 | Правила текстовой модерации
+- [x] T-0590 | Правила текстовой модерации
   - depends: [T-0070]
   - apply:
     ```bash
@@ -1355,7 +1355,7 @@ TS
 
 ## ЭТАП 61. Подписки/уведомления о доступности
 
-- [ ] T-0610 | Подписки на даты/города
+- [x] T-0610 | Подписки на даты/города
   - depends: [T-0051]
   - apply:
     ```bash
@@ -1368,7 +1368,7 @@ TS
 
 ## ЭТАП 62. Календарь пары
 
-- [ ] T-0620 | События подготовки (личный календарь)
+- [x] T-0620 | События подготовки (личный календарь)
   - depends: [T-0043]
   - apply:
     ```bash
@@ -1381,7 +1381,7 @@ TS
 
 ## ЭТАП 63. Рекомендательная лента
 
-- [ ] T-0630 | Сигналы и рекомендации
+- [x] T-0630 | Сигналы и рекомендации
   - depends: [T-0370]
   - apply:
     ```bash
@@ -1394,7 +1394,7 @@ TS
 
 ## ЭТАП 64. Экспорт счетов/квитанций (PDF)
 
-- [ ] T-0640 | PDF-квитанции (заготовка)
+- [x] T-0640 | PDF-квитанции (заготовка)
   - depends: [T-0290]
   - apply:
     ```bash
@@ -1407,7 +1407,7 @@ TS
 
 ## ЭТАП 65. Гео-поиск по близости
 
-- [ ] T-0650 | Координаты/радиусы (скелет)
+- [x] T-0650 | Координаты/радиусы (скелет)
   - depends: [T-0580,T-0050]
   - apply:
     ```bash
@@ -1419,7 +1419,7 @@ TS
 
 ## ЭТАП 66. Профили UX-ролей (персоны)
 
-- [ ] T-0660 | Персоны (docs)
+- [x] T-0660 | Персоны (docs)
   - depends: [T-0023]
   - apply:
     ```bash
@@ -1435,7 +1435,7 @@ MD
 
 ## ЭТАП 67. Доступность (a11y чек-лист)
 
-- [ ] T-0670 | Чек-лист a11y
+- [x] T-0670 | Чек-лист a11y
   - depends: [T-0023]
   - apply:
     ```bash
@@ -1450,7 +1450,7 @@ MD
 
 ## ЭТАП 68. Темы событий (никях/европейская/национальная)
 
-- [ ] T-0680 | Пресеты сценариев
+- [x] T-0680 | Пресеты сценариев
   - depends: [T-0320]
   - apply:
     ```bash
@@ -1463,7 +1463,7 @@ MD
 
 ## ЭТАП 69. Калькулятор бюджета
 
-- [ ] T-0690 | Виджет калькулятора
+- [x] T-0690 | Виджет калькулятора
   - depends: [T-0042]
   - apply:
     ```bash
@@ -1489,7 +1489,7 @@ MD
 
 ## ЭТАП 71. Onboarding/первые шаги
 
-- [ ] T-0710 | Скрипт onboarding
+- [x] T-0710 | Скрипт onboarding
   - depends: [T-0060]
   - apply:
     ```bash
@@ -1515,7 +1515,7 @@ MD
 
 ## ЭТАП 73. Теги/атрибуты у поставщиков
 
-- [ ] T-0730 | Тэги (kids-friendly, halal, vegan)
+- [x] T-0730 | Тэги (kids-friendly, halal, vegan)
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1527,7 +1527,7 @@ MD
 
 ## ЭТАП 74. Мультивалюта и курсы
 
-- [ ] T-0740 | Курсы валют (stub)
+- [x] T-0740 | Курсы валют (stub)
   - depends: [T-0310]
   - apply:
     ```bash
@@ -1539,7 +1539,7 @@ MD
 
 ## ЭТАП 75. UX «конструктор программы дня»
 
-- [ ] T-0750 | Программа дня (скелет)
+- [x] T-0750 | Программа дня (скелет)
   - depends: [T-0620]
   - apply:
     ```bash
@@ -1552,7 +1552,7 @@ MD
 
 ## ЭТАП 76. Экспорт приглашений (PDF/PNG)
 
-- [ ] T-0760 | Экспорт пригласительных
+- [x] T-0760 | Экспорт пригласительных
   - depends: [T-0062]
   - apply:
     ```bash
@@ -1565,7 +1565,7 @@ MD
 
 ## ЭТАП 77. Гайды для поставщиков (как повысить рейтинг)
 
-- [ ] T-0770 | Док гайдлайнов
+- [x] T-0770 | Док гайдлайнов
   - depends: [T-0530]
   - apply:
     ```bash
@@ -1581,7 +1581,7 @@ MD
 
 ## ЭТАП 78. Отмена/возвраты
 
-- [ ] T-0780 | Политика отмен
+- [x] T-0780 | Политика отмен
   - depends: [T-0290]
   - apply:
     ```bash
@@ -1594,7 +1594,7 @@ MD
 
 ## ЭТАП 79. Эскроу/частичные оплаты (заготовка)
 
-- [ ] T-0790 | Эскроу-логика (stub)
+- [x] T-0790 | Эскроу-логика (stub)
   - depends: [T-0290,T-0112]
   - apply:
     ```bash
@@ -1607,7 +1607,7 @@ MD
 
 ## ЭТАП 80. Анкета пары → персонализация каталога
 
-- [ ] T-0800 | Анкета предпочтений
+- [x] T-0800 | Анкета предпочтений
   - depends: [T-0630]
   - apply:
     ```bash
@@ -1620,7 +1620,7 @@ MD
 
 ## ЭТАП 81. Импорт контактов гостей (vCard)
 
-- [ ] T-0810 | vCard импорт
+- [x] T-0810 | vCard импорт
   - depends: [T-0040]
   - apply:
     ```bash
@@ -1646,7 +1646,7 @@ MD
 
 ## ЭТАП 83. Подбор дат (календарные рекомендации)
 
-- [ ] T-0830 | Рекомендация дат
+- [x] T-0830 | Рекомендация дат
   - depends: [T-0051,T-0620]
   - apply:
     ```bash
@@ -1659,7 +1659,7 @@ MD
 
 ## ЭТАП 84. Импорт прайсов поставщиков
 
-- [ ] T-0840 | CSV/XLSX прайсы
+- [x] T-0840 | CSV/XLSX прайсы
   - depends: [T-0210]
   - apply:
     ```bash
@@ -1672,7 +1672,7 @@ MD
 
 ## ЭТАП 85. Программы лояльности
 
-- [ ] T-0850 | Баллы/кэшбек (скелет)
+- [x] T-0850 | Баллы/кэшбек (скелет)
   - depends: [T-0170]
   - apply:
     ```bash
@@ -1685,7 +1685,7 @@ MD
 
 ## ЭТАП 86. Витрина акций/скидок
 
-- [ ] T-0860 | Акции каталога
+- [x] T-0860 | Акции каталога
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1698,7 +1698,7 @@ MD
 
 ## ЭТАП 87. Экспорт CSV аналитики
 
-- [ ] T-0870 | Экспорт отчётов
+- [x] T-0870 | Экспорт отчётов
   - depends: [T-0370]
   - apply:
     ```bash
@@ -1711,7 +1711,7 @@ MD
 
 ## ЭТАП 88. Кабинет пары: прогресс и дедлайны
 
-- [ ] T-0880 | Прогресс-бар подготовки
+- [x] T-0880 | Прогресс-бар подготовки
   - depends: [T-0570]
   - apply:
     ```bash
@@ -1724,7 +1724,7 @@ MD
 
 ## ЭТАП 89. Экспорт гостей в vCard/CSV
 
-- [ ] T-0890 | Экспорт гостей
+- [x] T-0890 | Экспорт гостей
   - depends: [T-0360]
   - apply:
     ```bash
@@ -1736,7 +1736,7 @@ MD
 
 ## ЭТАП 90. Печать/PDF программы дня
 
-- [ ] T-0900 | Экспорт программы в PDF
+- [x] T-0900 | Экспорт программы в PDF
   - depends: [T-0750]
   - apply:
     ```bash
@@ -1748,7 +1748,7 @@ MD
 
 ## ЭТАП 91. Анкета гостей (диеты/ограничения)
 
-- [ ] T-0910 | Поля диет/аллергий
+- [x] T-0910 | Поля диет/аллергий
   - depends: [T-0011,T-0040]
   - apply:
     ```bash
@@ -1760,7 +1760,7 @@ MD
 
 ## ЭТАП 92. Пуш-уведомления (web push)
 
-- [ ] T-0920 | Заглушка webpush
+- [x] T-0920 | Заглушка webpush
   - depends: [T-0451]
   - apply:
     ```bash
@@ -1773,7 +1773,7 @@ MD
 
 ## ЭТАП 93. Резервирование дат с предоплатой
 
-- [ ] T-0930 | Предоплата брони
+- [x] T-0930 | Предоплата брони
   - depends: [T-0112,T-0290]
   - apply:
     ```bash
@@ -1786,7 +1786,7 @@ MD
 
 ## ЭТАП 94. Интеграция e-mail домена (SPF/DKIM docs)
 
-- [ ] T-0940 | Док по SPF/DKIM
+- [x] T-0940 | Док по SPF/DKIM
   - depends: [T-0120]
   - apply:
     ```bash
@@ -1799,7 +1799,7 @@ MD
 
 ## ЭТАП 95. Импорт отзывов из внешних источников (stub)
 
-- [ ] T-0950 | Импорт отзывов CSV
+- [x] T-0950 | Импорт отзывов CSV
   - depends: [T-0070]
   - apply:
     ```bash
@@ -1812,7 +1812,7 @@ MD
 
 ## ЭТАП 96. Фидбек-виджет (NPS/CSAT)
 
-- [ ] T-0960 | NPS сборщик
+- [x] T-0960 | NPS сборщик
   - depends: [T-0090]
   - apply:
     ```bash
@@ -1825,7 +1825,7 @@ MD
 
 ## ЭТАП 97. Механика «заявка → договор → оплата» (связки)
 
-- [ ] T-0970 | Связки сущностей (docs)
+- [x] T-0970 | Связки сущностей (docs)
   - depends: [T-0290,T-0350]
   - apply:
     ```bash
@@ -1839,7 +1839,7 @@ MD
 
 ## ЭТАП 98. Точки качества каталога (скоринг профиля)
 
-- [ ] T-0980 | Метрики профиля
+- [x] T-0980 | Метрики профиля
   - depends: [T-0530]
   - apply:
     ```bash
@@ -1851,7 +1851,7 @@ MD
 
 ## ЭТАП 99. Маркетинговые лендинги
 
-- [ ] T-0990 | Лендинг поставщика (mdx)
+- [x] T-0990 | Лендинг поставщика (mdx)
   - depends: [T-0180]
   - apply:
     ```bash
@@ -1864,7 +1864,7 @@ MD
 
 ## этап 100 . PUSH В ВЕТКУ `codex`
 
-- [ ] T-1000 | Пуш прогресса
+- [x] T-1000 | Пуш прогресса
   - depends: [T-0005]
   - apply:
     ```bash
@@ -1903,7 +1903,7 @@ TS
     git add infra/feast/extract-features.ts
     ```
 
-- [ ] T-1012 | Batch-пересчёт рангов
+- [x] T-1012 | Batch-пересчёт рангов
   - depends: [T-1011]
   - apply:
     ```bash
@@ -1920,7 +1920,7 @@ TS
 
 ## ЭТАП 102. Многоэтапные оплаты и эскроу
 
-- [ ] T-1020 | Partial payments (депозит/финал)
+- [x] T-1020 | Partial payments (депозит/финал)
   - depends: [T-0290, T-0112]
   - apply:
     ```bash
@@ -1932,7 +1932,7 @@ TS
     git add apps/svc-payments/src/partials/index.ts
     ```
 
-- [ ] T-1021 | Эскроу оркестратор (скелет)
+- [x] T-1021 | Эскроу оркестратор (скелет)
   - depends: [T-0790, T-1020]
   - apply:
     ```bash
@@ -1947,7 +1947,7 @@ TS
 
 ## ЭТАП 103. Сверка выплат поставщикам
 
-- [ ] T-1030 | Реестр выплат (CSV-экспорт)
+- [x] T-1030 | Реестр выплат (CSV-экспорт)
   - depends: [T-0290]
   - apply:
     ```bash
@@ -1958,7 +1958,7 @@ TS
     git add apps/svc-payments/src/payouts/register.ts
     ```
 
-- [ ] T-1031 | Акт сверки (md → csv)
+- [x] T-1031 | Акт сверки (md → csv)
   - depends: [T-1030]
   - apply:
     ```bash
@@ -1972,7 +1972,7 @@ TS
 
 ## ЭТАП 104. Push-кампании и сегментация
 
-- [ ] T-1040 | Сегменты аудиторий
+- [x] T-1040 | Сегменты аудиторий
   - depends: [T-0370, T-0720]
   - apply:
     ```bash
@@ -1983,7 +1983,7 @@ TS
     git add apps/svc-notifier/src/segments/index.ts
     ```
 
-- [ ] T-1041 | Кампания (скелет DSL)
+- [x] T-1041 | Кампания (скелет DSL)
   - depends: [T-1040]
   - apply:
     ```bash
@@ -1998,7 +1998,7 @@ TS
 
 ## ЭТАП 105. UTM-атрибуция до оплаты
 
-- [ ] T-1050 | Трекер сессий UTM
+- [x] T-1050 | Трекер сессий UTM
   - depends: [T-0370, T-0490]
   - apply:
     ```bash
@@ -2009,7 +2009,7 @@ TS
     git add packages/attribution/index.ts
     ```
 
-- [ ] T-1051 | Привязка UTM к инвойсу
+- [x] T-1051 | Привязка UTM к инвойсу
   - depends: [T-1050, T-0290]
   - apply:
     ```bash
@@ -2108,7 +2108,7 @@ TS
 
 ## ЭТАП 110. Модерация изображений (базовые правила)
 
-- [ ] T-1100 | Правила safe-media
+- [x] T-1100 | Правила safe-media
   - depends: [T-0270]
   - apply:
     ```bash
@@ -2150,7 +2150,7 @@ TS
 
 ## ЭТАП 112. Индексация sitemap (index sitemap)
 
-- [ ] T-1120 | sitemap-index
+- [x] T-1120 | sitemap-index
   - depends: [T-0130]
   - apply:
     ```bash
@@ -2190,7 +2190,7 @@ TS
 
 ## ЭТАП 114. Выгрузки для бухгалтерии
 
-- [ ] T-1140 | Экспорт в 1С (CSV-шаблон)
+- [x] T-1140 | Экспорт в 1С (CSV-шаблон)
   - depends: [T-0290, T-1030]
   - apply:
     ```bash
@@ -2220,7 +2220,7 @@ TS
 
 ## ЭТАП 116. Сценарии прогрева (drip-кампании)
 
-- [ ] T-1160 | Drip-flows
+- [x] T-1160 | Drip-flows
   - depends: [T-1041, T-0120]
   - apply:
     ```bash
@@ -2250,7 +2250,7 @@ TS
 
 ## ЭТАП 118. Чеки после оплаты (фискальные заглушки)
 
-- [ ] T-1180 | Генератор чека (stub)
+- [x] T-1180 | Генератор чека (stub)
   - depends: [T-0290]
   - apply:
     ```bash
@@ -2281,7 +2281,7 @@ MD
 
 ## ЭТАП 120. Контроль качества данных (DQ)
 
-- [ ] T-1200 | Чеки DQ
+- [x] T-1200 | Чеки DQ
   - depends: [T-0011]
   - apply:
     ```bash
@@ -2296,7 +2296,7 @@ TS
 
 ## ЭТАП 121. Генерация карточек для шаринга (OG-cards)
 
-- [ ] T-1210 | Рендер карточек (stub)
+- [x] T-1210 | Рендер карточек (stub)
   - depends: [T-0131]
   - apply:
     ```bash
@@ -2311,7 +2311,7 @@ TS
 
 ## ЭТАП 122. Экспорт/импорт конфигураций проекта
 
-- [ ] T-1220 | Snapshot конфигов
+- [x] T-1220 | Snapshot конфигов
   - depends: []
   - apply:
     ```bash
@@ -2337,7 +2337,7 @@ TS
 
 ## ЭТАП 124. Инвентаризация прав доступа
 
-- [ ] T-1240 | Матрица доступов
+- [x] T-1240 | Матрица доступов
   - depends: [T-0032]
   - apply:
     ```bash
@@ -2353,7 +2353,7 @@ MD
 
 ## ЭТАП 125. Конфигурация лимитов загрузки медиа
 
-- [ ] T-1250 | Размеры/квоты
+- [x] T-1250 | Размеры/квоты
   - depends: [T-1100]
   - apply:
     ```bash
@@ -2367,7 +2367,7 @@ TS
 
 ## ЭТАП 126. Индексация каталога по расписанию
 
-- [ ] T-1260 | Крон job для пересчёта рангов
+- [x] T-1260 | Крон job для пересчёта рангов
   - depends: [T-1012]
   - apply:
     ```bash
@@ -2380,7 +2380,7 @@ TS
 
 ## ЭТАП 127. Конверсия на шаге заявки (UX-подсказки)
 
-- [ ] T-1270 | Хелперы подсказок
+- [x] T-1270 | Хелперы подсказок
   - depends: []
   - apply:
     ```bash
@@ -2393,7 +2393,7 @@ TS
 
 ## ЭТАП 128. Гео-карта площадок (скелет)
 
-- [ ] T-1280 | Координаты и мап-виджет
+- [x] T-1280 | Координаты и мап-виджет
   - depends: [T-0650]
   - apply:
     ```bash
@@ -2406,7 +2406,7 @@ TS
 
 ## ЭТАП 129. Экспорт финансов в CSV/Excel
 
-- [ ] T-1290 | Финансовые выгрузки
+- [x] T-1290 | Финансовые выгрузки
   - depends: [T-0290]
   - apply:
     ```bash
@@ -2419,7 +2419,7 @@ TS
 
 ## ЭТАП 130. Тарифные пакеты для поставщиков (пэйволл страниц)
 
-- [ ] T-1300 | Feature flags по планам
+- [x] T-1300 | Feature flags по планам
   - depends: [T-0170]
   - apply:
     ```bash
@@ -2434,7 +2434,7 @@ TS
 
 ## ЭТАП 131. Импорт медиа из URL (складирование в MinIO)
 
-- [ ] T-1310 | Импорт по ссылке (stub)
+- [x] T-1310 | Импорт по ссылке (stub)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -2557,7 +2557,7 @@ JS
 
 ## ЭТАП 140. Финальный пуш уровня 2
 
-- [x] T-1400 | Commit/push «Level 2»
+- [ ] T-1400 | Commit/push «Level 2»
   - depends: [T-0005]
   - apply:
     ```bash
@@ -3154,7 +3154,7 @@ TS
 
 ## ЭТАП 180. Финальный пуш уровня 3
 
-- [x] T-1800 | Commit/push «Level 3»
+- [ ] T-1800 | Commit/push «Level 3»
   - depends: [T-0005]
   - apply:
     ```bash
@@ -3166,7 +3166,7 @@ TS
 
 ## ЭТАП 181. DigitalOcean App Platform (Auto-Deploy)
 
-- [ ] T-0181 | Per-service package.json (build/start/start:migrate)
+- [x] T-0181 | Per-service package.json (build/start/start:migrate)
   - depends: [T-0004, T-0010]
   - apply:
     ```bash
@@ -3194,7 +3194,7 @@ JSON
     git add apps/svc-*/package.json
     ```
 
-- [ ] T-0182 | DigitalOcean App Spec (infra/do/app.yaml) c автоподстановкой origin
+- [x] T-0182 | DigitalOcean App Spec (infra/do/app.yaml) c автоподстановкой origin
   - depends: [T-0181]
   - apply:
     ```bash
@@ -3243,7 +3243,7 @@ YML
     git add infra/do/app.yaml
     ```
 
-- [ ] T-0183 | GitHub Action: Manual Deploy to DO App (`apps/{id}/deployments`)
+- [x] T-0183 | GitHub Action: Manual Deploy to DO App (`apps/{id}/deployments`)
   - depends: [T-0182]
   - apply:
     ```bash
@@ -3276,7 +3276,7 @@ YML
     git add .github/workflows/do-deploy.yml
     ```
 
-- [ ] T-0184 | GitHub Action: Lint `infra/do/app.yaml`
+- [x] T-0184 | GitHub Action: Lint `infra/do/app.yaml`
   - depends: [T-0182]
   - apply:
     ```bash
@@ -3303,7 +3303,7 @@ YML
     git add .github/workflows/do-appspec-lint.yml
     ```
 
-- [ ] T-0185 | Расширенный `/health`: признак доступности БД (`db:true|false`)
+- [x] T-0185 | Расширенный `/health`: признак доступности БД (`db:true|false`)
   - depends: [T-0011, T-0004]
   - apply:
     ```bash
@@ -3319,7 +3319,7 @@ YML
     git add apps/svc-*/src/main.js || true
     ```
 
-- [ ] T-0186 | Скрипт «миграции на старте»
+- [x] T-0186 | Скрипт «миграции на старте»
   - depends: [T-0012]
   - apply:
     ```bash
@@ -3335,7 +3335,7 @@ SH
     git add scripts/start-with-migrations.sh
     ```
 
-- [ ] T-0187 | DO Docs: one-click deploy (секреты/процедура)
+- [x] T-0187 | DO Docs: one-click deploy (секреты/процедура)
   - depends: [T-0183]
   - apply:
     ```bash
@@ -3355,7 +3355,7 @@ MD
 
 ## ЭТАП 182. B2B & Bridebook Extensions
 
-- [ ] T-0188 | Enquiry workflow: состояния и валидация переходов
+- [x] T-0188 | Enquiry workflow: состояния и валидация переходов
   - depends: [T-0052, T-0091]
   - apply:
     ```bash
@@ -3373,7 +3373,7 @@ TS
     git add apps/svc-enquiries/src/workflow/states.ts
     ```
 
-- [ ] T-0189 | Targeted enquiries (Premium)
+- [x] T-0189 | Targeted enquiries (Premium)
   - depends: [T-0188, T-0170]
   - apply:
     ```bash
@@ -3386,7 +3386,7 @@ TS
     git add apps/svc-enquiries/src/types/targeted.ts
     ```
 
-- [ ] T-0190 | Contract-based reviews: правило допуска
+- [x] T-0190 | Contract-based reviews: правило допуска
   - depends: [T-0070, T-0350]
   - apply:
     ```bash
@@ -3398,7 +3398,7 @@ TS
     git add apps/svc-enquiries/src/reviews/contract-verify.ts
     ```
 
-- [ ] T-0191 | Late availability: тип оффера для тойхан
+- [x] T-0191 | Late availability: тип оффера для тойхан
   - depends: [T-0051, T-0052]
   - apply:
     ```bash
@@ -3410,7 +3410,7 @@ TS
     git add apps/svc-vendors/src/late/index.ts
     ```
 
-- [ ] T-0192 | Контент-тип 3D-туров (Matterport/custom)
+- [x] T-0192 | Контент-тип 3D-туров (Matterport/custom)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -3422,7 +3422,7 @@ TS
     git add packages/media/3d/index.ts
     ```
 
-- [ ] T-0193 | ROI метрики поставщика (просмотры → заявки → WON)
+- [x] T-0193 | ROI метрики поставщика (просмотры → заявки → WON)
   - depends: [T-0090]
   - apply:
     ```bash
@@ -3435,7 +3435,7 @@ TS
     git add apps/svc-analytics/src/roi/vendor.ts
     ```
 
-- [ ] T-0194 | Ранжирование каталога: score()
+- [x] T-0194 | Ранжирование каталога: score()
   - depends: [T-0053]
   - apply:
     ```bash
@@ -3449,7 +3449,7 @@ TS
     git add apps/svc-catalog/src/rank/score.ts
     ```
 
-- [ ] T-0195 | SMS (UZ Eskiz) — минимальный адаптер
+- [x] T-0195 | SMS (UZ Eskiz) — минимальный адаптер
   - depends: [T-0121]
   - apply:
     ```bash
@@ -3461,7 +3461,7 @@ TS
     git add packages/sms/adapters/eskiz.ts
     ```
 
-- [ ] T-0196 | WCAG AA чек-лист
+- [x] T-0196 | WCAG AA чек-лист
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3478,7 +3478,7 @@ MD
     git add docs/a11y/wcag-aa.md
     ```
 
-- [ ] T-0197 | SEO лендинги: города/категории
+- [x] T-0197 | SEO лендинги: города/категории
   - depends: [T-0065]
   - apply:
     ```bash
@@ -4727,7 +4727,7 @@ YML
     git add docker-compose.yml
     ```
 
-- [ ] T-0252 | Env примеры (.env.example) для всех сервисов
+- [x] T-0252 | Env примеры (.env.example) для всех сервисов
   - depends: []
   - apply:
     ```bash
@@ -5051,7 +5051,7 @@ MD
 
 ## ЭТАП 210. Бронирование и календарь
 
-- [ ] T-0270 | Модель Booking + SlotLock (Prisma расширение)
+- [x] T-0270 | Модель Booking + SlotLock (Prisma расширение)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5085,7 +5085,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0271 | API слотов: list/free/lock
+- [x] T-0271 | API слотов: list/free/lock
   - depends: [T-0270]
   - apply:
     ```bash
@@ -5117,7 +5117,7 @@ JS
     git add apps/svc-enquiries/src/api/slots.js
     ```
 
-- [ ] T-0272 | Создание бронирования из lock + связка с оплатой
+- [x] T-0272 | Создание бронирования из lock + связка с оплатой
   - depends: [T-0271, T-0245]
   - apply:
     ```bash
@@ -8852,7 +8852,7 @@ MD
 
 ## ЭТАП 270. Прямые аплоады в DO Spaces (S3-compatible), удалённые логи, webhooks и агентства
 
-- [ ] T-0489 | env-переменные для Spaces (ключи/регион/бакет)
+- [x] T-0489 | env-переменные для Spaces (ключи/регион/бакет)
   - depends: [T-0252]
   - apply:
     ```bash
@@ -8861,7 +8861,7 @@ MD
     git add .env.example
     ```
 
-- [ ] T-0490 | Генерация S3 presign PUT (подпись v4)
+- [x] T-0490 | Генерация S3 presign PUT (подпись v4)
   - depends: [T-0489]
   - apply:
     ```bash
@@ -9803,7 +9803,7 @@ MD
 
 ## ЭТАП 280. Поиск по доступности дат (availability search)
 
-- [ ] T-0546 | Индекс занятости: BookingIndex (vendorId, day, slots)
+- [x] T-0546 | Индекс занятости: BookingIndex (vendorId, day, slots)
   - depends: [T-0270, T-0226]
   - apply:
     ```bash
@@ -9820,7 +9820,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0547 | Рекалькуляция индекса при создании брони
+- [x] T-0547 | Рекалькуляция индекса при создании брони
   - depends: [T-0546, T-0272]
   - apply:
     ```bash
@@ -9841,7 +9841,7 @@ JS
     git add apps/svc-enquiries/src/indexer/booking-index.js
     ```
 
-- [ ] T-0548 | Хук в booking.create → updateIndex(...)
+- [x] T-0548 | Хук в booking.create → updateIndex(...)
   - depends: [T-0547]
   - apply:
     ```bash
@@ -9850,7 +9850,7 @@ JS
     git add apps/svc-enquiries/src/api/booking.js
     ```
 
-- [ ] T-0549 | API: /catalog/available?date=YYYY-MM-DD
+- [x] T-0549 | API: /catalog/available?date=YYYY-MM-DD
   - depends: [T-0546, T-0234]
   - apply:
     ```bash
@@ -9877,7 +9877,7 @@ JS
 
 ## ЭТАП 281. AI-помощник в чате (FAQ по вендору, оффлайн-логика)
 
-- [ ] T-0550 | FAQ-бот без внешних API: шаблонные ответы
+- [x] T-0550 | FAQ-бот без внешних API: шаблонные ответы
   - depends: [T-0452, T-0453, T-0194]
   - apply:
     ```bash
