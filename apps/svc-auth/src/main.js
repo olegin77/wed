@@ -1,18 +1,16 @@
-import http from "http";
+import { createAuthServer } from "./server.js";
 
-const port = process.env.PORT || 3000;
+const port = Number.parseInt(process.env.PORT ?? "3000", 10);
+const host = process.env.HOST ?? "0.0.0.0";
 
-http
-  .createServer((req, res) => {
-    if (req.url === "/health") {
-      const db = true; // TODO: заменить stub на реальный ping БД
-      res.writeHead(200, { "Content-Type": "application/json" });
-      return res.end(
-        JSON.stringify({ status: "ok", db: typeof db !== "undefined" ? !!db : false })
-      );
-    }
+const server = createAuthServer();
 
-    res.writeHead(404);
-    res.end();
-  })
-  .listen(port, "0.0.0.0", () => console.log("svc ok", port));
+server.listen(port, host, () => {
+  console.log(`svc-auth listening on ${host}:${port}`);
+});
+
+for (const signal of ["SIGINT", "SIGTERM"]) {
+  process.on(signal, () => {
+    server.close(() => process.exit(0));
+  });
+}
