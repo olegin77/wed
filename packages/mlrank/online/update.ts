@@ -7,12 +7,14 @@ type UpdateEvent = {
   delta: number;
 };
 
-const weights: WeightVector = {
+const DEFAULT_WEIGHTS: WeightVector = {
   conv: 0.55,
   rating: 0.2,
   profile: 0.2,
   calendar: 0.05,
 };
+
+const weights: WeightVector = { ...DEFAULT_WEIGHTS };
 
 const clamp = (value: number, min = 0, max = 1): number => Math.max(min, Math.min(max, value));
 
@@ -31,6 +33,13 @@ export function update(event: UpdateEvent): WeightVector {
   }
 
   const total = weights.conv + weights.rating + weights.profile + weights.calendar;
+  if (total <= 0) {
+    (Object.keys(weights) as WeightKey[]).forEach((key) => {
+      weights[key] = DEFAULT_WEIGHTS[key];
+    });
+    return { ...weights };
+  }
+
   if (total !== 1) {
     const normalizer = 1 / total;
     (Object.keys(weights) as WeightKey[]).forEach((key) => {
