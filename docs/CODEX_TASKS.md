@@ -4240,7 +4240,7 @@ TS
     git add packages/prisma/seed/index.ts
     ```
 
-- [ ] T-0229 | Миграции на CI: включить prisma:deploy в DO старте
+- [x] T-0229 | Миграции на CI: включить prisma:deploy в DO старте
   - depends: [T-0186, T-0227]
   - apply:
     ```bash
@@ -4254,7 +4254,7 @@ TS
 
 ## ЭТАП 193. Аутентификация и авторизация
 
-- [ ] T-0230 | JWT-аутентификация: генерация/проверка токена
+- [x] T-0230 | JWT-аутентификация: генерация/проверка токена
   - depends: [T-0004, T-0226]
   - apply:
     ```bash
@@ -4281,7 +4281,7 @@ TS
     git add packages/auth/jwt.ts
     ```
 
-- [ ] T-0231 | Пароли: хэширование (argon2) и проверка
+- [x] T-0231 | Пароли: хэширование (argon2) и проверка
   - depends: [T-0230]
   - apply:
     ```bash
@@ -4303,7 +4303,7 @@ TS
     git add packages/auth/password.ts
     ```
 
-- [ ] T-0232 | API login/register (auth svc) + cookie с JWT
+- [x] T-0232 | API login/register (auth svc) + cookie с JWT
   - depends: [T-0230, T-0231, T-0226]
   - apply:
     ```bash
