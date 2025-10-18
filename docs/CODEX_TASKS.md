@@ -3410,7 +3410,7 @@ TS
     git add apps/svc-vendors/src/late/index.ts
     ```
 
-- [ ] T-0192 | Контент-тип 3D-туров (Matterport/custom)
+- [x] T-0192 | Контент-тип 3D-туров (Matterport/custom)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -3422,7 +3422,7 @@ TS
     git add packages/media/3d/index.ts
     ```
 
-- [ ] T-0193 | ROI метрики поставщика (просмотры → заявки → WON)
+- [x] T-0193 | ROI метрики поставщика (просмотры → заявки → WON)
   - depends: [T-0090]
   - apply:
     ```bash
@@ -3435,7 +3435,7 @@ TS
     git add apps/svc-analytics/src/roi/vendor.ts
     ```
 
-- [ ] T-0194 | Ранжирование каталога: score()
+- [x] T-0194 | Ранжирование каталога: score()
   - depends: [T-0053]
   - apply:
     ```bash
@@ -3449,7 +3449,7 @@ TS
     git add apps/svc-catalog/src/rank/score.ts
     ```
 
-- [ ] T-0195 | SMS (UZ Eskiz) — минимальный адаптер
+- [x] T-0195 | SMS (UZ Eskiz) — минимальный адаптер
   - depends: [T-0121]
   - apply:
     ```bash
@@ -3461,7 +3461,7 @@ TS
     git add packages/sms/adapters/eskiz.ts
     ```
 
-- [ ] T-0196 | WCAG AA чек-лист
+- [x] T-0196 | WCAG AA чек-лист
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3478,7 +3478,7 @@ MD
     git add docs/a11y/wcag-aa.md
     ```
 
-- [ ] T-0197 | SEO лендинги: города/категории
+- [x] T-0197 | SEO лендинги: города/категории
   - depends: [T-0065]
   - apply:
     ```bash
@@ -5051,7 +5051,7 @@ MD
 
 ## ЭТАП 210. Бронирование и календарь
 
-- [ ] T-0270 | Модель Booking + SlotLock (Prisma расширение)
+- [x] T-0270 | Модель Booking + SlotLock (Prisma расширение)
   - depends: [T-0226]
   - apply:
     ```bash

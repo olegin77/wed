@@ -47,6 +47,8 @@ model User {
 
   couple  Couple?
   vendors Vendor[]
+  bookings Booking[]
+  slotLocks SlotLock[] @relation("UserSlotLocks")
 }
 
 model Couple {
@@ -88,6 +90,8 @@ model Vendor {
   availabilities AvailabilitySlot[]
   enquiries     Enquiry[]
   rankSignals   RankSignal[]
+  bookings      Booking[]
+  slotLocks     SlotLock[]
 }
 
 model Venue {
@@ -151,6 +155,7 @@ model Enquiry {
   venue  Venue? @relation(fields: [venueId], references: [id])
   notes  EnquiryNote[]
   reviews Review[]
+  booking Booking?
 
   @@index([status, eventDate])
 }
@@ -276,4 +281,44 @@ model RankSignal {
   venue  Venue?  @relation(fields: [venueId], references: [id])
 
   @@index([vendorId, signalType])
+}
+
+enum BookingStatus {
+  PENDING_PAYMENT
+  PAID
+  CANCELED
+}
+
+model Booking {
+  id        String         @id @default(cuid())
+  vendorId  String
+  userId    String
+  enquiryId String?        @unique
+  startAt   DateTime
+  endAt     DateTime
+  status    BookingStatus  @default(PENDING_PAYMENT)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  vendor  Vendor  @relation(fields: [vendorId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+  enquiry Enquiry? @relation(fields: [enquiryId], references: [id])
+
+  @@index([vendorId, startAt, endAt])
+}
+
+model SlotLock {
+  id          String   @id @default(cuid())
+  vendorId    String
+  startAt     DateTime
+  endAt       DateTime
+  lockedUntil DateTime
+  byUserId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  vendor Vendor @relation(fields: [vendorId], references: [id])
+  byUser User?  @relation("UserSlotLocks", fields: [byUserId], references: [id])
+
+  @@index([vendorId, startAt, endAt])
 }
