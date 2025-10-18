@@ -7,9 +7,10 @@
     "infra/*"
   ],
   "scripts": {
-    "lint": "echo lint ok",
-    "test": "echo test ok",
-    "build": "echo build ok",
+    "start": "pnpm -w -r run start --if-present",
+    "lint": "pnpm -w -r run lint --if-present",
+    "test": "pnpm -w -r run test --if-present",
+    "build": "pnpm -w -r run build --if-present",
     "prisma:generate": "pnpm -C packages/prisma run generate",
     "prisma:migrate": "pnpm -C packages/prisma run migrate:dev",
     "seed": "node apps/seeder/index.js",

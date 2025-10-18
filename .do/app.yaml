@@ -1,13 +1,18 @@
 name: wed
 region: fra
+
 services:
   - name: web
+    github:
+      repo: olegin77/wed
+      branch: main
+      deploy_on_push: true
     environment_slug: node-js
     instance_size_slug: basic-xxs
     instance_count: 1
     routes:
       - path: /
-    source_dir: ./
+    source_dir: /
     http_port: 8080
     envs:
       - key: NODE_ENV
