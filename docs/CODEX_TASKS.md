@@ -736,7 +736,7 @@ JSON
 
 ## ЭТАП 20. Сиды/демо-данные
 
-- [ ] T-0200 | Примитивный сидер
+- [x] T-0200 | Примитивный сидер
   - depends: [T-0011]
   - apply:
     ```bash
@@ -777,7 +777,7 @@ JSON
 
 ## ЭТАП 23. Публичные каталоги (SEO-страницы)
 
-- [ ] T-0230 | Страницы города/категории (SSR заглушки)
+- [x] T-0230 | Страницы города/категории (SSR заглушки)
   - depends: [T-0060,T-0050]
   - apply:
     ```bash
@@ -803,7 +803,7 @@ JSON
 
 ## ЭТАП 25. Анти-фрод
 
-- [ ] T-0250 | Флаги анти-фрода
+- [x] T-0250 | Флаги анти-фрода
   - depends: [T-0011]
   - apply:
     ```bash
@@ -816,7 +816,7 @@ JSON
 
 ## ЭТАП 26. Импорт календарей (iCal)
 
-- [ ] T-0260 | Импорт iCal
+- [x] T-0260 | Импорт iCal
   - depends: [T-0051]
   - apply:
     ```bash
@@ -829,7 +829,7 @@ JSON
 
 ## ЭТАП 27. Медиа-хранилище (MinIO)
 
-- [ ] T-0270 | Абстракция S3-совместимого стораджа
+- [x] T-0270 | Абстракция S3-совместимого стораджа
   - depends: [T-0003]
   - apply:
     ```bash
@@ -855,7 +855,7 @@ JSON
 
 ## ЭТАП 29. Инвойсы/оплаты
 
-- [ ] T-0290 | Модель/скелет API инвойсов
+- [x] T-0290 | Модель/скелет API инвойсов
   - depends: [T-0112,T-0011]
   - apply:
     ```bash
@@ -881,7 +881,7 @@ JSON
 
 ## ЭТАП 31. Валюты/формат
 
-- [ ] T-0310 | Форматирование UZS/RUB/KZT
+- [x] T-0310 | Форматирование UZS/RUB/KZT
   - depends: [T-0100]
   - apply:
     ```bash
@@ -920,7 +920,7 @@ JSON
 
 ## ЭТАП 34. Чат пара↔поставщик
 
-- [ ] T-0340 | Каналы диалогов к заявкам
+- [x] T-0340 | Каналы диалогов к заявкам
   - depends: [T-0052]
   - apply:
     ```bash
@@ -959,7 +959,7 @@ JSON
 
 ## ЭТАП 37. Продуктовая аналитика
 
-- [ ] T-0370 | Воронки: просмотр→заявка→договор→оплата
+ - [x] T-0370 | Воронки: просмотр→заявка→договор→оплата
   - depends: [T-0090]
   - apply:
     ```bash
@@ -4098,7 +4098,7 @@ TSX
 
 ## ЭТАП 192. Данные: Prisma-схема, миграции и сиды
 
-- [ ] T-0226 | Prisma schema: базовые сущности (User, Vendor, Venue, Enquiry, Review)
+- [x] T-0226 | Prisma schema: базовые сущности (User, Vendor, Venue, Enquiry, Review)
   - depends: [T-0012]
   - apply:
     ```bash
@@ -4195,7 +4195,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0227 | Prisma scripts в package.json рабочего пространства
+- [x] T-0227 | Prisma scripts в package.json рабочего пространства
   - depends: [T-0226]
   - apply:
     ```bash
@@ -4211,7 +4211,7 @@ PRISMA
     fi
     ```
 
-- [ ] T-0228 | Сиды: города, категории, демонстрационные вендоры/площадки
+- [x] T-0228 | Сиды: города, категории, демонстрационные вендоры/площадки
   - depends: [T-0226]
   - apply:
     ```bash
@@ -4240,7 +4240,7 @@ TS
     git add packages/prisma/seed/index.ts
     ```
 
-- [ ] T-0229 | Миграции на CI: включить prisma:deploy в DO старте
+- [x] T-0229 | Миграции на CI: включить prisma:deploy в DO старте
   - depends: [T-0186, T-0227]
   - apply:
     ```bash
@@ -4254,7 +4254,7 @@ TS
 
 ## ЭТАП 193. Аутентификация и авторизация
 
-- [ ] T-0230 | JWT-аутентификация: генерация/проверка токена
+- [x] T-0230 | JWT-аутентификация: генерация/проверка токена
   - depends: [T-0004, T-0226]
   - apply:
     ```bash
@@ -4281,7 +4281,7 @@ TS
     git add packages/auth/jwt.ts
     ```
 
-- [ ] T-0231 | Пароли: хэширование (argon2) и проверка
+- [x] T-0231 | Пароли: хэширование (argon2) и проверка
   - depends: [T-0230]
   - apply:
     ```bash
@@ -4303,7 +4303,7 @@ TS
     git add packages/auth/password.ts
     ```
 
-- [ ] T-0232 | API login/register (auth svc) + cookie с JWT
+- [x] T-0232 | API login/register (auth svc) + cookie с JWT
   - depends: [T-0230, T-0231, T-0226]
   - apply:
     ```bash
@@ -4572,7 +4572,7 @@ TS
 
 ## ЭТАП 198. Платёжный слой (стаб) и статусы оплаты
 
-- [ ] T-0245 | Payments stub: createIntent / capture / webhook
+- [x] T-0245 | Payments stub: createIntent / capture / webhook
   - depends: [T-0238, T-0239]
   - apply:
     ```bash
@@ -4676,7 +4676,7 @@ TS
     git add e2e/smoke.spec.ts
     ```
 
-- [ ] T-0250 | ESLint + Prettier + Husky pre-commit
+- [x] T-0250 | ESLint + Prettier + Husky pre-commit
   - depends: []
   - apply:
     ```bash
@@ -5158,7 +5158,7 @@ JS
     git add apps/svc-enquiries/scripts/locks-gc.js
     ```
 
-- [ ] T-0274 | Привязка оплаты: update Booking.status на succeeded
+- [x] T-0274 | Привязка оплаты: update Booking.status на succeeded
   - depends: [T-0245, T-0272]
   - apply:
     ```bash
@@ -5171,7 +5171,7 @@ JS
     git add apps/svc-billing/src/hooks/booking-paid.js
     ```
 
-- [ ] T-0275 | API: /booking/confirm (после capture)
+- [x] T-0275 | API: /booking/confirm (после capture)
   - depends: [T-0274]
   - apply:
     ```bash
@@ -5600,7 +5600,7 @@ TS
     git add packages/media/src/cachebuster.ts
     ```
 
-- [ ] T-0299 | Инвалидация кэша каталога при изменении рейтинга
+- [x] T-0299 | Инвалидация кэша каталога при изменении рейтинга
   - depends: [T-0242, T-0234]
   - apply:
     ```bash
@@ -5906,7 +5906,7 @@ TS
     git add packages/prisma/schema.prisma packages/keys/verify.ts
     ```
 
-- [ ] T-0315 | Подпись вебхуков HMAC (общий helper)
+- [x] T-0315 | Подпись вебхуков HMAC (общий helper)
   - depends: []
   - apply:
     ```bash
@@ -6783,7 +6783,7 @@ TSX
 
 ## ЭТАП 241. Партнёрские webhooks (HMAC) и приём событий
 
-- [ ] T-0366 | Подписка партнёров: таблица WebhookEndpoint
+- [x] T-0366 | Подписка партнёров: таблица WebhookEndpoint
   - depends: [T-0315, T-0226]
   - apply:
     ```bash
@@ -6801,7 +6801,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0367 | Отправка webhook при оплате (booking paid)
+- [x] T-0367 | Отправка webhook при оплате (booking paid)
   - depends: [T-0275, T-0366]
   - apply:
     ```bash
@@ -6824,7 +6824,7 @@ JS
     git add apps/svc-billing/src/webhooks/dispatch.js
     ```
 
-- [ ] T-0368 | Вызов dispatch из /booking/confirm
+- [x] T-0368 | Вызов dispatch из /booking/confirm
   - depends: [T-0367]
   - apply:
     ```bash
@@ -8890,7 +8890,7 @@ TS
     git add packages/spaces/presign.ts
     ```
 
-- [ ] T-0491 | API: /spaces/presign → возвращает ссылку для PUT
+- [x] T-0491 | API: /spaces/presign → возвращает ссылку для PUT
   - depends: [T-0490]
   - apply:
     ```bash
@@ -8912,7 +8912,7 @@ JS
     git add apps/svc-media/src/api/spaces.js
     ```
 
-- [ ] T-0492 | Удалённый сбор логов: http-ингестер и файловая ротация
+- [x] T-0492 | Удалённый сбор логов: http-ингестер и файловая ротация — apps/svc-logs/src/server.js
   - depends: [T-0322]
   - apply:
     ```bash
@@ -8932,7 +8932,7 @@ JS
     git add apps/svc-logs/src/server.js
     ```
 
-- [ ] T-0493 | Хук отправки ошибок в удалённый лог-ингестер
+- [x] T-0493 | Хук отправки ошибок в удалённый лог-ингестер — packages/log/remote/ship.ts
   - depends: [T-0492, T-0322]
   - apply:
     ```bash
@@ -8944,7 +8944,7 @@ TS
     git add packages/log/remote/ship.ts
     ```
 
-- [ ] T-0494 | Вызов ship() из JSON-логгера при error
+- [x] T-0494 | Вызов ship() из JSON-логгера при error — packages/log/json/index.ts
   - depends: [T-0493, T-0322]
   - apply:
     ```bash
@@ -8953,7 +8953,7 @@ TS
     git add packages/log/json/index.ts
     ```
 
-- [ ] T-0495 | Webhook catalog.updated (после изменения рейтинга/профиля)
+- [x] T-0495 | Webhook catalog.updated (после изменения рейтинга/профиля)
   - depends: [T-0299, T-0367]
   - apply:
     ```bash
@@ -8971,7 +8971,7 @@ JS
     git add apps/svc-catalog/src/webhooks/dispatch.js
     ```
 
-- [ ] T-0496 | Триггер catalog.updated при invalidateCity()
+- [x] T-0496 | Триггер catalog.updated при invalidateCity()
   - depends: [T-0495, T-0299]
   - apply:
     ```bash
@@ -8980,7 +8980,7 @@ JS
     git add apps/svc-catalog/src/hooks/invalidate.ts
     ```
 
-- [ ] T-0497 | Мультиаккаунт для агентств: Agency/AgencyMember
+- [x] T-0497 | Мультиаккаунт для агентств: Agency/AgencyMember
   - depends: [T-0226]
   - apply:
     ```bash
@@ -9005,7 +9005,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0498 | UI: переключение контекста (личный/агентство)
+- [x] T-0498 | UI: переключение контекста (личный/агентство)
   - depends: [T-0497, T-0207]
   - apply:
     ```bash

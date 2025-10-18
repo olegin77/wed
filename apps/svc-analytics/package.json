@@ -5,7 +5,8 @@
   "scripts": {
     "build": "echo build-ok",
     "start": "node src/main.js",
-    "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js"
+    "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js",
+    "test": "node --test src/funnels/index.test.js"
   },
   "dependencies": {}
 }

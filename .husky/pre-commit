@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Pre-commit hook that enforces repository formatting using Prettier.
+# The script relies on npx to download a compatible Prettier version on demand,
+# keeping the hook lightweight while guaranteeing consistent formatting.
+set -euo pipefail
+npx --yes prettier@3.3.3 -c .
