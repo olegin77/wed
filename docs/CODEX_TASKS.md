@@ -4195,7 +4195,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0227 | Prisma scripts в package.json рабочего пространства
+- [x] T-0227 | Prisma scripts в package.json рабочего пространства
   - depends: [T-0226]
   - apply:
     ```bash
