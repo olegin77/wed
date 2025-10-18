@@ -736,7 +736,7 @@ JSON
 
 ## ЭТАП 20. Сиды/демо-данные
 
-- [ ] T-0200 | Примитивный сидер
+- [x] T-0200 | Примитивный сидер
   - depends: [T-0011]
   - apply:
     ```bash
@@ -8912,7 +8912,7 @@ JS
     git add apps/svc-media/src/api/spaces.js
     ```
 
-- [ ] T-0492 | Удалённый сбор логов: http-ингестер и файловая ротация
+- [x] T-0492 | Удалённый сбор логов: http-ингестер и файловая ротация — apps/svc-logs/src/server.js
   - depends: [T-0322]
   - apply:
     ```bash
@@ -8932,7 +8932,7 @@ JS
     git add apps/svc-logs/src/server.js
     ```
 
-- [ ] T-0493 | Хук отправки ошибок в удалённый лог-ингестер
+- [x] T-0493 | Хук отправки ошибок в удалённый лог-ингестер — packages/log/remote/ship.ts
   - depends: [T-0492, T-0322]
   - apply:
     ```bash
@@ -8944,7 +8944,7 @@ TS
     git add packages/log/remote/ship.ts
     ```
 
-- [ ] T-0494 | Вызов ship() из JSON-логгера при error
+- [x] T-0494 | Вызов ship() из JSON-логгера при error — packages/log/json/index.ts
   - depends: [T-0493, T-0322]
   - apply:
     ```bash
