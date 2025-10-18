@@ -21,6 +21,9 @@ export function createEscrow(total: number, split: EscrowSplit): EscrowState {
 }
 
 export function releaseEscrow(state: EscrowState, amount: number): EscrowState {
+  if (amount <= 0) {
+    throw new Error("Escrow release amount must be positive");
+  }
   const newReleased = Math.min(state.total, round(state.releasedAmount + amount));
   const heldAmount = round(state.total - newReleased);
   return {

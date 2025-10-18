@@ -41,7 +41,18 @@ export function presignPut({
     .map(([name, value]) => `${name}:${value}`)
     .join("\n")}\n`;
   const signedHeaders = headerEntries.map(([name]) => name).join(";");
-  const canonicalRequest = `PUT\n/${key}\n\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
+  const queryEntries: Array<[string, string]> = [
+    ["X-Amz-Algorithm", algorithm],
+    ["X-Amz-Credential", `${access}/${credentialScope}`],
+    ["X-Amz-Date", amzdate],
+    ["X-Amz-Expires", "300"],
+    ["X-Amz-SignedHeaders", signedHeaders],
+  ];
+  queryEntries.sort(([a], [b]) => a.localeCompare(b));
+  const canonicalQueryString = queryEntries
+    .map(([name, value]) => `${encodeURIComponent(name)}=${encodeURIComponent(value)}`)
+    .join("&");
+  const canonicalRequest = `PUT\n/${key}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
   const stringToSign = `${algorithm}\n${amzdate}\n${credentialScope}\n${crypto
     .createHash("sha256")
     .update(canonicalRequest)
@@ -51,9 +62,8 @@ export function presignPut({
   const kService = hmac(kRegion as any, service);
   const kSigning = hmac(kService as any, "aws4_request");
   const signature = hexhmac(kSigning as any, stringToSign);
-  const url = `https://${host}/${key}?X-Amz-Algorithm=${algorithm}&X-Amz-Credential=${encodeURIComponent(
-    `${access}/${credentialScope}`
-  )}&X-Amz-Date=${amzdate}&X-Amz-Expires=300&X-Amz-SignedHeaders=${signedHeaders}&X-Amz-Signature=${signature}`;
+  const queryString = `${canonicalQueryString}&X-Amz-Signature=${signature}`;
+  const url = `https://${host}/${key}?${queryString}`;
   return {
     url,
     headers: {

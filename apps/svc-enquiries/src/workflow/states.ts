@@ -1,4 +1,4 @@
-export const flow = ["NEW", "QUOTED", "CONTRACT_SIGNED", "WON", "LOST"] as const;
+export const flow = ["NEW", "QUOTE_SENT", "CONTRACT_SIGNED", "WON", "LOST"] as const;
 
 export function canTransit(from: string, to: string) {
   const i = flow.indexOf(from as any);
