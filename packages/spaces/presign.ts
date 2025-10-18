@@ -31,6 +31,9 @@ export interface PresignPutResult {
 
 /**
  * Generates a presigned PUT URL compatible with DigitalOcean Spaces (S3).
+ *
+ * The helper performs input validation and throws when the object key,
+ * content type, or Spaces credentials are missing or malformed.
  */
 export const presignPut = presignPutImpl as (
   params: PresignPutParams,

@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { createServer } from "node:http";
 
 import { presignPut } from "../../../packages/spaces/presign.js";
@@ -34,7 +35,8 @@ async function readJsonBody(req) {
 /**
  * Generates a deterministic upload object key for the DigitalOcean Spaces
  * bucket. The key groups uploads under the `uploads/` prefix and ensures a
- * unique suffix using the current timestamp and a random identifier.
+ * unique suffix using the current timestamp and a cryptographically random
+ * identifier so collisions are practically impossible.
  *
  * @param {string | undefined} extension - Optional file extension provided by the client.
  * @returns {string} Object key relative to the bucket root.
@@ -44,7 +46,7 @@ function generateObjectKey(extension) {
     ? extension.trim().replace(/^\./, "")
     : "jpg";
 
-  const randomSuffix = Math.random().toString(36).slice(2, 10);
+  const randomSuffix = randomBytes(6).toString("hex");
   return `uploads/${Date.now()}-${randomSuffix}.${normalizedExt}`;
 }
 
@@ -65,7 +67,9 @@ function respondJson(res, statusCode, payload) {
  * endpoint accepts POST requests with an optional `contentType` and `ext`
  * (extension) and responds with the presigned PUT URL and headers for uploading
  * directly to DigitalOcean Spaces. The response also includes the public URL of
- * the object without the query string.
+ * the object without the query string. When Spaces credentials are not
+ * configured the handler responds with HTTP 500 so deployment misconfigurations
+ * are surfaced immediately.
  */
 createServer(async (req, res) => {
   if (req.method === "POST" && req.url === "/spaces/presign") {
@@ -88,7 +92,8 @@ createServer(async (req, res) => {
       return;
     } catch (error) {
       const reason = error instanceof Error ? error.message : "unknown_error";
-      respondJson(res, 400, { error: reason });
+      const status = reason === "spaces_credentials_not_configured" ? 500 : 400;
+      respondJson(res, status, { error: reason });
       return;
     }
   }

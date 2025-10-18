@@ -52,12 +52,29 @@ function canonicaliseKey(key) {
  *
  * @param {{ key: string; contentType: string; payloadHash?: string }} params - Parameters for signing.
  * @returns {{ url: string; headers: Record<string, string> }} Signed URL and required headers.
+ * @throws {Error} When the object key, content type, or Spaces credentials are misconfigured.
  */
 export function presignPut({ key, contentType, payloadHash }) {
-  const access = process.env.SPACES_KEY || "";
-  const secret = process.env.SPACES_SECRET || "";
-  const region = process.env.SPACES_REGION || "ams3";
-  const bucket = process.env.SPACES_BUCKET || "wt-media";
+  const rawKey = typeof key === "string" ? key.trim() : "";
+  if (!rawKey) {
+    throw new Error("invalid_object_key");
+  }
+
+  const resolvedContentType = typeof contentType === "string" && contentType.trim().length > 0
+    ? contentType.trim()
+    : "";
+  if (!resolvedContentType) {
+    throw new Error("invalid_content_type");
+  }
+
+  const access = process.env.SPACES_KEY && process.env.SPACES_KEY.trim();
+  const secret = process.env.SPACES_SECRET && process.env.SPACES_SECRET.trim();
+  const bucket = process.env.SPACES_BUCKET && process.env.SPACES_BUCKET.trim();
+  const region = process.env.SPACES_REGION && process.env.SPACES_REGION.trim() ? process.env.SPACES_REGION.trim() : "ams3";
+
+  if (!access || !secret || !bucket) {
+    throw new Error("spaces_credentials_not_configured");
+  }
   const host = `${bucket}.${region}.digitaloceanspaces.com`;
   const service = "s3";
   const algorithm = "AWS4-HMAC-SHA256";
@@ -67,10 +84,13 @@ export function presignPut({ key, contentType, payloadHash }) {
     .replace(/\.\d{3}Z/, "Z");
   const datestamp = amzdate.slice(0, 8);
   const credentialScope = `${datestamp}/${region}/${service}/aws4_request`;
-  const hashedPayload = payloadHash ?? "UNSIGNED-PAYLOAD";
-  const canonicalKey = canonicaliseKey(key);
+  const hashedPayload = typeof payloadHash === "string" && payloadHash.trim().length > 0
+    ? payloadHash.trim()
+    : "UNSIGNED-PAYLOAD";
+  const canonicalKey = canonicaliseKey(rawKey.replace(/^\/+/, ""));
   const headerEntries = [
     ["host", host],
+    ["content-type", resolvedContentType],
     ["x-amz-content-sha256", hashedPayload],
     ["x-amz-date", amzdate],
   ];
@@ -115,8 +135,7 @@ export function presignPut({ key, contentType, payloadHash }) {
     url,
     headers: {
       "x-amz-date": amzdate,
-      Host: host,
-      "Content-Type": contentType,
+      "Content-Type": resolvedContentType,
       "x-amz-content-sha256": hashedPayload,
     },
   };
