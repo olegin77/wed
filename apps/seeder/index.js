@@ -1,7 +1,19 @@
 #!/usr/bin/env node
+/**
+ * Primitive seeding script that prepares demo data for local development.
+ *
+ * The script relies on Prisma `upsert` operations, therefore it is safe to run
+ * multiple times — each invocation reconciles the data with the desired state
+ * instead of creating duplicates.
+ */
 const path = require('path');
 const { execSync } = require('child_process');
 
+/**
+ * Default to the repository Prisma schema when the consumer does not specify
+ * an explicit path. This mirrors what `pnpm prisma:generate` uses by default
+ * inside the monorepo.
+ */
 if (!process.env.PRISMA_SCHEMA_PATH) {
   process.env.PRISMA_SCHEMA_PATH = path.resolve(
     __dirname,
@@ -13,6 +25,10 @@ if (!process.env.PRISMA_SCHEMA_PATH) {
   );
 }
 
+/**
+ * Fall back to the conventional local Postgres instance so the script remains
+ * useful right after cloning the repository.
+ */
 if (!process.env.DATABASE_URL) {
   process.env.DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/wt?schema=public';
   console.warn('[seed] DATABASE_URL was not set. Falling back to local development instance.');
@@ -31,8 +47,15 @@ try {
   }
 }
 
+/** @type {import('@prisma/client').PrismaClient} */
 const prisma = new PrismaClient();
 
+/**
+ * Ensures the three core platform users exist: an admin, a couple owner and
+ * a vendor owner. Each record is reconciled via `upsert`.
+ *
+ * @returns {Promise<{admin: import('@prisma/client').User, coupleUser: import('@prisma/client').User, vendorUser: import('@prisma/client').User}>}
+ */
 async function seedUsers() {
   const admin = await prisma.user.upsert({
     where: { id: 'seed-admin-user' },
@@ -94,6 +117,13 @@ async function seedUsers() {
   return { admin, coupleUser, vendorUser };
 }
 
+/**
+ * Creates a showcase couple with associated guests, table, budget and public
+ * website so that other services have meaningful demo data to display.
+ *
+ * @param {import('@prisma/client').User} coupleUser - Owner user for the couple profile.
+ * @returns {Promise<{couple: import('@prisma/client').Couple, table: import('@prisma/client').Table, guests: import('@prisma/client').Guest[], budgetItems: import('@prisma/client').BudgetItem[], website: import('@prisma/client').Website, rsvp: import('@prisma/client').RSVP}>}
+ */
 async function seedCouple(coupleUser) {
   const couple = await prisma.couple.upsert({
     where: { id: 'seed-couple' },
@@ -247,6 +277,13 @@ async function seedCouple(coupleUser) {
   return { couple, table, guests, budgetItems, website, rsvp };
 }
 
+/**
+ * Creates a sample vendor with an associated venue, availability slot, offer
+ * and ranking signal so marketplace flows have representative fixtures.
+ *
+ * @param {import('@prisma/client').User} vendorUser - Owner account for the vendor entity.
+ * @returns {Promise<{vendor: import('@prisma/client').Vendor, venue: import('@prisma/client').Venue, slot: import('@prisma/client').AvailabilitySlot, offer: import('@prisma/client').Offer, rankSignal: import('@prisma/client').RankSignal}>}
+ */
 async function seedVendor(vendorUser) {
   const vendor = await prisma.vendor.upsert({
     where: { id: 'seed-vendor' },
@@ -356,6 +393,18 @@ async function seedVendor(vendorUser) {
   return { vendor, venue, slot, offer, rankSignal };
 }
 
+/**
+ * Connects the couple with the vendor through an enquiry, adds internal
+ * collaboration artifacts (notes, reviews and audit trail) and keeps the
+ * dataset realistic.
+ *
+ * @param {import('@prisma/client').Couple} couple - The seeded couple entity.
+ * @param {import('@prisma/client').Vendor} vendor - The seeded vendor entity.
+ * @param {import('@prisma/client').Venue} venue - Venue linked to the enquiry.
+ * @param {import('@prisma/client').User} admin - Admin user to author the note.
+ * @param {import('@prisma/client').User} coupleUser - Couple owner to attribute audit trail.
+ * @returns {Promise<{enquiry: import('@prisma/client').Enquiry, note: import('@prisma/client').EnquiryNote, review: import('@prisma/client').Review, auditEvent: import('@prisma/client').AuditEvent}>}
+ */
 async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
   const enquiry = await prisma.enquiry.upsert({
     where: { id: 'seed-enquiry' },
@@ -436,21 +485,40 @@ async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
   return { enquiry, note, review, auditEvent };
 }
 
+/**
+ * Entrypoint that orchestrates all seeding steps and prints a concise summary
+ * highlighting the most relevant demo entities.
+ */
 async function main() {
   try {
     console.info('[seed] Starting data seeding');
     const { admin, coupleUser, vendorUser } = await seedUsers();
-    const { couple, guests, website } = await seedCouple(coupleUser);
-    const { vendor, venue } = await seedVendor(vendorUser);
-    const enquiryData = await seedEnquiry(couple, vendor, venue, admin, coupleUser);
-    console.info('[seed] Demo vendors seeded');
+    const coupleData = await seedCouple(coupleUser);
+    const vendorData = await seedVendor(vendorUser);
+    const enquiryData = await seedEnquiry(
+      coupleData.couple,
+      vendorData.vendor,
+      vendorData.venue,
+      admin,
+      coupleUser
+    );
 
     console.info('[seed] Seed summary:', {
       users: ['admin', 'couple', 'vendor'],
-      couple: couple.id,
-      guests: guests.map((guest) => guest.name),
-      website: website.slug,
-      vendor: vendor.title,
+      couple: coupleData.couple.id,
+      guests: coupleData.guests.map((guest) => guest.name),
+      table: coupleData.table.name,
+      budget: coupleData.budgetItems.map((item) => ({ category: item.category, actual: item.actual })),
+      website: coupleData.website.slug,
+      rsvp: coupleData.rsvp.id,
+      vendor: vendorData.vendor.title,
+      venue: vendorData.venue.title,
+      offers: [vendorData.offer.title],
+      availability:
+        vendorData.slot.date instanceof Date
+          ? vendorData.slot.date.toISOString()
+          : vendorData.slot.date,
+      rankSignal: vendorData.rankSignal.signalType,
       enquiry: enquiryData.enquiry.id,
     });
     console.info('[seed] Completed successfully');
