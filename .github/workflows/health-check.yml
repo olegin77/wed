@@ -1,0 +1,17 @@
+name: Health Check (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Health URL'
+        required: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: curl /health
+        run: |
+          set -e
+          curl -sS --max-time 5 "${{ github.event.inputs.url }}"

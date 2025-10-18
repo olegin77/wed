@@ -3495,7 +3495,7 @@ TS
 
 ## ЭТАП 183. Ops / Compliance / Monitoring
 
-- [ ] T-0198 | Rate limiting (локальный nginx-прокси)
+- [x] T-0198 | Rate limiting (локальный nginx-прокси)
   - depends: [T-0003]
   - apply:
     ```bash
@@ -3514,7 +3514,7 @@ CONF
     git add infra/local/nginx/nginx.conf
     ```
 
-- [ ] T-0199 | Очереди для импортов/экспортов (BullMQ stub)
+- [x] T-0199 | Очереди для импортов/экспортов (BullMQ stub)
   - depends: [T-0040, T-0360]
   - apply:
     ```bash
@@ -3526,7 +3526,7 @@ TS
     git add packages/queue/index.ts
     ```
 
-- [ ] T-0200 | Бэкапы Postgres: памятка
+- [x] T-0200 | Бэкапы Postgres: памятка
   - depends: [T-0011]
   - apply:
     ```bash
@@ -3541,7 +3541,7 @@ MD
     git add docs/ops/backups/pg.md
     ```
 
-- [ ] T-0201 | Data retention / экспорт по запросу
+- [x] T-0201 | Data retention / экспорт по запросу
   - depends: [T-0141]
   - apply:
     ```bash
@@ -3556,7 +3556,7 @@ MD
     git add docs/legal/data-retention.md
     ```
 
-- [ ] T-0202 | PII-safe логирование (маскирование)
+- [x] T-0202 | PII-safe логирование (маскирование)
   - depends: [T-0141]
   - apply:
     ```bash
@@ -3571,7 +3571,7 @@ MD
     git add docs/ops/logging/pii.md
     ```
 
-- [ ] T-0203 | Synthetic health-check (manual workflow)
+- [x] T-0203 | Synthetic health-check (manual workflow)
   - depends: [T-0185]
   - apply:
     ```bash
@@ -3597,7 +3597,7 @@ YML
     git add .github/workflows/health-check.yml
     ```
 
-- [ ] T-0204 | Uptime мониторинг: гайд (UptimeRobot/BetterStack)
+- [x] T-0204 | Uptime мониторинг: гайд (UptimeRobot/BetterStack)
   - depends: []
   - apply:
     ```bash
@@ -3612,7 +3612,7 @@ MD
     git add docs/ops/alerts/uptime.md
     ```
 
-- [ ] T-0205 | Lighthouse (manual) для публичного сайта
+- [x] T-0205 | Lighthouse (manual) для публичного сайта
   - depends: [T-0060]
   - apply:
     ```bash
