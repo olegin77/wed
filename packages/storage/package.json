@@ -1,0 +1,20 @@
+{
+  "name": "@wt/storage",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.js"
+    }
+  },
+  "scripts": {
+    "test": "node --test index.test.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.645.0"
+  }
+}
