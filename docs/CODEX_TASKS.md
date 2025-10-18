@@ -8890,7 +8890,7 @@ TS
     git add packages/spaces/presign.ts
     ```
 
-- [ ] T-0491 | API: /spaces/presign → возвращает ссылку для PUT
+- [x] T-0491 | API: /spaces/presign → возвращает ссылку для PUT
   - depends: [T-0490]
   - apply:
     ```bash
