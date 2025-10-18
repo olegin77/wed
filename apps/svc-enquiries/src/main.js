@@ -1,5 +1,8 @@
 import http from "http";
 
+import "./api/slots.js";
+import "./api/booking.js";
+
 const port = process.env.PORT || 3000;
 
 http

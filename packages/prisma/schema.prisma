@@ -322,3 +322,11 @@ model SlotLock {
 
   @@index([vendorId, startAt, endAt])
 }
+
+model BookingIndex {
+  vendorId String
+  day      DateTime
+  slots    String   // JSON array of time ranges
+
+  @@id([vendorId, day])
+}

@@ -5085,7 +5085,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0271 | API слотов: list/free/lock
+- [x] T-0271 | API слотов: list/free/lock
   - depends: [T-0270]
   - apply:
     ```bash
@@ -5117,7 +5117,7 @@ JS
     git add apps/svc-enquiries/src/api/slots.js
     ```
 
-- [ ] T-0272 | Создание бронирования из lock + связка с оплатой
+- [x] T-0272 | Создание бронирования из lock + связка с оплатой
   - depends: [T-0271, T-0245]
   - apply:
     ```bash
@@ -9803,7 +9803,7 @@ MD
 
 ## ЭТАП 280. Поиск по доступности дат (availability search)
 
-- [ ] T-0546 | Индекс занятости: BookingIndex (vendorId, day, slots)
+- [x] T-0546 | Индекс занятости: BookingIndex (vendorId, day, slots)
   - depends: [T-0270, T-0226]
   - apply:
     ```bash
@@ -9820,7 +9820,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0547 | Рекалькуляция индекса при создании брони
+- [x] T-0547 | Рекалькуляция индекса при создании брони
   - depends: [T-0546, T-0272]
   - apply:
     ```bash
@@ -9841,7 +9841,7 @@ JS
     git add apps/svc-enquiries/src/indexer/booking-index.js
     ```
 
-- [ ] T-0548 | Хук в booking.create → updateIndex(...)
+- [x] T-0548 | Хук в booking.create → updateIndex(...)
   - depends: [T-0547]
   - apply:
     ```bash
@@ -9850,7 +9850,7 @@ JS
     git add apps/svc-enquiries/src/api/booking.js
     ```
 
-- [ ] T-0549 | API: /catalog/available?date=YYYY-MM-DD
+- [x] T-0549 | API: /catalog/available?date=YYYY-MM-DD
   - depends: [T-0546, T-0234]
   - apply:
     ```bash
