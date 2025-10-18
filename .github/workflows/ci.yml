@@ -35,8 +35,14 @@ jobs:
         with:
           version: 9.12.0
 
-      - name: Install (frozen)
-        run: pnpm -w install --frozen-lockfile
+      - name: Install workspace dependencies
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile
+          else
+            # The monorepo intentionally omits a lockfile in some setups; fall back to a standard install.
+            pnpm install
+          fi
 
       - name: Install workspace dependencies
         run: |

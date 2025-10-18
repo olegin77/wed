@@ -330,3 +330,12 @@ model BookingIndex {
 
   @@id([vendorId, day])
 }
+
+/// WebhookEndpoint keeps partner webhook subscriptions and their shared secrets.
+model WebhookEndpoint {
+  id        String  @id @default(cuid())
+  url       String
+  secret    String
+  active    Boolean @default(true)
+  createdAt DateTime @default(now())
+}

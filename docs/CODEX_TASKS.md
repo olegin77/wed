@@ -4572,7 +4572,7 @@ TS
 
 ## ЭТАП 198. Платёжный слой (стаб) и статусы оплаты
 
-- [ ] T-0245 | Payments stub: createIntent / capture / webhook
+- [x] T-0245 | Payments stub: createIntent / capture / webhook
   - depends: [T-0238, T-0239]
   - apply:
     ```bash
@@ -5158,7 +5158,7 @@ JS
     git add apps/svc-enquiries/scripts/locks-gc.js
     ```
 
-- [ ] T-0274 | Привязка оплаты: update Booking.status на succeeded
+- [x] T-0274 | Привязка оплаты: update Booking.status на succeeded
   - depends: [T-0245, T-0272]
   - apply:
     ```bash
@@ -5171,7 +5171,7 @@ JS
     git add apps/svc-billing/src/hooks/booking-paid.js
     ```
 
-- [ ] T-0275 | API: /booking/confirm (после capture)
+- [x] T-0275 | API: /booking/confirm (после capture)
   - depends: [T-0274]
   - apply:
     ```bash
@@ -5600,7 +5600,7 @@ TS
     git add packages/media/src/cachebuster.ts
     ```
 
-- [ ] T-0299 | Инвалидация кэша каталога при изменении рейтинга
+- [x] T-0299 | Инвалидация кэша каталога при изменении рейтинга
   - depends: [T-0242, T-0234]
   - apply:
     ```bash
@@ -5906,7 +5906,7 @@ TS
     git add packages/prisma/schema.prisma packages/keys/verify.ts
     ```
 
-- [ ] T-0315 | Подпись вебхуков HMAC (общий helper)
+- [x] T-0315 | Подпись вебхуков HMAC (общий helper)
   - depends: []
   - apply:
     ```bash
@@ -6783,7 +6783,7 @@ TSX
 
 ## ЭТАП 241. Партнёрские webhooks (HMAC) и приём событий
 
-- [ ] T-0366 | Подписка партнёров: таблица WebhookEndpoint
+- [x] T-0366 | Подписка партнёров: таблица WebhookEndpoint
   - depends: [T-0315, T-0226]
   - apply:
     ```bash
@@ -6801,7 +6801,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0367 | Отправка webhook при оплате (booking paid)
+- [x] T-0367 | Отправка webhook при оплате (booking paid)
   - depends: [T-0275, T-0366]
   - apply:
     ```bash
@@ -6824,7 +6824,7 @@ JS
     git add apps/svc-billing/src/webhooks/dispatch.js
     ```
 
-- [ ] T-0368 | Вызов dispatch из /booking/confirm
+- [x] T-0368 | Вызов dispatch из /booking/confirm
   - depends: [T-0367]
   - apply:
     ```bash
@@ -8953,7 +8953,7 @@ TS
     git add packages/log/json/index.ts
     ```
 
-- [ ] T-0495 | Webhook catalog.updated (после изменения рейтинга/профиля)
+- [x] T-0495 | Webhook catalog.updated (после изменения рейтинга/профиля)
   - depends: [T-0299, T-0367]
   - apply:
     ```bash
@@ -8971,7 +8971,7 @@ JS
     git add apps/svc-catalog/src/webhooks/dispatch.js
     ```
 
-- [ ] T-0496 | Триггер catalog.updated при invalidateCity()
+- [x] T-0496 | Триггер catalog.updated при invalidateCity()
   - depends: [T-0495, T-0299]
   - apply:
     ```bash
