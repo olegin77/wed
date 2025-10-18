@@ -113,6 +113,33 @@ model Vendor {
   favourites    Favourite[]
 }
 
+/// CatalogCity keeps a curated list of geographies exposed to couples
+/// browsing the marketplace. The dataset stays relatively small and is
+/// maintained via seeds so local environments mirror production defaults.
+model CatalogCity {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  region      String?
+  countryCode String   @default("UZ")
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+/// CatalogCategory enumerates primary service types within the marketplace
+/// (venues, catering, photo/video, etc.). Keeping the list in Prisma allows
+/// API consumers to fetch canonical metadata without hardcoding constants.
+model CatalogCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  summary   String?
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 /// Venue captures bookable spaces exposed by vendors.
 model Venue {
   id          String  @id @default(cuid())

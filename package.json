@@ -16,7 +16,11 @@
     "prisma:migrate": "pnpm exec prisma migrate dev --schema packages/prisma/schema.prisma",
     "prisma:deploy": "pnpm exec prisma migrate deploy --schema packages/prisma/schema.prisma",
     "prisma:studio": "pnpm exec prisma studio --schema packages/prisma/schema.prisma",
+    "prisma:seed": "pnpm exec tsx packages/prisma/seed/index.ts",
     "seed": "node apps/seeder/index.js",
     "do:appspec": "node scripts/generate-do-appspec.js"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
   }
 }
