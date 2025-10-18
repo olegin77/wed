@@ -282,7 +282,7 @@ async function seedCouple(coupleUser) {
  * and ranking signal so marketplace flows have representative fixtures.
  *
  * @param {import('@prisma/client').User} vendorUser - Owner account for the vendor entity.
- * @returns {Promise<{vendor: import('@prisma/client').Vendor, venue: import('@prisma/client').Venue, slot: import('@prisma/client').AvailabilitySlot, offer: import('@prisma/client').Offer, rankSignal: import('@prisma/client').RankSignal}>}
+ * @returns {Promise<{vendor: import('@prisma/client').Vendor, venue: import('@prisma/client').Venue, slot: import('@prisma/client').AvailabilitySlot, offer: import('@prisma/client').Offer, rankSignal: import('@prisma/client').RankSignal, document: import('@prisma/client').VendorDocument}>}
  */
 async function seedVendor(vendorUser) {
   const vendor = await prisma.vendor.upsert({
@@ -390,7 +390,25 @@ async function seedVendor(vendorUser) {
     },
   });
 
-  return { vendor, venue, slot, offer, rankSignal };
+  // Reconcile a verified compliance document to showcase vendor onboarding.
+  const document = await prisma.vendorDocument.upsert({
+    where: { id: 'seed-vendor-document' },
+    update: {
+      vendorId: vendor.id,
+      title: 'Лицензия на организацию мероприятий',
+      url: 'https://example.com/docs/vendor-license.pdf',
+      verified: true,
+    },
+    create: {
+      id: 'seed-vendor-document',
+      vendorId: vendor.id,
+      title: 'Лицензия на организацию мероприятий',
+      url: 'https://example.com/docs/vendor-license.pdf',
+      verified: true,
+    },
+  });
+
+  return { vendor, venue, slot, offer, rankSignal, document };
 }
 
 /**
@@ -410,6 +428,7 @@ async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
     where: { id: 'seed-enquiry' },
     update: {
       coupleId: couple.id,
+      userId: coupleUser.id,
       vendorId: vendor.id,
       venueId: venue.id,
       eventDate: new Date('2025-06-15T12:00:00.000Z'),
@@ -420,6 +439,7 @@ async function seedEnquiry(couple, vendor, venue, admin, coupleUser) {
     create: {
       id: 'seed-enquiry',
       coupleId: couple.id,
+      userId: coupleUser.id,
       vendorId: vendor.id,
       venueId: venue.id,
       eventDate: new Date('2025-06-15T12:00:00.000Z'),
@@ -503,6 +523,20 @@ async function main() {
       coupleUser
     );
 
+    // Ensure the couple bookmarks the vendor for catalogue demo flows.
+    const favourite = await prisma.favourite.upsert({
+      where: { id: 'seed-favourite' },
+      update: {
+        userId: coupleUser.id,
+        vendorId: vendorData.vendor.id,
+      },
+      create: {
+        id: 'seed-favourite',
+        userId: coupleUser.id,
+        vendorId: vendorData.vendor.id,
+      },
+    });
+
     console.info('[seed] Seed summary:', {
       users: ['admin', 'couple', 'vendor'],
       couple: coupleData.couple.id,
@@ -519,7 +553,9 @@ async function main() {
           ? vendorData.slot.date.toISOString()
           : vendorData.slot.date,
       rankSignal: vendorData.rankSignal.signalType,
+      vendorDocument: vendorData.document.title,
       enquiry: enquiryData.enquiry.id,
+      favourite: favourite.id,
     });
     console.info('[seed] Completed successfully');
   } catch (error) {

@@ -4098,7 +4098,7 @@ TSX
 
 ## ЭТАП 192. Данные: Prisma-схема, миграции и сиды
 
-- [ ] T-0226 | Prisma schema: базовые сущности (User, Vendor, Venue, Enquiry, Review)
+- [x] T-0226 | Prisma schema: базовые сущности (User, Vendor, Venue, Enquiry, Review)
   - depends: [T-0012]
   - apply:
     ```bash
