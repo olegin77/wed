@@ -12,6 +12,7 @@
 - Reworked `packages/catalog/categories.ts` with hierarchical locale-aware categories and helper utilities for navigation and search.
 - Introduced budget and guest presets with regional multipliers to produce spend recommendations in `packages/catalog/budget.ts`.
 - Delivered a detailed Uzbekistan geo directory with regional metadata, key cities, and search helpers in `packages/geo/uz.ts`.
+- Curated hall+decor+music bundles under `apps/svc-catalog/src/bundles` with price allocation helpers and documentation in `docs/catalog/bundles.md`.
 ### Fixed
 - Sanitised the log ingestion service filenames and explained the lint exceptions for dynamic fs calls.
 - Declared browser/runtime globals for the service worker and k6 scripts to clear `no-undef` warnings.

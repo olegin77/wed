@@ -102,6 +102,12 @@ sandbox:
 
 - Modelled budget tiers and guest-count segments with helper functions to compute region-aware recommendations.
 
+## Bundle packages
+
+- Added hall+decor+music presets in `apps/svc-catalog/src/bundles` with documented budget splits and localisation.
+- `estimateBundleQuote()` now returns per-component cost ranges leveraging the shared budget recommender.
+- Documented usage and positioning in `docs/catalog/bundles.md` for sales and account teams.
+
 ## Uzbekistan geo reference
 
 - Expanded `@wt/geo/uz` with regional metadata, major cities, and search helpers for onboarding and filtering flows.
