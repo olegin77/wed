@@ -7,6 +7,7 @@ rules:
       const $X = process.env.JWT_SECRET?.trim() || "changeme";
     fix: |
       const $X = process.env.JWT_SECRET?.trim();
+
   - id: node-jwt-weak-default-var
     message: Remove weak default for JWT secret and require explicit config.
     severity: ERROR
@@ -15,6 +16,7 @@ rules:
       const $X = process.env["JWT_SECRET"]?.trim() || "changeme";
     fix: |
       const $X = process.env["JWT_SECRET"]?.trim();
+
   - id: env-jwt-secret-changeme
     message: JWT_SECRET must not be "changeme" in .env files.
     severity: ERROR
