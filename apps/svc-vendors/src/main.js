@@ -1,10 +1,13 @@
 import http from "http";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
 import { handleAvailabilityIcs } from "./api/availability-ics.js";
 
 const port = process.env.PORT || 3000;
 
 http
   .createServer((req, res) => {
+    applySecurityHeaders(res);
+
     if (handleAvailabilityIcs(req, res)) {
       return;
     }
