@@ -81,3 +81,23 @@ sandbox:
 - Declared the service worker and k6 runtime globals so eslint no longer raises undefined-variable errors in the public assets and load tests.
 - Replaced unsafe regular expressions in `packages/ical/index.js` with deterministic parsers to satisfy `security/detect-unsafe-regex` without changing behaviour.
 
+## Search utilities
+
+- Added `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and normalisation utilities for multilingual content.
+
+## Media pipeline
+
+- Expanded `@wt/media` to generate multi-format variants, expose batch helpers, and return metadata for responsive asset workflows.
+
+## Catalog reference
+
+- Rebuilt the vendor category directory with locale-aware titles, hierarchy helpers, and substring search utilities.
+
+## Budget presets
+
+- Modelled budget tiers and guest-count segments with helper functions to compute region-aware recommendations.
+
+## Uzbekistan geo reference
+
+- Expanded `@wt/geo/uz` with regional metadata, major cities, and search helpers for onboarding and filtering flows.
+
