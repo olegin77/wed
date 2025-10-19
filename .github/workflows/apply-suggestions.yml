@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Merge all GitHub suggestions on this PR
         uses: tianhaoz95/merge-github-suggestions@v3
         with:
