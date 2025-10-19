@@ -70,3 +70,8 @@ sandbox:
 - Added a shared `packages/security/headers.js` helper that sets hardened HTTP response headers (`X-Frame-Options`, `Permissions-Policy`, `Cross-Origin-*`).
 - Vendor service now applies these defaults to every request to reduce clickjacking and resource isolation risks.
 
+## Admin UI skeleton
+
+- Added `apps/svc-admin/src/pages/index.tsx` with a React-based landing page that lists core moderation areas (медиа, документы, журналы).
+- Documented the placeholder flow in `docs/admin/overview.md` so teams know where to extend the panel.
+
