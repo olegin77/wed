@@ -74,6 +74,7 @@ sandbox:
 
 - Added `apps/svc-admin/src/pages/index.tsx` with a React-based landing page that lists core moderation areas (медиа, документы, журналы).
 - Documented the placeholder flow in `docs/admin/overview.md` so teams know where to extend the panel.
+- Introduced `apps/svc-admin/src/moderation/reviews.ts` with a documented `canPublishReview` rule enforcing contract verification before a review is published.
 
 ## Maintenance fixes
 
