@@ -75,3 +75,9 @@ sandbox:
 - Added `apps/svc-admin/src/pages/index.tsx` with a React-based landing page that lists core moderation areas (медиа, документы, журналы).
 - Documented the placeholder flow in `docs/admin/overview.md` so teams know where to extend the panel.
 
+## Maintenance fixes
+
+- Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.
+- Declared the service worker and k6 runtime globals so eslint no longer raises undefined-variable errors in the public assets and load tests.
+- Replaced unsafe regular expressions in `packages/ical/index.js` with deterministic parsers to satisfy `security/detect-unsafe-regex` without changing behaviour.
+
