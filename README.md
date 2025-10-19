@@ -80,6 +80,12 @@ sandbox:
 
 - Added `LazyImg` to `apps/svc-website/src/ui/img/LazyImg.tsx` to standardise lazy loading with intrinsic dimensions for gallery and card artwork.
 
+## Notification center
+
+- Upgraded `apps/svc-notifier/src/index.ts` with a documented `NotificationCenter` that records delivery state per channel and persists per-user feed entries for read/unread badges.
+- Exposed `NotificationFeed` helpers for listing, counting unread items, and bulk acknowledgements together with error reporting via `NotificationDispatchError`.
+- Documented delivery states and integration patterns in `docs/notifications/center.md`.
+
 ## Maintenance fixes
 
 - Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.

@@ -27,7 +27,7 @@ async function readJsonBody(req) {
 
   try {
     return JSON.parse(Buffer.concat(chunks).toString("utf8"));
-  } catch (error) {
+  } catch {
     throw new Error("invalid_json_body");
   }
 }

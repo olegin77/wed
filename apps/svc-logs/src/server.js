@@ -45,6 +45,7 @@ createServer(async (req, res) => {
       res.end();
       return;
     } catch (error) {
+      console.error("log_ingest_failure", error);
       res.writeHead(500, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ error: "failed_to_persist_log" }));
       return;
