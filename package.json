@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "start": "pnpm -w -r run start --if-present",
-    "lint": "pnpm -w -r run lint --if-present",
+    "lint": "pnpm -w -r run lint --if-present && eslint .",
+    "lint:fix": "pnpm -w -r run lint:fix --if-present && eslint . --fix",
     "test": "pnpm -w -r run test --if-present",
     "build": "pnpm -w -r run build --if-present",
     "prisma:gen": "pnpm exec prisma generate --schema packages/prisma/schema.prisma",
@@ -18,9 +19,13 @@
     "prisma:studio": "pnpm exec prisma studio --schema packages/prisma/schema.prisma",
     "prisma:seed": "pnpm exec tsx packages/prisma/seed/index.ts",
     "seed": "node apps/seeder/index.js",
-    "do:appspec": "node scripts/generate-do-appspec.js"
+    "do:appspec": "node scripts/generate-do-appspec.js",
+    "semgrep": "semgrep --config .semgrep.yml",
+    "semgrep:fix": "semgrep --config .semgrep.yml --fix --error"
   },
   "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-plugin-security": "3.0.1",
     "tsx": "^4.19.2"
   }
 }
