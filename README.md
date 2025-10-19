@@ -91,6 +91,11 @@ sandbox:
 - Added `apps/svc-analytics/src/vendor/index.{js,ts}` helpers that compute conversion summaries and month-by-month demand slices with peak/off-season classification.
 - Documented the seasonality workflow and sample queries in `docs/analytics/vendor-seasonality.md` to guide vendor success managers.
 
+## Offline ranking stub
+
+- Documented `@wt/mlrank` as a reusable offline scorer with configurable weights and clamped output for catalogue experiments.
+- See `docs/mlrank/offline-scoring.md` for factor definitions and integration notes with the catalogue recompute job.
+
 ## Maintenance fixes
 
 - Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.
