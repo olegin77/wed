@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "start": "pnpm -w -r run start --if-present",
-    "lint": "pnpm -w -r --if-present run lint && pnpm exec eslint .",
-    "lint:fix": "pnpm -w -r --if-present run lint:fix && pnpm exec eslint . --fix",
+    "lint": "pnpm -w -r --if-present run lint",
+    "lint:fix": "pnpm -w -r --if-present run lint:fix",
     "test": "pnpm -w -r run test --if-present",
     "build": "pnpm -w -r run build --if-present",
     "prisma:gen": "pnpm exec prisma generate --schema packages/prisma/schema.prisma",
@@ -24,8 +24,6 @@
     "semgrep:fix": "semgrep --config .semgrep.yml --fix --error"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
-    "eslint-plugin-security": "3.0.1",
     "tsx": "^4.19.2"
   }
 }
