@@ -76,6 +76,10 @@ sandbox:
 - Documented the placeholder flow in `docs/admin/overview.md` so teams know where to extend the panel.
 - Introduced `apps/svc-admin/src/moderation/reviews.ts` with a documented `canPublishReview` rule enforcing contract verification before a review is published.
 
+## UI imagery
+
+- Added `LazyImg` to `apps/svc-website/src/ui/img/LazyImg.tsx` to standardise lazy loading with intrinsic dimensions for gallery and card artwork.
+
 ## Maintenance fixes
 
 - Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.

@@ -6,6 +6,7 @@
 - Wired vendor service HTTP responses to use the shared security headers helper.
 - Scaffolded an admin landing page with high-level sections for media moderation, vendor verification, and event logs.
 - Documented the review publication rule in `apps/svc-admin/src/moderation/reviews.ts`, enforcing contract verification for moderation workflows.
+- Delivered `LazyImg` in `apps/svc-website/src/ui/img/LazyImg.tsx` to provide lazy loading with intrinsic dimensions for public imagery.
 - Implemented `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and multilingual normalisation utilities.
 - Upgraded `@wt/media` to expose multi-format minification, batch variant generation, and metadata extraction helpers.
 - Reworked `packages/catalog/categories.ts` with hierarchical locale-aware categories and helper utilities for navigation and search.
