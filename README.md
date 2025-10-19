@@ -96,6 +96,11 @@ sandbox:
 - Documented `@wt/mlrank` as a reusable offline scorer with configurable weights and clamped output for catalogue experiments.
 - See `docs/mlrank/offline-scoring.md` for factor definitions and integration notes with the catalogue recompute job.
 
+## Catalog feature extraction
+
+- Rebuilt `infra/feast/extract-features.ts` to normalise conversion, rating, profile и calendar метрики из разнородных источников и безопасно отдавать факторы в `[0, 1]`.
+- Задокументировали поддерживаемые поля, правила нормализации и пример использования в `docs/analytics/catalog-features.md`.
+
 ## Maintenance fixes
 
 - Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.

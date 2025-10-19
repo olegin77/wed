@@ -16,6 +16,7 @@
 - Curated hall+decor+music bundles under `apps/svc-catalog/src/bundles` with price allocation helpers and documentation in `docs/catalog/bundles.md`.
 - Enhanced `apps/svc-notifier/src/index.ts` with a persistent notification feed, delivery tracking, and documented error handling helpers.
 - Documented and extended `@wt/mlrank` with configurable offline score weights and clamped output helpers for catalogue ranking.
+- Hardened `infra/feast/extract-features.ts` to normalise vendor metrics from mixed data sources and documented the supported fields in `docs/analytics/catalog-features.md`.
 ### Fixed
 - Sanitised the log ingestion service filenames and explained the lint exceptions for dynamic fs calls.
 - Declared browser/runtime globals for the service worker and k6 scripts to clear `no-undef` warnings.
