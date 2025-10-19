@@ -279,18 +279,45 @@ function parseDateComponents(value) {
 function parseDateTimeComponents(value) {
   const isUTC = value.endsWith("Z");
   const normalized = isUTC ? value.slice(0, -1) : value;
-  const match = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?$/.exec(normalized);
-  if (!match) {
+  if (normalized.length !== 15 && normalized.length !== 13) {
     return undefined;
   }
-  const secondPart = match[6];
+
+  if (normalized.charAt(8) !== "T") {
+    return undefined;
+  }
+
+  const datePart = normalized.slice(0, 8);
+  const timePart = normalized.slice(9);
+
+  if (timePart.length !== 4 && timePart.length !== 6) {
+    return undefined;
+  }
+
+  for (const char of datePart + timePart) {
+    if (char < "0" || char > "9") {
+      return undefined;
+    }
+  }
+
+  const year = Number.parseInt(datePart.slice(0, 4), 10);
+  const month = Number.parseInt(datePart.slice(4, 6), 10);
+  const day = Number.parseInt(datePart.slice(6, 8), 10);
+  const hour = Number.parseInt(timePart.slice(0, 2), 10);
+  const minute = Number.parseInt(timePart.slice(2, 4), 10);
+  const second = timePart.length === 6 ? Number.parseInt(timePart.slice(4, 6), 10) : 0;
+
+  if ([year, month, day, hour, minute, second].some(Number.isNaN)) {
+    return undefined;
+  }
+
   return {
-    year: Number.parseInt(match[1], 10),
-    month: Number.parseInt(match[2], 10),
-    day: Number.parseInt(match[3], 10),
-    hour: Number.parseInt(match[4], 10),
-    minute: Number.parseInt(match[5], 10),
-    second: secondPart ? Number.parseInt(secondPart, 10) : 0,
+    year,
+    month,
+    day,
+    hour,
+    minute,
+    second,
     isUTC,
   };
 }
@@ -391,15 +418,64 @@ function extractDateParts(parts) {
  * @returns {number}
  */
 function parseDuration(value) {
-  const match = /^P(?:(\d+)W)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/.exec(value);
-  if (!match) {
+  if (!value.startsWith("P") || value.length === 1) {
     return Number.NaN;
   }
-  const weeks = Number.parseInt(match[1] ?? "0", 10);
-  const days = Number.parseInt(match[2] ?? "0", 10);
-  const hours = Number.parseInt(match[3] ?? "0", 10);
-  const minutes = Number.parseInt(match[4] ?? "0", 10);
-  const seconds = Number.parseInt(match[5] ?? "0", 10);
+
+  let weeks = 0;
+  let days = 0;
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+  let buffer = "";
+  let inTimeSection = false;
+
+  for (let index = 1; index < value.length; index += 1) {
+    const char = value[index];
+
+    if (char === "T") {
+      if (inTimeSection || buffer.length > 0) {
+        return Number.NaN;
+      }
+      inTimeSection = true;
+      continue;
+    }
+
+    if (char >= "0" && char <= "9") {
+      buffer += char;
+      continue;
+    }
+
+    if (buffer.length === 0) {
+      return Number.NaN;
+    }
+
+    const amount = Number.parseInt(buffer, 10);
+    buffer = "";
+
+    if (!inTimeSection) {
+      if (char === "W") {
+        weeks = amount;
+      } else if (char === "D") {
+        days = amount;
+      } else {
+        return Number.NaN;
+      }
+    } else if (char === "H") {
+      hours = amount;
+    } else if (char === "M") {
+      minutes = amount;
+    } else if (char === "S") {
+      seconds = amount;
+    } else {
+      return Number.NaN;
+    }
+  }
+
+  if (buffer.length > 0) {
+    return Number.NaN;
+  }
+
   return (
     weeks * 7 * DAY_MS +
     days * DAY_MS +
