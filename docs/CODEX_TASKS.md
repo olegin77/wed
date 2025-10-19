@@ -3993,7 +3993,7 @@ TS
     git add packages/calendar/ics.ts
     ```
 
-- [ ] T-0221 | API точка: скачать .ics для vendor availability
+- [x] T-0221 | API точка: скачать .ics для vendor availability
   - depends: [T-0220, T-0004]
   - apply:
     ```bash
