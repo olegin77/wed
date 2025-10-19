@@ -55,8 +55,9 @@ jobs:
             pnpm install
           fi
 
-      - name: Lint (workspace recursive)
-        run: pnpm -w -r run lint --if-present
+      # ---- FIX: запускаем корневой скрипт, внутри которого уже безопасный рекурсивный линт ----
+      - name: Lint (workspace via root script)
+        run: pnpm run lint
 
       - name: Test (workspace recursive)
         run: pnpm -w -r run test --if-present
