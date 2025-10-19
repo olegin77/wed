@@ -65,3 +65,40 @@ sandbox:
       - "pnpm"
     no_tty: true
 
+## Security headers helper
+
+- Added a shared `packages/security/headers.js` helper that sets hardened HTTP response headers (`X-Frame-Options`, `Permissions-Policy`, `Cross-Origin-*`).
+- Vendor service now applies these defaults to every request to reduce clickjacking and resource isolation risks.
+
+## Admin UI skeleton
+
+- Added `apps/svc-admin/src/pages/index.tsx` with a React-based landing page that lists core moderation areas (медиа, документы, журналы).
+- Documented the placeholder flow in `docs/admin/overview.md` so teams know where to extend the panel.
+- Introduced `apps/svc-admin/src/moderation/reviews.ts` with a documented `canPublishReview` rule enforcing contract verification before a review is published.
+
+## Maintenance fixes
+
+- Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.
+- Declared the service worker and k6 runtime globals so eslint no longer raises undefined-variable errors in the public assets and load tests.
+- Replaced unsafe regular expressions in `packages/ical/index.js` with deterministic parsers to satisfy `security/detect-unsafe-regex` without changing behaviour.
+
+## Search utilities
+
+- Added `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and normalisation utilities for multilingual content.
+
+## Media pipeline
+
+- Expanded `@wt/media` to generate multi-format variants, expose batch helpers, and return metadata for responsive asset workflows.
+
+## Catalog reference
+
+- Rebuilt the vendor category directory with locale-aware titles, hierarchy helpers, and substring search utilities.
+
+## Budget presets
+
+- Modelled budget tiers and guest-count segments with helper functions to compute region-aware recommendations.
+
+## Uzbekistan geo reference
+
+- Expanded `@wt/geo/uz` with regional metadata, major cities, and search helpers for onboarding and filtering flows.
+
