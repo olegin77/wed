@@ -86,6 +86,11 @@ sandbox:
 - Exposed `NotificationFeed` helpers for listing, counting unread items, and bulk acknowledgements together with error reporting via `NotificationDispatchError`.
 - Documented delivery states and integration patterns in `docs/notifications/center.md`.
 
+## Vendor demand analytics
+
+- Added `apps/svc-analytics/src/vendor/index.{js,ts}` helpers that compute conversion summaries and month-by-month demand slices with peak/off-season classification.
+- Documented the seasonality workflow and sample queries in `docs/analytics/vendor-seasonality.md` to guide vendor success managers.
+
 ## Maintenance fixes
 
 - Normalized the log ingestion service to write into a deterministic `logs/` directory with sanitized daily filenames and documented why the security linter ignores the dynamic path.

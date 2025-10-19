@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- Delivered vendor demand analytics with seasonality slices in `apps/svc-analytics/src/vendor/index.{js,ts}` and documented usage in `docs/analytics/vendor-seasonality.md`.
 - Introduced `@wt/security` header utilities to apply default hardening headers across Node services.
 - Wired vendor service HTTP responses to use the shared security headers helper.
 - Scaffolded an admin landing page with high-level sections for media moderation, vendor verification, and event logs.
