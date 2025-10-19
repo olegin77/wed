@@ -1081,7 +1081,7 @@ JS
 
 ## ЭТАП 43. Hardening
 
-- [ ] T-0430 | Security headers
+- [x] T-0430 | Security headers
   - depends: [T-0004]
   - apply:
     ```bash
@@ -1227,7 +1227,7 @@ TS
 
 ## ЭТАП 51. Поиск по сайту (full-text, подсказки)
 
-- [ ] T-0510 | Пакет `@wt/search` (in-repo)
+- [x] T-0510 | Пакет `@wt/search` (in-repo)
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1240,7 +1240,7 @@ TS
 
 ## ЭТАП 52. Мультимедиа и компрессия
 
-- [ ] T-0520 | Минификация изображений (заготовка)
+- [x] T-0520 | Минификация изображений (заготовка)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -1253,7 +1253,7 @@ TS
 
 ## ЭТАП 53. Категории поставщиков (иерархия)
 
-- [ ] T-0530 | Справочник категорий
+- [x] T-0530 | Справочник категорий
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1266,7 +1266,7 @@ TS
 
 ## ЭТАП 54. Фильтры по бюджету/гостям
 
-- [ ] T-0540 | Пресеты бюджета и количества гостей
+- [x] T-0540 | Пресеты бюджета и количества гостей
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1317,7 +1317,7 @@ TS
 
 ## ЭТАП 58. Географические справочники
 
-- [ ] T-0580 | Города/регионы Узбекистана
+- [x] T-0580 | Города/регионы Узбекистана
   - depends: [T-0011]
   - apply:
     ```bash
@@ -3646,7 +3646,7 @@ YML
 
 ## ЭТАП 184. Дизайн-система, тема и базовые UI-компоненты
 
-- [ ] T-0206 | Tailwind конфиг + дизайн-токены (светлая/тёмная темы)
+- [x] T-0206 | Tailwind конфиг + дизайн-токены (светлая/тёмная темы)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3685,7 +3685,7 @@ CSS
     git add apps/svc-website/tailwind.config.js apps/svc-website/src/styles/tokens.css
     ```
 
-- [ ] T-0207 | Базовые UI: Button/Card/Section/Container (React, без плейсхолдеров)
+- [x] T-0207 | Базовые UI: Button/Card/Section/Container (React, без плейсхолдеров)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3724,7 +3724,7 @@ TSX
     git add apps/svc-website/src/ui/*.tsx
     ```
 
-- [ ] T-0208 | Типографика и базовый layout (главные стили)
+- [x] T-0208 | Типографика и базовый layout (главные стили)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3744,7 +3744,7 @@ CSS
     git add apps/svc-website/src/styles/base.css
     ```
 
-- [ ] T-0209 | Темный режим: переключатель темы (class .dark)
+- [x] T-0209 | Темный режим: переключатель темы (class .dark)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3771,7 +3771,7 @@ TS
 
 ## ЭТАП 185. I18N (RU/UZ) и форматирование дат/валют
 
-- [ ] T-0210 | Пакет @wt/i18n с ресурсами ru/uz
+- [x] T-0210 | Пакет @wt/i18n с ресурсами ru/uz
   - depends: [T-0001]
   - apply:
     ```bash
@@ -3794,7 +3794,7 @@ JSON
     git add packages/i18n/index.ts packages/i18n/locales/*.json
     ```
 
-- [ ] T-0211 | Хелперы форматирования: дата/валюта (UZS)
+- [x] T-0211 | Хелперы форматирования: дата/валюта (UZS)
   - depends: [T-0210]
   - apply:
     ```bash
@@ -3813,7 +3813,7 @@ TS
 
 ## ЭТАП 186. SEO/OG, карта сайта и микроразметка
 
-- [ ] T-0212 | Генерация sitemap.xml для каталога
+- [x] T-0212 | Генерация sitemap.xml для каталога
   - depends: [T-0065, T-0197]
   - apply:
     ```bash
@@ -3832,7 +3832,7 @@ TS
     git add apps/svc-website/src/seo/sitemap.ts
     ```
 
-- [ ] T-0213 | OpenGraph/Twitter метатеги генератор
+- [x] T-0213 | OpenGraph/Twitter метатеги генератор
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3855,7 +3855,7 @@ TS
     git add apps/svc-website/src/seo/meta.ts
     ```
 
-- [ ] T-0214 | JSON-LD схема для карточки площадки (Venue)
+- [x] T-0214 | JSON-LD схема для карточки площадки (Venue)
   - depends: [T-0065]
   - apply:
     ```bash
@@ -3877,7 +3877,7 @@ TS
 
 ## ЭТАП 187. Медиа: галереи, оптимизация изображений и превью
 
-- [ ] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
+- [x] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
   - depends: [T-0003]
   - apply:
     ```bash
@@ -3900,7 +3900,7 @@ JSON
     git add packages/media/src/optimize.ts packages/media/package.json
     ```
 
-- [ ] T-0216 | Галерея (masonry) для профиля тойханы
+- [x] T-0216 | Галерея (masonry) для профиля тойханы
   - depends: [T-0207, T-0215]
   - apply:
     ```bash
@@ -3917,7 +3917,7 @@ TSX
     git add apps/svc-website/src/ui/gallery/Masonry.tsx
     ```
 
-- [ ] T-0217 | Превью загрузок: генерация thumbnail (256px)
+- [x] T-0217 | Превью загрузок: генерация thumbnail (256px)
   - depends: [T-0215]
   - apply:
     ```bash
@@ -3937,7 +3937,7 @@ SH
 
 ## ЭТАП 188. Почтовые шаблоны и уведомления
 
-- [ ] T-0218 | Email-шаблоны: приглашение гостя и заявка поставщику
+- [x] T-0218 | Email-шаблоны: приглашение гостя и заявка поставщику
   - depends: [T-0120]
   - apply:
     ```bash
@@ -3958,7 +3958,7 @@ HTML
     git add packages/mail/templates/*.html
     ```
 
-- [ ] T-0219 | Отправка писем (SMTP URL) — простой sender
+- [x] T-0219 | Отправка писем (SMTP URL) — простой sender
   - depends: [T-0120]
   - apply:
     ```bash
@@ -3977,7 +3977,7 @@ TS
 
 ## ЭТАП 189. Календарь и .ics экспорт
 
-- [ ] T-0220 | Экспорт доступности площадок в .ics
+- [x] T-0220 | Экспорт доступности площадок в .ics
   - depends: [T-0065]
   - apply:
     ```bash
@@ -3993,7 +3993,7 @@ TS
     git add packages/calendar/ics.ts
     ```
 
-- [ ] T-0221 | API точка: скачать .ics для vendor availability
+- [x] T-0221 | API точка: скачать .ics для vendor availability
   - depends: [T-0220, T-0004]
   - apply:
     ```bash
@@ -4023,7 +4023,7 @@ JS
 
 ## ЭТАП 190. Админ-панель (скелет) и модерация
 
-- [ ] T-0222 | Admin UI (скелет разделов)
+- [x] T-0222 | Admin UI (скелет разделов)
   - depends: [T-0207]
   - apply:
     ```bash
