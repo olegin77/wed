@@ -86,6 +86,42 @@ sandbox:
 - Exposed `NotificationFeed` helpers for listing, counting unread items, and bulk acknowledgements together with error reporting via `NotificationDispatchError`.
 - Documented delivery states and integration patterns in `docs/notifications/center.md`.
 
+## GraphQL gateway
+
+- Added `apps/svc-gql/src/index.ts` with a documented `health` query schema and resolver map for the future API gateway.
+- Captured schema/resolver wiring expectations in `docs/api/graphql-gateway.md` for platform teams.
+
+## Payment providers
+
+- Added typed UzPay, Payme, and Click provider factories under `apps/svc-payments/providers/` that sign outgoing payloads for sandbox testing.
+- Documented request payloads, signature/auth header construction, and override options in `docs/payments/providers.md` for payment engineers.
+
+## Internationalisation updates
+
+- Expanded the lightweight i18n helper to include Kazakh, Kyrgyz, and Azerbaijani locales backed by JSON dictionaries.
+- Documented locale bundles and onboarding notes in `docs/i18n/regional-locales.md`.
+
+## Contact formatting helpers
+
+- Added `packages/geo/format/index.ts` with documented phone masks and address ordering helpers for UZ/KZ/KG/AZ flows.
+- Captured reference guidance for forms in `docs/geo/contact-formatting.md`.
+
+## Entity graph scaffold
+
+- Documented an in-memory directed graph helper in `packages/graph/index.ts` for connecting catalogue entities.
+- Recorded usage in `docs/architecture/entity-graph.md` for search experimentation.
+
+## Rate limiting utilities
+
+- Introduced a primitive token bucket helper in `packages/ratelimit/index.ts` with reset support for tests.
+- Added `packages/ratelimit/mw/index.ts` to wrap the helper into a Node middleware returning HTTP 429 on excess traffic.
+- Recorded usage guidance and caveats in `docs/architecture/rate-limit.md`.
+
+## Fraud detection
+
+- Added synchronous antifraud heuristics in `packages/antifraud/signals/index.ts` to flag enquiry spikes and IP mismatches.
+- Documented available signals and integration hints in `docs/security/fraud-signals.md`.
+
 ## Vendor demand analytics
 
 - Added `apps/svc-analytics/src/vendor/index.{js,ts}` helpers that compute conversion summaries and month-by-month demand slices with peak/off-season classification.

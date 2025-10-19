@@ -2023,7 +2023,7 @@ TS
 
 ## ЭТАП 106. Доп. платёжные провайдеры (UzPay/Payme/Click)
 
-- [ ] T-1060 | UzPay провайдер
+- [x] T-1060 | UzPay провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2034,7 +2034,7 @@ TS
     git add apps/svc-payments/providers/uzpay.ts
     ```
 
-- [ ] T-1061 | Payme провайдер
+- [x] T-1061 | Payme провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2044,7 +2044,7 @@ TS
     git add apps/svc-payments/providers/payme.ts
     ```
 
-- [ ] T-1062 | Click провайдер
+- [x] T-1062 | Click провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2058,7 +2058,7 @@ TS
 
 ## ЭТАП 107. GraphQL-шлюз
 
-- [ ] T-1070 | Gateway (скелет)
+- [x] T-1070 | Gateway (скелет)
   - depends: [T-0004]
   - apply:
     ```bash
@@ -2073,7 +2073,7 @@ TS
 
 ## ЭТАП 108. Rate-limits
 
-- [ ] T-1080 | Примитивный токен-бакет
+- [x] T-1080 | Примитивный токен-бакет
   - depends: [T-0004]
   - apply:
     ```bash
@@ -2093,7 +2093,7 @@ TS
 
 ## ЭТАП 109. Fraud-сигналы
 
-- [ ] T-1090 | Каталог сигналов риска
+- [x] T-1090 | Каталог сигналов риска
   - depends: [T-0250]
   - apply:
     ```bash
@@ -2165,7 +2165,7 @@ JS
 
 ## ЭТАП 113. Региональные фичи KZ/KG/AZ
 
-- [ ] T-1130 | Локали и валюты (дополнение)
+- [x] T-1130 | Локали и валюты (дополнение)
   - depends: [T-0100, T-0310]
   - apply:
     ```bash
@@ -2175,7 +2175,7 @@ JS
     git add packages/i18n/kk.json packages/i18n/kg.json packages/i18n/az.json
     ```
 
-- [ ] T-1131 | Форматы адресов/телефонов
+- [x] T-1131 | Форматы адресов/телефонов
   - depends: [T-0580]
   - apply:
     ```bash
@@ -2205,7 +2205,7 @@ TS
 
 ## ЭТАП 115. Граф поиска по связям
 
-- [ ] T-1150 | Граф сущностей (скелет)
+- [x] T-1150 | Граф сущностей (скелет)
   - depends: [T-0011, T-0370]
   - apply:
     ```bash
@@ -2235,7 +2235,7 @@ TS
 
 ## ЭТАП 117. Ограничение скоростей по IP/аккаунту
 
-- [ ] T-1170 | Middleware rate-limit
+- [x] T-1170 | Middleware rate-limit
   - depends: [T-1080]
   - apply:
     ```bash

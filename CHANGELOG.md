@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 ### Added
+- Introduced documented UzPay, Payme, and Click payment provider stubs in `apps/svc-payments/providers/` with supporting notes in `docs/payments/providers.md`.
+- Scaffolded the GraphQL gateway schema and resolver map in `apps/svc-gql/src/index.ts` with notes in `docs/api/graphql-gateway.md`.
+- Added primitive rate-limiting helpers in `packages/ratelimit/index.ts` and middleware wiring in `packages/ratelimit/mw/index.ts` with documentation in `docs/architecture/rate-limit.md`.
+- Published synchronous antifraud signal helpers in `packages/antifraud/signals/index.ts` with docs in `docs/security/fraud-signals.md`.
+- Extended the lightweight i18n dictionary with Kazakh, Kyrgyz, and Azerbaijani locales and documented the additions in `docs/i18n/regional-locales.md`.
+- Added geo formatting helpers (phone masks and address layouts) in `packages/geo/format/index.ts` with docs in `docs/geo/contact-formatting.md`.
+- Published an in-memory entity graph skeleton in `packages/graph/index.ts` with documentation in `docs/architecture/entity-graph.md`.
 - Delivered vendor demand analytics with seasonality slices in `apps/svc-analytics/src/vendor/index.{js,ts}` and documented usage in `docs/analytics/vendor-seasonality.md`.
 - Introduced `@wt/security` header utilities to apply default hardening headers across Node services.
 - Wired vendor service HTTP responses to use the shared security headers helper.
