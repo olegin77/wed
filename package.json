@@ -24,6 +24,8 @@
     "semgrep:fix": "semgrep --config .semgrep.yml --fix --error"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "3.1.0",
+    "@eslint/js": "9.12.0",
     "eslint": "8.57.0",
     "eslint-plugin-security": "3.0.1",
     "tsx": "^4.19.2"

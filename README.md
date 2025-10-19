@@ -65,3 +65,8 @@ sandbox:
       - "pnpm"
     no_tty: true
 
+## Security headers helper
+
+- Added a shared `packages/security/headers.js` helper that sets hardened HTTP response headers (`X-Frame-Options`, `Permissions-Policy`, `Cross-Origin-*`).
+- Vendor service now applies these defaults to every request to reduce clickjacking and resource isolation risks.
+
