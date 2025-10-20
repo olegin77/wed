@@ -138,6 +138,12 @@ sandbox:
 - Documented `@wt/mlrank` as a reusable offline scorer with configurable weights and clamped output for catalogue experiments.
 - See `docs/mlrank/offline-scoring.md` for factor definitions and integration notes with the catalogue recompute job.
 
+## Online weight tuning
+
+- Added `@wt/mlrank/online/update` with documented decay-aware updates for click and booking events, including helpers to reset
+  state and inspect metadata during experiments.
+- Captured usage examples and configuration hints in `docs/mlrank/online-learning.md` for growth and data science teams.
+
 ## Catalog feature extraction
 
 - Rebuilt `infra/feast/extract-features.ts` to normalise conversion, rating, profile и calendar метрики из разнородных источников и безопасно отдавать факторы в `[0, 1]`.
