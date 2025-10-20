@@ -1,9 +1,17 @@
 import http from "http";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
+import { handleAvailabilityIcs } from "./api/availability-ics.js";
 
 const port = process.env.PORT || 3000;
 
 http
   .createServer((req, res) => {
+    applySecurityHeaders(res);
+
+    if (handleAvailabilityIcs(req, res)) {
+      return;
+    }
+
     if (req.url === "/health") {
       const db = true; // TODO: заменить stub на реальный ping БД
       res.writeHead(200, { "Content-Type": "application/json" });
