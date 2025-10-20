@@ -90,11 +90,13 @@ sandbox:
 
 - Added `apps/svc-gql/src/index.ts` with a documented `health` query schema and resolver map for the future API gateway.
 - Captured schema/resolver wiring expectations in `docs/api/graphql-gateway.md` for platform teams.
+- Added `apps/svc-gql/schema/build-schema.mjs` to stitch SDL files into a single `schema.graphql` artifact documented in `docs/api/graphql-schema.md`.
 
 ## Payment providers
 
 - Added typed UzPay, Payme, and Click provider factories under `apps/svc-payments/providers/` that sign outgoing payloads for sandbox testing.
 - Documented request payloads, signature/auth header construction, and override options in `docs/payments/providers.md` for payment engineers.
+- Expanded `apps/svc-payments/src/fee/` with commission calculators, fee reports, and docs in `docs/payments/platform-fee.md`.
 
 ## Internationalisation updates
 
@@ -122,6 +124,10 @@ sandbox:
 - Added synchronous antifraud heuristics in `packages/antifraud/signals/index.ts` to flag enquiry spikes and IP mismatches.
 - Documented available signals and integration hints in `docs/security/fraud-signals.md`.
 
+## Security audit logging
+
+- Upgraded `packages/audit/security/` with sink-based logging, metadata sanitisation, and tests documented in `docs/security/audit.md`.
+
 ## Vendor demand analytics
 
 - Added `apps/svc-analytics/src/vendor/index.{js,ts}` helpers that compute conversion summaries and month-by-month demand slices with peak/off-season classification.
@@ -146,10 +152,26 @@ sandbox:
 ## Search utilities
 
 - Added `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and normalisation utilities for multilingual content.
+- Documented the k6 search stress profile in `infra/k6/search.js` with usage notes in `docs/perf/k6-search.md`.
+
+## SEO controls
+
+- Refined `apps/svc-website/public/robots.txt` to block internal routes, slow aggressive crawlers, and advertise public sitemaps.
+- Documented the robots policy for content and SEO teams in `docs/seo/robots.md`.
 
 ## Media pipeline
 
 - Expanded `@wt/media` to generate multi-format variants, expose batch helpers, and return metadata for responsive asset workflows.
+- Added a documented chunked upload helper in `packages/storage/chunk/` with tests and guidance in `docs/storage/chunk-upload.md`.
+
+## Enquiry archive
+
+- Implemented a documented archive manager with in-memory storage, helper wrappers, and Node tests under `apps/svc-enquiries/src/archive/`.
+- Added guidance for GDPR deletion flows in `docs/enquiries/archive.md`.
+
+## Review policy
+
+- Strengthened `apps/svc-enquiries/src/reviews/policy.ts` with contract checks, length/word thresholds, media requirements, and tests documented in `docs/enquiries/review-policy.md`.
 
 ## Catalog reference
 

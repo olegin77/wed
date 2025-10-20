@@ -24,6 +24,14 @@
 - Enhanced `apps/svc-notifier/src/index.ts` with a persistent notification feed, delivery tracking, and documented error handling helpers.
 - Documented and extended `@wt/mlrank` with configurable offline score weights and clamped output helpers for catalogue ranking.
 - Hardened `infra/feast/extract-features.ts` to normalise vendor metrics from mixed data sources and documented the supported fields in `docs/analytics/catalog-features.md`.
+- Refined `apps/svc-website/public/robots.txt` and documented the crawling policy in `docs/seo/robots.md` to keep private surfaces out of search indices.
+- Replaced the enquiries archive stub with a documented manager, in-memory store, and tests covering archive/restore/purge flows.
+- Introduced a documented schema builder in `apps/svc-gql/schema/build-schema.mjs` that outputs a consolidated `schema.graphql`.
+- Implemented chunked upload helpers under `packages/storage/chunk/` with tests and documentation.
+- Enhanced platform fee calculations with per-order reports and validation in `apps/svc-payments/src/fee/`.
+- Replaced the security audit stub with a sink-driven logger, metadata sanitisation, and accompanying documentation/tests.
+- Upgraded the k6 search stress profile with realistic scenarios, metrics, and documentation.
+- Hardened the review publication policy with contract checks, text thresholds, media requirements, and unit tests.
 ### Fixed
 - Sanitised the log ingestion service filenames and explained the lint exceptions for dynamic fs calls.
 - Declared browser/runtime globals for the service worker and k6 scripts to clear `no-undef` warnings.
