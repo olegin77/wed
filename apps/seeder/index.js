@@ -30,7 +30,7 @@ if (!process.env.PRISMA_SCHEMA_PATH) {
  * useful right after cloning the repository.
  */
 if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/wt?schema=public';
+  process.env.DATABASE_URL = 'postgresql://postgres:postgres@localhost:5434/wt?schema=public';
   console.warn('[seed] DATABASE_URL was not set. Falling back to local development instance.');
 }
 

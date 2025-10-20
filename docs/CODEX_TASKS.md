@@ -82,7 +82,7 @@ services:
   db:
     image: postgres:15
     environment: { POSTGRES_USER: postgres, POSTGRES_PASSWORD: postgres, POSTGRES_DB: wt }
-    ports: ["5432:5432"]
+    ports: ["5434:5432"]
   redis:
     image: redis:7
     ports: ["6379:6379"]
@@ -1081,7 +1081,7 @@ JS
 
 ## ЭТАП 43. Hardening
 
-- [ ] T-0430 | Security headers
+- [x] T-0430 | Security headers
   - depends: [T-0004]
   - apply:
     ```bash
@@ -1227,7 +1227,7 @@ TS
 
 ## ЭТАП 51. Поиск по сайту (full-text, подсказки)
 
-- [ ] T-0510 | Пакет `@wt/search` (in-repo)
+- [x] T-0510 | Пакет `@wt/search` (in-repo)
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1240,7 +1240,7 @@ TS
 
 ## ЭТАП 52. Мультимедиа и компрессия
 
-- [ ] T-0520 | Минификация изображений (заготовка)
+- [x] T-0520 | Минификация изображений (заготовка)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -1253,7 +1253,7 @@ TS
 
 ## ЭТАП 53. Категории поставщиков (иерархия)
 
-- [ ] T-0530 | Справочник категорий
+- [x] T-0530 | Справочник категорий
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1266,7 +1266,7 @@ TS
 
 ## ЭТАП 54. Фильтры по бюджету/гостям
 
-- [ ] T-0540 | Пресеты бюджета и количества гостей
+- [x] T-0540 | Пресеты бюджета и количества гостей
   - depends: [T-0050]
   - apply:
     ```bash
@@ -1317,7 +1317,7 @@ TS
 
 ## ЭТАП 58. Географические справочники
 
-- [ ] T-0580 | Города/регионы Узбекистана
+- [x] T-0580 | Города/регионы Узбекистана
   - depends: [T-0011]
   - apply:
     ```bash
@@ -1342,7 +1342,7 @@ TS
 
 ## ЭТАП 60. Маркетплейс пакетных предложений
 
-- [ ] T-0600 | Пакеты «зал+декор+музыка»
+- [x] T-0600 | Пакеты «зал+декор+музыка»
   - depends: [T-0040,T-0042,T-0050]
   - apply:
     ```bash
@@ -1502,7 +1502,7 @@ MD
 
 ## ЭТАП 72. Настройки оповещений
 
-- [ ] T-0720 | Центр уведомлений
+- [x] T-0720 | Центр уведомлений
   - depends: [T-0120,T-0121]
   - apply:
     ```bash
@@ -1633,7 +1633,7 @@ MD
 
 ## ЭТАП 82. Отчёты для поставщика (аналитика спроса)
 
-- [ ] T-0820 | Срезы спроса/сезонности
+- [x] T-0820 | Срезы спроса/сезонности
   - depends: [T-0090]
   - apply:
     ```bash
@@ -1875,7 +1875,7 @@ MD
 
 ## ЭТАП 101. ML-ранжирование и оффлайн-скоринг
 
-- [ ] T-1010 | Пакет `@wt/mlrank` — оффлайн скорер (заглушка под модель)
+- [x] T-1010 | Пакет `@wt/mlrank` — оффлайн скорер (заглушка под модель)
   - depends: [T-0053, T-0370]
   - apply:
     ```bash
@@ -1890,7 +1890,7 @@ TS
     git add packages/mlrank/index.ts
     ```
 
-- [ ] T-1011 | Экстракция признаков каталога
+- [x] T-1011 | Экстракция признаков каталога
   - depends: [T-0011, T-1010]
   - apply:
     ```bash
@@ -2023,7 +2023,7 @@ TS
 
 ## ЭТАП 106. Доп. платёжные провайдеры (UzPay/Payme/Click)
 
-- [ ] T-1060 | UzPay провайдер
+- [x] T-1060 | UzPay провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2034,7 +2034,7 @@ TS
     git add apps/svc-payments/providers/uzpay.ts
     ```
 
-- [ ] T-1061 | Payme провайдер
+- [x] T-1061 | Payme провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2044,7 +2044,7 @@ TS
     git add apps/svc-payments/providers/payme.ts
     ```
 
-- [ ] T-1062 | Click провайдер
+- [x] T-1062 | Click провайдер
   - depends: [T-0112]
   - apply:
     ```bash
@@ -2058,7 +2058,7 @@ TS
 
 ## ЭТАП 107. GraphQL-шлюз
 
-- [ ] T-1070 | Gateway (скелет)
+- [x] T-1070 | Gateway (скелет)
   - depends: [T-0004]
   - apply:
     ```bash
@@ -2073,7 +2073,7 @@ TS
 
 ## ЭТАП 108. Rate-limits
 
-- [ ] T-1080 | Примитивный токен-бакет
+- [x] T-1080 | Примитивный токен-бакет
   - depends: [T-0004]
   - apply:
     ```bash
@@ -2093,7 +2093,7 @@ TS
 
 ## ЭТАП 109. Fraud-сигналы
 
-- [ ] T-1090 | Каталог сигналов риска
+- [x] T-1090 | Каталог сигналов риска
   - depends: [T-0250]
   - apply:
     ```bash
@@ -2165,7 +2165,7 @@ JS
 
 ## ЭТАП 113. Региональные фичи KZ/KG/AZ
 
-- [ ] T-1130 | Локали и валюты (дополнение)
+- [x] T-1130 | Локали и валюты (дополнение)
   - depends: [T-0100, T-0310]
   - apply:
     ```bash
@@ -2175,7 +2175,7 @@ JS
     git add packages/i18n/kk.json packages/i18n/kg.json packages/i18n/az.json
     ```
 
-- [ ] T-1131 | Форматы адресов/телефонов
+- [x] T-1131 | Форматы адресов/телефонов
   - depends: [T-0580]
   - apply:
     ```bash
@@ -2205,7 +2205,7 @@ TS
 
 ## ЭТАП 115. Граф поиска по связям
 
-- [ ] T-1150 | Граф сущностей (скелет)
+- [x] T-1150 | Граф сущностей (скелет)
   - depends: [T-0011, T-0370]
   - apply:
     ```bash
@@ -2235,7 +2235,7 @@ TS
 
 ## ЭТАП 117. Ограничение скоростей по IP/аккаунту
 
-- [ ] T-1170 | Middleware rate-limit
+- [x] T-1170 | Middleware rate-limit
   - depends: [T-1080]
   - apply:
     ```bash
@@ -2447,7 +2447,7 @@ TS
 
 ## ЭТАП 132. Тонкая настройка robots.txt
 
-- [ ] T-1320 | robots.txt
+- [x] T-1320 | robots.txt
   - depends: [T-0130]
   - apply:
     ```bash
@@ -2464,7 +2464,7 @@ TXT
 
 ## ЭТАП 133. Архив заявок и GDPR-удаление
 
-- [ ] T-1330 | Архивация/удаление
+- [x] T-1330 | Архивация/удаление
   - depends: [T-0141]
   - apply:
     ```bash
@@ -2477,7 +2477,7 @@ TXT
 
 ## ЭТАП 134. Автогенерация OpenAPI/GraphQL схем (скелет)
 
-- [ ] T-1340 | Схемы контуров
+- [x] T-1340 | Схемы контуров
   - depends: [T-1070]
   - apply:
     ```bash
@@ -2490,7 +2490,7 @@ TXT
 
 ## ЭТАП 135. Приём файлов больших размеров (chunked)
 
-- [ ] T-1350 | Чанк-загрузка (stub)
+- [x] T-1350 | Чанк-загрузка (stub)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -2503,7 +2503,7 @@ TXT
 
 ## ЭТАП 136. Биллинг для маркетплейса (комиссия платформы)
 
-- [ ] T-1360 | Комиссия и отчёт
+- [x] T-1360 | Комиссия и отчёт
   - depends: [T-0290]
   - apply:
     ```bash
@@ -2518,7 +2518,7 @@ TS
 
 ## ЭТАП 137. Логи аудита безопасности
 
-- [ ] T-1370 | Security-аудит
+- [x] T-1370 | Security-аудит
   - depends: [T-0091]
   - apply:
     ```bash
@@ -2531,7 +2531,7 @@ TS
 
 ## ЭТАП 138. Стресс-профили k6 (каталог/поиск)
 
-- [ ] T-1380 | k6 search/stress
+- [x] T-1380 | k6 search/stress
   - depends: [T-0150]
   - apply:
     ```bash
@@ -2545,7 +2545,7 @@ JS
 
 ## ЭТАП 139. Монитор качества отзывов (порог публикации)
 
-- [ ] T-1390 | Порог публикации
+- [x] T-1390 | Порог публикации
   - depends: [T-0070]
   - apply:
     ```bash
@@ -2557,7 +2557,7 @@ JS
 
 ## ЭТАП 140. Финальный пуш уровня 2
 
-- [ ] T-1400 | Commit/push «Level 2»
+- [x] T-1400 | Commit/push «Level 2»
   - depends: [T-0005]
   - apply:
     ```bash
@@ -2570,7 +2570,7 @@ JS
 
 ## ЭТАП 141. Семантический поиск и векторный индекс
 
-- [ ] T-1410 | Пакет `@wt/semantic` (скелет векторного индекса)
+- [x] T-1410 | Пакет `@wt/semantic` (скелет векторного индекса)
   - depends: [T-0510]
   - apply:
     ```bash
@@ -2587,7 +2587,7 @@ TS
     git add packages/semantic/index.ts
     ```
 
-- [ ] T-1411 | Индексация поставщиков в семантический индекс
+- [x] T-1411 | Индексация поставщиков в семантический индекс
   - depends: [T-1410, T-0050]
   - apply:
     ```bash
@@ -2602,7 +2602,7 @@ TS
 
 ## ЭТАП 142. Feature Store для ML
 
-- [ ] T-1420 | Пакет `@wt/features` (фичи и схемы)
+- [x] T-1420 | Пакет `@wt/features` (фичи и схемы)
   - depends: [T-1011]
   - apply:
     ```bash
@@ -2614,7 +2614,7 @@ TS
     git add packages/features/index.ts
     ```
 
-- [ ] T-1421 | Экспорт фич в snapshot
+- [x] T-1421 | Экспорт фич в snapshot
   - depends: [T-1420]
   - apply:
     ```bash
@@ -2630,7 +2630,7 @@ TS
 
 ## ЭТАП 143. Online-learning заглушка
 
-- [ ] T-1430 | Обновление весов по событиям
+- [x] T-1430 | Обновление весов по событиям
   - depends: [T-0370, T-1010]
   - apply:
     ```bash
@@ -3646,7 +3646,7 @@ YML
 
 ## ЭТАП 184. Дизайн-система, тема и базовые UI-компоненты
 
-- [ ] T-0206 | Tailwind конфиг + дизайн-токены (светлая/тёмная темы)
+- [x] T-0206 | Tailwind конфиг + дизайн-токены (светлая/тёмная темы)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3685,7 +3685,7 @@ CSS
     git add apps/svc-website/tailwind.config.js apps/svc-website/src/styles/tokens.css
     ```
 
-- [ ] T-0207 | Базовые UI: Button/Card/Section/Container (React, без плейсхолдеров)
+- [x] T-0207 | Базовые UI: Button/Card/Section/Container (React, без плейсхолдеров)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3724,7 +3724,7 @@ TSX
     git add apps/svc-website/src/ui/*.tsx
     ```
 
-- [ ] T-0208 | Типографика и базовый layout (главные стили)
+- [x] T-0208 | Типографика и базовый layout (главные стили)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3744,7 +3744,7 @@ CSS
     git add apps/svc-website/src/styles/base.css
     ```
 
-- [ ] T-0209 | Темный режим: переключатель темы (class .dark)
+- [x] T-0209 | Темный режим: переключатель темы (class .dark)
   - depends: [T-0206]
   - apply:
     ```bash
@@ -3771,7 +3771,7 @@ TS
 
 ## ЭТАП 185. I18N (RU/UZ) и форматирование дат/валют
 
-- [ ] T-0210 | Пакет @wt/i18n с ресурсами ru/uz
+- [x] T-0210 | Пакет @wt/i18n с ресурсами ru/uz
   - depends: [T-0001]
   - apply:
     ```bash
@@ -3794,7 +3794,7 @@ JSON
     git add packages/i18n/index.ts packages/i18n/locales/*.json
     ```
 
-- [ ] T-0211 | Хелперы форматирования: дата/валюта (UZS)
+- [x] T-0211 | Хелперы форматирования: дата/валюта (UZS)
   - depends: [T-0210]
   - apply:
     ```bash
@@ -3813,7 +3813,7 @@ TS
 
 ## ЭТАП 186. SEO/OG, карта сайта и микроразметка
 
-- [ ] T-0212 | Генерация sitemap.xml для каталога
+- [x] T-0212 | Генерация sitemap.xml для каталога
   - depends: [T-0065, T-0197]
   - apply:
     ```bash
@@ -3832,7 +3832,7 @@ TS
     git add apps/svc-website/src/seo/sitemap.ts
     ```
 
-- [ ] T-0213 | OpenGraph/Twitter метатеги генератор
+- [x] T-0213 | OpenGraph/Twitter метатеги генератор
   - depends: [T-0060]
   - apply:
     ```bash
@@ -3855,7 +3855,7 @@ TS
     git add apps/svc-website/src/seo/meta.ts
     ```
 
-- [ ] T-0214 | JSON-LD схема для карточки площадки (Venue)
+- [x] T-0214 | JSON-LD схема для карточки площадки (Venue)
   - depends: [T-0065]
   - apply:
     ```bash
@@ -3877,7 +3877,7 @@ TS
 
 ## ЭТАП 187. Медиа: галереи, оптимизация изображений и превью
 
-- [ ] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
+- [x] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
   - depends: [T-0003]
   - apply:
     ```bash
@@ -3900,7 +3900,7 @@ JSON
     git add packages/media/src/optimize.ts packages/media/package.json
     ```
 
-- [ ] T-0216 | Галерея (masonry) для профиля тойханы
+- [x] T-0216 | Галерея (masonry) для профиля тойханы
   - depends: [T-0207, T-0215]
   - apply:
     ```bash
@@ -3917,7 +3917,7 @@ TSX
     git add apps/svc-website/src/ui/gallery/Masonry.tsx
     ```
 
-- [ ] T-0217 | Превью загрузок: генерация thumbnail (256px)
+- [x] T-0217 | Превью загрузок: генерация thumbnail (256px)
   - depends: [T-0215]
   - apply:
     ```bash
@@ -3937,7 +3937,7 @@ SH
 
 ## ЭТАП 188. Почтовые шаблоны и уведомления
 
-- [ ] T-0218 | Email-шаблоны: приглашение гостя и заявка поставщику
+- [x] T-0218 | Email-шаблоны: приглашение гостя и заявка поставщику
   - depends: [T-0120]
   - apply:
     ```bash
@@ -3958,7 +3958,7 @@ HTML
     git add packages/mail/templates/*.html
     ```
 
-- [ ] T-0219 | Отправка писем (SMTP URL) — простой sender
+- [x] T-0219 | Отправка писем (SMTP URL) — простой sender
   - depends: [T-0120]
   - apply:
     ```bash
@@ -3977,7 +3977,7 @@ TS
 
 ## ЭТАП 189. Календарь и .ics экспорт
 
-- [ ] T-0220 | Экспорт доступности площадок в .ics
+- [x] T-0220 | Экспорт доступности площадок в .ics
   - depends: [T-0065]
   - apply:
     ```bash
@@ -3993,7 +3993,7 @@ TS
     git add packages/calendar/ics.ts
     ```
 
-- [ ] T-0221 | API точка: скачать .ics для vendor availability
+- [x] T-0221 | API точка: скачать .ics для vendor availability
   - depends: [T-0220, T-0004]
   - apply:
     ```bash
@@ -4023,7 +4023,7 @@ JS
 
 ## ЭТАП 190. Админ-панель (скелет) и модерация
 
-- [ ] T-0222 | Admin UI (скелет разделов)
+- [x] T-0222 | Admin UI (скелет разделов)
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4045,7 +4045,7 @@ TSX
     git add apps/svc-admin/src/pages/index.tsx
     ```
 
-- [ ] T-0223 | Модерация отзывов: правило «только контракт»
+- [x] T-0223 | Модерация отзывов: правило «только контракт»
   - depends: [T-0190]
   - apply:
     ```bash
@@ -4061,7 +4061,7 @@ TS
 
 ## ЭТАП 191. Производительность и качество интерфейса
 
-- [ ] T-0224 | Ленивая загрузка изображений + width/height атрибуты
+- [x] T-0224 | Ленивая загрузка изображений + width/height атрибуты
   - depends: [T-0216]
   - apply:
     ```bash
@@ -4715,7 +4715,7 @@ services:
       POSTGRES_PASSWORD: pg
       POSTGRES_USER: pg
       POSTGRES_DB: wt
-    ports: ["5432:5432"]
+    ports: ["5434:5432"]
   minio:
     image: minio/minio
     command: server /data
@@ -4733,7 +4733,7 @@ YML
     ```bash
     set -euo pipefail
     cat > .env.example <<'ENV'
-DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 JWT_SECRET=supersecret
 SMTP_URL=smtp://user:pass@smtp.example.com:587
 MAIL_FROM=noreply@weddingtech.uz
@@ -5010,7 +5010,7 @@ TSX
 # WeddingTech UZ (MVP)
 ## Local
 1) docker-compose up -d db
-2) export DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+2) export DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 3) pnpm run prisma:gen && pnpm run prisma:migrate && pnpm run prisma:seed
 4) запустить сервисы (auth/catalog/enquiries/vendors/billing)
 ## DO App Platform
@@ -6095,7 +6095,7 @@ MD
     cat > scripts/backup/pg_nightly.sh <<'SH'
 #!/usr/bin/env bash
 set -euo pipefail
-: "${DATABASE_URL:=postgresql://pg:pg@localhost:5432/wt}"
+: "${DATABASE_URL:=postgresql://pg:pg@localhost:5434/wt}"
 OUT="backups/$(date +%Y-%m-%d)"
 mkdir -p "$OUT"
 pg_dump "$DATABASE_URL" > "$OUT/wt.sql"
@@ -6114,7 +6114,7 @@ SH
     cat > scripts/backup/pg_restore_smoke.sh <<'SH'
 #!/usr/bin/env bash
 set -euo pipefail
-: "${DATABASE_URL:=postgresql://pg:pg@localhost:5432/wt}"
+: "${DATABASE_URL:=postgresql://pg:pg@localhost:5434/wt}"
 LAST="$(ls -1dt backups/* | head -n1)/wt.sql"
 [ -f "$LAST" ] || { echo "no backup found"; exit 1; }
 psql "$DATABASE_URL" -c 'SELECT 1' >/dev/null
@@ -6523,7 +6523,7 @@ JS
     set -euo pipefail
     cat > .env.local.example <<'ENV'
 # локальные секреты разработчика
-DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 JWT_SECRET=devsecret
 ENV
     mkdir -p docs/ops/secrets
@@ -12051,7 +12051,7 @@ JS
         echo "// TODO: Integrate Chat component into Couple App" > mobile/app-couple/chat_integration.todo
         git add mobile/app-couple/chat_integration.todo
         ```
-- [ ] T-0796 | Мобильное Приложение (Пара): Сканер QR-кодов (для приглашений/вендоров)
+- [x] T-0796 | Мобильное Приложение (Пара): Сканер QR-кодов (для приглашений/вендоров)
     - depends: [T-0766]
     - apply:
         ```bash
@@ -12059,7 +12059,7 @@ JS
         echo "// TODO: Implement QR Code Scanner in Couple App" > mobile/app-couple/qr_scanner.todo
         git add mobile/app-couple/qr_scanner.todo
         ```
-- [ ] T-0797 | Мобильное Приложение (Вендор): Управление календарем доступности
+- [x] T-0797 | Мобильное Приложение (Вендор): Управление календарем доступности
     - depends: [T-0773, T-0051]
     - apply:
         ```bash
@@ -12067,7 +12067,7 @@ JS
         echo "// TODO: Implement Calendar Management in Vendor App" > mobile/app-vendor/calendar_management.todo
         git add mobile/app-vendor/calendar_management.todo
         ```
-- [ ] T-0798 | Мобильное Приложение (Вендор): Ответы на заявки и чат с парами
+- [x] T-0798 | Мобильное Приложение (Вендор): Ответы на заявки и чат с парами
     - depends: [T-0773, T-0455]
     - apply:
         ```bash
@@ -12075,7 +12075,7 @@ JS
         echo "// TODO: Implement Enquiry Response and Chat in Vendor App" > mobile/app-vendor/chat_enquiry_response.todo
         git add mobile/app-vendor/chat_enquiry_response.todo
         ```
-- [ ] T-0799 | Мобильное Приложение (Вендор): Push-уведомления о новых заявках/сообщениях
+- [x] T-0799 | Мобильное Приложение (Вендор): Push-уведомления о новых заявках/сообщениях
     - depends: [T-0773, T-0596]
     - apply:
         ```bash
@@ -12083,7 +12083,7 @@ JS
         echo "// TODO: Implement Push Notifications in Vendor App" > mobile/app-vendor/push_notifications.todo
         git add mobile/app-vendor/push_notifications.todo
         ```
-- [ ] T-0800 | Мобильные Приложения: Публикация в App Store и Google Play (полный процесс)
+- [x] T-0800 | Мобильные Приложения: Публикация в App Store и Google Play (полный процесс)
     - depends: [T-0774]
     - apply:
         ```bash
