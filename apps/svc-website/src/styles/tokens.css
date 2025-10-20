@@ -1,0 +1,18 @@
+:root {
+  --bg: #ffffff;
+  --fg: #111827;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --brand: #7c3aed;
+  --accent: #10b981;
+  --radius: 16px;
+}
+
+.dark {
+  --bg: #0b0b10;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --card: #0f0f16;
+  --brand: #a78bfa;
+  --accent: #34d399;
+}

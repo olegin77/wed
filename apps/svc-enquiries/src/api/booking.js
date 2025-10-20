@@ -42,7 +42,7 @@ const cookieUserId = (req) => {
     const decoded = Buffer.from(payload, "base64").toString();
     const parsed = JSON.parse(decoded);
     return parsed?.sub || null;
-  } catch (error) {
+  } catch {
     return null;
   }
 };
