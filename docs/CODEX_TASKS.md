@@ -82,7 +82,7 @@ services:
   db:
     image: postgres:15
     environment: { POSTGRES_USER: postgres, POSTGRES_PASSWORD: postgres, POSTGRES_DB: wt }
-    ports: ["5432:5432"]
+    ports: ["5434:5432"]
   redis:
     image: redis:7
     ports: ["6379:6379"]
@@ -4715,7 +4715,7 @@ services:
       POSTGRES_PASSWORD: pg
       POSTGRES_USER: pg
       POSTGRES_DB: wt
-    ports: ["5432:5432"]
+    ports: ["5434:5432"]
   minio:
     image: minio/minio
     command: server /data
@@ -4733,7 +4733,7 @@ YML
     ```bash
     set -euo pipefail
     cat > .env.example <<'ENV'
-DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 JWT_SECRET=supersecret
 SMTP_URL=smtp://user:pass@smtp.example.com:587
 MAIL_FROM=noreply@weddingtech.uz
@@ -5010,7 +5010,7 @@ TSX
 # WeddingTech UZ (MVP)
 ## Local
 1) docker-compose up -d db
-2) export DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+2) export DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 3) pnpm run prisma:gen && pnpm run prisma:migrate && pnpm run prisma:seed
 4) запустить сервисы (auth/catalog/enquiries/vendors/billing)
 ## DO App Platform
@@ -6095,7 +6095,7 @@ MD
     cat > scripts/backup/pg_nightly.sh <<'SH'
 #!/usr/bin/env bash
 set -euo pipefail
-: "${DATABASE_URL:=postgresql://pg:pg@localhost:5432/wt}"
+: "${DATABASE_URL:=postgresql://pg:pg@localhost:5434/wt}"
 OUT="backups/$(date +%Y-%m-%d)"
 mkdir -p "$OUT"
 pg_dump "$DATABASE_URL" > "$OUT/wt.sql"
@@ -6114,7 +6114,7 @@ SH
     cat > scripts/backup/pg_restore_smoke.sh <<'SH'
 #!/usr/bin/env bash
 set -euo pipefail
-: "${DATABASE_URL:=postgresql://pg:pg@localhost:5432/wt}"
+: "${DATABASE_URL:=postgresql://pg:pg@localhost:5434/wt}"
 LAST="$(ls -1dt backups/* | head -n1)/wt.sql"
 [ -f "$LAST" ] || { echo "no backup found"; exit 1; }
 psql "$DATABASE_URL" -c 'SELECT 1' >/dev/null
@@ -6523,7 +6523,7 @@ JS
     set -euo pipefail
     cat > .env.local.example <<'ENV'
 # локальные секреты разработчика
-DATABASE_URL=postgresql://pg:pg@localhost:5432/wt
+DATABASE_URL=postgresql://pg:pg@localhost:5434/wt
 JWT_SECRET=devsecret
 ENV
     mkdir -p docs/ops/secrets
