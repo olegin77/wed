@@ -2630,7 +2630,7 @@ TS
 
 ## ЭТАП 143. Online-learning заглушка
 
-- [ ] T-1430 | Обновление весов по событиям
+- [x] T-1430 | Обновление весов по событиям
   - depends: [T-0370, T-1010]
   - apply:
     ```bash
@@ -4076,7 +4076,7 @@ TSX
     git add apps/svc-website/src/ui/img/LazyImg.tsx
     ```
 
-- [ ] T-0225 | Скелетон-лоадер для карточек каталога
+- [x] T-0225 | Скелетон-лоадер для карточек каталога
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4335,7 +4335,7 @@ JS
     git add apps/svc-auth/src/server.js
     ```
 
-- [ ] T-0233 | Роли и права: middleware-проверка (ADMIN/VENDOR/USER)
+- [x] T-0233 | Роли и права: middleware-проверка (ADMIN/VENDOR/USER)
   - depends: [T-0230]
   - apply:
     ```bash
@@ -4360,7 +4360,7 @@ TS
 
 ## ЭТАП 194. Каталог и поиск
 
-- [ ] T-0234 | Поиск и фильтры каталога (город/категория/вместимость/рейтинг)
+- [x] T-0234 | Поиск и фильтры каталога (город/категория/вместимость/рейтинг)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -4384,7 +4384,7 @@ JS
     git add apps/svc-catalog/src/api/search.js
     ```
 
-- [ ] T-0235 | Сортировки и пагинация (page/limit/sort=rating|reviews)
+- [x] T-0235 | Сортировки и пагинация (page/limit/sort=rating|reviews)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -4827,7 +4827,7 @@ MD
 
 ## ЭТАП 204. UI улучшения каталога и страниц вендора
 
-- [ ] T-0258 | Компонент VendorCard с бейджами verified/rating
+- [x] T-0258 | Компонент VendorCard с бейджами verified/rating
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4849,7 +4849,7 @@ TSX
     git add apps/svc-website/src/ui/vendor/VendorCard.tsx
     ```
 
-- [ ] T-0259 | Секция «Похожие поставщики» (simple related)
+- [x] T-0259 | Секция «Похожие поставщики» (simple related)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -4966,7 +4966,7 @@ TS
 
 ## ЭТАП 208. Улучшения UX: формы и валидации
 
-- [ ] T-0265 | UI Input/Form helpers (очистка, error state)
+- [x] T-0265 | UI Input/Form helpers (очистка, error state)
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4982,7 +4982,7 @@ TSX
     git add apps/svc-website/src/ui/form/Input.tsx
     ```
 
-- [ ] T-0266 | Toast-уведомления (простая реализация)
+- [x] T-0266 | Toast-уведомления (простая реализация)
   - depends: [T-0207]
   - apply:
     ```bash
