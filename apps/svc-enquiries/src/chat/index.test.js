@@ -51,7 +51,7 @@ const createMockPrisma = (options = {}) => {
 
   const prisma = {
     enquiry: {
-      async findUnique(args) {
+      async findUnique() {
         if (options.missingEnquiry) {
           return null;
         }
