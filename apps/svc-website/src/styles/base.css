@@ -59,3 +59,13 @@ p {
   background: var(--card);
   padding: 1.5rem;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}

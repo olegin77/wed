@@ -4076,7 +4076,7 @@ TSX
     git add apps/svc-website/src/ui/img/LazyImg.tsx
     ```
 
-- [ ] T-0225 | Скелетон-лоадер для карточек каталога
+- [x] T-0225 | Скелетон-лоадер для карточек каталога
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4827,7 +4827,7 @@ MD
 
 ## ЭТАП 204. UI улучшения каталога и страниц вендора
 
-- [ ] T-0258 | Компонент VendorCard с бейджами verified/rating
+- [x] T-0258 | Компонент VendorCard с бейджами verified/rating
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4849,7 +4849,7 @@ TSX
     git add apps/svc-website/src/ui/vendor/VendorCard.tsx
     ```
 
-- [ ] T-0259 | Секция «Похожие поставщики» (simple related)
+- [x] T-0259 | Секция «Похожие поставщики» (simple related)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -4966,7 +4966,7 @@ TS
 
 ## ЭТАП 208. Улучшения UX: формы и валидации
 
-- [ ] T-0265 | UI Input/Form helpers (очистка, error state)
+- [x] T-0265 | UI Input/Form helpers (очистка, error state)
   - depends: [T-0207]
   - apply:
     ```bash
@@ -4982,7 +4982,7 @@ TSX
     git add apps/svc-website/src/ui/form/Input.tsx
     ```
 
-- [ ] T-0266 | Toast-уведомления (простая реализация)
+- [x] T-0266 | Toast-уведомления (простая реализация)
   - depends: [T-0207]
   - apply:
     ```bash
