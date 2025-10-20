@@ -1,22 +1,24 @@
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { allow } from "../index";
 
-type LimitOptions = {
-  limit?: number;
-  windowMs?: number;
-};
+export type KeyResolver = (req: IncomingMessage) => string;
 
-export function check(key: string, { limit = 60, windowMs = 60_000 }: LimitOptions = {}) {
-  return allow(key, limit, windowMs);
-}
-
-export function express(options: { key: (req: any) => string } & LimitOptions) {
-  return function rateLimitMiddleware(req: any, res: any, next: () => void) {
-    const key = options.key(req);
-    const ok = allow(key, options.limit ?? 60, options.windowMs ?? 60_000);
-    if (!ok) {
+/**
+ * Creates a Node.js HTTP middleware that applies the primitive token bucket to
+ * inbound requests. When the rate limit is exceeded, the middleware responds
+ * with HTTP 429 and stops the pipeline.
+ */
+export function createRateLimitMiddleware(
+  resolveKey: KeyResolver,
+  limit = 60,
+  windowMs = 60_000,
+) {
+  return function rateLimit(req: IncomingMessage, res: ServerResponse, next: () => void) {
+    const key = resolveKey(req);
+    if (!allow(key, limit, windowMs)) {
       res.statusCode = 429;
-      res.setHeader("Retry-After", Math.ceil((options.windowMs ?? 60_000) / 1000));
-      res.end("Too Many Requests");
+      res.setHeader("Retry-After", Math.ceil(windowMs / 1000).toString());
+      res.end("rate_limited");
       return;
     }
     next();

@@ -1,72 +1,41 @@
-export type FeatureValue = number | string | boolean | null;
+import { clampNormalized, type OfflineScoreInput } from "@wt/mlrank";
 
-export type VendorFeatures = {
-  conversionRate: number;
-  ratingAverage: number;
-  profileCompleteness: number;
-  calendarAvailability: number;
+export type VendorFeatures = OfflineScoreInput;
+
+export type FeatureNamespace = keyof typeof registry;
+
+export type FeatureKey<TNamespace extends FeatureNamespace> =
+  (typeof registry)[TNamespace][number];
+
+export const registry = {
+  VendorFeatures: ["conv", "rating", "profile", "calendar", "price"] as const,
 };
 
-export type FeatureKey<T> = keyof T & string;
-
-export interface FeatureDefinition<T> {
-  key: FeatureKey<T>;
-  description: string;
-  defaultValue: FeatureValue;
+/**
+ * Normalises и заполняет вектор признаков поставщика. Все значения приводятся к
+ * диапазону `[0, 1]`, а отсутствующие поля получают значение `0`.
+ */
+export function normaliseVendorFeatures(candidate: Partial<VendorFeatures>): VendorFeatures {
+  return {
+    conv: clampNormalized(candidate.conv ?? 0),
+    rating: clampNormalized(candidate.rating ?? 0),
+    profile: clampNormalized(candidate.profile ?? 0),
+    calendar: clampNormalized(candidate.calendar ?? 0),
+    price:
+      candidate.price === undefined ? undefined : clampNormalized(candidate.price),
+  };
 }
 
-export interface FeatureSchema<T> {
-  name: string;
-  features: FeatureDefinition<T>[];
+/**
+ * Представляет вектор признаков в виде массива чисел для передачи в модели,
+ * ожидающие фиксированный порядок значений.
+ */
+export function toArray(features: VendorFeatures): number[] {
+  return [
+    clampNormalized(features.conv),
+    clampNormalized(features.rating),
+    clampNormalized(features.profile),
+    clampNormalized(features.calendar),
+    clampNormalized(features.price ?? 0),
+  ];
 }
-
-const registry = new Map<string, FeatureSchema<any>>();
-
-export function registerFeatures<T>(schema: FeatureSchema<T>): void {
-  registry.set(schema.name, schema);
-}
-
-export function getSchema<T = Record<string, FeatureValue>>(name: string): FeatureSchema<T> | undefined {
-  return registry.get(name);
-}
-
-export function serializeRow<T extends Record<string, FeatureValue>>(name: string, values: T): Record<string, FeatureValue> {
-  const schema = getSchema<T>(name);
-  if (!schema) {
-    throw new Error(`Unknown feature set: ${name}`);
-  }
-
-  const result: Record<string, FeatureValue> = { __entity__: name };
-  for (const feature of schema.features) {
-    const value = values[feature.key];
-    result[feature.key] = value ?? feature.defaultValue;
-  }
-
-  return result;
-}
-
-registerFeatures<VendorFeatures>({
-  name: "vendor",
-  features: [
-    {
-      key: "conversionRate",
-      description: "Доля заявок, конвертирующихся в бронирования",
-      defaultValue: 0,
-    },
-    {
-      key: "ratingAverage",
-      description: "Средняя оценка отзывов",
-      defaultValue: 0,
-    },
-    {
-      key: "profileCompleteness",
-      description: "Заполненность профиля поставщика",
-      defaultValue: 0,
-    },
-    {
-      key: "calendarAvailability",
-      description: "Доступность дат в календаре",
-      defaultValue: 0,
-    },
-  ],
-});
