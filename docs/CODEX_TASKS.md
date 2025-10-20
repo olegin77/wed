@@ -12051,7 +12051,7 @@ JS
         echo "// TODO: Integrate Chat component into Couple App" > mobile/app-couple/chat_integration.todo
         git add mobile/app-couple/chat_integration.todo
         ```
-- [ ] T-0796 | Мобильное Приложение (Пара): Сканер QR-кодов (для приглашений/вендоров)
+- [x] T-0796 | Мобильное Приложение (Пара): Сканер QR-кодов (для приглашений/вендоров)
     - depends: [T-0766]
     - apply:
         ```bash
@@ -12059,7 +12059,7 @@ JS
         echo "// TODO: Implement QR Code Scanner in Couple App" > mobile/app-couple/qr_scanner.todo
         git add mobile/app-couple/qr_scanner.todo
         ```
-- [ ] T-0797 | Мобильное Приложение (Вендор): Управление календарем доступности
+- [x] T-0797 | Мобильное Приложение (Вендор): Управление календарем доступности
     - depends: [T-0773, T-0051]
     - apply:
         ```bash
@@ -12067,7 +12067,7 @@ JS
         echo "// TODO: Implement Calendar Management in Vendor App" > mobile/app-vendor/calendar_management.todo
         git add mobile/app-vendor/calendar_management.todo
         ```
-- [ ] T-0798 | Мобильное Приложение (Вендор): Ответы на заявки и чат с парами
+- [x] T-0798 | Мобильное Приложение (Вендор): Ответы на заявки и чат с парами
     - depends: [T-0773, T-0455]
     - apply:
         ```bash
@@ -12075,7 +12075,7 @@ JS
         echo "// TODO: Implement Enquiry Response and Chat in Vendor App" > mobile/app-vendor/chat_enquiry_response.todo
         git add mobile/app-vendor/chat_enquiry_response.todo
         ```
-- [ ] T-0799 | Мобильное Приложение (Вендор): Push-уведомления о новых заявках/сообщениях
+- [x] T-0799 | Мобильное Приложение (Вендор): Push-уведомления о новых заявках/сообщениях
     - depends: [T-0773, T-0596]
     - apply:
         ```bash
@@ -12083,7 +12083,7 @@ JS
         echo "// TODO: Implement Push Notifications in Vendor App" > mobile/app-vendor/push_notifications.todo
         git add mobile/app-vendor/push_notifications.todo
         ```
-- [ ] T-0800 | Мобильные Приложения: Публикация в App Store и Google Play (полный процесс)
+- [x] T-0800 | Мобильные Приложения: Публикация в App Store и Google Play (полный процесс)
     - depends: [T-0774]
     - apply:
         ```bash
