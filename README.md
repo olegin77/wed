@@ -191,3 +191,8 @@ sandbox:
 
 - Expanded `@wt/geo/uz` with regional metadata, major cities, and search helpers for onboarding and filtering flows.
 
+## Build pipeline documentation
+
+- Added `docs/build/process.md` with a step-by-step checklist covering dependency installation, lint, test, and build commands.
+- Verified every command locally (including the "no build scripts" outcome) so the notes match real output and the CI workflow.
+
