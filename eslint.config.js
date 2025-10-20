@@ -1,10 +1,5 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { FlatCompat } = require("@eslint/eslintrc");
+const js = require("@eslint/js");
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -12,7 +7,7 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
+module.exports = [
   ...compat.config({
     root: true,
     env: { es2023: true, node: true },

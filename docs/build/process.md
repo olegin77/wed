@@ -10,8 +10,6 @@ manually on the current codebase.
   `node-version: 20`).
 - **pnpm 9.12.0** – install via `corepack enable && corepack prepare pnpm@9.12.0 --activate` or
   let the bootstrap script provision it automatically.
-- **pnpm 10** – install via `corepack enable && corepack prepare pnpm@10 --activate` or
-  use the version bundled with Node 20's Corepack integration.
 - **Workspace install** – this repository is a pnpm workspace. All commands are executed
   from the repository root (`/workspace/wed`).
 
@@ -41,10 +39,6 @@ local infrastructure (if Docker is available) and finally launches all workspace
 
 ```bash
 pnpm install --frozen-lockfile
-## 1. Install dependencies
-
-```bash
-pnpm install
 ```
 
 - Installs all workspace dependencies using the lockfile (`pnpm-lock.yaml`).

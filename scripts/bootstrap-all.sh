@@ -93,7 +93,18 @@ fi
 
 if $RUN_BUILD; then
   log "Running build pipeline"
-  pnpm run build
+  TMP_BUILD_LOG="$(mktemp)"
+  if pnpm run build | tee "$TMP_BUILD_LOG"; then
+    if grep -q 'None of the selected packages has a "build" script' "$TMP_BUILD_LOG"; then
+      log "No workspace defines a build script; skipping artifact compilation"
+    fi
+  else
+    log "Build pipeline failed"
+    cat "$TMP_BUILD_LOG"
+    rm -f "$TMP_BUILD_LOG"
+    exit 1
+  fi
+  rm -f "$TMP_BUILD_LOG"
 else
   log "Skipping build as requested"
 fi
