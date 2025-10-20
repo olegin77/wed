@@ -6,7 +6,7 @@
     "build": "echo build-ok",
     "start": "node src/main.js",
     "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js",
-    "test": "node --test src/chat/index.test.js"
+    "test": "node --test \"src/**/*.test.{js,ts}\""
   },
   "dependencies": {}
 }
