@@ -198,5 +198,12 @@ sandbox:
 ## Build pipeline documentation
 
 - Added `docs/build/process.md` with a step-by-step checklist covering dependency installation, lint, test, and build commands.
+
+## Bootstrap automation
+
+- Added `scripts/bootstrap-all.sh` which provisions pnpm, installs dependencies, and runs lint/test/build before optionally
+  starting local Docker infrastructure and every workspace service in parallel.
+- Documented usage flags (`--no-start`, `--no-infra`, `--skip-tests`, `--skip-build`) in both the script help output and
+  `docs/build/process.md` so contributors can tailor the one-click bootstrap to their environment.
 - Verified every command locally (including the "no build scripts" outcome) so the notes match real output and the CI workflow.
 

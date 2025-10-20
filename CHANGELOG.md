@@ -36,6 +36,8 @@
 - Replaced the security audit stub with a sink-driven logger, metadata sanitisation, and accompanying documentation/tests.
 - Upgraded the k6 search stress profile with realistic scenarios, metrics, and documentation.
 - Hardened the review publication policy with contract checks, text thresholds, media requirements, and unit tests.
+- Added `scripts/bootstrap-all.sh` to orchestrate dependency installation, lint/test/build checks, and optional infra/service
+  startup with documentation in the README and build process guide.
 ### Fixed
 - Sanitised the log ingestion service filenames and explained the lint exceptions for dynamic fs calls.
 - Declared browser/runtime globals for the service worker and k6 scripts to clear `no-undef` warnings.

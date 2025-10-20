@@ -8,6 +8,8 @@ manually on the current codebase.
 
 - **Node.js 20** – matches the runtime configured in CI (`actions/setup-node@v4` with
   `node-version: 20`).
+- **pnpm 9.12.0** – install via `corepack enable && corepack prepare pnpm@9.12.0 --activate` or
+  let the bootstrap script provision it automatically.
 - **pnpm 10** – install via `corepack enable && corepack prepare pnpm@10 --activate` or
   use the version bundled with Node 20's Corepack integration.
 - **Workspace install** – this repository is a pnpm workspace. All commands are executed
@@ -18,6 +20,27 @@ manually on the current codebase.
 > as Prisma. Approve them when you need to run Prisma generators with
 > `pnpm approve-builds`, otherwise the dependency installation completes successfully.
 
+## One-click bootstrap script
+
+Run everything (install → lint → test → build) with optional infrastructure/service startup using the helper script:
+
+```bash
+./scripts/bootstrap-all.sh
+```
+
+Flags:
+
+- `--no-infra` — skip bringing up `infra/local/docker-compose.yml` via Docker.
+- `--no-start` — skip the recursive `pnpm start` fan-out (useful in CI or headless environments).
+- `--skip-tests` / `--skip-build` — omit the corresponding stages while still running lint.
+
+By default the script prepares pnpm through Corepack, performs a frozen-lockfile install, executes lint/test/build, then starts
+local infrastructure (if Docker is available) and finally launches all workspace `start` scripts in parallel.
+
+## 1. Install dependencies
+
+```bash
+pnpm install --frozen-lockfile
 ## 1. Install dependencies
 
 ```bash
@@ -26,7 +49,7 @@ pnpm install
 
 - Installs all workspace dependencies using the lockfile (`pnpm-lock.yaml`).
 - Verified output includes `Scope: all 18 workspace projects` and
-  `Done in … using pnpm v10.5.2`.
+  `Done in … using pnpm v9.12.0`.
 - Expect the optional "Ignored build scripts" warning described above.
 
 ## 2. Lint
