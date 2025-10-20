@@ -16,6 +16,8 @@
 - Documented the review publication rule in `apps/svc-admin/src/moderation/reviews.ts`, enforcing contract verification for moderation workflows.
 - Delivered `LazyImg` in `apps/svc-website/src/ui/img/LazyImg.tsx` to provide lazy loading with intrinsic dimensions for public imagery.
 - Implemented `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and multilingual normalisation utilities.
+- Introduced `@wt/semantic` with deterministic pseudo-embeddings, insert/search helpers, and documentation in `docs/search/semantic.md`.
+- Wired the catalogue vendor reindexer to populate the semantic index with enriched vendor surfaces.
 - Upgraded `@wt/media` to expose multi-format minification, batch variant generation, and metadata extraction helpers.
 - Reworked `packages/catalog/categories.ts` with hierarchical locale-aware categories and helper utilities for navigation and search.
 - Introduced budget and guest presets with regional multipliers to produce spend recommendations in `packages/catalog/budget.ts`.
@@ -24,6 +26,8 @@
 - Enhanced `apps/svc-notifier/src/index.ts` with a persistent notification feed, delivery tracking, and documented error handling helpers.
 - Documented and extended `@wt/mlrank` with configurable offline score weights and clamped output helpers for catalogue ranking.
 - Hardened `infra/feast/extract-features.ts` to normalise vendor metrics from mixed data sources and documented the supported fields in `docs/analytics/catalog-features.md`.
+- Published `@wt/features` to centralise vendor feature vectors, registry metadata, and normalisation helpers for ML pipelines.
+- Added a snapshot exporter in `infra/feast/export.ts` to persist feature dumps with optional metadata blocks.
 - Refined `apps/svc-website/public/robots.txt` and documented the crawling policy in `docs/seo/robots.md` to keep private surfaces out of search indices.
 - Replaced the enquiries archive stub with a documented manager, in-memory store, and tests covering archive/restore/purge flows.
 - Introduced a documented schema builder in `apps/svc-gql/schema/build-schema.mjs` that outputs a consolidated `schema.graphql`.

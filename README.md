@@ -142,6 +142,8 @@ sandbox:
 
 - Rebuilt `infra/feast/extract-features.ts` to normalise conversion, rating, profile и calendar метрики из разнородных источников и безопасно отдавать факторы в `[0, 1]`.
 - Задокументировали поддерживаемые поля, правила нормализации и пример использования в `docs/analytics/catalog-features.md`.
+- Added `@wt/features` to share typed vendor feature vectors, registry metadata, and helpers for normalising ML-ready payloads.
+- Added `infra/feast/export.ts` helper to dump JSON snapshots (with optional metadata) for ML pipelines.
 
 ## Maintenance fixes
 
@@ -152,6 +154,8 @@ sandbox:
 ## Search utilities
 
 - Added `@wt/search` with an in-memory TF-IDF index, keyword extraction helper, and normalisation utilities for multilingual content.
+- Introduced `@wt/semantic` with deterministic pseudo-embeddings, in-memory cosine search helpers, and documented guidance in `docs/search/semantic.md`.
+- Wired catalogue vendor reindexing via `apps/svc-catalog/src/semantic/index-vendors.ts` so nightly jobs can refresh semantic search payloads.
 - Documented the k6 search stress profile in `infra/k6/search.js` with usage notes in `docs/perf/k6-search.md`.
 
 ## SEO controls

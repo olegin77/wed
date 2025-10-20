@@ -2,9 +2,10 @@
 
 Экстрактор признаков для каталога превращает разрозненные метрики в
 нормализованные факторы `[0, 1]`, которые затем используются оффлайн-скорером
-`@wt/mlrank`. Файл `infra/feast/extract-features.ts` поддерживает как текущие
-поля баз данных, так и новые аналитические витрины, автоматически игнорируя
-отсутствующие значения.
+`@wt/mlrank`. Общие типы и хелперы в пакете `@wt/features` позволяют
+гарантировать, что сервисы и пайплайны используют одну и ту же схему. Файл
+`infra/feast/extract-features.ts` поддерживает как текущие поля баз данных, так и
+новые аналитические витрины, автоматически игнорируя отсутствующие значения.
 
 ## Поддерживаемые источники
 
@@ -30,10 +31,18 @@
 
 ```ts
 import { extract } from "infra/feast/extract-features";
+import { dumpSnapshot } from "infra/feast/export";
+import { normaliseVendorFeatures } from "@wt/features";
 import { score } from "@wt/mlrank";
 
-const factors = extract(vendorSnapshot);
+const rawFactors = extract(vendorSnapshot);
+const factors = normaliseVendorFeatures(rawFactors);
 const rank = score(factors);
+
+// optionally persist the snapshot for ML experiments
+dumpSnapshot("vendor_features_latest", [
+  { vendorId: vendorSnapshot.id, ...factors },
+]);
 ```
 
 Экстрактор не выбрасывает исключения при отсутствии отдельных показателей и

@@ -2557,7 +2557,7 @@ JS
 
 ## ЭТАП 140. Финальный пуш уровня 2
 
-- [ ] T-1400 | Commit/push «Level 2»
+- [x] T-1400 | Commit/push «Level 2»
   - depends: [T-0005]
   - apply:
     ```bash
@@ -2570,7 +2570,7 @@ JS
 
 ## ЭТАП 141. Семантический поиск и векторный индекс
 
-- [ ] T-1410 | Пакет `@wt/semantic` (скелет векторного индекса)
+- [x] T-1410 | Пакет `@wt/semantic` (скелет векторного индекса)
   - depends: [T-0510]
   - apply:
     ```bash
@@ -2587,7 +2587,7 @@ TS
     git add packages/semantic/index.ts
     ```
 
-- [ ] T-1411 | Индексация поставщиков в семантический индекс
+- [x] T-1411 | Индексация поставщиков в семантический индекс
   - depends: [T-1410, T-0050]
   - apply:
     ```bash
@@ -2602,7 +2602,7 @@ TS
 
 ## ЭТАП 142. Feature Store для ML
 
-- [ ] T-1420 | Пакет `@wt/features` (фичи и схемы)
+- [x] T-1420 | Пакет `@wt/features` (фичи и схемы)
   - depends: [T-1011]
   - apply:
     ```bash
@@ -2614,7 +2614,7 @@ TS
     git add packages/features/index.ts
     ```
 
-- [ ] T-1421 | Экспорт фич в snapshot
+- [x] T-1421 | Экспорт фич в snapshot
   - depends: [T-1420]
   - apply:
     ```bash
