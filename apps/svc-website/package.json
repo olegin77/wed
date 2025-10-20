@@ -8,5 +8,12 @@
     "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js",
     "test": "node --test pages/vendors/__tests__/ssr.test.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2"
+  }
 }

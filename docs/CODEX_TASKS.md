@@ -8035,7 +8035,7 @@ JSON
 
 ## ЭТАП 260. Маркетинг-страницы и релиз 1.0
 
-- [ ] T-0441 | Главный лендинг: hero-секция
+- [x] T-0441 | Главный лендинг: hero-секция
   - depends: [T-0207]
   - apply:
     ```bash
@@ -8053,7 +8053,7 @@ TSX
     git add apps/svc-website/src/pages/index.tsx
     ```
 
-- [ ] T-0442 | Мини-блог (плоские md-посты)
+- [x] T-0442 | Мини-блог (плоские md-посты)
   - depends: []
   - apply:
     ```bash
@@ -8071,7 +8071,7 @@ TSX
     git add content/blog/first.md apps/svc-website/src/pages/blog/index.tsx apps/svc-website/src/pages/blog/first.tsx
     ```
 
-- [ ] T-0443 | FAQ страница
+- [x] T-0443 | FAQ страница
   - depends: [T-0060]
   - apply:
     ```bash
@@ -8082,7 +8082,7 @@ TSX
     git add apps/svc-website/src/pages/faq.tsx
     ```
 
-- [ ] T-0444 | Schema.org: Organization/FAQPage JSON-LD
+- [x] T-0444 | Schema.org: Organization/FAQPage JSON-LD
   - depends: [T-0213]
   - apply:
     ```bash
@@ -8095,7 +8095,7 @@ TS
     git add apps/svc-website/src/seo/org-jsonld.ts
     ```
 
-- [ ] T-0445 | Обновить sitemap для новых страниц
+- [x] T-0445 | Обновить sitemap для новых страниц
   - depends: [T-0212, T-0441, T-0443]
   - apply:
     ```bash
@@ -8128,7 +8128,7 @@ MD
     git add docs/content/microcopy.md
     ```
 
-- [ ] T-0448 | Баннеры на сайте (инфо/акции)
+- [x] T-0448 | Баннеры на сайте (инфо/акции)
   - depends: [T-0207]
   - apply:
     ```bash
@@ -10719,7 +10719,7 @@ JS
         touch apps/svc-website/src/analytics/integrations/ga.ts apps/svc-website/src/analytics/integrations/metrika.ts
         git add apps/svc-website/src/analytics/integrations/*.ts
         ```
-- [ ] T-0645 | Маркетинг: Создание прелендинга/страницы "Скоро запуск"
+- [x] T-0645 | Маркетинг: Создание прелендинга/страницы "Скоро запуск"
     - depends: [T-0441]
     - apply:
         ```bash
