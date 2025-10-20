@@ -4335,7 +4335,7 @@ JS
     git add apps/svc-auth/src/server.js
     ```
 
-- [ ] T-0233 | Роли и права: middleware-проверка (ADMIN/VENDOR/USER)
+- [x] T-0233 | Роли и права: middleware-проверка (ADMIN/VENDOR/USER)
   - depends: [T-0230]
   - apply:
     ```bash
@@ -4360,7 +4360,7 @@ TS
 
 ## ЭТАП 194. Каталог и поиск
 
-- [ ] T-0234 | Поиск и фильтры каталога (город/категория/вместимость/рейтинг)
+- [x] T-0234 | Поиск и фильтры каталога (город/категория/вместимость/рейтинг)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -4384,7 +4384,7 @@ JS
     git add apps/svc-catalog/src/api/search.js
     ```
 
-- [ ] T-0235 | Сортировки и пагинация (page/limit/sort=rating|reviews)
+- [x] T-0235 | Сортировки и пагинация (page/limit/sort=rating|reviews)
   - depends: [T-0234]
   - apply:
     ```bash
