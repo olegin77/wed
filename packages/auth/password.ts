@@ -1,4 +1,4 @@
-import type { HashOptions } from "@node-rs/argon2";
+import type { Options as ArgonOptions } from "@node-rs/argon2";
 import { hashPassword as hashPasswordImpl, needsRehash as needsRehashImpl, verifyPassword as verifyPasswordImpl } from "./password.js";
 
 export interface PasswordHashOptions {
@@ -34,4 +34,4 @@ export const verifyPassword: (password: string, digest: PasswordHash) => Promise
  */
 export const needsRehash: (digest: PasswordHash, options?: PasswordHashOptions) => boolean = needsRehashImpl;
 
-export type InternalHashOptions = HashOptions;
+export type InternalHashOptions = ArgonOptions;

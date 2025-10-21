@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "node --test jwt.test.js password.test.js"
+    "test": "node --test jwt.test.js password.test.js roles.test.js"
   },
   "dependencies": {
     "@node-rs/argon2": "^1.7.3"
