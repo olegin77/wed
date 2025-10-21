@@ -1,0 +1,2 @@
+-- minimal invoices table (если миграции вручную)
+-- CREATE TABLE invoices (id text primary key, vendor_id text, user_id text, amount integer, currency text, created_at timestamp default now());
