@@ -1,3 +1,7 @@
+export function payLink(invoiceId: string): string {
+  return `/pay/${invoiceId}`;
+}
+
 const DEFAULT_BASE = process.env.PAYMENT_PORTAL_URL ?? "https://pay.weddingtech.uz";
 
 type PayLinkOptions = {

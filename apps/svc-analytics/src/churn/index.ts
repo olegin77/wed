@@ -1,3 +1,15 @@
+export type ChurnInput = {
+  daysInactive: number;
+  enquiries: number;
+};
+
+export function churnScore(user: ChurnInput): number {
+  const inactivityComponent = user.daysInactive / 30;
+  const engagementComponent = 0.1 * user.enquiries;
+  const raw = inactivityComponent - engagementComponent;
+  return Math.min(1, Math.max(0, raw));
+}
+
 export interface ChurnSignal {
   daysInactive: number;
   enquiries: number;

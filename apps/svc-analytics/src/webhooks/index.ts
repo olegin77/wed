@@ -1,3 +1,7 @@
+export function subscribe(): boolean {
+  return true;
+}
+
 type EventName = "invoice.created" | "payment.completed" | "enquiry.status";
 
 type Subscriber = {
