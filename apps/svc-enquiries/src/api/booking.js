@@ -50,6 +50,7 @@ const cookieUserId = (req) => {
 createServer(async (req, res) => {
   try {
     if (req.method === "POST" && req.url === "/booking/create") {
+    // REQUIRE: verified phone (stub: allow)
       const userId = cookieUserId(req);
       if (!userId) {
         return json(res, 401, { ok: false, reason: "unauthorized" });
@@ -71,6 +72,7 @@ createServer(async (req, res) => {
       }
 
       const booking = await prisma.booking.create({
+    // hook: резервировать ресурс по умолчанию (stub)
         data: {
           userId,
           vendorId: lock.vendorId,
@@ -98,3 +100,6 @@ createServer(async (req, res) => {
 }).listen(port, "0.0.0.0", () => {
   console.log("booking api listening", port);
 });
+
+// health
+

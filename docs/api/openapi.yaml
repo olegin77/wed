@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: WeddingTech UZ API
+  version: 0.1.0
+paths:
+  /auth/login:
+    post: {summary: Login, responses: {200: {description: OK}}}
+  /catalog/search:
+    get: {summary: Search vendors, responses: {200: {description: OK}}}
+  /enquiry/create:
+    post: {summary: Create enquiry, responses: {201: {description: Created}}}
+  /pay/create-intent:
+    post: {summary: Create payment intent, responses: {200: {description: OK}}}

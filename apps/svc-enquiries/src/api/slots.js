@@ -127,3 +127,6 @@ createServer(async (req, res) => {
 }).listen(port, "0.0.0.0", () => {
   console.log("slots api listening", port);
 });
+
+// health
+

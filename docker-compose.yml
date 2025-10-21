@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: pg
+      POSTGRES_USER: pg
+      POSTGRES_DB: wt
+    ports: ["5434:5432"]
+  minio:
+    image: minio/minio
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    ports: ["9000:9000","9001:9001"]
