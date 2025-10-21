@@ -4,6 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import HomePage from "../apps/svc-website/app/page";
+import CommunityPage from "../apps/svc-website/app/community/page";
 import { Breadcrumbs } from "../apps/svc-website/src/ui/nav/Breadcrumbs";
 import SearchEmpty from "../apps/svc-website/src/ui/empty/SearchEmpty";
 import { FeatureHighlights } from "../apps/svc-website/src/ui/marketing/FeatureHighlights";
@@ -90,6 +91,17 @@ void describe("svc-website shared UI", () => {
       if (feature.ctaHref) {
         assert.ok(markup.includes(`href=\"${feature.ctaHref}\"`));
       }
+    }
+  });
+
+  void it("renders the community feed route with filters and items", () => {
+    const markup = renderToStaticMarkup(React.createElement(CommunityPage));
+
+    assert.ok(markup.includes("data-testid=\"community-feed-list\""));
+    assert.ok(markup.includes("Комьюнити"));
+    assert.ok(markup.includes("Фильтр материалов"));
+    for (const filter of ["Все материалы", "Блог", "Реальные свадьбы", "Вопросы и ответы"]) {
+      assert.ok(markup.includes(filter));
     }
   });
 

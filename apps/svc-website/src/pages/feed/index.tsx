@@ -4,78 +4,15 @@ import Container from "../../ui/Container";
 import Section from "../../ui/Section";
 import Card from "../../ui/Card";
 import SkipLink from "../../ui/a11y/SkipLink";
+import {
+  FEED_ITEMS,
+  FEED_FILTERS,
+  type FeedItem,
+  type FeedItemType,
+} from "../../../app/community-feed-data";
 
-export type FeedItemType = "blog" | "wedding" | "qa";
-
-export interface FeedItem {
-  readonly id: string;
-  readonly type: FeedItemType;
-  readonly title: string;
-  readonly excerpt: string;
-  readonly href: string;
-  readonly publishedAt: string;
-  readonly meta?: string;
-}
-
-export const FEED_ITEMS: readonly FeedItem[] = [
-  {
-    id: "blog-destination-trends",
-    type: "blog",
-    title: "5 трендов свадеб 2025 года",
-    excerpt:
-      "Собрали главные инсайты от ведущих организаторов: цветовые палитры, идеи welcome-зон и советы по таймлайну.",
-    href: "/blog/first",
-    publishedAt: "2024-05-12",
-    meta: "Блог",
-  },
-  {
-    id: "real-wedding-nodir-madina",
-    type: "wedding",
-    title: "Реальная свадьба: Нодир и Мадина",
-    excerpt:
-      "Пара поделилась опытом поиска площадки и внедрения интерактивного реестра подарков на WeddingTech.",
-    href: "/real-weddings/nodir-madina",
-    publishedAt: "2024-05-05",
-    meta: "Реальные свадьбы",
-  },
-  {
-    id: "qa-budget-planning",
-    type: "qa",
-    title: "Как оптимизировать бюджет без потери качества?",
-    excerpt:
-      "Отвечаем на популярный вопрос из комьюнити: что вынести в must-have и как договариваться с вендорами о пакетах.",
-    href: "/community/questions/budget-planning",
-    publishedAt: "2024-04-28",
-    meta: "Q&A",
-  },
-  {
-    id: "blog-vendor-spotlight",
-    type: "blog",
-    title: "Интервью с флористом Aisha Flowers",
-    excerpt:
-      "Как автоматизация заявок и аналитика в кабинете помогают команде доставлять композиции вовремя и без пересортов.",
-    href: "/blog/aisha-flowers",
-    publishedAt: "2024-04-20",
-    meta: "Блог",
-  },
-  {
-    id: "qa-guest-management",
-    type: "qa",
-    title: "Что делать с гостями без смартфона?",
-    excerpt:
-      "Разбираем сценарии офлайн-приглашений и подтверждений, чтобы никто не остался без внимания.",
-    href: "/community/questions/guest-management",
-    publishedAt: "2024-04-14",
-    meta: "Q&A",
-  },
-];
-
-const FILTERS: readonly { value: FeedItemType | "all"; label: string }[] = [
-  { value: "all", label: "Все материалы" },
-  { value: "blog", label: "Блог" },
-  { value: "wedding", label: "Реальные свадьбы" },
-  { value: "qa", label: "Вопросы и ответы" },
-];
+export { FEED_ITEMS, FEED_FILTERS };
+export type { FeedItem, FeedItemType };
 
 function formatDate(date: string) {
   const formatter = new Intl.DateTimeFormat("ru-RU", {
@@ -126,7 +63,7 @@ export default function CommunityFeedPage() {
             description="Следите за последними обновлениями платформы, историями реальных пар и ответами экспертов комьюнити."
           >
             <div className="flex flex-wrap items-center gap-3 pb-6" role="toolbar" aria-label="Фильтр материалов">
-              {FILTERS.map((entry) => {
+              {FEED_FILTERS.map((entry) => {
                 const isActive = filter === entry.value;
                 return (
                   <button
