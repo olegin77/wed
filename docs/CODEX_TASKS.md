@@ -4546,7 +4546,7 @@ TS
     git add packages/cache/index.ts
     ```
 
-- [ ] T-0243 | Обёртка кэша для каталога (по городу/категории)
+- [x] T-0243 | Обёртка кэша для каталога (по городу/категории)
   - depends: [T-0242, T-0234]
   - apply:
     ```bash
@@ -4601,7 +4601,7 @@ JS
 
 ## ЭТАП 199. API-контракты и документация
 
-- [ ] T-0246 | OpenAPI spec (yaml) для ключевых эндпоинтов
+- [x] T-0246 | OpenAPI spec (yaml) для ключевых эндпоинтов
   - depends: [T-0232, T-0234, T-0237, T-0245]
   - apply:
     ```bash
@@ -4625,7 +4625,7 @@ YML
     git add docs/api/openapi.yaml
     ```
 
-- [ ] T-0247 | Postman коллекция (json) — автоимпорт
+- [x] T-0247 | Postman коллекция (json) — автоимпорт
   - depends: [T-0246]
   - apply:
     ```bash
@@ -4643,7 +4643,7 @@ JSON
 
 ## ЭТАП 200. Тесты и качество
 
-- [ ] T-0248 | Vitest: юнит-тесты auth/password, score()
+- [x] T-0248 | Vitest: юнит-тесты auth/password, score()
   - depends: [T-0231, T-0194]
   - apply:
     ```bash
@@ -4660,7 +4660,7 @@ TS
     git add tests/*.ts
     ```
 
-- [ ] T-0249 | Playwright: e2e smoke для публичного сайта
+- [x] T-0249 | Playwright: e2e smoke для публичного сайта
   - depends: [T-0060]
   - apply:
     ```bash
@@ -4701,7 +4701,7 @@ SH
 
 ## ЭТАП 201. Инфраструктура локально
 
-- [ ] T-0251 | Docker Compose: postgres + minio (место DO Spaces)
+- [x] T-0251 | Docker Compose: postgres + minio (место DO Spaces)
   - depends: []
   - apply:
     ```bash
@@ -4745,7 +4745,7 @@ ENV
 
 ## ЭТАП 202. Безопасность и соответствие
 
-- [ ] T-0253 | Security headers + CSP политика (docs)
+- [x] T-0253 | Security headers + CSP политика (docs)
   - depends: []
   - apply:
     ```bash
@@ -4761,7 +4761,7 @@ MD
     git add docs/security/headers.md
     ```
 
-- [ ] T-0254 | Sentry stub: captureException()
+- [x] T-0254 | Sentry stub: captureException()
   - depends: []
   - apply:
     ```bash
@@ -4773,7 +4773,7 @@ TS
     git add packages/monitor/sentry.ts
     ```
 
-- [ ] T-0255 | Audit-лог: простая запись событий в файл
+- [x] T-0255 | Audit-лог: простая запись событий в файл
   - depends: []
   - apply:
     ```bash
@@ -4871,7 +4871,7 @@ TSX
 
 ## ЭТАП 205. Админ-лог и верификация документов
 
-- [ ] T-0260 | API: загрузка/верификация документов поставщика (флаг verified)
+- [x] T-0260 | API: загрузка/верификация документов поставщика (флаг verified)
   - depends: [T-0193, T-0226, T-0240]
   - apply:
     ```bash
@@ -4899,7 +4899,7 @@ JS
 
 ## ЭТАП 206. Observability и эксплуатация
 
-- [ ] T-0261 | Логи запросов (common format) для всех svc (пример)
+- [x] T-0261 | Логи запросов (common format) для всех svc (пример)
   - depends: []
   - apply:
     ```bash
@@ -4911,7 +4911,7 @@ TS
     git add packages/log/http.ts
     ```
 
-- [ ] T-0262 | Health summary docs (инвентарь сервисов)
+- [x] T-0262 | Health summary docs (инвентарь сервисов)
   - depends: []
   - apply:
     ```bash
@@ -4932,7 +4932,7 @@ MD
 
 ## ЭТАП 207. Импорт/экспорт данных
 
-- [ ] T-0263 | CSV импорт поставщиков (title, city, category)
+- [x] T-0263 | CSV импорт поставщиков (title, city, category)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -4949,7 +4949,7 @@ TS
     git add apps/svc-admin/src/import/vendors-csv.ts
     ```
 
-- [ ] T-0264 | Экспорт заявок в CSV
+- [x] T-0264 | Экспорт заявок в CSV
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5001,7 +5001,7 @@ TSX
 
 ## ЭТАП 209. Завершение MVP-контура
 
-- [ ] T-0267 | Readme-сборка: как поднять проект локально/DO
+- [x] T-0267 | Readme-сборка: как поднять проект локально/DO
   - depends: [T-0251, T-0182]
   - apply:
     ```bash
@@ -5019,7 +5019,7 @@ MD
     git add README.md
     ```
 
-- [ ] T-0268 | Sample .http файлы для REST тестирования
+- [x] T-0268 | Sample .http файлы для REST тестирования
   - depends: []
   - apply:
     ```bash
@@ -5034,7 +5034,7 @@ HTTP
     git add http/login.http
     ```
 
-- [ ] T-0269 | Проверка лицензий open-source (док)
+- [x] T-0269 | Проверка лицензий open-source (док)
   - depends: []
   - apply:
     ```bash
@@ -5144,7 +5144,7 @@ JS
     git add apps/svc-enquiries/src/api/booking.js
     ```
 
-- [ ] T-0273 | Отмена блокировок по TTL (cron js)
+- [x] T-0273 | Отмена блокировок по TTL (cron js)
   - depends: [T-0271]
   - apply:
     ```bash
@@ -5191,7 +5191,7 @@ JS
     git add apps/svc-billing/src/api/confirm.js
     ```
 
-- [ ] T-0276 | ICS выгрузка подтверждённого бронирования
+- [x] T-0276 | ICS выгрузка подтверждённого бронирования
   - depends: [T-0220, T-0275]
   - apply:
     ```bash
@@ -5218,7 +5218,7 @@ JS
 
 ## ЭТАП 211. Прайс-листы, пакеты и промокоды
 
-- [ ] T-0277 | Модель PricePackage + PriceItem
+- [x] T-0277 | Модель PricePackage + PriceItem
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5244,7 +5244,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0278 | API: CRUD пакетов для вендора
+- [x] T-0278 | API: CRUD пакетов для вендора
   - depends: [T-0277]
   - apply:
     ```bash
@@ -5270,7 +5270,7 @@ JS
     git add apps/svc-vendors/src/api/pricing.js
     ```
 
-- [ ] T-0279 | Модель PromoCode + применение к бронированию
+- [x] T-0279 | Модель PromoCode + применение к бронированию
   - depends: [T-0270]
   - apply:
     ```bash
@@ -5288,7 +5288,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0280 | API: promo/apply (валидация срока/привязки к вендору)
+- [x] T-0280 | API: promo/apply (валидация срока/привязки к вендору)
   - depends: [T-0279]
   - apply:
     ```bash
@@ -5311,7 +5311,7 @@ JS
     git add apps/svc-billing/src/api/promo.js
     ```
 
-- [ ] T-0281 | Расчёт итоговой стоимости: пакет + промо (%)
+- [x] T-0281 | Расчёт итоговой стоимости: пакет + промо (%)
   - depends: [T-0278, T-0280]
   - apply:
     ```bash
@@ -5323,7 +5323,7 @@ JS
     git add apps/svc-billing/src/lib/total.js
     ```
 
-- [ ] T-0282 | Инвойс с указанием применённого промокода
+- [x] T-0282 | Инвойс с указанием применённого промокода
   - depends: [T-0238, T-0281]
   - apply:
     ```bash
@@ -5332,7 +5332,7 @@ JS
     git add packages/invoice/html.ts
     ```
 
-- [ ] T-0283 | Сид промокодов (WELCOME10 до +30 дней)
+- [x] T-0283 | Сид промокодов (WELCOME10 до +30 дней)
   - depends: [T-0279]
   - apply:
     ```bash
@@ -5352,7 +5352,7 @@ TS
 
 ## ЭТАП 212. Рефералка и бонусы
 
-- [ ] T-0284 | Модель Referral + начисления
+- [x] T-0284 | Модель Referral + начисления
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5370,7 +5370,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0285 | API: /ref/invite (создать пару), /ref/reward (начислить)
+- [x] T-0285 | API: /ref/invite (создать пару), /ref/reward (начислить)
   - depends: [T-0284]
   - apply:
     ```bash
@@ -5395,7 +5395,7 @@ JS
     git add apps/svc-auth/src/ref/api.js
     ```
 
-- [ ] T-0286 | Баланс пользователя (поле bonusBalance)
+- [x] T-0286 | Баланс пользователя (поле bonusBalance)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5404,7 +5404,7 @@ JS
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0287 | Скрипт перерасчёта бонусов по рефералкам
+- [x] T-0287 | Скрипт перерасчёта бонусов по рефералкам
   - depends: [T-0284, T-0286]
   - apply:
     ```bash
@@ -5420,7 +5420,7 @@ JS
     git add apps/svc-auth/scripts/ref-calc.js
     ```
 
-- [ ] T-0288 | Применение бонусов к оплате (минус из total)
+- [x] T-0288 | Применение бонусов к оплате (минус из total)
   - depends: [T-0286, T-0281]
   - apply:
     ```bash
@@ -5436,7 +5436,7 @@ JS
 
 ## ЭТАП 213. ROI-дашборды и отчётность
 
-- [ ] T-0289 | Aggregation: заявки/конверсия по городам
+- [x] T-0289 | Aggregation: заявки/конверсия по городам
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5452,7 +5452,7 @@ TS
     git add apps/svc-analytics/src/agg/city.ts
     ```
 
-- [ ] T-0290 | Admin отчёт: CSV сводка по городам
+- [x] T-0290 | Admin отчёт: CSV сводка по городам
   - depends: [T-0289]
   - apply:
     ```bash
@@ -5467,7 +5467,7 @@ TS
     git add apps/svc-admin/src/reports/city-csv.ts
     ```
 
-- [ ] T-0291 | ROI виджет вендора: calc + dummy API
+- [x] T-0291 | ROI виджет вендора: calc + dummy API
   - depends: [T-0193]
   - apply:
     ```bash
@@ -5489,7 +5489,7 @@ JS
     git add apps/svc-analytics/src/api/vendor-roi.js
     ```
 
-- [ ] T-0292 | Admin UI: быстрый просмотр ROI метрик
+- [x] T-0292 | Admin UI: быстрый просмотр ROI метрик
   - depends: [T-0291]
   - apply:
     ```bash
@@ -5510,7 +5510,7 @@ TSX
 
 ## ЭТАП 214. DigitalOcean: autoscaling и CDN-заголовки
 
-- [ ] T-0293 | DO app.yaml: autoscaling (минимальный патч)
+- [x] T-0293 | DO app.yaml: autoscaling (минимальный патч)
   - depends: [T-0182]
   - apply:
     ```bash
@@ -5521,7 +5521,7 @@ TSX
     fi
     ```
 
-- [ ] T-0294 | CDN cache headers (docs)
+- [x] T-0294 | CDN cache headers (docs)
   - depends: []
   - apply:
     ```bash
@@ -5536,7 +5536,7 @@ MD
     git add docs/ops/cdn/headers.md
     ```
 
-- [ ] T-0295 | Нормализация `X-Forwarded-*` и доверие прокси (doc)
+- [x] T-0295 | Нормализация `X-Forwarded-*` и доверие прокси (doc)
   - depends: []
   - apply:
     ```bash
@@ -5550,7 +5550,7 @@ MD
     git add docs/ops/proxy/forwarded.md
     ```
 
-- [ ] T-0296 | App spec: принудительный https redirect (Nginx snippet локально)
+- [x] T-0296 | App spec: принудительный https redirect (Nginx snippet локально)
   - depends: [T-0198]
   - apply:
     ```bash
@@ -5569,7 +5569,7 @@ CONF
 
 ## ЭТАП 215. Медиа-репроцессинг и инвалидация кэша
 
-- [ ] T-0297 | Репроцесс изображений пакетно (480/960/1440)
+- [x] T-0297 | Репроцесс изображений пакетно (480/960/1440)
   - depends: [T-0215]
   - apply:
     ```bash
@@ -5588,7 +5588,7 @@ SH
     git add apps/svc-media/scripts/reprocess.sh
     ```
 
-- [ ] T-0298 | Кеш-бастер для изображений (?v=timestamp)
+- [x] T-0298 | Кеш-бастер для изображений (?v=timestamp)
   - depends: [T-0297]
   - apply:
     ```bash
@@ -5617,7 +5617,7 @@ TS
 
 ## ЭТАП 216. Коммуникации: чат, web-push и SMS сценарии
 
-- [ ] T-0300 | Лайв-чат (stub): start/append/list
+- [x] T-0300 | Лайв-чат (stub): start/append/list
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5642,7 +5642,7 @@ JS
 
 ## ЭТАП 217. Уведомления: Web Push (регистрация и доставка)
 
-- [ ] T-0301 | Service Worker для web-push (sw.js)
+- [x] T-0301 | Service Worker для web-push (sw.js)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -5662,7 +5662,7 @@ JS
     git add public/sw.js
     ```
 
-- [ ] T-0302 | Ключи VAPID: генерация/хранение (docs + env)
+- [x] T-0302 | Ключи VAPID: генерация/хранение (docs + env)
   - depends: []
   - apply:
     ```bash
@@ -5677,7 +5677,7 @@ MD
     git add docs/ops/push/vapid.md .env.example
     ```
 
-- [ ] T-0303 | Серверная отправка web-push (stub на web-push lib несовместим → собственный fetch к push service не требуется; делаем интерфейс)
+- [x] T-0303 | Серверная отправка web-push (stub на web-push lib несовместим → собственный fetch к push service не требуется; делаем интерфейс)
   - depends: [T-0302]
   - apply:
     ```bash
@@ -5695,7 +5695,7 @@ TS
     git add packages/push/index.ts
     ```
 
-- [ ] T-0304 | API: регистрация подписки и тест-отправка
+- [x] T-0304 | API: регистрация подписки и тест-отправка
   - depends: [T-0303]
   - apply:
     ```bash
@@ -5724,7 +5724,7 @@ JS
 
 ## ЭТАП 218. SMS-сценарии: подтверждение заявки и напоминания
 
-- [ ] T-0305 | Шаблоны SMS: enquiry_created / booking_reminder
+- [x] T-0305 | Шаблоны SMS: enquiry_created / booking_reminder
   - depends: [T-0195]
   - apply:
     ```bash
@@ -5739,7 +5739,7 @@ TXT
     git add packages/sms/templates/*.txt
     ```
 
-- [ ] T-0306 | Отправка SMS при создании заявки (hook)
+- [x] T-0306 | Отправка SMS при создании заявки (hook)
   - depends: [T-0305, T-0237]
   - apply:
     ```bash
@@ -5755,7 +5755,7 @@ TS
     git add apps/svc-enquiries/src/hooks/sms-on-create.ts
     ```
 
-- [ ] T-0307 | Cron: SMS напоминания о бронировании за 24 часа
+- [x] T-0307 | Cron: SMS напоминания о бронировании за 24 часа
   - depends: [T-0305, T-0272]
   - apply:
     ```bash
@@ -5791,7 +5791,7 @@ JSON
     git add public/manifest.json public/icon-192.png public/icon-512.png
     ```
 
-- [ ] T-0309 | Перфоманс budget (docs) + чек-лист Lighthouse
+- [x] T-0309 | Перфоманс budget (docs) + чек-лист Lighthouse
   - depends: [T-0205]
   - apply:
     ```bash
@@ -5810,7 +5810,7 @@ MD
 
 ## ЭТАП 220. Feature Flags и A/B
 
-- [ ] T-0310 | Фичефлаги: in-memory toggles
+- [x] T-0310 | Фичефлаги: in-memory toggles
   - depends: []
   - apply:
     ```bash
@@ -5824,7 +5824,7 @@ TS
     git add packages/flags/index.ts
     ```
 
-- [ ] T-0311 | A/B helper: bucket по userId
+- [x] T-0311 | A/B helper: bucket по userId
   - depends: []
   - apply:
     ```bash
@@ -5841,7 +5841,7 @@ TS
 
 ## ЭТАП 221. UX: онбординг и страницы ошибок
 
-- [ ] T-0312 | Онбординг вендора (wizard skeleton)
+- [x] T-0312 | Онбординг вендора (wizard skeleton)
   - depends: [T-0207, T-0278]
   - apply:
     ```bash
@@ -5882,7 +5882,7 @@ TSX
 
 ## ЭТАП 222. Партнёрские интеграции и безопасность API
 
-- [ ] T-0314 | API Keys для партнёров (таблица + верификация)
+- [x] T-0314 | API Keys для партнёров (таблица + верификация)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -5920,7 +5920,7 @@ TS
     git add packages/webhooks/sign.ts
     ```
 
-- [ ] T-0316 | Ретрай и backoff утилита (экспоненциальная)
+- [x] T-0316 | Ретрай и backoff утилита (экспоненциальная)
   - depends: []
   - apply:
     ```bash
@@ -5939,7 +5939,7 @@ TS
 
 ## ЭТАП 223. Очереди, воркеры и фоновые задачи
 
-- [ ] T-0317 | Runner для очередей (универсальный обработчик)
+- [x] T-0317 | Runner для очередей (универсальный обработчик)
   - depends: [T-0199]
   - apply:
     ```bash
@@ -5952,7 +5952,7 @@ TS
     git add apps/worker/src/runner.ts
     ```
 
-- [ ] T-0318 | Cron-docs: расписания задач (locks GC, reminders)
+- [x] T-0318 | Cron-docs: расписания задач (locks GC, reminders)
   - depends: [T-0273, T-0307]
   - apply:
     ```bash
@@ -5970,7 +5970,7 @@ MD
 
 ## ЭТАП 224. CORS, версияция API и пагинация
 
-- [ ] T-0319 | Общая CORS-прослойка (разрешить PROD-домен)
+- [x] T-0319 | Общая CORS-прослойка (разрешить PROD-домен)
   - depends: []
   - apply:
     ```bash
@@ -5990,7 +5990,7 @@ TS
     git add packages/http/cors.ts
     ```
 
-- [ ] T-0320 | API версия в префиксе: /v1/*
+- [x] T-0320 | API версия в префиксе: /v1/*
   - depends: [T-0232, T-0234]
   - apply:
     ```bash
@@ -6004,7 +6004,7 @@ MD
     git add docs/api/versioning.md
     ```
 
-- [ ] T-0321 | Единый helper для пагинации (page/limit → skip/take)
+- [x] T-0321 | Единый helper для пагинации (page/limit → skip/take)
   - depends: []
   - apply:
     ```bash
@@ -6023,7 +6023,7 @@ TS
 
 ## ЭТАП 225. Логи и метрики
 
-- [ ] T-0322 | JSON-логгер (structured)
+- [x] T-0322 | JSON-логгер (structured)
   - depends: []
   - apply:
     ```bash
@@ -6037,7 +6037,7 @@ TS
     git add packages/log/json/index.ts
     ```
 
-- [ ] T-0323 | Прометей-stub метрики (counter/gauge)
+- [x] T-0323 | Прометей-stub метрики (counter/gauge)
   - depends: []
   - apply:
     ```bash
@@ -6052,7 +6052,7 @@ TS
     git add packages/metrics/index.ts
     ```
 
-- [ ] T-0324 | /metrics аггрегатор (общий HTTP)
+- [x] T-0324 | /metrics аггрегатор (общий HTTP)
   - depends: [T-0323]
   - apply:
     ```bash
@@ -6070,7 +6070,7 @@ JS
 
 ## ЭТАП 226. Эксплуатация и управление изменениями
 
-- [ ] T-0325 | CHANGELOG.md и правила релизов (SemVer)
+- [x] T-0325 | CHANGELOG.md и правила релизов (SemVer)
   - depends: []
   - apply:
     ```bash
@@ -6086,7 +6086,7 @@ MD
 
 ## ЭТАП 227. DR-план, авто-бэкапы и восстановление
 
-- [ ] T-0326 | Скрипт pg_dump nightly + ротация 7 дней
+- [x] T-0326 | Скрипт pg_dump nightly + ротация 7 дней
   - depends: [T-0251, T-0200]
   - apply:
     ```bash
@@ -6106,7 +6106,7 @@ SH
     git add scripts/backup/pg_nightly.sh
     ```
 
-- [ ] T-0327 | Скрипт восстановления pg_restore smoke
+- [x] T-0327 | Скрипт восстановления pg_restore smoke
   - depends: [T-0326]
   - apply:
     ```bash
@@ -6124,7 +6124,7 @@ SH
     git add scripts/backup/pg_restore_smoke.sh
     ```
 
-- [ ] T-0328 | Документ DR-Runbook (RPO/RTO)
+- [x] T-0328 | Документ DR-Runbook (RPO/RTO)
   - depends: []
   - apply:
     ```bash
@@ -6143,7 +6143,7 @@ MD
 
 ## ЭТАП 228. Pre-Prod окружение и релизы
 
-- [ ] T-0329 | Бранч preprod + CI job deploy (manual)
+- [x] T-0329 | Бранч preprod + CI job deploy (manual)
   - depends: [T-0183]
   - apply:
     ```bash
@@ -6172,7 +6172,7 @@ YML
     git add .github/workflows/preprod-deploy.yml
     ```
 
-- [ ] T-0330 | Release checklist (freeze, smoke, rollback)
+- [x] T-0330 | Release checklist (freeze, smoke, rollback)
   - depends: [T-0325]
   - apply:
     ```bash
@@ -6188,7 +6188,7 @@ MD
     git add docs/release/checklist.md
     ```
 
-- [ ] T-0331 | DORA-метрики (docs) и таблица учёта релизов
+- [x] T-0331 | DORA-метрики (docs) и таблица учёта релизов
   - depends: [T-0325]
   - apply:
     ```bash
@@ -6205,7 +6205,7 @@ MD
 
 ## ЭТАП 229. CDN/Cache invalidation и статика
 
-- [ ] T-0332 | Маркер кэш-инвалидации для статики (build-id.txt)
+- [x] T-0332 | Маркер кэш-инвалидации для статики (build-id.txt)
   - depends: []
   - apply:
     ```bash
@@ -6223,7 +6223,7 @@ SH
     git add scripts/build/write-build-id.sh
     ```
 
-- [ ] T-0333 | Док: вручную инвалидировать CDN по `/build-id.txt`
+- [x] T-0333 | Док: вручную инвалидировать CDN по `/build-id.txt`
   - depends: [T-0332]
   - apply:
     ```bash
@@ -6241,7 +6241,7 @@ MD
 
 ## ЭТАП 230. Rollout/A-B и трафик-сплиты
 
-- [ ] T-0334 | Traffic split helper (N%-включение фичи)
+- [x] T-0334 | Traffic split helper (N%-включение фичи)
   - depends: [T-0311]
   - apply:
     ```bash
@@ -6254,7 +6254,7 @@ TS
     git add packages/ab/rollout.ts
     ```
 
-- [ ] T-0335 | Док: стратегия «canary 10% → 50% → 100%»
+- [x] T-0335 | Док: стратегия «canary 10% → 50% → 100%»
   - depends: [T-0334]
   - apply:
     ```bash
@@ -6272,7 +6272,7 @@ MD
 
 ## ЭТАП 231. Безопасность приложений
 
-- [ ] T-0336 | CSRF-токен (double submit cookie)
+- [x] T-0336 | CSRF-токен (double submit cookie)
   - depends: [T-0232]
   - apply:
     ```bash
@@ -6286,7 +6286,7 @@ TS
     git add packages/security/csrf.ts
     ```
 
-- [ ] T-0337 | Rate Limit middleware (in-memory token bucket)
+- [x] T-0337 | Rate Limit middleware (in-memory token bucket)
   - depends: []
   - apply:
     ```bash
@@ -6306,7 +6306,7 @@ TS
     git add packages/security/rate.ts
     ```
 
-- [ ] T-0338 | Скан зависимостей (docs + команда npx npm-check-updates)
+- [x] T-0338 | Скан зависимостей (docs + команда npx npm-check-updates)
   - depends: []
   - apply:
     ```bash
@@ -6324,7 +6324,7 @@ MD
 
 ## ЭТАП 232. Аналитика и события
 
-- [ ] T-0339 | Событийный лог фронта (page_view, search, enquiry_submit)
+- [x] T-0339 | Событийный лог фронта (page_view, search, enquiry_submit)
   - depends: [T-0207]
   - apply:
     ```bash
@@ -6337,7 +6337,7 @@ TS
     git add apps/svc-website/src/analytics/events.ts
     ```
 
-- [ ] T-0340 | Сборщик событий (HTTP endpoint)
+- [x] T-0340 | Сборщик событий (HTTP endpoint)
   - depends: [T-0339]
   - apply:
     ```bash
@@ -6364,7 +6364,7 @@ JS
 
 ## ЭТАП 233. Terraform-скелеты (DigitalOcean DB + Spaces)
 
-- [ ] T-0341 | Terraform init: provider + DO token через env
+- [x] T-0341 | Terraform init: provider + DO token через env
   - depends: []
   - apply:
     ```bash
@@ -6387,7 +6387,7 @@ MD
     git add infra/tf/main.tf infra/tf/README.md
     ```
 
-- [ ] T-0342 | Terraform: Managed DB (stub resource)
+- [x] T-0342 | Terraform: Managed DB (stub resource)
   - depends: [T-0341]
   - apply:
     ```bash
@@ -6406,7 +6406,7 @@ TF
     git add infra/tf/db.tf
     ```
 
-- [ ] T-0343 | Terraform: Spaces bucket (static/media)
+- [x] T-0343 | Terraform: Spaces bucket (static/media)
   - depends: [T-0341]
   - apply:
     ```bash
@@ -6474,7 +6474,7 @@ TSX
 
 ## ЭТАП 235. Улучшения каталога и отзывов
 
-- [ ] T-0347 | Подсчёт и отображение количества отзывов
+- [x] T-0347 | Подсчёт и отображение количества отзывов
   - depends: [T-0226, T-0194]
   - apply:
     ```bash
@@ -6486,7 +6486,7 @@ TS
     git add apps/svc-catalog/src/lib/reviewCount.ts
     ```
 
-- [ ] T-0348 | API: добавление отзыва пользователем (contract-only)
+- [x] T-0348 | API: добавление отзыва пользователем (contract-only)
   - depends: [T-0190, T-0232]
   - apply:
     ```bash
@@ -6516,7 +6516,7 @@ JS
 
 ## ЭТАП 236. Конфигурации и секреты
 
-- [ ] T-0349 | .env.local шаблон и инструкция по секретам
+- [x] T-0349 | .env.local шаблон и инструкция по секретам
   - depends: [T-0252]
   - apply:
     ```bash
@@ -6539,7 +6539,7 @@ MD
 
 ## ЭТАП 237. Финальный «полиш» и проверка релиза
 
-- [ ] T-0350 | Релизный скрипт: build-id + lighthouse + health
+- [x] T-0350 | Релизный скрипт: build-id + lighthouse + health
   - depends: [T-0332, T-0205, T-0203]
   - apply:
     ```bash
@@ -6560,7 +6560,7 @@ SH
 
 ## ЭТАП 238. Продвинутая аналитика: когорты и удержание
 
-- [ ] T-0351 | Модель EventLog (Prisma) для аналитики
+- [x] T-0351 | Модель EventLog (Prisma) для аналитики
   - depends: [T-0226, T-0340]
   - apply:
     ```bash
@@ -6579,7 +6579,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0352 | Ингестор: прокладка из /analytics в EventLog
+- [x] T-0352 | Ингестор: прокладка из /analytics в EventLog
   - depends: [T-0351, T-0340]
   - apply:
     ```bash
@@ -6589,7 +6589,7 @@ PRISMA
     git add apps/svc-analytics/src/collector/server.js
     ```
 
-- [ ] T-0353 | Когорты по неделям регистрации
+- [x] T-0353 | Когорты по неделям регистрации
   - depends: [T-0351]
   - apply:
     ```bash
@@ -6607,7 +6607,7 @@ TS
     git add apps/svc-analytics/src/cohort/weekly.ts
     ```
 
-- [ ] T-0354 | Retention: D1/D7/D30 из EventLog
+- [x] T-0354 | Retention: D1/D7/D30 из EventLog
   - depends: [T-0352]
   - apply:
     ```bash
@@ -6624,7 +6624,7 @@ TS
     git add apps/svc-analytics/src/retention/deltas.ts
     ```
 
-- [ ] T-0355 | Admin API: выгрузка сводки retention/кохорт
+- [x] T-0355 | Admin API: выгрузка сводки retention/кохорт
   - depends: [T-0353, T-0354]
   - apply:
     ```bash
@@ -6645,7 +6645,7 @@ JS
     git add apps/svc-analytics/src/api/summary.js
     ```
 
-- [ ] T-0356 | Дашборд retention в админке (виджет)
+- [x] T-0356 | Дашборд retention в админке (виджет)
   - depends: [T-0355]
   - apply:
     ```bash
@@ -6666,7 +6666,7 @@ TSX
 
 ## ЭТАП 239. Боевой платёжный слой (абстракция провайдера)
 
-- [ ] T-0357 | Абстракция PaymentProvider (create/capture/refund)
+- [x] T-0357 | Абстракция PaymentProvider (create/capture/refund)
   - depends: [T-0245]
   - apply:
     ```bash
@@ -6679,7 +6679,7 @@ TS
     git add packages/pay/provider.ts
     ```
 
-- [ ] T-0358 | Провайдер DemoProvider (in-memory)
+- [x] T-0358 | Провайдер DemoProvider (in-memory)
   - depends: [T-0357]
   - apply:
     ```bash
@@ -6696,7 +6696,7 @@ TS
     git add packages/pay/demo.ts
     ```
 
-- [ ] T-0359 | Связка биллинга с провайдером (инъекция через env)
+- [x] T-0359 | Связка биллинга с провайдером (инъекция через env)
   - depends: [T-0358, T-0245]
   - apply:
     ```bash
@@ -6705,7 +6705,7 @@ TS
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0360 | API: /pay/create-intent использует P.createIntent
+- [x] T-0360 | API: /pay/create-intent использует P.createIntent
   - depends: [T-0359]
   - apply:
     ```bash
@@ -6714,7 +6714,7 @@ TS
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0361 | API: /pay/capture использует P.capture
+- [x] T-0361 | API: /pay/capture использует P.capture
   - depends: [T-0360]
   - apply:
     ```bash
@@ -6723,7 +6723,7 @@ TS
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0362 | API: /pay/refund
+- [x] T-0362 | API: /pay/refund
   - depends: [T-0361]
   - apply:
     ```bash
@@ -6736,7 +6736,7 @@ TS
 
 ## ЭТАП 240. Экспорт в бухучёт (CSV/XLSX) и отчёты
 
-- [ ] T-0363 | Экспорт инвойсов в CSV
+- [x] T-0363 | Экспорт инвойсов в CSV
   - depends: [T-0238]
   - apply:
     ```bash
@@ -6749,7 +6749,7 @@ JS
     git add apps/svc-billing/src/export/invoices-csv.js
     ```
 
-- [ ] T-0364 | Экспорт инвойсов в XLSX (простая TSV → .xlsx)
+- [x] T-0364 | Экспорт инвойсов в XLSX (простая TSV → .xlsx)
   - depends: [T-0363]
   - apply:
     ```bash
@@ -6761,7 +6761,7 @@ JS
     git add apps/svc-billing/src/export/invoices-xlsx.js
     ```
 
-- [ ] T-0365 | Admin UI: кнопки экспорта CSV/XLSX
+- [x] T-0365 | Admin UI: кнопки экспорта CSV/XLSX
   - depends: [T-0363, T-0364]
   - apply:
     ```bash
@@ -6833,7 +6833,7 @@ JS
     git add apps/svc-billing/src/api/confirm.js
     ```
 
-- [ ] T-0369 | Приём сторонних вебхуков: verify HMAC
+- [x] T-0369 | Приём сторонних вебхуков: verify HMAC
   - depends: [T-0315]
   - apply:
     ```bash
@@ -6858,7 +6858,7 @@ JS
 
 ## ЭТАП 242. Конструктор лендингов пар
 
-- [ ] T-0370 | Модель CoupleSite (theme, slug, blocks)
+- [x] T-0370 | Модель CoupleSite (theme, slug, blocks)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -6878,7 +6878,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0371 | Темы лендинга: classic / elegant / photo
+- [x] T-0371 | Темы лендинга: classic / elegant / photo
   - depends: [T-0370]
   - apply:
     ```bash
@@ -6895,7 +6895,7 @@ TS
     git add packages/couples/themes/index.ts
     ```
 
-- [ ] T-0372 | Рендерер блоков: Hero/Text/Gallery
+- [x] T-0372 | Рендерер блоков: Hero/Text/Gallery
   - depends: [T-0371]
   - apply:
     ```bash
@@ -6910,7 +6910,7 @@ TSX
     git add apps/svc-website/src/couples/blocks.tsx
     ```
 
-- [ ] T-0373 | Роут /couple/:slug (SSR/SPA-скелет)
+- [x] T-0373 | Роут /couple/:slug (SSR/SPA-скелет)
   - depends: [T-0370, T-0372]
   - apply:
     ```bash
@@ -6924,7 +6924,7 @@ TSX
     git add apps/svc-website/src/pages/couple/[slug].tsx
     ```
 
-- [ ] T-0374 | Генерация QR приглашения для лендинга
+- [x] T-0374 | Генерация QR приглашения для лендинга
   - depends: [T-0373]
   - apply:
     ```bash
@@ -6936,7 +6936,7 @@ TS
     git add packages/qr/index.ts
     ```
 
-- [ ] T-0375 | Шеринг: OpenGraph прелоадер для пары
+- [x] T-0375 | Шеринг: OpenGraph прелоадер для пары
   - depends: [T-0213, T-0373]
   - apply:
     ```bash
@@ -6955,7 +6955,7 @@ TS
 
 ## ЭТАП 243. ML-ранжирование каталога (легковесный слой)
 
-- [ ] T-0376 | Фичи ранжирования: извлечение признаков по вендору
+- [x] T-0376 | Фичи ранжирования: извлечение признаков по вендору
   - depends: [T-0194, T-0226]
   - apply:
     ```bash
@@ -6975,7 +6975,7 @@ TS
     git add apps/svc-catalog/src/ml/features.ts
     ```
 
-- [ ] T-0377 | Модель ранжирования: логистическая регрессия (коэффы в коде)
+- [x] T-0377 | Модель ранжирования: логистическая регрессия (коэффы в коде)
   - depends: [T-0376]
   - apply:
     ```bash
@@ -6988,7 +6988,7 @@ TS
     git add apps/svc-catalog/src/ml/model.ts
     ```
 
-- [ ] T-0378 | Смешивание baseline score() и ML-score
+- [x] T-0378 | Смешивание baseline score() и ML-score
   - depends: [T-0194, T-0377]
   - apply:
     ```bash
@@ -7006,7 +7006,7 @@ TS
     git add apps/svc-catalog/src/rank/mix.ts
     ```
 
-- [ ] T-0379 | Параметр sort=ml в поиске каталога
+- [x] T-0379 | Параметр sort=ml в поиске каталога
   - depends: [T-0378, T-0234]
   - apply:
     ```bash
@@ -7016,7 +7016,7 @@ TS
     git add apps/svc-catalog/src/api/search.js
     ```
 
-- [ ] T-0380 | Документ: как обновлять веса модели
+- [x] T-0380 | Документ: как обновлять веса модели
   - depends: [T-0377]
   - apply:
     ```bash
@@ -7034,7 +7034,7 @@ MD
 
 ## ЭТАП 244. Антифрод: скоринг и правила
 
-- [ ] T-0381 | Модель FraudEvent и поле trustScore у User
+- [x] T-0381 | Модель FraudEvent и поле trustScore у User
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7053,7 +7053,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0382 | Скоринг: простые штрафы (много заявок за короткий период)
+- [x] T-0382 | Скоринг: простые штрафы (много заявок за короткий период)
   - depends: [T-0381, T-0237]
   - apply:
     ```bash
@@ -7072,7 +7072,7 @@ TS
     git add apps/svc-enquiries/src/fraud/score.ts
     ```
 
-- [ ] T-0383 | Хук при создании заявки: запись FraudEvent
+- [x] T-0383 | Хук при создании заявки: запись FraudEvent
   - depends: [T-0382]
   - apply:
     ```bash
@@ -7081,7 +7081,7 @@ TS
     git add apps/svc-enquiries/src/api/enquiry.js
     ```
 
-- [ ] T-0384 | Док: антифрод-правила и ручная блокировка
+- [x] T-0384 | Док: антифрод-правила и ручная блокировка
   - depends: []
   - apply:
     ```bash
@@ -7099,7 +7099,7 @@ MD
 
 ## ЭТАП 245. Импортеры поставщиков (CSV/JSON)
 
-- [ ] T-0385 | CSV импортер из Bridebook (title/city/category/rating)
+- [x] T-0385 | CSV импортер из Bridebook (title/city/category/rating)
   - depends: [T-0263, T-0226]
   - apply:
     ```bash
@@ -7120,7 +7120,7 @@ TS
     git add apps/svc-admin/src/import/bridebook.csv.example apps/svc-admin/src/import/bridebook.ts
     ```
 
-- [ ] T-0386 | JSON импортер из Zola-подобной выгрузки
+- [x] T-0386 | JSON импортер из Zola-подобной выгрузки
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7137,7 +7137,7 @@ TS
     git add apps/svc-admin/src/import/zola.ts
     ```
 
-- [ ] T-0387 | Валидация импортов: отчёт об ошибках
+- [x] T-0387 | Валидация импортов: отчёт об ошибках
   - depends: [T-0385, T-0386]
   - apply:
     ```bash
@@ -7149,7 +7149,7 @@ TS
     git add apps/svc-admin/src/import/validate.ts
     ```
 
-- [ ] T-0388 | Док: чек-лист импорта из конкурентов
+- [x] T-0388 | Док: чек-лист импорта из конкурентов
   - depends: [T-0385, T-0386]
   - apply:
     ```bash
@@ -7168,7 +7168,7 @@ MD
 
 ## ЭТАП 246. Мультивалютность и НДС
 
-- [ ] T-0389 | Валюты: таблица CurrencyRate (курс к UZS)
+- [x] T-0389 | Валюты: таблица CurrencyRate (курс к UZS)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7184,7 +7184,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0390 | Конвертер валют: UZS ⇄ USD/EUR по таблице
+- [x] T-0390 | Конвертер валют: UZS ⇄ USD/EUR по таблице
   - depends: [T-0389]
   - apply:
     ```bash
@@ -7198,7 +7198,7 @@ TS
     git add packages/money/convert.ts
     ```
 
-- [ ] T-0391 | НДС: правило расчёта tax = base * rate%
+- [x] T-0391 | НДС: правило расчёта tax = base * rate%
   - depends: []
   - apply:
     ```bash
@@ -7209,7 +7209,7 @@ TS
     git add packages/money/vat.ts
     ```
 
-- [ ] T-0392 | Инвойс с НДС и итогами в UZS
+- [x] T-0392 | Инвойс с НДС и итогами в UZS
   - depends: [T-0390, T-0391, T-0238]
   - apply:
     ```bash
@@ -7222,7 +7222,7 @@ TS
 
 ## ЭТАП 247. Авто-расписания уведомлений (email/SMS/push)
 
-- [ ] T-0393 | Планировщик: JSON-конфиг расписаний
+- [x] T-0393 | Планировщик: JSON-конфиг расписаний
   - depends: []
   - apply:
     ```bash
@@ -7234,7 +7234,7 @@ JSON
     git add configs/schedules.json
     ```
 
-- [ ] T-0394 | Runner cron-задач: читает configs/schedules.json
+- [x] T-0394 | Runner cron-задач: читает configs/schedules.json
   - depends: [T-0393]
   - apply:
     ```bash
@@ -7249,7 +7249,7 @@ TS
     git add apps/worker/src/cron-runner.ts
     ```
 
-- [ ] T-0395 | Daily email отчёт в админку (stub файл)
+- [x] T-0395 | Daily email отчёт в админку (stub файл)
   - depends: [T-0218, T-0394]
   - apply:
     ```bash
@@ -7267,7 +7267,7 @@ MD
 
 ## ЭТАП 248. SLA-мониторы
 
-- [ ] T-0396 | SLA doc: целевые метрики (аптайм, p95)
+- [x] T-0396 | SLA doc: целевые метрики (аптайм, p95)
   - depends: []
   - apply:
     ```bash
@@ -7282,7 +7282,7 @@ MD
     git add docs/sla/targets.md
     ```
 
-- [ ] T-0397 | Монитор p95 локально (скрипт обстрела)
+- [x] T-0397 | Монитор p95 локально (скрипт обстрела)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -7307,7 +7307,7 @@ SH
 
 ## ЭТАП 249. Витрина: лендинги городов, подборки и отзывы с фото
 
-- [ ] T-0398 | Страницы городов: /city/:slug (SEO-лендинги)
+- [x] T-0398 | Страницы городов: /city/:slug (SEO-лендинги)
   - depends: [T-0197, T-0060]
   - apply:
     ```bash
@@ -7320,7 +7320,7 @@ TSX
     git add apps/svc-website/src/pages/city/[slug].tsx
     ```
 
-- [ ] T-0399 | Подборки: «Лучшие тойханы 2025 Ташкента» (виджет)
+- [x] T-0399 | Подборки: «Лучшие тойханы 2025 Ташкента» (виджет)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -7335,7 +7335,7 @@ TSX
     git add apps/svc-website/src/widgets/TopList.tsx
     ```
 
-- [ ] T-0400 | Отзывы с фото: поддержка image[] в Review
+- [x] T-0400 | Отзывы с фото: поддержка image[] в Review
   - depends: [T-0226, T-0215]
   - apply:
     ```bash
@@ -7358,7 +7358,7 @@ TSX
 
 ## ЭТАП 250. Персонализация каталога (интересы пользователя)
 
-- [ ] T-0401 | Prisma: UserPrefs (интересы, города, бюджет)
+- [x] T-0401 | Prisma: UserPrefs (интересы, города, бюджет)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7377,7 +7377,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0402 | Сбор интереса: событие click_vendor в EventLog
+- [x] T-0402 | Сбор интереса: событие click_vendor в EventLog
   - depends: [T-0351, T-0340]
   - apply:
     ```bash
@@ -7386,7 +7386,7 @@ PRISMA
     git add apps/svc-analytics/src/collector/server.js
     ```
 
-- [ ] T-0403 | Косинусное сходство интересов (user↔vendor)
+- [x] T-0403 | Косинусное сходство интересов (user↔vendor)
   - depends: [T-0401, T-0226]
   - apply:
     ```bash
@@ -7399,7 +7399,7 @@ TS
     git add apps/svc-catalog/src/reco/sim.ts
     ```
 
-- [ ] T-0404 | API: персонализированный список /catalog/personal
+- [x] T-0404 | API: персонализированный список /catalog/personal
   - depends: [T-0403, T-0234]
   - apply:
     ```bash
@@ -7426,7 +7426,7 @@ JS
     git add apps/svc-catalog/src/api/personal.js
     ```
 
-- [ ] T-0405 | Флаг A/B: включение персонализации для 50%
+- [x] T-0405 | Флаг A/B: включение персонализации для 50%
   - depends: [T-0334, T-0404]
   - apply:
     ```bash
@@ -7443,7 +7443,7 @@ TS
 
 ## ЭТАП 251. Gift Registry (список подарков пары)
 
-- [ ] T-0406 | Prisma: GiftRegistry/GiftItem/Reservation
+- [x] T-0406 | Prisma: GiftRegistry/GiftItem/Reservation
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7479,7 +7479,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0407 | API CRUD: добавление/резервирование подарка
+- [x] T-0407 | API CRUD: добавление/резервирование подарка
   - depends: [T-0406]
   - apply:
     ```bash
@@ -7503,7 +7503,7 @@ JS
     git add apps/svc-registry/src/server.js
     ```
 
-- [ ] T-0408 | Публичная страница реестра + QR
+- [x] T-0408 | Публичная страница реестра + QR
   - depends: [T-0406, T-0374, T-0060]
   - apply:
     ```bash
@@ -7518,7 +7518,7 @@ TSX
     git add apps/svc-website/src/pages/registry/[id].tsx
     ```
 
-- [ ] T-0409 | Экспорт реестра в CSV
+- [x] T-0409 | Экспорт реестра в CSV
   - depends: [T-0406]
   - apply:
     ```bash
@@ -7534,7 +7534,7 @@ JS
 
 ## ЭТАП 252. Карты и дистанции
 
-- [ ] T-0410 | Поля lat/lng для Venue + хелпер Haversine
+- [x] T-0410 | Поля lat/lng для Venue + хелпер Haversine
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7550,7 +7550,7 @@ TS
     git add packages/prisma/schema.prisma packages/geo/distance.ts
     ```
 
-- [ ] T-0411 | Поиск по радиусу: /catalog/near?lat&lng&km
+- [x] T-0411 | Поиск по радиусу: /catalog/near?lat&lng&km
   - depends: [T-0410, T-0234]
   - apply:
     ```bash
@@ -7571,7 +7571,7 @@ JS
     git add apps/svc-catalog/src/api/near.js
     ```
 
-- [ ] T-0412 | Виджет карты (простая «пустышка» без SDK)
+- [x] T-0412 | Виджет карты (простая «пустышка» без SDK)
   - depends: [T-0060]
   - apply:
     ```bash
@@ -7584,7 +7584,7 @@ TSX
     git add apps/svc-website/src/ui/map/MapBox.tsx
     ```
 
-- [ ] T-0413 | Сортировка по расстоянию (если даны lat/lng)
+- [x] T-0413 | Сортировка по расстоянию (если даны lat/lng)
   - depends: [T-0410, T-0234]
   - apply:
     ```bash
@@ -7598,7 +7598,7 @@ TSX
 
 ## ЭТАП 253. Таймлайн дня свадьбы
 
-- [ ] T-0414 | Prisma: EventPlan/EventTask
+- [x] T-0414 | Prisma: EventPlan/EventTask
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7625,7 +7625,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0415 | UI: конструктор таймлайна (минимальный)
+- [x] T-0415 | UI: конструктор таймлайна (минимальный)
   - depends: [T-0414, T-0207]
   - apply:
     ```bash
@@ -7642,7 +7642,7 @@ TSX
     git add apps/svc-website/src/pages/plan/editor.tsx
     ```
 
-- [ ] T-0416 | Экспорт таймлайна в HTML (PDF-подготовка)
+- [x] T-0416 | Экспорт таймлайна в HTML (PDF-подготовка)
   - depends: [T-0414]
   - apply:
     ```bash
@@ -7655,7 +7655,7 @@ JS
     git add apps/svc-planner/src/export/html.js
     ```
 
-- [ ] T-0417 | Напоминания по задачам (stub cron)
+- [x] T-0417 | Напоминания по задачам (stub cron)
   - depends: [T-0414, T-0394]
   - apply:
     ```bash
@@ -7671,7 +7671,7 @@ JS
 
 ## ЭТАП 254. Роли вендора и доступ
 
-- [ ] T-0418 | Prisma: VendorMember (role=OWNER|MANAGER)
+- [x] T-0418 | Prisma: VendorMember (role=OWNER|MANAGER)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -7689,7 +7689,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0419 | Приглашение менеджера (email)
+- [x] T-0419 | Приглашение менеджера (email)
   - depends: [T-0418, T-0219]
   - apply:
     ```bash
@@ -7702,7 +7702,7 @@ JS
     git add apps/svc-vendors/src/members/invite.js
     ```
 
-- [ ] T-0420 | Проверка прав в /pricing/* (OWNER|MANAGER)
+- [x] T-0420 | Проверка прав в /pricing/* (OWNER|MANAGER)
   - depends: [T-0418, T-0278]
   - apply:
     ```bash
@@ -7711,7 +7711,7 @@ JS
     git add apps/svc-vendors/src/api/pricing.js
     ```
 
-- [ ] T-0421 | Аудит действий менеджеров (файл)
+- [x] T-0421 | Аудит действий менеджеров (файл)
   - depends: [T-0255]
   - apply:
     ```bash
@@ -7728,7 +7728,7 @@ TS
 
 ## ЭТАП 255. E2E сценарии бронирования
 
-- [ ] T-0422 | Playwright: бронирование + промокод + оплата
+- [x] T-0422 | Playwright: бронирование + промокод + оплата
   - depends: [T-0272, T-0280, T-0249]
   - apply:
     ```bash
@@ -7744,7 +7744,7 @@ TS
     git add e2e/booking.flow.spec.ts
     ```
 
-- [ ] T-0423 | Биллинг lifecycle smoke API-тест (.http)
+- [x] T-0423 | Биллинг lifecycle smoke API-тест (.http)
   - depends: [T-0360, T-0361]
   - apply:
     ```bash
@@ -7765,7 +7765,7 @@ HTTP
     git add http/pay.flow.http
     ```
 
-- [ ] T-0424 | Нагрузочный скрипт поиска (autocannon аналог)
+- [x] T-0424 | Нагрузочный скрипт поиска (autocannon аналог)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -7778,7 +7778,7 @@ JS
     git add scripts/perf/search_blast.js
     ```
 
-- [ ] T-0425 | Тест устойчивости к сбоям платежей (retry)
+- [x] T-0425 | Тест устойчивости к сбоям платежей (retry)
   - depends: [T-0316, T-0360]
   - apply:
     ```bash
@@ -7839,7 +7839,7 @@ TSX
     git add apps/svc-website/src/ui/i18n/LangSwitch.tsx
     ```
 
-- [ ] T-0429 | Локализация дат/валют в карточках
+- [x] T-0429 | Локализация дат/валют в карточках
   - depends: [T-0211]
   - apply:
     ```bash
@@ -7855,7 +7855,7 @@ TS
 
 ## ЭТАП 257. DO App Platform: автодеплой и healthchecks
 
-- [ ] T-0430 | app.yaml секции сервисов (скелет)
+- [x] T-0430 | app.yaml секции сервисов (скелет)
   - depends: [T-0182]
   - apply:
     ```bash
@@ -7881,7 +7881,7 @@ YML
     git add infra/do/app.yaml
     ```
 
-- [ ] T-0431 | One-click Deploy: инструкция по DO
+- [x] T-0431 | One-click Deploy: инструкция по DO
   - depends: [T-0430]
   - apply:
     ```bash
@@ -7896,7 +7896,7 @@ MD
     git add docs/ops/do/one-click-deploy.md
     ```
 
-- [ ] T-0432 | /health эндпоинты во всех сервисах
+- [x] T-0432 | /health эндпоинты во всех сервисах
   - depends: [T-0004]
   - apply:
     ```bash
@@ -7906,7 +7906,7 @@ MD
     done
     ```
 
-- [ ] T-0433 | CI: prod deploy trigger workflow
+- [x] T-0433 | CI: prod deploy trigger workflow
   - depends: [T-0329]
   - apply:
     ```bash
@@ -7938,7 +7938,7 @@ YML
 
 ## ЭТАП 258. Мониторинг и алерты
 
-- [ ] T-0434 | Аптайм-чекер + письмо админу при падении
+- [x] T-0434 | Аптайм-чекер + письмо админу при падении
   - depends: [T-0219]
   - apply:
     ```bash
@@ -7952,7 +7952,7 @@ JS
     git add scripts/monitor/uptime.js
     ```
 
-- [ ] T-0435 | Ошибки ≥ N/мин → алерт (парсер логов)
+- [x] T-0435 | Ошибки ≥ N/мин → алерт (парсер логов)
   - depends: [T-0322]
   - apply:
     ```bash
@@ -7965,7 +7965,7 @@ JS
     git add scripts/monitor/error_rate.js
     ```
 
-- [ ] T-0436 | Вебхук уведомлений (generic)
+- [x] T-0436 | Вебхук уведомлений (generic)
   - depends: []
   - apply:
     ```bash
@@ -7977,7 +7977,7 @@ TS
     git add packages/notify/webhook.ts
     ```
 
-- [ ] T-0437 | Док: SLO-дашборд и алерт-пороги
+- [x] T-0437 | Док: SLO-дашборд и алерт-пороги
   - depends: []
   - apply:
     ```bash
@@ -7995,7 +7995,7 @@ MD
 
 ## ЭТАП 259. Приватность и права пользователя
 
-- [ ] T-0438 | Экспорт данных пользователя (JSON zip)
+- [x] T-0438 | Экспорт данных пользователя (JSON zip)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8007,7 +8007,7 @@ JS
     git add apps/svc-privacy/src/export.js
     ```
 
-- [ ] T-0439 | Право на удаление: скрипт анонимизации
+- [x] T-0439 | Право на удаление: скрипт анонимизации
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8019,7 +8019,7 @@ JS
     git add apps/svc-privacy/scripts/anonymize.js
     ```
 
-- [ ] T-0440 | Лог согласий (consents.json)
+- [x] T-0440 | Лог согласий (consents.json)
   - depends: []
   - apply:
     ```bash
@@ -8104,7 +8104,7 @@ TS
     git add apps/svc-website/src/seo/sitemap.ts
     ```
 
-- [ ] T-0446 | OG расширение для городов/вендоров
+- [x] T-0446 | OG расширение для городов/вендоров
   - depends: [T-0213, T-0398]
   - apply:
     ```bash
@@ -8115,7 +8115,7 @@ TS
     git add apps/svc-website/src/seo/city-og.ts
     ```
 
-- [ ] T-0447 | Гайд по микрокопии (tone of voice)
+- [x] T-0447 | Гайд по микрокопии (tone of voice)
   - depends: []
   - apply:
     ```bash
@@ -8140,7 +8140,7 @@ TSX
     git add apps/svc-website/src/ui/banner/Banner.tsx
     ```
 
-- [ ] T-0449 | A/B геро-секции (две версии)
+- [x] T-0449 | A/B геро-секции (две версии)
   - depends: [T-0311, T-0334, T-0441]
   - apply:
     ```bash
@@ -8156,7 +8156,7 @@ TSX
     git add apps/svc-website/src/ab/HeroAB.tsx
     ```
 
-- [ ] T-0450 | Тег релиза 1.0 и финальный чек
+- [x] T-0450 | Тег релиза 1.0 и финальный чек
   - depends: [T-0350]
   - apply:
     ```bash
@@ -8176,7 +8176,7 @@ SH
 
 ## ЭТАП 261. Чат «вендор ↔ пара» с загрузкой медиа
 
-- [ ] T-0451 | Prisma: ChatThread/ChatMessage + связь с Enquiry
+- [x] T-0451 | Prisma: ChatThread/ChatMessage + связь с Enquiry
   - depends: [T-0226, T-0190]
   - apply:
     ```bash
@@ -8204,7 +8204,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0452 | API: создать/получить тред чата по enquiryId
+- [x] T-0452 | API: создать/получить тред чата по enquiryId
   - depends: [T-0451, T-0237]
   - apply:
     ```bash
@@ -8232,7 +8232,7 @@ JS
     git add apps/svc-chat/src/api/thread.js
     ```
 
-- [ ] T-0453 | API: отправка сообщения (текст/медиа)
+- [x] T-0453 | API: отправка сообщения (текст/медиа)
   - depends: [T-0451, T-0215]
   - apply:
     ```bash
@@ -8253,7 +8253,7 @@ JS
     git add apps/svc-chat/src/api/send.js
     ```
 
-- [ ] T-0454 | Медиа-загрузка: эндпоинт получения pre-signed URL (stub)
+- [x] T-0454 | Медиа-загрузка: эндпоинт получения pre-signed URL (stub)
   - depends: [T-0216]
   - apply:
     ```bash
@@ -8273,7 +8273,7 @@ JS
     git add apps/svc-media/src/api/presign.js
     ```
 
-- [ ] T-0455 | UI компонент ChatBox (отправка текста/картинки)
+- [x] T-0455 | UI компонент ChatBox (отправка текста/картинки)
   - depends: [T-0452, T-0453, T-0454, T-0207]
   - apply:
     ```bash
@@ -8299,7 +8299,7 @@ TSX
 
 ## ЭТАП 262. Верификация SMS/Email
 
-- [ ] T-0456 | Prisma: VerificationCode (channel, code, expiresAt)
+- [x] T-0456 | Prisma: VerificationCode (channel, code, expiresAt)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8320,7 +8320,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0457 | Генерация и отправка кода (SMS/E-mail)
+- [x] T-0457 | Генерация и отправка кода (SMS/E-mail)
   - depends: [T-0456, T-0219, T-0305]
   - apply:
     ```bash
@@ -8339,7 +8339,7 @@ JS
     git add apps/svc-auth/src/verify/send.js
     ```
 
-- [ ] T-0458 | API: /verify/send и /verify/check
+- [x] T-0458 | API: /verify/send и /verify/check
   - depends: [T-0457]
   - apply:
     ```bash
@@ -8361,7 +8361,7 @@ JS
     git add apps/svc-auth/src/verify/api.js
     ```
 
-- [ ] T-0459 | Требовать верификацию телефона перед бронированием
+- [x] T-0459 | Требовать верификацию телефона перед бронированием
   - depends: [T-0458, T-0272]
   - apply:
     ```bash
@@ -8374,7 +8374,7 @@ JS
 
 ## ЭТАП 263. Отчёты вендора: времена отклика и SLA
 
-- [ ] T-0460 | Модель ResponseMetric (threadId, firstReplySec)
+- [x] T-0460 | Модель ResponseMetric (threadId, firstReplySec)
   - depends: [T-0451, T-0226]
   - apply:
     ```bash
@@ -8391,7 +8391,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0461 | Подсчёт firstReplySec при первом ответе вендора
+- [x] T-0461 | Подсчёт firstReplySec при первом ответе вендора
   - depends: [T-0453, T-0460]
   - apply:
     ```bash
@@ -8400,7 +8400,7 @@ PRISMA
     git add apps/svc-chat/src/api/send.js
     ```
 
-- [ ] T-0462 | Vendor dashboard: виджет среднего времени ответа
+- [x] T-0462 | Vendor dashboard: виджет среднего времени ответа
   - depends: [T-0461, T-0193]
   - apply:
     ```bash
@@ -8417,7 +8417,7 @@ TSX
 
 ## ЭТАП 264. Витрины-коллекции и редактор подборок
 
-- [ ] T-0463 | Prisma: Collection (slug,title,filtersJSON)
+- [x] T-0463 | Prisma: Collection (slug,title,filtersJSON)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8435,7 +8435,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0464 | API: /collections/:slug → список вендоров по фильтрам
+- [x] T-0464 | API: /collections/:slug → список вендоров по фильтрам
   - depends: [T-0463, T-0234]
   - apply:
     ```bash
@@ -8458,7 +8458,7 @@ JS
     git add apps/svc-catalog/src/api/collection.js
     ```
 
-- [ ] T-0465 | UI: страница коллекции /collections/:slug
+- [x] T-0465 | UI: страница коллекции /collections/:slug
   - depends: [T-0464, T-0060]
   - apply:
     ```bash
@@ -8471,7 +8471,7 @@ TSX
     git add apps/svc-website/src/pages/collections/[slug].tsx
     ```
 
-- [ ] T-0466 | Admin: редактор коллекций (CRUD)
+- [x] T-0466 | Admin: редактор коллекций (CRUD)
   - depends: [T-0463, T-0193]
   - apply:
     ```bash
@@ -8488,7 +8488,7 @@ TSX
 
 ## ЭТАП 265. Мультиязычные лендинги пар (RU/UZ)
 
-- [ ] T-0467 | Поле locale у CoupleSite и переключение темы текста
+- [x] T-0467 | Поле locale у CoupleSite и переключение темы текста
   - depends: [T-0370]
   - apply:
     ```bash
@@ -8497,7 +8497,7 @@ TSX
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0468 | Блоки i18n: Hero/Text поддержка двух языков
+- [x] T-0468 | Блоки i18n: Hero/Text поддержка двух языков
   - depends: [T-0467, T-0372]
   - apply:
     ```bash
@@ -8506,7 +8506,7 @@ TSX
     git add apps/svc-website/src/couples/blocks.tsx
     ```
 
-- [ ] T-0469 | Параметр ?lang=uz в /couple/:slug
+- [x] T-0469 | Параметр ?lang=uz в /couple/:slug
   - depends: [T-0373]
   - apply:
     ```bash
@@ -8519,7 +8519,7 @@ TSX
 
 ## ЭТАП 266. Календарь .ics: импорт/экспорт и синк
 
-- [ ] T-0470 | Импорт .ics в Booking (парсер упрощённый)
+- [x] T-0470 | Импорт .ics в Booking (парсер упрощённый)
   - depends: [T-0270]
   - apply:
     ```bash
@@ -8536,7 +8536,7 @@ JS
     git add apps/svc-enquiries/src/import/ics.js
     ```
 
-- [ ] T-0471 | Экспорт бронирований в .ics (вендорский календарь)
+- [x] T-0471 | Экспорт бронирований в .ics (вендорский календарь)
   - depends: [T-0276, T-0270]
   - apply:
     ```bash
@@ -8554,7 +8554,7 @@ JS
     git add apps/svc-enquiries/src/export/vendor-ics.js
     ```
 
-- [ ] T-0472 | API: /vendor/:id/calendar.ics
+- [x] T-0472 | API: /vendor/:id/calendar.ics
   - depends: [T-0471]
   - apply:
     ```bash
@@ -8572,7 +8572,7 @@ JS
     git add apps/svc-enquiries/src/api/vendor-ics.js
     ```
 
-- [ ] T-0473 | Док: подключение .ics к Google Calendar
+- [x] T-0473 | Док: подключение .ics к Google Calendar
   - depends: [T-0472]
   - apply:
     ```bash
@@ -8589,7 +8589,7 @@ MD
 
 ## ЭТАП 267. Монетизация: отчёт по ARPU/GMV/MRR
 
-- [ ] T-0474 | Модель RevenueEvent (type, amountUZS, refId)
+- [x] T-0474 | Модель RevenueEvent (type, amountUZS, refId)
   - depends: [T-0226, T-0245]
   - apply:
     ```bash
@@ -8607,7 +8607,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0475 | Запись RevenueEvent при capture платежа
+- [x] T-0475 | Запись RevenueEvent при capture платежа
   - depends: [T-0361, T-0474]
   - apply:
     ```bash
@@ -8616,7 +8616,7 @@ PRISMA
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0476 | Аггрегатор метрик дохода (день/месяц)
+- [x] T-0476 | Аггрегатор метрик дохода (день/месяц)
   - depends: [T-0474]
   - apply:
     ```bash
@@ -8632,7 +8632,7 @@ TS
     git add apps/svc-analytics/src/revenue/aggregate.ts
     ```
 
-- [ ] T-0477 | Admin API: /revenue/summary (GMV/MRR/ARPU stub)
+- [x] T-0477 | Admin API: /revenue/summary (GMV/MRR/ARPU stub)
   - depends: [T-0476]
   - apply:
     ```bash
@@ -8652,7 +8652,7 @@ JS
     git add apps/svc-analytics/src/api/revenue.js
     ```
 
-- [ ] T-0478 | Admin виджет RevenueCard
+- [x] T-0478 | Admin виджет RevenueCard
   - depends: [T-0477]
   - apply:
     ```bash
@@ -8670,7 +8670,7 @@ TSX
     git add apps/svc-admin/src/widgets/RevenueCard.tsx
     ```
 
-- [ ] T-0479 | Ежедневный CSV отчёт доходов
+- [x] T-0479 | Ежедневный CSV отчёт доходов
   - depends: [T-0476]
   - apply:
     ```bash
@@ -8682,7 +8682,7 @@ JS
     git add apps/svc-analytics/src/revenue/export-csv.js
     ```
 
-- [ ] T-0480 | Док: KPI монетизации и целевые уровни
+- [x] T-0480 | Док: KPI монетизации и целевые уровни
   - depends: [T-0477]
   - apply:
     ```bash
@@ -8700,7 +8700,7 @@ MD
 
 ## ЭТАП 268. Подарочные карты и ваучеры
 
-- [ ] T-0481 | Prisma: GiftCard (код, сумма, валюта, статус)
+- [x] T-0481 | Prisma: GiftCard (код, сумма, валюта, статус)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8721,7 +8721,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0482 | Генерация кодов ваучеров (скрипт выдачи)
+- [x] T-0482 | Генерация кодов ваучеров (скрипт выдачи)
   - depends: [T-0481]
   - apply:
     ```bash
@@ -8737,7 +8737,7 @@ JS
     git add scripts/gift/issue.js
     ```
 
-- [ ] T-0483 | API: redeem ваучера и привязка к пользователю
+- [x] T-0483 | API: redeem ваучера и привязка к пользователю
   - depends: [T-0481, T-0232]
   - apply:
     ```bash
@@ -8764,7 +8764,7 @@ JS
     git add apps/svc-billing/src/api/giftcard.js
     ```
 
-- [ ] T-0484 | Отчет по ваучерам (CSV)
+- [x] T-0484 | Отчет по ваучерам (CSV)
   - depends: [T-0481]
   - apply:
     ```bash
@@ -8781,7 +8781,7 @@ JS
 
 ## ЭТАП 269. Модерация контента (объявления, отзывы, фото)
 
-- [ ] T-0485 | Prisma: ModerationQueue (entity, refId, reason, state)
+- [x] T-0485 | Prisma: ModerationQueue (entity, refId, reason, state)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -8802,7 +8802,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0486 | Постановка в очередь модерации при новом отзыве
+- [x] T-0486 | Постановка в очередь модерации при новом отзыве
   - depends: [T-0485, T-0348]
   - apply:
     ```bash
@@ -8811,7 +8811,7 @@ PRISMA
     git add apps/svc-enquiries/src/api/review-add.js
     ```
 
-- [ ] T-0487 | Admin API: approve/reject модерации
+- [x] T-0487 | Admin API: approve/reject модерации
   - depends: [T-0485, T-0193]
   - apply:
     ```bash
@@ -8833,7 +8833,7 @@ JS
     git add apps/svc-admin/src/api/moderation.js
     ```
 
-- [ ] T-0488 | Док: правила модерации (фото, текст, спам)
+- [x] T-0488 | Док: правила модерации (фото, текст, спам)
   - depends: []
   - apply:
     ```bash
@@ -9020,7 +9020,7 @@ TSX
     git add apps/svc-website/src/ui/account/ContextSwitch.tsx
     ```
 
-- [ ] T-0499 | Экспорт аналитики в ClickHouse (HTTP insert, stub)
+- [x] T-0499 | Экспорт аналитики в ClickHouse (HTTP insert, stub)
   - depends: [T-0340]
   - apply:
     ```bash
@@ -9033,7 +9033,7 @@ JS
     git add apps/svc-analytics/src/export/clickhouse.js
     ```
 
-- [ ] T-0500 | Экспорт в BigQuery (готовим NDJSON, локальный файл)
+- [x] T-0500 | Экспорт в BigQuery (готовим NDJSON, локальный файл)
   - depends: [T-0340]
   - apply:
     ```bash
@@ -9049,7 +9049,7 @@ JS
 
 ## ЭТАП 271. Подписки вендоров (планы/лимиты/пейволл)
 
-- [ ] T-0501 | Prisma: VendorPlan/VendorSubscription (лимиты)
+- [x] T-0501 | Prisma: VendorPlan/VendorSubscription (лимиты)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -9077,7 +9077,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0502 | Сидирование планов: FREE/PRO/BUSINESS
+- [x] T-0502 | Сидирование планов: FREE/PRO/BUSINESS
   - depends: [T-0501]
   - apply:
     ```bash
@@ -9097,7 +9097,7 @@ JS
     git add scripts/seed/vendor_plans.js
     ```
 
-- [ ] T-0503 | Пейволл-проверка при создании карточки вендора
+- [x] T-0503 | Пейволл-проверка при создании карточки вендора
   - depends: [T-0501, T-0194]
   - apply:
     ```bash
@@ -9106,7 +9106,7 @@ JS
     git add apps/svc-catalog/src/api/vendor.js
     ```
 
-- [ ] T-0504 | API: покупка подписки (списание через DemoProvider)
+- [x] T-0504 | API: покупка подписки (списание через DemoProvider)
   - depends: [T-0359, T-0501]
   - apply:
     ```bash
@@ -9132,7 +9132,7 @@ JS
     git add apps/svc-billing/src/api/subscription.js
     ```
 
-- [ ] T-0505 | Витрина планов в кабинете вендора (UI)
+- [x] T-0505 | Витрина планов в кабинете вендора (UI)
   - depends: [T-0193, T-0502]
   - apply:
     ```bash
@@ -9154,7 +9154,7 @@ TSX
 
 ## ЭТАП 272. Антиспам и капча (заявки/отзывы)
 
-- [ ] T-0506 | Простая капча: question/answer (арифметика)
+- [x] T-0506 | Простая капча: question/answer (арифметика)
   - depends: []
   - apply:
     ```bash
@@ -9167,7 +9167,7 @@ TS
     git add packages/captcha/qa.ts
     ```
 
-- [ ] T-0507 | Капча в форме заявки /enquiry/create
+- [x] T-0507 | Капча в форме заявки /enquiry/create
   - depends: [T-0506, T-0237]
   - apply:
     ```bash
@@ -9176,7 +9176,7 @@ TS
     git add apps/svc-enquiries/src/api/enquiry.js
     ```
 
-- [ ] T-0508 | Капча при добавлении отзыва /review/add
+- [x] T-0508 | Капча при добавлении отзыва /review/add
   - depends: [T-0506, T-0348]
   - apply:
     ```bash
@@ -9185,7 +9185,7 @@ TS
     git add apps/svc-enquiries/src/api/review-add.js
     ```
 
-- [ ] T-0509 | Rate-limit отзывов: ≤3/час/пользователь
+- [x] T-0509 | Rate-limit отзывов: ≤3/час/пользователь
   - depends: [T-0337, T-0348]
   - apply:
     ```bash
@@ -9194,7 +9194,7 @@ TS
     git add apps/svc-enquiries/src/api/review-add.js
     ```
 
-- [ ] T-0510 | Док: антиспам-политика (пороговые значения)
+- [x] T-0510 | Док: антиспам-политика (пороговые значения)
   - depends: []
   - apply:
     ```bash
@@ -9213,7 +9213,7 @@ MD
 
 ## ЭТАП 273. Карты: реализация SDK-скелета для провайдера
 
-- [ ] T-0511 | Абстракция MapProvider (init, marker, route)
+- [x] T-0511 | Абстракция MapProvider (init, marker, route)
   - depends: []
   - apply:
     ```bash
@@ -9229,7 +9229,7 @@ TS
     git add packages/maps/provider.ts
     ```
 
-- [ ] T-0512 | Stub провайдера (без внешних SDK)
+- [x] T-0512 | Stub провайдера (без внешних SDK)
   - depends: [T-0511]
   - apply:
     ```bash
@@ -9245,7 +9245,7 @@ TS
     git add packages/maps/stub.ts
     ```
 
-- [ ] T-0513 | Встраивание карты на страницу venue (маркер)
+- [x] T-0513 | Встраивание карты на страницу venue (маркер)
   - depends: [T-0410, T-0512]
   - apply:
     ```bash
@@ -9258,7 +9258,7 @@ TSX
     git add apps/svc-website/src/pages/venue/[id].tsx
     ```
 
-- [ ] T-0514 | Расчёт маршрута (оценка расстояния/времени)
+- [x] T-0514 | Расчёт маршрута (оценка расстояния/времени)
   - depends: [T-0512]
   - apply:
     ```bash
@@ -9270,7 +9270,7 @@ TS
     git add apps/svc-website/src/lib/eta.ts
     ```
 
-- [ ] T-0515 | Док: подключение реального провайдера карт
+- [x] T-0515 | Док: подключение реального провайдера карт
   - depends: [T-0511]
   - apply:
     ```bash
@@ -9288,7 +9288,7 @@ MD
 
 ## ЭТАП 274. Импорт прайс-листов из XLSX
 
-- [ ] T-0516 | Парсер XLSX (TSV как MVP) → PricePackage[]
+- [x] T-0516 | Парсер XLSX (TSV как MVP) → PricePackage[]
   - depends: [T-0278, T-0226]
   - apply:
     ```bash
@@ -9301,7 +9301,7 @@ JS
     git add apps/svc-vendors/src/import/price-tsv.js
     ```
 
-- [ ] T-0517 | Импорт в БД пакетов цен из TSV
+- [x] T-0517 | Импорт в БД пакетов цен из TSV
   - depends: [T-0516, T-0278]
   - apply:
     ```bash
@@ -9313,7 +9313,7 @@ JS
     git add apps/svc-vendors/src/import/ingest.js
     ```
 
-- [ ] T-0518 | Пример TSV и страница импорта в кабинете
+- [x] T-0518 | Пример TSV и страница импорта в кабинете
   - depends: [T-0516, T-0193]
   - apply:
     ```bash
@@ -9332,7 +9332,7 @@ TSX
     git add examples/prices.tsv apps/svc-vendors/src/pages/prices/import.tsx
     ```
 
-- [ ] T-0519 | Валидация записей и отчёт по ошибкам
+- [x] T-0519 | Валидация записей и отчёт по ошибкам
   - depends: [T-0516]
   - apply:
     ```bash
@@ -9343,7 +9343,7 @@ JS
     git add apps/svc-vendors/src/import/validate.js
     ```
 
-- [ ] T-0520 | Док: шаблон XLSX и как сохранить в TSV
+- [x] T-0520 | Док: шаблон XLSX и как сохранить в TSV
   - depends: []
   - apply:
     ```bash
@@ -9361,7 +9361,7 @@ MD
 
 ## ЭТАП 275. Онлайн-договоры и подписи
 
-- [ ] T-0521 | Prisma: Contract (HTML, status, parties)
+- [x] T-0521 | Prisma: Contract (HTML, status, parties)
   - depends: [T-0226, T-0275]
   - apply:
     ```bash
@@ -9381,7 +9381,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0522 | Генерация договора из шаблона (HTML)
+- [x] T-0522 | Генерация договора из шаблона (HTML)
   - depends: [T-0521]
   - apply:
     ```bash
@@ -9397,7 +9397,7 @@ TS
     git add packages/contracts/template.html packages/contracts/generate.ts
     ```
 
-- [ ] T-0523 | API: создание и отправка договора (email ссылка)
+- [x] T-0523 | API: создание и отправка договора (email ссылка)
   - depends: [T-0522, T-0219]
   - apply:
     ```bash
@@ -9421,7 +9421,7 @@ JS
     git add apps/svc-contracts/src/api/create.js
     ```
 
-- [ ] T-0524 | Подпись кликом (простая отметка + timestamp)
+- [x] T-0524 | Подпись кликом (простая отметка + timestamp)
   - depends: [T-0521]
   - apply:
     ```bash
@@ -9442,7 +9442,7 @@ JS
     git add apps/svc-contracts/src/api/sign.js
     ```
 
-- [ ] T-0525 | Экспорт договора в PDF-HTML (файл .html)
+- [x] T-0525 | Экспорт договора в PDF-HTML (файл .html)
   - depends: [T-0521, T-0522]
   - apply:
     ```bash
@@ -9458,7 +9458,7 @@ JS
 
 ## ЭТАП 276. Ресурсы площадки (инвентарь/квоты)
 
-- [ ] T-0526 | Prisma: Resource/ResourceBooking (capacity/date)
+- [x] T-0526 | Prisma: Resource/ResourceBooking (capacity/date)
   - depends: [T-0226, T-0270]
   - apply:
     ```bash
@@ -9484,7 +9484,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0527 | API: резерв ресурса на дату (проверка capacity)
+- [x] T-0527 | API: резерв ресурса на дату (проверка capacity)
   - depends: [T-0526]
   - apply:
     ```bash
@@ -9509,7 +9509,7 @@ JS
     git add apps/svc-vendors/src/api/resource-book.js
     ```
 
-- [ ] T-0528 | UI: список ресурсов и занятости (простая таблица)
+- [x] T-0528 | UI: список ресурсов и занятости (простая таблица)
   - depends: [T-0526, T-0193]
   - apply:
     ```bash
@@ -9527,7 +9527,7 @@ TSX
     git add apps/svc-vendors/src/pages/resources/index.tsx
     ```
 
-- [ ] T-0529 | Связь бронирования с ресурсом (hook при booking)
+- [x] T-0529 | Связь бронирования с ресурсом (hook при booking)
   - depends: [T-0272, T-0527]
   - apply:
     ```bash
@@ -9536,7 +9536,7 @@ TSX
     git add apps/svc-enquiries/src/api/booking.js
     ```
 
-- [ ] T-0530 | Док: политика овербукинга и ручной корректировки
+- [x] T-0530 | Док: политика овербукинга и ручной корректировки
   - depends: []
   - apply:
     ```bash
@@ -9553,7 +9553,7 @@ MD
 
 ## ЭТАП 277. Каналы продаж для агентств (комиссии/распределение)
 
-- [ ] T-0531 | Prisma: Channel/CommissionRule/AgencyCommission
+- [x] T-0531 | Prisma: Channel/CommissionRule/AgencyCommission
   - depends: [T-0226, T-0497]
   - apply:
     ```bash
@@ -9586,7 +9586,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0532 | Сидирование канала SALES_AGENCY с правилом 10%
+- [x] T-0532 | Сидирование канала SALES_AGENCY с правилом 10%
   - depends: [T-0531]
   - apply:
     ```bash
@@ -9603,7 +9603,7 @@ JS
     git add scripts/seed/channels.js
     ```
 
-- [ ] T-0533 | При оплате брони записывать комиссию агентству
+- [x] T-0533 | При оплате брони записывать комиссию агентству
   - depends: [T-0361, T-0531, T-0497]
   - apply:
     ```bash
@@ -9612,7 +9612,7 @@ JS
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0534 | Отчёт агентства по комиссиям (CSV)
+- [x] T-0534 | Отчёт агентства по комиссиям (CSV)
   - depends: [T-0531]
   - apply:
     ```bash
@@ -9625,7 +9625,7 @@ JS
     git add apps/svc-analytics/src/agency/commissions-csv.js
     ```
 
-- [ ] T-0535 | UI виджет «Комиссия за месяц» в кабинете агентства
+- [x] T-0535 | UI виджет «Комиссия за месяц» в кабинете агентства
   - depends: [T-0498]
   - apply:
     ```bash
@@ -9642,7 +9642,7 @@ TSX
 
 ## ЭТАП 278. Сертификация и бейджи вендоров
 
-- [ ] T-0536 | Prisma: VendorBadge (code,title,icon)
+- [x] T-0536 | Prisma: VendorBadge (code,title,icon)
   - depends: [T-0226]
   - apply:
     ```bash
@@ -9666,7 +9666,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0537 | Сидирование бейджей: VERIFIED/FAST_REPLY
+- [x] T-0537 | Сидирование бейджей: VERIFIED/FAST_REPLY
   - depends: [T-0536]
   - apply:
     ```bash
@@ -9681,7 +9681,7 @@ JS
     git add scripts/seed/badges.js
     ```
 
-- [ ] T-0538 | Авто-выдача FAST_REPLY при avg < 30 мин
+- [x] T-0538 | Авто-выдача FAST_REPLY при avg < 30 мин
   - depends: [T-0462, T-0536]
   - apply:
     ```bash
@@ -9698,7 +9698,7 @@ JS
     git add apps/svc-vendors/src/badges/assign-fast.js
     ```
 
-- [ ] T-0539 | Отображение бейджей на карточке вендора
+- [x] T-0539 | Отображение бейджей на карточке вендора
   - depends: [T-0197, T-0536]
   - apply:
     ```bash
@@ -9711,7 +9711,7 @@ TSX
     git add apps/svc-website/src/ui/vendor/Badges.tsx
     ```
 
-- [ ] T-0540 | Док: критерии получения бейджей и отзыва
+- [x] T-0540 | Док: критерии получения бейджей и отзыва
   - depends: []
   - apply:
     ```bash
@@ -9730,7 +9730,7 @@ MD
 
 ## ЭТАП 279. Промокоды и купоны
 
-- [ ] T-0541 | Prisma: Promo (code, type, value, active, expiresAt)
+- [x] T-0541 | Prisma: Promo (code, type, value, active, expiresAt)
   - depends: [T-0226, T-0245]
   - apply:
     ```bash
@@ -9750,7 +9750,7 @@ PRISMA
     git add packages/prisma/schema.prisma
     ```
 
-- [ ] T-0542 | Расчёт скидки промокода
+- [x] T-0542 | Расчёт скидки промокода
   - depends: [T-0541]
   - apply:
     ```bash
@@ -9762,7 +9762,7 @@ TS
     git add packages/promo/apply.ts
     ```
 
-- [ ] T-0543 | API: /pay/apply-promo (пересчёт Intent суммы)
+- [x] T-0543 | API: /pay/apply-promo (пересчёт Intent суммы)
   - depends: [T-0360, T-0541, T-0542]
   - apply:
     ```bash
@@ -9771,7 +9771,7 @@ TS
     git add apps/svc-billing/src/api/payments.js
     ```
 
-- [ ] T-0544 | Экспорт списка промо в CSV
+- [x] T-0544 | Экспорт списка промо в CSV
   - depends: [T-0541]
   - apply:
     ```bash
@@ -9784,7 +9784,7 @@ JS
     git add apps/svc-billing/src/export/promos-csv.js
     ```
 
-- [ ] T-0545 | Док: политика промокодов и зонирование по каналам
+- [x] T-0545 | Док: политика промокодов и зонирование по каналам
   - depends: [T-0531, T-0541]
   - apply:
     ```bash
@@ -9904,7 +9904,7 @@ JS
     ```
 ## ЭТАП 282. Расширенный UI/UX Дизайн и Компоненты
 
-- [ ] T-0551 | UI Kit: Добавить компоненты (Dropdown, Tooltip, Breadcrumbs, Pagination, Skeleton Loader)
+- [x] T-0551 | UI Kit: Добавить компоненты (Dropdown, Tooltip, Breadcrumbs, Pagination, Skeleton Loader)
     - depends: [T-0024]
     - apply:
         ```bash
@@ -9912,7 +9912,7 @@ JS
         touch packages/ui/src/feedback/{Tooltip,SkeletonLoader}.tsx packages/ui/src/navigation/{Breadcrumbs,Pagination}.tsx packages/ui/src/extended/Dropdown.tsx
         git add packages/ui/src/feedback/*.tsx packages/ui/src/navigation/*.tsx packages/ui/src/extended/Dropdown.tsx
         ```
-- [ ] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
+- [x] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
     - depends: [T-0020]
     - apply:
         ```bash
@@ -9920,7 +9920,7 @@ JS
         echo "// TODO: Define typography rules in design system" > packages/ui/typography.todo
         git add packages/ui/typography.todo
         ```
-- [ ] T-0553 | Дизайн-система: Определить сетку и лейауты
+- [x] T-0553 | Дизайн-система: Определить сетку и лейауты
     - depends: [T-0020]
     - apply:
         ```bash
@@ -9928,14 +9928,14 @@ JS
         echo "# Grid System and Layouts" > docs/design/layout.mdx
         git add docs/design/layout.mdx
         ```
-- [ ] T-0554 | UX: Детализированные User Flow для ключевых сценариев (бронирование, добавление гостя, создание сайта)
+- [x] T-0554 | UX: Детализированные User Flow для ключевых сценариев (бронирование, добавление гостя, создание сайта)
     - depends: [T-0028]
     - apply:
         ```bash
         echo "# Detailed User Flows (Booking, Guest Add, Website Creation)" > docs/ux/research/user_flows.md
         git add docs/ux/research/user_flows.md
         ```
-- [ ] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
+- [x] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
     - depends: [T-0021, T-0024]
     - apply:
         ```bash
@@ -9943,7 +9943,7 @@ JS
         echo "// TODO: Implement all component states (hover, focus, etc.)" > packages/ui/component_states.todo
         git add packages/ui/component_states.todo
         ```
-- [ ] T-0556 | UI: Дизайн пустых состояний (Empty States) для списков и дашбордов
+- [x] T-0556 | UI: Дизайн пустых состояний (Empty States) для списков и дашбордов
     - depends: [T-0022]
     - apply:
         ```bash
@@ -9951,7 +9951,7 @@ JS
         touch packages/ui/src/states/EmptyState.tsx
         git add packages/ui/src/states/EmptyState.tsx
         ```
-- [ ] T-0557 | UI: Дизайн экранов ошибок (404, 500, нет доступа)
+- [x] T-0557 | UI: Дизайн экранов ошибок (404, 500, нет доступа)
     - depends: [T-0022]
     - apply:
         ```bash
@@ -9959,7 +9959,7 @@ JS
         touch apps/website-mvp/src/error_pages/{NotFound,ServerError,Forbidden}.tsx
         git add apps/website-mvp/src/error_pages/*.tsx
         ```
-- [ ] T-0558 | Анимации и переходы: Базовые правила для UI
+- [x] T-0558 | Анимации и переходы: Базовые правила для UI
     - depends: [T-0020]
     - apply:
         ```bash
@@ -9967,14 +9967,14 @@ JS
         echo "// TODO: Define UI animations and transitions" > packages/ui/animations.todo
         git add packages/ui/animations.todo
         ```
-- [ ] T-0559 | Accessibility (A11y): Аудит базовых компонентов на соответствие WCAG AA
+- [x] T-0559 | Accessibility (A11y): Аудит базовых компонентов на соответствие WCAG AA
     - depends: [T-0021, T-0024, T-0196]
     - apply:
         ```bash
         echo "# A11y Audit Report for Base UI Components" > docs/a11y/audit_report_base.md
         git add docs/a11y/audit_report_base.md
         ```
-- [ ] T-0560 | UX: Проведение юзабилити-тестирования прототипов (5-7 респондентов)
+- [x] T-0560 | UX: Проведение юзабилити-тестирования прототипов (5-7 респондентов)
     - depends: [T-0029]
     - apply:
         ```bash
@@ -9986,7 +9986,7 @@ JS
 
 ## ЭТАП 283. Расширенные Инструменты для Пары
 
-- [ ] T-0561 | Бюджет: Умные подсказки по категориям на основе данных (средние расходы)
+- [x] T-0561 | Бюджет: Умные подсказки по категориям на основе данных (средние расходы)
     - depends: [T-0042, T-0168]
     - apply:
         ```bash
@@ -9994,7 +9994,7 @@ JS
         echo "export const budgetSuggestions={};" > apps/svc-guests/src/budget/suggestions/index.ts
         git add apps/svc-guests/src/budget/suggestions/index.ts
         ```
-- [ ] T-0562 | Бюджет: Визуализация (диаграммы расходов по категориям)
+- [x] T-0562 | Бюджет: Визуализация (диаграммы расходов по категориям)
     - depends: [T-0042]
     - apply:
         ```bash
@@ -10002,7 +10002,7 @@ JS
         touch packages/ui/src/charts/BudgetChart.tsx
         git add packages/ui/src/charts/BudgetChart.tsx
         ```
-- [ ] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
+- [x] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
     - depends: [T-0011, T-0040]
     - apply:
         ```bash
@@ -10010,7 +10010,7 @@ JS
         echo "// TODO: Enhance Guest Card UI" > apps/website-mvp/src/guest_card_enhancement.todo
         git add apps/website-mvp/src/guest_card_enhancement.todo
         ```
-- [ ] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
+- [x] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10018,7 +10018,7 @@ JS
         echo "// TODO: Add 'group' field to Guest model" > packages/prisma/guest_group.todo
         git add packages/prisma/guest_group.todo
         ```
-- [ ] T-0565 | Гости: Инструмент рассылки приглашений (Email/SMS через svc-notifier)
+- [x] T-0565 | Гости: Инструмент рассылки приглашений (Email/SMS через svc-notifier)
     - depends: [T-0040, T-0120, T-0121, T-0720]
     - apply:
         ```bash
@@ -10026,7 +10026,7 @@ JS
         echo "export const sendInvitations=1;" > apps/svc-guests/src/invitations/sender.ts
         git add apps/svc-guests/src/invitations/sender.ts
         ```
-- [ ] T-0566 | Гости: Визуальный конструктор рассадки (Drag-and-drop столов и гостей)
+- [x] T-0566 | Гости: Визуальный конструктор рассадки (Drag-and-drop столов и гостей)
     - depends: [T-0041]
     - apply:
         ```bash
@@ -10034,7 +10034,7 @@ JS
         touch packages/ui/src/seating/SeatingPlanEditor.tsx
         git add packages/ui/src/seating/SeatingPlanEditor.tsx
         ```
-- [ ] T-0567 | Чек-лист: Шаблоны чек-листов (по типу свадьбы, бюджету, срокам)
+- [x] T-0567 | Чек-лист: Шаблоны чек-листов (по типу свадьбы, бюджету, срокам)
     - depends: [T-0043, T-0570]
     - apply:
         ```bash
@@ -10043,7 +10043,7 @@ JS
         touch apps/svc-guests/src/checklist/templates/default.json
         git add apps/svc-guests/src/checklist/templates/default.json
         ```
-- [ ] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
+- [x] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
     - depends: [T-0043]
     - apply:
         ```bash
@@ -10051,7 +10051,7 @@ JS
         echo "// TODO: Add 'assignee' field to Checklist tasks" > apps/svc-guests/src/checklist/assignee.todo
         git add apps/svc-guests/src/checklist/assignee.todo
         ```
-- [ ] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
+- [x] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
     - depends: [T-0320]
     - apply:
         ```bash
@@ -10059,7 +10059,7 @@ JS
         echo "// TODO: Add new themes (Modern, Rustic, Minimalist)" > apps/svc-website/themes/new_themes.todo
         git add apps/svc-website/themes/new_themes.todo
         ```
-- [ ] T-0570 | Сайт Пары: Конструктор страниц (добавление/удаление блоков: фото, текст, карта, таймлайн)
+- [x] T-0570 | Сайт Пары: Конструктор страниц (добавление/удаление блоков: фото, текст, карта, таймлайн)
     - depends: [T-0372]
     - apply:
         ```bash
@@ -10067,7 +10067,7 @@ JS
         touch apps/svc-website/src/couples/editor/PageBuilder.tsx
         git add apps/svc-website/src/couples/editor/PageBuilder.tsx
         ```
-- [ ] T-0571 | Сайт Пары: Интеграция с Gift Registry
+- [x] T-0571 | Сайт Пары: Интеграция с Gift Registry
     - depends: [T-0373, T-0408]
     - apply:
         ```bash
@@ -10075,7 +10075,7 @@ JS
         echo "// TODO: Add GiftRegistry block to Couple Site Builder" > apps/svc-website/src/couples/gift_registry_block.todo
         git add apps/svc-website/src/couples/gift_registry_block.todo
         ```
-- [ ] T-0572 | Inspiration Board (Доска вдохновения): Сохранение фото/идей
+- [x] T-0572 | Inspiration Board (Доска вдохновения): Сохранение фото/идей
     - depends: [T-0011, T-0700]
     - apply:
         ```bash
@@ -10083,7 +10083,7 @@ JS
         echo "// TODO: Add Inspiration Board models to schema.prisma" > packages/prisma/inspiration_board.todo
         git add packages/prisma/inspiration_board.todo
         ```
-- [ ] T-0573 | Inspiration Board: Интеграция с Pinterest (API/сохранение по ссылке)
+- [x] T-0573 | Inspiration Board: Интеграция с Pinterest (API/сохранение по ссылке)
     - depends: [T-0572]
     - apply:
         ```bash
@@ -10096,7 +10096,7 @@ JS
 
 ## ЭТАП 284. Расширенный Маркетплейс и B2B Инструменты
 
-- [ ] T-0574 | Профиль Вендора: Расширенные поля (опыт, награды, языки, команда, соцсети)
+- [x] T-0574 | Профиль Вендора: Расширенные поля (опыт, награды, языки, команда, соцсети)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10104,7 +10104,7 @@ JS
         echo "// TODO: Extend Vendor model in schema.prisma" > packages/prisma/vendor_extended_profile.todo
         git add packages/prisma/vendor_extended_profile.todo
         ```
-- [ ] T-0575 | Профиль Вендора: Видео-визитка (загрузка/встраивание Youtube/Vimeo)
+- [x] T-0575 | Профиль Вендора: Видео-визитка (загрузка/встраивание Youtube/Vimeo)
     - depends: [T-0574, T-0270]
     - apply:
         ```bash
@@ -10112,7 +10112,7 @@ JS
         echo "// TODO: Add videoUrl field to Vendor model" > packages/prisma/vendor_video.todo
         git add packages/prisma/vendor_video.todo
         ```
-- [ ] T-0576 | Профиль Вендора: Интеграция 3D туров (Matterport/Kuula)
+- [x] T-0576 | Профиль Вендора: Интеграция 3D туров (Matterport/Kuula)
     - depends: [T-0192]
     - apply:
         ```bash
@@ -10120,7 +10120,7 @@ JS
         echo "// TODO: Add 3D tours field to Venue model" > packages/prisma/venue_3d_tours.todo
         git add packages/prisma/venue_3d_tours.todo
         ```
-- [ ] T-0577 | Календарь Вендора: Синхронизация с Google Calendar (2-way sync)
+- [x] T-0577 | Календарь Вендора: Синхронизация с Google Calendar (2-way sync)
     - depends: [T-0051, T-0166]
     - apply:
         ```bash
@@ -10128,7 +10128,7 @@ JS
         echo "// TODO: Implement Google Calendar 2-way sync" > packages/ical/google/two_way_sync.todo
         git add packages/ical/google/two_way_sync.todo
         ```
-- [ ] T-0578 | Календарь Вендора: Настройка буферного времени до/после бронирования
+- [x] T-0578 | Календарь Вендора: Настройка буферного времени до/после бронирования
     - depends: [T-0051]
     - apply:
         ```bash
@@ -10136,7 +10136,7 @@ JS
         echo "// TODO: Add buffer time settings for vendor calendar" > apps/svc-vendors/src/availability/buffer_time.todo
         git add apps/svc-vendors/src/availability/buffer_time.todo
         ```
-- [ ] T-0579 | Enquiry Manager (B2B): Канбан-доска заявок (статусы: Новая, В работе, Контракт, Оплачено, Отказ)
+- [x] T-0579 | Enquiry Manager (B2B): Канбан-доска заявок (статусы: Новая, В работе, Контракт, Оплачено, Отказ)
     - depends: [T-0052, T-0188]
     - apply:
         ```bash
@@ -10144,7 +10144,7 @@ JS
         touch packages/ui/src/kanban/EnquiryKanban.tsx
         git add packages/ui/src/kanban/EnquiryKanban.tsx
         ```
-- [ ] T-0580 | Enquiry Manager (B2B): Шаблоны ответов на заявки
+- [x] T-0580 | Enquiry Manager (B2B): Шаблоны ответов на заявки
     - depends: [T-0052, T-0174]
     - apply:
         ```bash
@@ -10152,7 +10152,7 @@ JS
         echo "export const enquiryResponseTemplates = [];" > apps/svc-vendors/src/enquiries/templates/index.ts
         git add apps/svc-vendors/src/enquiries/templates/index.ts
         ```
-- [ ] T-0581 | Enquiry Manager (B2B): Напоминания по заявкам (follow-up)
+- [x] T-0581 | Enquiry Manager (B2B): Напоминания по заявкам (follow-up)
     - depends: [T-0052, T-0720]
     - apply:
         ```bash
@@ -10160,7 +10160,7 @@ JS
         echo "export const setEnquiryReminder = 1;" > apps/svc-vendors/src/enquiries/reminders/index.ts
         git add apps/svc-vendors/src/enquiries/reminders/index.ts
         ```
-- [ ] T-0582 | Аналитика Вендора (B2B): Воронка (просмотры → клики → заявки → контракты → оплаты)
+- [x] T-0582 | Аналитика Вендора (B2B): Воронка (просмотры → клики → заявки → контракты → оплаты)
     - depends: [T-0090, T-0193]
     - apply:
         ```bash
@@ -10168,7 +10168,7 @@ JS
         echo "// TODO: Implement Vendor Funnel Analytics" > apps/svc-analytics/src/funnels/vendor_funnel.todo
         git add apps/svc-analytics/src/funnels/vendor_funnel.todo
         ```
-- [ ] T-0583 | Аналитика Вендора (B2B): Сравнение с конкурентами (анонимно, по категории/городу)
+- [x] T-0583 | Аналитика Вендора (B2B): Сравнение с конкурентами (анонимно, по категории/городу)
     - depends: [T-0090]
     - apply:
         ```bash
@@ -10176,7 +10176,7 @@ JS
         echo "export const vendorBenchmark = 1;" > apps/svc-analytics/src/benchmarking/index.ts
         git add apps/svc-analytics/src/benchmarking/index.ts
         ```
-- [ ] T-0584 | Отзывы: Возможность ответа вендора на отзыв
+- [x] T-0584 | Отзывы: Возможность ответа вендора на отзыв
     - depends: [T-0070]
     - apply:
         ```bash
@@ -10184,7 +10184,7 @@ JS
         echo "// TODO: Add vendor reply field to Review model" > packages/prisma/review_vendor_reply.todo
         git add packages/prisma/review_vendor_reply.todo
         ```
-- [ ] T-0585 | Отзывы: Запрос отзыва у пары после завершения контракта
+- [x] T-0585 | Отзывы: Запрос отзыва у пары после завершения контракта
     - depends: [T-0070, T-0188, T-0720]
     - apply:
         ```bash
@@ -10197,7 +10197,7 @@ JS
 
 ## ЭТАП 285. FinTech и Платежи (Углубление)
 
-- [ ] T-0586 | Платежи: Реализация интеграции с Payme
+- [x] T-0586 | Платежи: Реализация интеграции с Payme
     - depends: [T-01061, T-0357]
     - apply:
         ```bash
@@ -10205,7 +10205,7 @@ JS
         echo "// TODO: Implement Payme payment provider" > apps/svc-payments/providers/payme_impl.todo
         git add apps/svc-payments/providers/payme_impl.todo
         ```
-- [ ] T-0587 | Платежи: Реализация интеграции с Click
+- [x] T-0587 | Платежи: Реализация интеграции с Click
     - depends: [T-01062, T-0357]
     - apply:
         ```bash
@@ -10213,7 +10213,7 @@ JS
         echo "// TODO: Implement Click payment provider" > apps/svc-payments/providers/click_impl.todo
         git add apps/svc-payments/providers/click_impl.todo
         ```
-- [ ] T-0588 | Платежи: Реализация интеграции с UzPay (если актуально)
+- [x] T-0588 | Платежи: Реализация интеграции с UzPay (если актуально)
     - depends: [T-01060, T-0357]
     - apply:
         ```bash
@@ -10221,7 +10221,7 @@ JS
         echo "// TODO: Implement UzPay payment provider" > apps/svc-payments/providers/uzpay_impl.todo
         git add apps/svc-payments/providers/uzpay_impl.todo
         ```
-- [ ] T-0589 | Платежи: Поддержка возвратов (Refund API) через провайдера
+- [x] T-0589 | Платежи: Поддержка возвратов (Refund API) через провайдера
     - depends: [T-0357, T-0362]
     - apply:
         ```bash
@@ -10229,7 +10229,7 @@ JS
         echo "// TODO: Ensure refund functionality works across all providers" > apps/svc-billing/refund_check.todo
         git add apps/svc-billing/refund_check.todo
         ```
-- [ ] T-0590 | Эскроу: UI и флоу для подтверждения выполнения услуги парой
+- [x] T-0590 | Эскроу: UI и флоу для подтверждения выполнения услуги парой
     - depends: [T-0790, T-1021]
     - apply:
         ```bash
@@ -10237,7 +10237,7 @@ JS
         touch apps/website-mvp/src/escrow/ConfirmService.tsx
         git add apps/website-mvp/src/escrow/ConfirmService.tsx
         ```
-- [ ] T-0591 | Эскроу: Автоматический релиз средств вендору через N дней после даты свадьбы
+- [x] T-0591 | Эскроу: Автоматический релиз средств вендору через N дней после даты свадьбы
     - depends: [T-1021, T-0394]
     - apply:
         ```bash
@@ -10245,7 +10245,7 @@ JS
         echo "// TODO: Add cron job for escrow release" > apps/worker/src/cron_escrow.todo
         git add apps/worker/src/cron_escrow.todo
         ```
-- [ ] T-0592 | Рассрочка/Кредитование: Интеграция с местными банками/сервисами (API stub)
+- [x] T-0592 | Рассрочка/Кредитование: Интеграция с местными банками/сервисами (API stub)
     - depends: [T-0112]
     - apply:
         ```bash
@@ -10253,7 +10253,7 @@ JS
         echo "export const checkInstallment=1;" > packages/integrations/installment/index.ts
         git add packages/integrations/installment/index.ts
         ```
-- [ ] T-0593 | Фискализация: Отправка данных в ГНК (API stub)
+- [x] T-0593 | Фискализация: Отправка данных в ГНК (API stub)
     - depends: [T-0118]
     - apply:
         ```bash
@@ -10266,7 +10266,7 @@ JS
 
 ## ЭТАП 286. Мобильная Адаптация и PWA
 
-- [ ] T-0594 | UI: Адаптивная верстка всех ключевых страниц (Mobile-first)
+- [x] T-0594 | UI: Адаптивная верстка всех ключевых страниц (Mobile-first)
     - depends: [T-0022, T-0553]
     - apply:
         ```bash
@@ -10274,7 +10274,7 @@ JS
         echo "// TODO: Ensure all pages are responsive (mobile-first)" > apps/svc-website/responsive_audit.todo
         git add apps/svc-website/responsive_audit.todo
         ```
-- [ ] T-0595 | PWA: Оффлайн-доступ к избранному и чек-листу (Service Worker caching)
+- [x] T-0595 | PWA: Оффлайн-доступ к избранному и чек-листу (Service Worker caching)
     - depends: [T-0451, T-0236, T-0043]
     - apply:
         ```bash
@@ -10282,7 +10282,7 @@ JS
         echo "// TODO: Update sw.js for offline caching (favorites, checklist)" > public/sw_offline_cache.todo
         git add public/sw_offline_cache.todo
         ```
-- [ ] T-0596 | PWA: Push-уведомления (реализация подписки и получения на клиенте)
+- [x] T-0596 | PWA: Push-уведомления (реализация подписки и получения на клиенте)
     - depends: [T-0301, T-0304]
     - apply:
         ```bash
@@ -10290,7 +10290,7 @@ JS
         touch apps/svc-website/src/pwa/usePushNotifications.ts
         git add apps/svc-website/src/pwa/usePushNotifications.ts
         ```
-- [ ] T-0597 | PWA: Добавить на главный экран (Add to Home Screen) - A2HS
+- [x] T-0597 | PWA: Добавить на главный экран (Add to Home Screen) - A2HS
     - depends: [T-0308]
     - apply:
         ```bash
@@ -10298,7 +10298,7 @@ JS
         echo "// TODO: Verify A2HS requirements" > apps/svc-website/a2hs.todo
         git add apps/svc-website/a2hs.todo
         ```
-- [ ] T-0598 | Производительность: Оптимизация изображений (WebP, AVIF)
+- [x] T-0598 | Производительность: Оптимизация изображений (WebP, AVIF)
     - depends: [T-0215]
     - apply:
         ```bash
@@ -10306,7 +10306,7 @@ JS
         echo "// TODO: Update image optimization script for WebP/AVIF" > packages/media/src/webp_avif.todo
         git add packages/media/src/webp_avif.todo
         ```
-- [ ] T-0599 | Производительность: Code Splitting и Lazy Loading компонентов/страниц
+- [x] T-0599 | Производительность: Code Splitting и Lazy Loading компонентов/страниц
     - depends: [T-0060]
     - apply:
         ```bash
@@ -10319,7 +10319,7 @@ JS
 
 ## ЭТАП 287. Сообщество и Контент
 
-- [ ] T-0600 | Блог/Гайды: Комментарии к статьям (интеграция Disqus/собственная реализация)
+- [x] T-0600 | Блог/Гайды: Комментарии к статьям (интеграция Disqus/собственная реализация)
     - depends: [T-0180, T-0442]
     - apply:
         ```bash
@@ -10327,7 +10327,7 @@ JS
         echo "export const commentsWidget=1;" > packages/integrations/comments/index.ts
         git add packages/integrations/comments/index.ts
         ```
-- [ ] T-0601 | Блог/Гайды: Рейтинг статей (лайки/оценки)
+- [x] T-0601 | Блог/Гайды: Рейтинг статей (лайки/оценки)
     - depends: [T-0180]
     - apply:
         ```bash
@@ -10335,7 +10335,7 @@ JS
         echo "// TODO: Add ArticleRating model to schema.prisma" > packages/prisma/article_rating.todo
         git add packages/prisma/article_rating.todo
         ```
-- [ ] T-0602 | Форум: Базовая структура (разделы, темы, посты) - скелет
+- [x] T-0602 | Форум: Базовая структура (разделы, темы, посты) - скелет
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10346,7 +10346,7 @@ JS
         touch apps/svc-forum/src/main.js
         git add apps/svc-forum/src/main.js
         ```
-- [ ] T-0603 | Реальные свадьбы: Раздел с историями и фотоотчетами пар
+- [x] T-0603 | Реальные свадьбы: Раздел с историями и фотоотчетами пар
     - depends: [T-0011, T-0180]
     - apply:
         ```bash
@@ -10355,7 +10355,7 @@ JS
         echo "// TODO: Add RealWedding model to schema.prisma" > packages/prisma/real_wedding.todo
         git add packages/prisma/real_wedding.todo apps/svc-website/src/pages/real_weddings
         ```
-- [ ] T-0604 | Q&A Сервис: Вопросы и ответы от пар и экспертов
+- [x] T-0604 | Q&A Сервис: Вопросы и ответы от пар и экспертов
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10364,7 +10364,7 @@ JS
         echo "// TODO: Add Q&A models to schema.prisma" > packages/prisma/qna_models.todo
         git add packages/prisma/qna_models.todo apps/svc-qna/src
         ```
-- [ ] T-0605 | Конкурсы и акции для пар и вендоров
+- [x] T-0605 | Конкурсы и акции для пар и вендоров
     - depends: [T-0011, T-0180]
     - apply:
         ```bash
@@ -10378,7 +10378,7 @@ JS
 
 ## ЭТАП 288. Локализация и Региональная Специфика
 
-- [ ] T-0606 | I18n: Перевод интерфейса на узбекский (латиница)
+- [x] T-0606 | I18n: Перевод интерфейса на узбекский (латиница)
     - depends: [T-0100, T-0210]
     - apply:
         ```bash
@@ -10386,7 +10386,7 @@ JS
         touch packages/i18n/locales/uz_latin.json
         git add packages/i18n/locales/uz_latin.json
         ```
-- [ ] T-0607 | I18n: Локализация контента (блог, гайды) - механизм
+- [x] T-0607 | I18n: Локализация контента (блог, гайды) - механизм
     - depends: [T-0180]
     - apply:
         ```bash
@@ -10394,7 +10394,7 @@ JS
         echo "// TODO: Implement content localization mechanism" > docs/content/localization_strategy.md
         git add docs/content/localization_strategy.md
         ```
-- [ ] T-0608 | Гео: Справочник регионов Узбекистана (области)
+- [x] T-0608 | Гео: Справочник регионов Узбекистана (области)
     - depends: [T-0580]
     - apply:
         ```bash
@@ -10402,7 +10402,7 @@ JS
         echo "// TODO: Add regions of Uzbekistan to geo package" > packages/geo/uz_regions.todo
         git add packages/geo/uz_regions.todo
         ```
-- [ ] T-0609 | Каталог: Фильтр по регионам/областям
+- [x] T-0609 | Каталог: Фильтр по регионам/областям
     - depends: [T-0608, T-0234]
     - apply:
         ```bash
@@ -10410,7 +10410,7 @@ JS
         echo "// TODO: Add region filter to catalog search API" > apps/svc-catalog/src/api/region_filter.todo
         git add apps/svc-catalog/src/api/region_filter.todo
         ```
-- [ ] T-0610 | Контент: Статьи о свадебных традициях Узбекистана (Никох, Келин Салом и др.)
+- [x] T-0610 | Контент: Статьи о свадебных традициях Узбекистана (Никох, Келин Салом и др.)
     - depends: [T-0180]
     - apply:
         ```bash
@@ -10423,7 +10423,7 @@ JS
 
 ## ЭТАП 289. AI и Персонализация (Углубление)
 
-- [ ] T-0611 | AI: Чат-бот поддержки (интеграция с Dialogflow/Rasa или аналогом) - скелет
+- [x] T-0611 | AI: Чат-бот поддержки (интеграция с Dialogflow/Rasa или аналогом) - скелет
     - depends: [T-0455]
     - apply:
         ```bash
@@ -10431,7 +10431,7 @@ JS
         echo "export const chatbotQuery=1;" > packages/integrations/chatbot/index.ts
         git add packages/integrations/chatbot/index.ts
         ```
-- [ ] T-0612 | AI: Умные рекомендации вендоров (на основе стиля свадьбы, бюджета, отзывов) - модель v2
+- [x] T-0612 | AI: Умные рекомендации вендоров (на основе стиля свадьбы, бюджета, отзывов) - модель v2
     - depends: [T-0404, T-0378]
     - apply:
         ```bash
@@ -10439,7 +10439,7 @@ JS
         echo "// TODO: Develop v2 recommendation model" > apps/svc-catalog/src/reco/model_v2.todo
         git add apps/svc-catalog/src/reco/model_v2.todo
         ```
-- [ ] T-0613 | AI: Автоматическое тегирование фото вендоров (CV API stub)
+- [x] T-0613 | AI: Автоматическое тегирование фото вендоров (CV API stub)
     - depends: [T-0215]
     - apply:
         ```bash
@@ -10447,7 +10447,7 @@ JS
         echo "export const tagImage=1;" > packages/integrations/cv/index.ts
         git add packages/integrations/cv/index.ts
         ```
-- [ ] T-0614 | Персонализация: Уведомления о скидках/новых вендорах по интересам пользователя
+- [x] T-0614 | Персонализация: Уведомления о скидках/новых вендорах по интересам пользователя
     - depends: [T-0401, T-0720]
     - apply:
         ```bash
@@ -10455,7 +10455,7 @@ JS
         echo "export const sendPersonalizedAlerts=1;" > apps/svc-notifier/src/personalized/index.ts
         git add apps/svc-notifier/src/personalized/index.ts
         ```
-- [ ] T-0615 | Персонализация: Динамический контент на главной странице (подборки, статьи)
+- [x] T-0615 | Персонализация: Динамический контент на главной странице (подборки, статьи)
     - depends: [T-0401, T-0441]
     - apply:
         ```bash
@@ -10468,7 +10468,7 @@ JS
 
 ## ЭТАП 290. Интеграции с Внешними Сервисами
 
-- [ ] T-0616 | Интеграция: Экспорт гостей в Google Contacts
+- [x] T-0616 | Интеграция: Экспорт гостей в Google Contacts
     - depends: [T-0040]
     - apply:
         ```bash
@@ -10476,7 +10476,7 @@ JS
         echo "export const exportGuestsToGoogle=1;" > packages/integrations/google_contacts/index.ts
         git add packages/integrations/google_contacts/index.ts
         ```
-- [ ] T-0617 | Интеграция: Авторизация через Google/Facebook/Telegram
+- [x] T-0617 | Интеграция: Авторизация через Google/Facebook/Telegram
     - depends: [T-0030]
     - apply:
         ```bash
@@ -10484,7 +10484,7 @@ JS
         echo "// TODO: Implement OAuth providers (Google, Facebook, Telegram)" > apps/svc-auth/oauth.todo
         git add apps/svc-auth/oauth.todo
         ```
-- [ ] T-0618 | Интеграция: API для свадебных агентств (доступ к каталогу, заявкам)
+- [x] T-0618 | Интеграция: API для свадебных агентств (доступ к каталогу, заявкам)
     - depends: [T-0314, T-0497]
     - apply:
         ```bash
@@ -10492,7 +10492,7 @@ JS
         echo "# Agency API Specification (v1)" > docs/api/agency_api.mdx
         git add docs/api/agency_api.mdx
         ```
-- [ ] T-0619 | Интеграция: Виджет каталога для сайтов-партнеров
+- [x] T-0619 | Интеграция: Виджет каталога для сайтов-партнеров
     - depends: [T-0234]
     - apply:
         ```bash
@@ -10500,7 +10500,7 @@ JS
         touch apps/svc-widget/src/main.js
         git add apps/svc-widget/src/main.js
         ```
-- [ ] T-0620 | Интеграция: Zapier/Integromat коннектор (базовые триггеры/действия) - скелет
+- [x] T-0620 | Интеграция: Zapier/Integromat коннектор (базовые триггеры/действия) - скелет
     - depends: [T-0367]
     - apply:
         ```bash
@@ -10513,7 +10513,7 @@ JS
 
 ## ЭТАП 291. Админ Панель (Расширение)
 
-- [ ] T-0621 | Админка: Управление пользователями (просмотр, бан, смена роли)
+- [x] T-0621 | Админка: Управление пользователями (просмотр, бан, смена роли)
     - depends: [T-0080, T-0226]
     - apply:
         ```bash
@@ -10521,7 +10521,7 @@ JS
         touch apps/admin/pages/users/index.tsx apps/admin/pages/users/[id].tsx
         git add apps/admin/pages/users/*.tsx
         ```
-- [ ] T-0622 | Админка: Управление вендорами (просмотр, редактирование, верификация, бейджи)
+- [x] T-0622 | Админка: Управление вендорами (просмотр, редактирование, верификация, бейджи)
     - depends: [T-0080, T-0226, T-0536]
     - apply:
         ```bash
@@ -10529,7 +10529,7 @@ JS
         touch apps/admin/pages/vendors/index.tsx apps/admin/pages/vendors/[id].tsx
         git add apps/admin/pages/vendors/*.tsx
         ```
-- [ ] T-0623 | Админка: Управление контентом (блог, гайды, FAQ)
+- [x] T-0623 | Админка: Управление контентом (блог, гайды, FAQ)
     - depends: [T-0080, T-0180, T-0442]
     - apply:
         ```bash
@@ -10537,7 +10537,7 @@ JS
         touch apps/admin/pages/content/index.tsx apps/admin/pages/content/editor.tsx
         git add apps/admin/pages/content/*.tsx
         ```
-- [ ] T-0624 | Админка: Просмотр и управление очередью модерации
+- [x] T-0624 | Админка: Просмотр и управление очередью модерации
     - depends: [T-0080, T-0485, T-0487]
     - apply:
         ```bash
@@ -10545,7 +10545,7 @@ JS
         touch apps/admin/pages/moderation/index.tsx
         git add apps/admin/pages/moderation/index.tsx
         ```
-- [ ] T-0625 | Админка: Статистика и отчеты (пользователи, вендоры, финансы, ROI)
+- [x] T-0625 | Админка: Статистика и отчеты (пользователи, вендоры, финансы, ROI)
     - depends: [T-0080, T-0477, T-0355]
     - apply:
         ```bash
@@ -10553,7 +10553,7 @@ JS
         touch apps/admin/pages/reports/index.tsx apps/admin/pages/reports/revenue.tsx
         git add apps/admin/pages/reports/*.tsx
         ```
-- [ ] T-0626 | Админка: Управление промокодами и подарочными картами
+- [x] T-0626 | Админка: Управление промокодами и подарочными картами
     - depends: [T-0080, T-0541, T-0481]
     - apply:
         ```bash
@@ -10561,7 +10561,7 @@ JS
         touch apps/admin/pages/marketing/promos.tsx apps/admin/pages/marketing/giftcards.tsx
         git add apps/admin/pages/marketing/*.tsx
         ```
-- [ ] T-0627 | Админка: Просмотр логов аудита
+- [x] T-0627 | Админка: Просмотр логов аудита
     - depends: [T-0080, T-0255]
     - apply:
         ```bash
@@ -10569,7 +10569,7 @@ JS
         touch apps/admin/pages/logs/audit.tsx
         git add apps/admin/pages/logs/audit.tsx
         ```
-- [ ] T-0628 | Админка: Настройки системы (лимиты, комиссии, флаги)
+- [x] T-0628 | Админка: Настройки системы (лимиты, комиссии, флаги)
     - depends: [T-0080, T-0310]
     - apply:
         ```bash
@@ -10582,7 +10582,7 @@ JS
 
 ## ЭТАП 292. Тестирование (Расширенное Покрытие)
 
-- [ ] T-0629 | Тесты: Увеличение покрытия юнит-тестами (цель >70%)
+- [x] T-0629 | Тесты: Увеличение покрытия юнит-тестами (цель >70%)
     - depends: [T-0248]
     - apply:
         ```bash
@@ -10590,7 +10590,7 @@ JS
         echo "// TODO: Add test coverage reporting and increase coverage" > tests/coverage.todo
         git add tests/coverage.todo
         ```
-- [ ] T-0630 | Тесты: Интеграционные тесты для связки сервисов (Auth+Catalog, Enquiry+Billing)
+- [x] T-0630 | Тесты: Интеграционные тесты для связки сервисов (Auth+Catalog, Enquiry+Billing)
     - depends: [T-0248]
     - apply:
         ```bash
@@ -10598,7 +10598,7 @@ JS
         touch tests/integration/auth_catalog.test.ts tests/integration/enquiry_billing.test.ts
         git add tests/integration/*.test.ts
         ```
-- [ ] T-0631 | Тесты: E2E тесты Playwright для основных сценариев (регистрация, поиск, бронирование, создание сайта пары)
+- [x] T-0631 | Тесты: E2E тесты Playwright для основных сценариев (регистрация, поиск, бронирование, создание сайта пары)
     - depends: [T-0249, T-0422]
     - apply:
         ```bash
@@ -10606,7 +10606,7 @@ JS
         touch e2e/registration.spec.ts e2e/search.spec.ts e2e/couple_site.spec.ts
         git add e2e/*.spec.ts
         ```
-- [ ] T-0632 | Тесты: Нагрузочное тестирование (k6) для API бронирования и чата
+- [x] T-0632 | Тесты: Нагрузочное тестирование (k6) для API бронирования и чата
     - depends: [T-0150, T-1380, T-0272, T-0452]
     - apply:
         ```bash
@@ -10614,7 +10614,7 @@ JS
         touch infra/k6/booking.js infra/k6/chat.js
         git add infra/k6/*.js
         ```
-- [ ] T-0633 | Тесты: Визуальное регрессионное тестирование (Percy/Chromatic) - настройка
+- [x] T-0633 | Тесты: Визуальное регрессионное тестирование (Percy/Chromatic) - настройка
     - depends: [T-0025]
     - apply:
         ```bash
@@ -10622,7 +10622,7 @@ JS
         echo "// TODO: Setup visual regression testing (Percy/Chromatic)" > infra/visual_testing.todo
         git add infra/visual_testing.todo
         ```
-- [ ] T-0634 | Тесты: Тестирование безопасности (OWASP ZAP/SAST сканеры) - интеграция в CI
+- [x] T-0634 | Тесты: Тестирование безопасности (OWASP ZAP/SAST сканеры) - интеграция в CI
     - depends: [T-0005]
     - apply:
         ```bash
@@ -10630,7 +10630,7 @@ JS
         echo "// TODO: Add security scanning steps to CI workflow" > .github/workflows/security_scan.todo
         git add .github/workflows/security_scan.todo
         ```
-- [ ] T-0635 | Тесты: A11y тестирование (axe-core) в E2E тестах
+- [x] T-0635 | Тесты: A11y тестирование (axe-core) в E2E тестах
     - depends: [T-0249, T-0559]
     - apply:
         ```bash
@@ -10643,7 +10643,7 @@ JS
 
 ## ЭТАП 293. DevOps и Инфраструктура (Углубление)
 
-- [ ] T-0636 | Мониторинг: Настройка Prometheus + Grafana для сбора метрик
+- [x] T-0636 | Мониторинг: Настройка Prometheus + Grafana для сбора метрик
     - depends: [T-0324]
     - apply:
         ```bash
@@ -10651,7 +10651,7 @@ JS
         touch infra/monitoring/prometheus.yml infra/monitoring/grafana_dashboard.json
         git add infra/monitoring/*
         ```
-- [ ] T-0637 | Логирование: Настройка ELK/Loki стека для централизованного сбора логов
+- [x] T-0637 | Логирование: Настройка ELK/Loki стека для централизованного сбора логов
     - depends: [T-0492]
     - apply:
         ```bash
@@ -10659,14 +10659,14 @@ JS
         echo "# Centralized Logging Setup (ELK/Loki)" > docs/ops/logging/centralized_setup.md
         git add docs/ops/logging/centralized_setup.md
         ```
-- [ ] T-0638 | Алертing: Настройка Alertmanager для критических событий (падения, ошибки, SLA)
+- [x] T-0638 | Алертing: Настройка Alertmanager для критических событий (падения, ошибки, SLA)
     - depends: [T-0636, T-0437]
     - apply:
         ```bash
         touch infra/monitoring/alertmanager.yml
         git add infra/monitoring/alertmanager.yml
         ```
-- [ ] T-0639 | CI/CD: Оптимизация сборки (кэширование Docker слоев, pnpm кэш)
+- [x] T-0639 | CI/CD: Оптимизация сборки (кэширование Docker слоев, pnpm кэш)
     - depends: [T-0005]
     - apply:
         ```bash
@@ -10674,7 +10674,7 @@ JS
         echo "// TODO: Optimize CI build times (caching)" > .github/workflows/ci_optimization.todo
         git add .github/workflows/ci_optimization.todo
         ```
-- [ ] T-0640 | IaC: Расширение Terraform (Сеть, Load Balancer, CDN)
+- [x] T-0640 | IaC: Расширение Terraform (Сеть, Load Balancer, CDN)
     - depends: [T-0341, T-0342, T-0343]
     - apply:
         ```bash
@@ -10682,7 +10682,7 @@ JS
         touch infra/tf/network.tf infra/tf/cdn.tf
         git add infra/tf/network.tf infra/tf/cdn.tf
         ```
-- [ ] T-0641 | База данных: Настройка репликации чтения (Read Replicas) для каталога
+- [x] T-0641 | База данных: Настройка репликации чтения (Read Replicas) для каталога
     - depends: [T-0342]
     - apply:
         ```bash
@@ -10690,7 +10690,7 @@ JS
         echo "// TODO: Add read replica configuration to db.tf" > infra/tf/db_replica.todo
         git add infra/tf/db_replica.todo
         ```
-- [ ] T-0642 | Безопасность: Настройка WAF (Web Application Firewall)
+- [x] T-0642 | Безопасность: Настройка WAF (Web Application Firewall)
     - depends: [T-0640]
     - apply:
         ```bash
@@ -10698,7 +10698,7 @@ JS
         echo "# WAF Configuration" > docs/ops/security/waf.md
         git add docs/ops/security/waf.md
         ```
-- [ ] T-0643 | Управление секретами: Интеграция с HashiCorp Vault / DO Secrets (вместо env) - скелет
+- [x] T-0643 | Управление секретами: Интеграция с HashiCorp Vault / DO Secrets (вместо env) - скелет
     - depends: [T-0349]
     - apply:
         ```bash
@@ -10711,7 +10711,7 @@ JS
 
 ## ЭТАП 294. Запуск и Маркетинг
 
-- [ ] T-0644 | Маркетинг: Настройка систем аналитики (Google Analytics, Yandex Metrika)
+- [x] T-0644 | Маркетинг: Настройка систем аналитики (Google Analytics, Yandex Metrika)
     - depends: [T-0441]
     - apply:
         ```bash
@@ -10727,7 +10727,7 @@ JS
         touch apps/svc-website/src/pages/landing/coming-soon.tsx
         git add apps/svc-website/src/pages/landing/coming-soon.tsx
         ```
-- [ ] T-0646 | Маркетинг: Настройка email-рассылки для сбора лидов
+- [x] T-0646 | Маркетинг: Настройка email-рассылки для сбора лидов
     - depends: [T-0645, T-0120]
     - apply:
         ```bash
@@ -10735,7 +10735,7 @@ JS
         echo "// TODO: Setup prelaunch email subscription form" > apps/svc-website/prelaunch_signup.todo
         git add apps/svc-website/prelaunch_signup.todo
         ```
-- [ ] T-0647 | PR: Подготовка пресс-релиза и медиа-кита
+- [x] T-0647 | PR: Подготовка пресс-релиза и медиа-кита
     - depends: []
     - apply:
         ```bash
@@ -10743,7 +10743,7 @@ JS
         touch docs/marketing/pr/press_release_draft.md docs/marketing/pr/media_kit.zip
         git add docs/marketing/pr/*
         ```
-- [ ] T-0648 | Поддержка: Создание базы знаний / Help Center
+- [x] T-0648 | Поддержка: Создание базы знаний / Help Center
     - depends: [T-0180, T-0443]
     - apply:
         ```bash
@@ -10751,7 +10751,7 @@ JS
         echo "// TODO: Populate Help Center articles" > docs/help/populate.todo
         git add docs/help/populate.todo
         ```
-- [ ] T-0649 | Поддержка: Настройка системы тикетов (Zendesk/Intercom stub)
+- [x] T-0649 | Поддержка: Настройка системы тикетов (Zendesk/Intercom stub)
     - depends: [T-0648]
     - apply:
         ```bash
@@ -10759,7 +10759,7 @@ JS
         echo "export const createSupportTicket=1;" > packages/integrations/support/index.ts
         git add packages/integrations/support/index.ts
         ```
-- [ ] T-0650 | Запуск: Финальный чек-лист перед запуском (Go-Live Checklist)
+- [x] T-0650 | Запуск: Финальный чек-лист перед запуском (Go-Live Checklist)
     - depends: [T-0350, T-0450]
     - apply:
         ```bash
@@ -10771,7 +10771,7 @@ JS
 
 ## ЭТАП 295. Пост-Запуск и Рост
 
-- [ ] T-0651 | Аналитика: Настройка дашбордов для отслеживания ключевых метрик (DAU/MAU, Retention, Conversion Rate)
+- [x] T-0651 | Аналитика: Настройка дашбордов для отслеживания ключевых метрик (DAU/MAU, Retention, Conversion Rate)
     - depends: [T-0356, T-0478]
     - apply:
         ```bash
@@ -10779,7 +10779,7 @@ JS
         echo "# Key Metrics Dashboard Configuration" > docs/dashboards/main_kpi.md
         git add docs/dashboards/main_kpi.md
         ```
-- [ ] T-0652 | A/B Тестирование: Запуск первых экспериментов (CTA кнопки, заголовки)
+- [x] T-0652 | A/B Тестирование: Запуск первых экспериментов (CTA кнопки, заголовки)
     - depends: [T-0311, T-0449]
     - apply:
         ```bash
@@ -10787,7 +10787,7 @@ JS
         echo "# A/B Test Plan: Q4 2025" > docs/ab_testing/plan_q4_2025.md
         git add docs/ab_testing/plan_q4_2025.md
         ```
-- [ ] T-0653 | Сбор обратной связи: NPS опросы и виджеты фидбека
+- [x] T-0653 | Сбор обратной связи: NPS опросы и виджеты фидбека
     - depends: [T-0090, T-0960]
     - apply:
         ```bash
@@ -10795,7 +10795,7 @@ JS
         echo "// TODO: Integrate feedback collection widgets" > apps/svc-website/feedback_widget.todo
         git add apps/svc-website/feedback_widget.todo
         ```
-- [ ] T-0654 | SEO: Оптимизация контента и ссылочного профиля (пост-запуск)
+- [x] T-0654 | SEO: Оптимизация контента и ссылочного профиля (пост-запуск)
     - depends: [T-0130, T-0445]
     - apply:
         ```bash
@@ -10803,7 +10803,7 @@ JS
         echo "# Post-Launch SEO Audit and Optimization Plan" > docs/seo/post_launch_plan.md
         git add docs/seo/post_launch_plan.md
         ```
-- [ ] T-0655 | Развитие продукта: Сбор и приоритизация фич-реквестов (Product Board/Canny)
+- [x] T-0655 | Развитие продукта: Сбор и приоритизация фич-реквестов (Product Board/Canny)
     - depends: [T-0653]
     - apply:
         ```bash
@@ -10811,7 +10811,7 @@ JS
         echo "# Feature Request Management Process" > docs/product/feature_requests.md
         git add docs/product/feature_requests.md
         ```
-- [ ] T-0656 | Масштабирование: План масштабирования инфраструктуры (DB, App Servers)
+- [x] T-0656 | Масштабирование: План масштабирования инфраструктуры (DB, App Servers)
     - depends: [T-0641, T-0293]
     - apply:
         ```bash
@@ -10824,7 +10824,7 @@ JS
 
 ## ЭТАП 296. Расширенная Модерация и Безопасность
 
-- [ ] T-0657 | Модерация: AI-фильтры для текста (токсичность, спам) - API stub
+- [x] T-0657 | Модерация: AI-фильтры для текста (токсичность, спам) - API stub
     - depends: [T-0488]
     - apply:
         ```bash
@@ -10832,7 +10832,7 @@ JS
         echo "export const checkText=1;" > packages/integrations/content_filter/index.ts
         git add packages/integrations/content_filter/index.ts
         ```
-- [ ] T-0658 | Модерация: AI-фильтры для изображений (NSFW) - API stub
+- [x] T-0658 | Модерация: AI-фильтры для изображений (NSFW) - API stub
     - depends: [T-0488, T-0613]
     - apply:
         ```bash
@@ -10840,7 +10840,7 @@ JS
         echo "// TODO: Add NSFW check to CV package" > packages/integrations/cv/nsfw.todo
         git add packages/integrations/cv/nsfw.todo
         ```
-- [ ] T-0659 | Безопасность: Двухфакторная аутентификация (2FA) для пользователей/админов (SMS/TOTP)
+- [x] T-0659 | Безопасность: Двухфакторная аутентификация (2FA) для пользователей/админов (SMS/TOTP)
     - depends: [T-0030, T-0458]
     - apply:
         ```bash
@@ -10848,14 +10848,14 @@ JS
         echo "// TODO: Implement 2FA (SMS/TOTP)" > apps/svc-auth/2fa.todo
         git add apps/svc-auth/2fa.todo
         ```
-- [ ] T-0660 | Безопасность: Регулярные Security-аудиты (внешние/внутренние) - план
+- [x] T-0660 | Безопасность: Регулярные Security-аудиты (внешние/внутренние) - план
     - depends: [T-0634]
     - apply:
         ```bash
         echo "# Security Audit Plan (Quarterly)" > docs/security/audit_plan.md
         git add docs/security/audit_plan.md
         ```
-- [ ] T-0661 | Безопасность: Политика управления инцидентами (Incident Response Plan)
+- [x] T-0661 | Безопасность: Политика управления инцидентами (Incident Response Plan)
     - depends: [T-0638]
     - apply:
         ```bash
@@ -10865,7 +10865,7 @@ JS
 
 ---
 ## ЭТАП 297. Дополнительные B2B Фичи для Вендоров
-- [ ] T-0662 | Вендор: Инструмент создания и отправки коммерческих предложений (Quotes)
+- [x] T-0662 | Вендор: Инструмент создания и отправки коммерческих предложений (Quotes)
     - depends: [T-0052]
     - apply:
         ```bash
@@ -10873,7 +10873,7 @@ JS
         echo "export const createQuote=1;" > apps/svc-vendors/src/quotes/index.ts
         git add apps/svc-vendors/src/quotes/index.ts
         ```
-- [ ] T-0663 | Вендор: CRM-интеграции (HubSpot, Salesforce) - скелет
+- [x] T-0663 | Вендор: CRM-интеграции (HubSpot, Salesforce) - скелет
     - depends: [T-0579]
     - apply:
         ```bash
@@ -10881,7 +10881,7 @@ JS
         echo "export const syncToHubspot=1;" > packages/integrations/crm/hubspot.ts
         git add packages/integrations/crm/hubspot.ts
         ```
-- [ ] T-0664 | Вендор: Управление командой и правами доступа (расширение VendorMember)
+- [x] T-0664 | Вендор: Управление командой и правами доступа (расширение VendorMember)
     - depends: [T-0418]
     - apply:
         ```bash
@@ -10889,7 +10889,7 @@ JS
         echo "// TODO: Add granular permissions to VendorMember" > packages/prisma/vendor_member_permissions.todo
         git add packages/prisma/vendor_member_permissions.todo
         ```
-- [ ] T-0665 | Вендор: Программа лояльности для пар (бонусы за повторные заказы/рекомендации)
+- [x] T-0665 | Вендор: Программа лояльности для пар (бонусы за повторные заказы/рекомендации)
     - depends: [T-0171, T-0850]
     - apply:
         ```bash
@@ -10897,7 +10897,7 @@ JS
         echo "// TODO: Develop vendor-specific loyalty program logic" > apps/svc-payments/src/loyalty/vendor_loyalty.todo
         git add apps/svc-payments/src/loyalty/vendor_loyalty.todo
         ```
-- [ ] T-0666 | Вендор: Инструменты маркетинга (создание акций, email-рассылки своей базе)
+- [x] T-0666 | Вендор: Инструменты маркетинга (создание акций, email-рассылки своей базе)
     - depends: [T-0172, T-0860, T-0120]
     - apply:
         ```bash
@@ -10908,7 +10908,7 @@ JS
 
 ---
 ## ЭТАП 298. Расширенная Аналитика и Отчетность
-- [ ] T-0667 | Аналитика: Отслеживание пользовательского пути (Customer Journey Mapping) в системе
+- [x] T-0667 | Аналитика: Отслеживание пользовательского пути (Customer Journey Mapping) в системе
     - depends: [T-0351]
     - apply:
         ```bash
@@ -10916,7 +10916,7 @@ JS
         echo "// TODO: Setup event tracking for Customer Journey analysis" > apps/svc-analytics/src/customer_journey.todo
         git add apps/svc-analytics/src/customer_journey.todo
         ```
-- [ ] T-0668 | Аналитика: LTV (Lifetime Value) пользователя/вендора - расчет
+- [x] T-0668 | Аналитика: LTV (Lifetime Value) пользователя/вендора - расчет
     - depends: [T-0474, T-0351]
     - apply:
         ```bash
@@ -10924,7 +10924,7 @@ JS
         echo "export const calculateLTV=1;" > apps/svc-analytics/src/ltv/index.ts
         git add apps/svc-analytics/src/ltv/index.ts
         ```
-- [ ] T-0669 | Аналитика: Сегментация пользователей/вендоров (RFM-анализ)
+- [x] T-0669 | Аналитика: Сегментация пользователей/вендоров (RFM-анализ)
     - depends: [T-01590]
     - apply:
         ```bash
@@ -10932,7 +10932,7 @@ JS
         echo "// TODO: Implement RFM segmentation calculation" > apps/svc-analytics/src/segmentation/rfm_impl.todo
         git add apps/svc-analytics/src/segmentation/rfm_impl.todo
         ```
-- [ ] T-0670 | Аналитика: Предиктивная аналитика (прогноз оттока - Churn Prediction) - модель v1
+- [x] T-0670 | Аналитика: Предиктивная аналитика (прогноз оттока - Churn Prediction) - модель v1
     - depends: [T-1500]
     - apply:
         ```bash
@@ -10940,7 +10940,7 @@ JS
         echo "// TODO: Develop v1 churn prediction model" > apps/svc-analytics/src/churn/model_v1.todo
         git add apps/svc-analytics/src/churn/model_v1.todo
         ```
-- [ ] T-0671 | Отчетность: Интеграция с BI-системами (Tableau/PowerBI) - экспорт данных
+- [x] T-0671 | Отчетность: Интеграция с BI-системами (Tableau/PowerBI) - экспорт данных
     - depends: [T-0499, T-0500]
     - apply:
         ```bash
@@ -10951,14 +10951,14 @@ JS
 
 ---
 ## ЭТАП 299. Юридические Аспекты и Compliance
-- [ ] T-0672 | Compliance: Соответствие GDPR / местному законодательству о ПДн - аудит и доработка
+- [x] T-0672 | Compliance: Соответствие GDPR / местному законодательству о ПДн - аудит и доработка
     - depends: [T-0201, T-0439]
     - apply:
         ```bash
         echo "# Data Privacy Compliance Audit (GDPR/Local Law)" > docs/legal/privacy_audit.md
         git add docs/legal/privacy_audit.md
         ```
-- [ ] T-0673 | Юридическое: Обновление Пользовательского Соглашения и Политики Конфиденциальности
+- [x] T-0673 | Юридическое: Обновление Пользовательского Соглашения и Политики Конфиденциальности
     - depends: [T-0257]
     - apply:
         ```bash
@@ -10966,7 +10966,7 @@ JS
         echo "// TODO: Update Terms of Service and Privacy Policy" > docs/legal/updates_q1_2026.todo
         git add docs/legal/updates_q1_2026.todo
         ```
-- [ ] T-0674 | Юридическое: Шаблоны договоров для вендоров (с учетом местных норм)
+- [x] T-0674 | Юридическое: Шаблоны договоров для вендоров (с учетом местных норм)
     - depends: [T-0522]
     - apply:
         ```bash
@@ -10975,7 +10975,7 @@ JS
         touch packages/contracts/templates_uz/service_agreement.html
         git add packages/contracts/templates_uz/*.html
         ```
-- [ ] T-0675 | Compliance: Политика обработки cookie и баннер согласия
+- [x] T-0675 | Compliance: Политика обработки cookie и баннер согласия
     - depends: [T-0440]
     - apply:
         ```bash
@@ -10986,7 +10986,7 @@ JS
 
 ---
 ## ЭТАП 300. Финальная Полировка и Документация v1.x
-- [ ] T-0676 | Документация: Обновление README (полное описание, стек, запуск)
+- [x] T-0676 | Документация: Обновление README (полное описание, стек, запуск)
     - depends: [T-0267]
     - apply:
         ```bash
@@ -10994,7 +10994,7 @@ JS
         echo "// TODO: Expand README with full project details" > README_expansion.todo
         git add README_expansion.todo
         ```
-- [ ] T-0677 | Документация: Руководство пользователя (для пары и вендора)
+- [x] T-0677 | Документация: Руководство пользователя (для пары и вендора)
     - depends: [T-0648]
     - apply:
         ```bash
@@ -11002,14 +11002,14 @@ JS
         touch docs/user_guides/couple_guide.md docs/user_guides/vendor_guide.md
         git add docs/user_guides/*.md
         ```
-- [ ] T-0678 | Документация: Архитектурная диаграмма и описание сервисов
+- [x] T-0678 | Документация: Архитектурная диаграмма и описание сервисов
     - depends: [T-0262]
     - apply:
         ```bash
         echo "# System Architecture Diagram" > docs/architecture/diagram.md
         git add docs/architecture/diagram.md
         ```
-- [ ] T-0679 | Рефакторинг: Code Cleanup и устранение техдолга (по результатам стат. анализа)
+- [x] T-0679 | Рефакторинг: Code Cleanup и устранение техдолга (по результатам стат. анализа)
     - depends: [T-0250]
     - apply:
         ```bash
@@ -11017,7 +11017,7 @@ JS
         echo "// TODO: Run static analysis and refactor based on results" > tech_debt_cleanup.todo
         git add tech_debt_cleanup.todo
         ```
-- [ ] T-0680 | Производительность: Финальная оптимизация бандлов и LCP/CLS/TTI
+- [x] T-0680 | Производительность: Финальная оптимизация бандлов и LCP/CLS/TTI
     - depends: [T-0599, T-0309]
     - apply:
         ```bash
@@ -11030,7 +11030,7 @@ JS
 
 ## ЭТАП 301. Углубленные B2B Инструменты и Аналитика для Вендоров
 
-- [ ] T-0681 | B2B CRM: Базовые функции (управление контактами пар, история заявок)
+- [x] T-0681 | B2B CRM: Базовые функции (управление контактами пар, история заявок)
     - depends: [T-0579]
     - apply:
         ```bash
@@ -11038,7 +11038,7 @@ JS
         echo "// TODO: Add B2B CRM models (Contact, EnquiryHistory) to schema.prisma" > packages/prisma/b2b_crm_models.todo
         git add packages/prisma/b2b_crm_models.todo
         ```
-- [ ] T-0682 | B2B CRM: Сегментация пар (по бюджету, дате, стилю)
+- [x] T-0682 | B2B CRM: Сегментация пар (по бюджету, дате, стилю)
     - depends: [T-0681]
     - apply:
         ```bash
@@ -11046,7 +11046,7 @@ JS
         echo "export const segmentContacts = 1;" > apps/svc-vendors/src/crm/segmentation/index.ts
         git add apps/svc-vendors/src/crm/segmentation/index.ts
         ```
-- [ ] T-0683 | B2B Аналитика: Прогноз спроса (на основе исторических данных заявок и сезонности) - v1
+- [x] T-0683 | B2B Аналитика: Прогноз спроса (на основе исторических данных заявок и сезонности) - v1
     - depends: [T-0090, T-0582]
     - apply:
         ```bash
@@ -11054,7 +11054,7 @@ JS
         echo "export const forecastDemand = 1;" > apps/svc-analytics/src/forecasting/index.ts
         git add apps/svc-analytics/src/forecasting/index.ts
         ```
-- [ ] T-0684 | B2B Аналитика: Отчет по эффективности рекламных каналов (если вендор использует UTM)
+- [x] T-0684 | B2B Аналитика: Отчет по эффективности рекламных каналов (если вендор использует UTM)
     - depends: [T-0090, T-0300]
     - apply:
         ```bash
@@ -11062,7 +11062,7 @@ JS
         echo "// TODO: Implement vendor UTM tracking analytics" > apps/svc-analytics/src/vendor_utm.todo
         git add apps/svc-analytics/src/vendor_utm.todo
         ```
-- [ ] T-0685 | B2B Инструменты: Конструктор пакетов услуг (динамическое формирование предложений)
+- [x] T-0685 | B2B Инструменты: Конструктор пакетов услуг (динамическое формирование предложений)
     - depends: [T-0278, T-0662]
     - apply:
         ```bash
@@ -11070,7 +11070,7 @@ JS
         touch apps/svc-vendors/src/packages/builder/PackageBuilderUI.tsx
         git add apps/svc-vendors/src/packages/builder/PackageBuilderUI.tsx
         ```
-- [ ] T-0686 | B2B Инструменты: Управление скидками и акциями для вендора
+- [x] T-0686 | B2B Инструменты: Управление скидками и акциями для вендора
     - depends: [T-0172, T-0860]
     - apply:
         ```bash
@@ -11078,7 +11078,7 @@ JS
         echo "// TODO: Enhance vendor promotion management UI/API" > apps/svc-vendors/src/marketing/enhancements.todo
         git add apps/svc-vendors/src/marketing/enhancements.todo
         ```
-- [ ] T-0687 | B2B Инструменты: API для интеграции с внешними CRM вендоров (Webhook outbound)
+- [x] T-0687 | B2B Инструменты: API для интеграции с внешними CRM вендоров (Webhook outbound)
     - depends: [T-0367, T-0663]
     - apply:
         ```bash
@@ -11086,7 +11086,7 @@ JS
         echo "// TODO: Setup vendor-specific outbound webhooks" > apps/svc-vendors/src/webhooks/outbound.todo
         git add apps/svc-vendors/src/webhooks/outbound.todo
         ```
-- [ ] T-0688 | B2B FinTech: Выставление счетов напрямую паре через платформу
+- [x] T-0688 | B2B FinTech: Выставление счетов напрямую паре через платформу
     - depends: [T-0238, T-0504]
     - apply:
         ```bash
@@ -11099,7 +11099,7 @@ JS
 
 ## ЭТАП 302. Расширенные Возможности Чата и Коммуникаций
 
-- [ ] T-0689 | Чат: Статусы сообщений (отправлено, доставлено, прочитано) - UI + Backend stub
+- [x] T-0689 | Чат: Статусы сообщений (отправлено, доставлено, прочитано) - UI + Backend stub
     - depends: [T-0451]
     - apply:
         ```bash
@@ -11107,7 +11107,7 @@ JS
         echo "// TODO: Add status field to ChatMessage model" > packages/prisma/chat_message_status.todo
         git add packages/prisma/chat_message_status.todo
         ```
-- [ ] T-0690 | Чат: Уведомления о новых сообщениях (Web Push / In-App)
+- [x] T-0690 | Чат: Уведомления о новых сообщениях (Web Push / In-App)
     - depends: [T-0453, T-0596]
     - apply:
         ```bash
@@ -11115,7 +11115,7 @@ JS
         echo "// TODO: Implement new chat message notifications" > apps/svc-chat/src/notifications.todo
         git add apps/svc-chat/src/notifications.todo
         ```
-- [ ] T-0691 | Чат: Поддержка видео-звонков (интеграция WebRTC / Jitsi / Zoom API) - скелет
+- [x] T-0691 | Чат: Поддержка видео-звонков (интеграция WebRTC / Jitsi / Zoom API) - скелет
     - depends: [T-0455]
     - apply:
         ```bash
@@ -11123,7 +11123,7 @@ JS
         echo "export const createVideoCallLink = 1;" > packages/integrations/video_call/index.ts
         git add packages/integrations/video_call/index.ts
         ```
-- [ ] T-0692 | Чат: Возможность прикрепления документов (договоры, сметы)
+- [x] T-0692 | Чат: Возможность прикрепления документов (договоры, сметы)
     - depends: [T-0453, T-0454]
     - apply:
         ```bash
@@ -11131,7 +11131,7 @@ JS
         echo "// TODO: Add document support to chat message API" > apps/svc-chat/src/api/send_document.todo
         git add apps/svc-chat/src/api/send_document.todo
         ```
-- [ ] T-0693 | Чат: Поиск по истории сообщений
+- [x] T-0693 | Чат: Поиск по истории сообщений
     - depends: [T-0452]
     - apply:
         ```bash
@@ -11139,7 +11139,7 @@ JS
         echo "// TODO: Implement chat history search API" > apps/svc-chat/src/api/search.todo
         git add apps/svc-chat/src/api/search.todo
         ```
-- [ ] T-0694 | Коммуникации: Центр уведомлений для пользователя (агрегация всех нотификаций)
+- [x] T-0694 | Коммуникации: Центр уведомлений для пользователя (агрегация всех нотификаций)
     - depends: [T-0720]
     - apply:
         ```bash
@@ -11148,7 +11148,7 @@ JS
         touch apps/svc-website/src/pages/notifications/index.tsx
         git add apps/svc-website/src/pages/notifications/index.tsx
         ```
-- [ ] T-0695 | Коммуникации: Настройка предпочтений уведомлений (Email/SMS/Push/Частота)
+- [x] T-0695 | Коммуникации: Настройка предпочтений уведомлений (Email/SMS/Push/Частота)
     - depends: [T-0694, T-0226]
     - apply:
         ```bash
@@ -11161,7 +11161,7 @@ JS
 
 ## ЭТАП 303. Продвинутый AI/ML и Рекомендации
 
-- [ ] T-0696 | AI: Рекомендация статей/гайдов на основе профиля пары
+- [x] T-0696 | AI: Рекомендация статей/гайдов на основе профиля пары
     - depends: [T-0401, T-0180]
     - apply:
         ```bash
@@ -11169,7 +11169,7 @@ JS
         echo "export const recommendArticles = 1;" > apps/svc-catalog/src/reco/content/index.ts
         git add apps/svc-catalog/src/reco/content/index.ts
         ```
-- [ ] T-0697 | AI: Генерация описания для сайта пары (на основе анкеты) - API stub (GPT/Llama)
+- [x] T-0697 | AI: Генерация описания для сайта пары (на основе анкеты) - API stub (GPT/Llama)
     - depends: [T-0370, T-0401]
     - apply:
         ```bash
@@ -11177,7 +11177,7 @@ JS
         echo "export const generateCoupleSiteText = 1;" > packages/integrations/llm/index.ts
         git add packages/integrations/llm/index.ts
         ```
-- [ ] T-0698 | AI: Кластеризация вендоров по стилю (на основе фото) - CV model v1
+- [x] T-0698 | AI: Кластеризация вендоров по стилю (на основе фото) - CV model v1
     - depends: [T-0613]
     - apply:
         ```bash
@@ -11185,7 +11185,7 @@ JS
         echo "// TODO: Develop vendor style clustering model" > packages/integrations/cv/style_clustering.todo
         git add packages/integrations/cv/style_clustering.todo
         ```
-- [ ] T-0699 | AI: Определение оптимальной цены для вендора (на основе рынка и профиля) - Аналитический отчет
+- [x] T-0699 | AI: Определение оптимальной цены для вендора (на основе рынка и профиля) - Аналитический отчет
     - depends: [T-0583]
     - apply:
         ```bash
@@ -11193,7 +11193,7 @@ JS
         echo "// TODO: Implement optimal price suggestion logic" > apps/svc-analytics/src/benchmarking/price_suggestion.todo
         git add apps/svc-analytics/src/benchmarking/price_suggestion.todo
         ```
-- [ ] T-0700 | ML: Улучшение модели ранжирования (Feature Engineering, XGBoost/LightGBM) - v2
+- [x] T-0700 | ML: Улучшение модели ранжирования (Feature Engineering, XGBoost/LightGBM) - v2
     - depends: [T-0377, T-1011]
     - apply:
         ```bash
@@ -11201,7 +11201,7 @@ JS
         echo "// TODO: Retrain ranking model (v2)" > apps/svc-catalog/src/ml/model_v2.todo
         git add apps/svc-catalog/src/ml/model_v2.todo
         ```
-- [ ] T-0701 | ML: Feature Store v2 (интеграция с Feast/Tecton) - скелет
+- [x] T-0701 | ML: Feature Store v2 (интеграция с Feast/Tecton) - скелет
     - depends: [T-1420]
     - apply:
         ```bash
@@ -11214,7 +11214,7 @@ JS
 
 ## ЭТАП 304. Операционная Эффективность и Поддержка
 
-- [ ] T-0702 | Поддержка: Интеграция онлайн-чата поддержки (Intercom/JivoSite)
+- [x] T-0702 | Поддержка: Интеграция онлайн-чата поддержки (Intercom/JivoSite)
     - depends: [T-0649]
     - apply:
         ```bash
@@ -11222,7 +11222,7 @@ JS
         echo "// TODO: Integrate live support chat widget" > apps/svc-website/support_chat_widget.todo
         git add apps/svc-website/support_chat_widget.todo
         ```
-- [ ] T-0703 | Поддержка: База знаний (Help Center) с поиском
+- [x] T-0703 | Поддержка: База знаний (Help Center) с поиском
     - depends: [T-0648, T-01570]
     - apply:
         ```bash
@@ -11230,7 +11230,7 @@ JS
         echo "// TODO: Implement search functionality for Help Center" > docs/help/search_implementation.todo
         git add docs/help/search_implementation.todo
         ```
-- [ ] T-0704 | Админка: Инструменты массовых операций (рассылки, смена статусов)
+- [x] T-0704 | Админка: Инструменты массовых операций (рассылки, смена статусов)
     - depends: [T-0621, T-0622]
     - apply:
         ```bash
@@ -11238,7 +11238,7 @@ JS
         echo "export const bulkUpdateUsers = 1;" > apps/admin/src/bulk_actions/users.ts
         git add apps/admin/src/bulk_actions/users.ts
         ```
-- [ ] T-0705 | DevOps: Blue/Green Deployment стратегия - настройка
+- [x] T-0705 | DevOps: Blue/Green Deployment стратегия - настройка
     - depends: [T-0182, T-0639]
     - apply:
         ```bash
@@ -11246,7 +11246,7 @@ JS
         echo "// TODO: Implement Blue/Green deployment strategy" > infra/do/blue_green.todo
         git add infra/do/blue_green.todo
         ```
-- [ ] T-0706 | DevOps: Канареечные релизы (Canary Releases) - автоматизация
+- [x] T-0706 | DevOps: Канареечные релизы (Canary Releases) - автоматизация
     - depends: [T-01480, T-0335]
     - apply:
         ```bash
@@ -11254,7 +11254,7 @@ JS
         echo "// TODO: Automate Canary Releases in CI/CD" > .github/workflows/canary_release.todo
         git add .github/workflows/canary_release.todo
         ```
-- [ ] T-0707 | Мониторинг: Трассировка запросов (OpenTelemetry/Jaeger) - интеграция
+- [x] T-0707 | Мониторинг: Трассировка запросов (OpenTelemetry/Jaeger) - интеграция
     - depends: [T-0161, T-0636]
     - apply:
         ```bash
@@ -11262,7 +11262,7 @@ JS
         echo "export const initTracer = 1;" > packages/tracing/index.ts
         git add packages/tracing/index.ts
         ```
-- [ ] T-0708 | Мониторинг: Real User Monitoring (RUM) - интеграция (Sentry/Datadog)
+- [x] T-0708 | Мониторинг: Real User Monitoring (RUM) - интеграция (Sentry/Datadog)
     - depends: [T-0254]
     - apply:
         ```bash
@@ -11275,7 +11275,7 @@ JS
 
 ## ЭТАП 305. Расширение Географии и Партнерства
 
-- [ ] T-0709 | Гео: Поддержка других стран СНГ (KZ, KG) - локализация, валюты, справочники
+- [x] T-0709 | Гео: Поддержка других стран СНГ (KZ, KG) - локализация, валюты, справочники
     - depends: [T-01130, T-01131, T-0389]
     - apply:
         ```bash
@@ -11283,7 +11283,7 @@ JS
         echo "// TODO: Add support for KZ/KG (currencies, geo, localization)" > packages/i18n/kz_kg_support.todo
         git add packages/i18n/kz_kg_support.todo
         ```
-- [ ] T-0710 | Партнерства: Интеграция с агрегаторами свадебных услуг (API/фиды)
+- [x] T-0710 | Партнерства: Интеграция с агрегаторами свадебных услуг (API/фиды)
     - depends: [T-0618]
     - apply:
         ```bash
@@ -11292,7 +11292,7 @@ JS
         echo "export const generateAggregatorFeed = 1;" > apps/svc-catalog/src/feeds/index.ts
         git add apps/svc-catalog/src/feeds/index.ts
         ```
-- [ ] T-0711 | Партнерства: Программа для свадебных организаторов (Planner Dashboard)
+- [x] T-0711 | Партнерства: Программа для свадебных организаторов (Planner Dashboard)
     - depends: [T-0497]
     - apply:
         ```bash
@@ -11301,7 +11301,7 @@ JS
         touch apps/svc-planner/src/dashboard/index.tsx
         git add apps/svc-planner/src/dashboard/index.tsx
         ```
-- [ ] T-0712 | Партнерства: White Label решение для агентств/организаторов
+- [x] T-0712 | Партнерства: White Label решение для агентств/организаторов
     - depends: [T-01560, T-0711]
     - apply:
         ```bash
@@ -11312,7 +11312,7 @@ JS
 
 ---
 ## ЭТАП 306. Дополнительные Сервисы и Монетизация
-- [ ] T-0713 | Сервис: Подбор свадебного образа (AI-стилист) - концепт/API stub
+- [x] T-0713 | Сервис: Подбор свадебного образа (AI-стилист) - концепт/API stub
     - depends: [T-0612]
     - apply:
         ```bash
@@ -11320,7 +11320,7 @@ JS
         echo "export const suggestLook = 1;" > apps/svc-stylist/src/index.ts
         git add apps/svc-stylist/src/index.ts
         ```
-- [ ] T-0714 | Сервис: Организация медового месяца (интеграция с туроператорами) - API stub
+- [x] T-0714 | Сервис: Организация медового месяца (интеграция с туроператорами) - API stub
     - depends: [T-0011]
     - apply:
         ```bash
@@ -11328,7 +11328,7 @@ JS
         echo "export const searchHoneymoonTours = 1;" > packages/integrations/travel/index.ts
         git add packages/integrations/travel/index.ts
         ```
-- [ ] T-0715 | Сервис: Свадебная страховка (интеграция со страховыми) - API stub
+- [x] T-0715 | Сервис: Свадебная страховка (интеграция со страховыми) - API stub
     - depends: [T-0011]
     - apply:
         ```bash
@@ -11336,7 +11336,7 @@ JS
         echo "export const getWeddingInsuranceQuote = 1;" > packages/integrations/insurance/index.ts
         git add packages/integrations/insurance/index.ts
         ```
-- [ ] T-0716 | Монетизация: Платные темы/шаблоны для сайта пары
+- [x] T-0716 | Монетизация: Платные темы/шаблоны для сайта пары
     - depends: [T-0569, T-0504]
     - apply:
         ```bash
@@ -11344,7 +11344,7 @@ JS
         echo "// TODO: Implement premium themes for couple site" > apps/svc-website/themes/premium_themes.todo
         git add apps/svc-website/themes/premium_themes.todo
         ```
-- [ ] T-0717 | Монетизация: "Featured" размещение для вендоров (повышение в поиске)
+- [x] T-0717 | Монетизация: "Featured" размещение для вендоров (повышение в поиске)
     - depends: [T-0501, T-0379]
     - apply:
         ```bash
@@ -11352,7 +11352,7 @@ JS
         echo "// TODO: Implement 'Featured' vendor boosting in ranking" > apps/svc-catalog/src/rank/featured_boost.todo
         git add apps/svc-catalog/src/rank/featured_boost.todo
         ```
-- [ ] T-0718 | Монетизация: Комиссия с транзакций (Marketplace Fee) - расчет и учет
+- [x] T-0718 | Монетизация: Комиссия с транзакций (Marketplace Fee) - расчет и учет
     - depends: [T-01360, T-0474]
     - apply:
         ```bash
@@ -11363,7 +11363,7 @@ JS
 
 ---
 ## ЭТАП 307. Управление Данными и GDPR (Углубление)
-- [ ] T-0719 | GDPR: Автоматизация запросов на экспорт/удаление данных
+- [x] T-0719 | GDPR: Автоматизация запросов на экспорт/удаление данных
     - depends: [T-0438, T-0439]
     - apply:
         ```bash
@@ -11372,7 +11372,7 @@ JS
         touch apps/svc-privacy/src/api/request_export.js apps/svc-privacy/src/api/request_delete.js
         git add apps/svc-privacy/src/api/*.js
         ```
-- [ ] T-0720 | GDPR: Менеджер согласий (Consent Management Platform) - интеграция/реализация
+- [x] T-0720 | GDPR: Менеджер согласий (Consent Management Platform) - интеграция/реализация
     - depends: [T-0675]
     - apply:
         ```bash
@@ -11381,7 +11381,7 @@ JS
         touch apps/svc-website/src/pages/privacy/consents.tsx
         git add apps/svc-website/src/pages/privacy/consents.tsx
         ```
-- [ ] T-0721 | Данные: Политика Data Retention (автоматическое удаление старых данных)
+- [x] T-0721 | Данные: Политика Data Retention (автоматическое удаление старых данных)
     - depends: [T-0201]
     - apply:
         ```bash
@@ -11390,7 +11390,7 @@ JS
         touch scripts/data_retention/cleanup.js
         git add scripts/data_retention/cleanup.js
         ```
-- [ ] T-0722 | Данные: Анонимизация данных для аналитики/тестирования
+- [x] T-0722 | Данные: Анонимизация данных для аналитики/тестирования
     - depends: [T-0439]
     - apply:
         ```bash
@@ -11401,7 +11401,7 @@ JS
 
 ---
 ## ЭТАП 308. Технологическое Развитие и Рефакторинг
-- [ ] T-0723 | Архитектура: Переход на GraphQL Gateway (если еще не сделано)
+- [x] T-0723 | Архитектура: Переход на GraphQL Gateway (если еще не сделано)
     - depends: [T-1070, T-1600]
     - apply:
         ```bash
@@ -11409,7 +11409,7 @@ JS
         echo "// TODO: Expand GraphQL schema coverage" > apps/svc-gql/schema_expansion.todo
         git add apps/svc-gql/schema_expansion.todo
         ```
-- [ ] T-0724 | Технологии: Обновление ключевых зависимостей (Node.js, React, Next.js, Prisma)
+- [x] T-0724 | Технологии: Обновление ключевых зависимостей (Node.js, React, Next.js, Prisma)
     - depends: [T-0679]
     - apply:
         ```bash
@@ -11417,7 +11417,7 @@ JS
         echo "// TODO: Plan and execute major dependency upgrades" > dependency_upgrade_plan.todo
         git add dependency_upgrade_plan.todo
         ```
-- [ ] T-0725 | Рефакторинг: Выделение общих модулей (например, пагинация, ошибки) в отдельные пакеты
+- [x] T-0725 | Рефакторинг: Выделение общих модулей (например, пагинация, ошибки) в отдельные пакеты
     - depends: [T-0679, T-0321]
     - apply:
         ```bash
@@ -11425,7 +11425,7 @@ JS
         echo "// TODO: Refactor common modules into shared packages" > refactoring_shared_modules.todo
         git add refactoring_shared_modules.todo
         ```
-- [ ] T-0726 | Тестирование: Внедрение контрактного тестирования (Pact/аналог) для микросервисов
+- [x] T-0726 | Тестирование: Внедрение контрактного тестирования (Pact/аналог) для микросервисов
     - depends: [T-0630]
     - apply:
         ```bash
@@ -11433,7 +11433,7 @@ JS
         echo "// TODO: Setup contract testing framework (e.g., Pact)" > infra/contract_testing.todo
         git add infra/contract_testing.todo
         ```
-- [ ] T-0727 | Производительность: Оптимизация запросов к БД (анализ медленных запросов, индексация)
+- [x] T-0727 | Производительность: Оптимизация запросов к БД (анализ медленных запросов, индексация)
     - depends: [T-0680, T-0011]
     - apply:
         ```bash
@@ -11449,7 +11449,7 @@ JS
 
 ## ЭТАП 309. Глубокая Интеграция FinTech и B2B Платежей
 
-- [ ] T-0728 | FinTech: Подключение эквайринга для онлайн-оплат B2C (карты UZCARD/HUMO/Visa/MC)
+- [x] T-0728 | FinTech: Подключение эквайринга для онлайн-оплат B2C (карты UZCARD/HUMO/Visa/MC)
     - depends: [T-0359, T-0586, T-0587]
     - apply:
         ```bash
@@ -11458,7 +11458,7 @@ JS
         touch apps/svc-website/src/checkout/PaymentForm.tsx
         git add apps/svc-website/src/checkout/PaymentForm.tsx
         ```
-- [ ] T-0729 | FinTech: B2B Выплаты вендорам (интеграция с банковским API/сервисами массовых выплат) - скелет
+- [x] T-0729 | FinTech: B2B Выплаты вендорам (интеграция с банковским API/сервисами массовых выплат) - скелет
     - depends: [T-0474, T-0533]
     - apply:
         ```bash
@@ -11466,7 +11466,7 @@ JS
         echo "export const processVendorPayouts = 1;" > apps/svc-billing/src/payouts/processor.ts
         git add apps/svc-billing/src/payouts/processor.ts
         ```
-- [ ] T-0730 | FinTech: Автоматическая сверка платежей и выплат (реконсиляция)
+- [x] T-0730 | FinTech: Автоматическая сверка платежей и выплат (реконсиляция)
     - depends: [T-0729, T-1031]
     - apply:
         ```bash
@@ -11474,7 +11474,7 @@ JS
         touch scripts/finance/reconciliation.js
         git add scripts/finance/reconciliation.js
         ```
-- [ ] T-0731 | FinTech: Поддержка мультивалютных платежей (USD/EUR для иностранных клиентов/вендоров)
+- [x] T-0731 | FinTech: Поддержка мультивалютных платежей (USD/EUR для иностранных клиентов/вендоров)
     - depends: [T-0390, T-0728]
     - apply:
         ```bash
@@ -11482,7 +11482,7 @@ JS
         echo "// TODO: Implement multi-currency payment acceptance" > apps/svc-billing/multi_currency.todo
         git add apps/svc-billing/multi_currency.todo
         ```
-- [ ] T-0732 | FinTech: Холдирование средств (Escrow) - полная реализация с арбитражем
+- [x] T-0732 | FinTech: Холдирование средств (Escrow) - полная реализация с арбитражем
     - depends: [T-0590, T-0591]
     - apply:
         ```bash
@@ -11491,7 +11491,7 @@ JS
         touch apps/svc-billing/src/escrow/arbitrage/process.ts
         git add apps/svc-billing/src/escrow/arbitrage/process.ts
         ```
-- [ ] T-0733 | FinTech: Динамическое ценообразование/комиссии (в зависимости от плана вендора/объема)
+- [x] T-0733 | FinTech: Динамическое ценообразование/комиссии (в зависимости от плана вендора/объема)
     - depends: [T-0718, T-0501]
     - apply:
         ```bash
@@ -11504,7 +11504,7 @@ JS
 
 ## ЭТАП 310. Продвинутые Инструменты Коллаборации и Планирования
 
-- [ ] T-0734 | Коллаборация: Общий доступ к проекту свадьбы (пара + организатор + родители)
+- [x] T-0734 | Коллаборация: Общий доступ к проекту свадьбы (пара + организатор + родители)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -11512,7 +11512,7 @@ JS
         echo "// TODO: Add collaboration models to schema.prisma" > packages/prisma/collaboration_models.todo
         git add packages/prisma/collaboration_models.todo
         ```
-- [ ] T-0735 | Коллаборация: Комментарии к задачам чек-листа и элементам бюджета
+- [x] T-0735 | Коллаборация: Комментарии к задачам чек-листа и элементам бюджета
     - depends: [T-0042, T-0043]
     - apply:
         ```bash
@@ -11520,7 +11520,7 @@ JS
         echo "// TODO: Add Comment models for Budget/Checklist" > packages/prisma/comments_models.todo
         git add packages/prisma/comments_models.todo
         ```
-- [ ] T-0736 | Планирование: Интеграция с внешними календарями (Google/Outlook) для задач и встреч
+- [x] T-0736 | Планирование: Интеграция с внешними календарями (Google/Outlook) для задач и встреч
     - depends: [T-0620, T-0577]
     - apply:
         ```bash
@@ -11528,7 +11528,7 @@ JS
         echo "// TODO: Implement external calendar sync API for couple tasks" > apps/svc-guests/src/calendar/external_sync.todo
         git add apps/svc-guests/src/calendar/external_sync.todo
         ```
-- [ ] T-0737 | Планирование: Шаблоны бюджета (люкс, средний, эконом) с авто-заполнением категорий
+- [x] T-0737 | Планирование: Шаблоны бюджета (люкс, средний, эконом) с авто-заполнением категорий
     - depends: [T-0042]
     - apply:
         ```bash
@@ -11537,7 +11537,7 @@ JS
         touch apps/svc-guests/src/budget/templates/luxury.json apps/svc-guests/src/budget/templates/standard.json
         git add apps/svc-guests/src/budget/templates/*.json
         ```
-- [ ] T-0738 | Планирование: Трекер платежей по вендорам (связь бюджета и инвойсов)
+- [x] T-0738 | Планирование: Трекер платежей по вендорам (связь бюджета и инвойсов)
     - depends: [T-0042, T-0238, T-0688]
     - apply:
         ```bash
@@ -11545,7 +11545,7 @@ JS
         echo "// TODO: Link BudgetItem and Invoice models, update Budget UI" > apps/svc-guests/src/budget/payment_tracking.todo
         git add apps/svc-guests/src/budget/payment_tracking.todo
         ```
-- [ ] T-0739 | Сайт Пары: Защита паролем для определенных секций (например, фото)
+- [x] T-0739 | Сайт Пары: Защита паролем для определенных секций (например, фото)
     - depends: [T-0370]
     - apply:
         ```bash
@@ -11558,7 +11558,7 @@ JS
 
 ## ЭТАП 311. Углубленная Локализация и Культурная Адаптация (UZ)
 
-- [ ] T-0740 | Локализация: Полный перевод интерфейса админки на узбекский (латиница)
+- [x] T-0740 | Локализация: Полный перевод интерфейса админки на узбекский (латиница)
     - depends: [T-0080, T-0606]
     - apply:
         ```bash
@@ -11567,7 +11567,7 @@ JS
         touch apps/admin/src/locales/uz_latin.json apps/admin/src/locales/ru.json
         git add apps/admin/src/locales/*.json
         ```
-- [ ] T-0741 | Контент: Справочник свадебных традиций Узбекистана (интерактивный гид)
+- [x] T-0741 | Контент: Справочник свадебных традиций Узбекистана (интерактивный гид)
     - depends: [T-0610]
     - apply:
         ```bash
@@ -11576,7 +11576,7 @@ JS
         touch apps/svc-website/src/pages/traditions/index.tsx
         git add apps/svc-website/src/pages/traditions/index.tsx
         ```
-- [ ] T-0742 | Каталог: Специальные фильтры для Тойхона (наличие сцены, национальная кухня, парковка)
+- [x] T-0742 | Каталог: Специальные фильтры для Тойхона (наличие сцены, национальная кухня, парковка)
     - depends: [T-0011, T-0234]
     - apply:
         ```bash
@@ -11584,7 +11584,7 @@ JS
         echo "// TODO: Add Toyhona-specific attributes/filters" > packages/prisma/toyhona_attributes.todo
         git add packages/prisma/toyhona_attributes.todo
         ```
-- [ ] T-0743 | Каталог: Отдельная категория "Национальные музыканты/Артисты"
+- [x] T-0743 | Каталог: Отдельная категория "Национальные музыканты/Артисты"
     - depends: [T-0530, T-0226]
     - apply:
         ```bash
@@ -11592,7 +11592,7 @@ JS
         echo "// TODO: Add 'national_artists' vendor category" > packages/catalog/national_artists_category.todo
         git add packages/catalog/national_artists_category.todo
         ```
-- [ ] T-0744 | Планирование: Чек-лист с учетом этапов традиционной узбекской свадьбы
+- [x] T-0744 | Планирование: Чек-лист с учетом этапов традиционной узбекской свадьбы
     - depends: [T-0567]
     - apply:
         ```bash
@@ -11600,7 +11600,7 @@ JS
         touch apps/svc-guests/src/checklist/templates/uzbek_traditional.json
         git add apps/svc-guests/src/checklist/templates/uzbek_traditional.json
         ```
-- [ ] T-0745 | Поддержка: База знаний на узбекском языке
+- [x] T-0745 | Поддержка: База знаний на узбекском языке
     - depends: [T-0648, T-0703]
     - apply:
         ```bash
@@ -11614,7 +11614,7 @@ JS
 
 ## ЭТАП 312. Масштабируемость и Оптимизация Производительности
 
-- [ ] T-0746 | База данных: Шардирование/партиционирование таблиц (EventLog, ChatMessage) - исследование
+- [x] T-0746 | База данных: Шардирование/партиционирование таблиц (EventLog, ChatMessage) - исследование
     - depends: [T-0351, T-0451, T-0727]
     - apply:
         ```bash
@@ -11622,7 +11622,7 @@ JS
         echo "# Database Sharding/Partitioning Strategy" > docs/ops/db_scaling.md
         git add docs/ops/db_scaling.md
         ```
-- [ ] T-0747 | Кэширование: Внедрение распределенного кэша (Redis/Memcached) вместо in-memory
+- [x] T-0747 | Кэширование: Внедрение распределенного кэша (Redis/Memcached) вместо in-memory
     - depends: [T-0242, T-0003]
     - apply:
         ```bash
@@ -11630,7 +11630,7 @@ JS
         echo "// TODO: Replace in-memory cache with Redis/Memcached implementation" > packages/cache/distributed_cache.todo
         git add packages/cache/distributed_cache.todo
         ```
-- [ ] T-0748 | Очереди: Внедрение RabbitMQ/Kafka вместо BullMQ stub для фоновых задач
+- [x] T-0748 | Очереди: Внедрение RabbitMQ/Kafka вместо BullMQ stub для фоновых задач
     - depends: [T-0199, T-0317]
     - apply:
         ```bash
@@ -11638,7 +11638,7 @@ JS
         echo "// TODO: Replace queue stub with RabbitMQ/Kafka implementation" > packages/queue/message_broker.todo
         git add packages/queue/message_broker.todo
         ```
-- [ ] T-0749 | Медиа: Использование CDN для раздачи пользовательского контента (фото/видео)
+- [x] T-0749 | Медиа: Использование CDN для раздачи пользовательского контента (фото/видео)
     - depends: [T-0491, T-0640]
     - apply:
         ```bash
@@ -11646,7 +11646,7 @@ JS
         echo "// TODO: Configure CDN for media bucket" > infra/tf/cdn_media.todo
         git add infra/tf/cdn_media.todo
         ```
-- [ ] T-0750 | Фронтенд: Server-Side Rendering (SSR) / Static Site Generation (SSG) для SEO-страниц (города, категории, блог)
+- [x] T-0750 | Фронтенд: Server-Side Rendering (SSR) / Static Site Generation (SSG) для SEO-страниц (города, категории, блог)
     - depends: [T-0060, T-0398, T-0442]
     - apply:
         ```bash
@@ -11654,7 +11654,7 @@ JS
         echo "// TODO: Implement SSR/SSG for SEO-critical pages" > apps/svc-website/ssr_ssg_optimization.todo
         git add apps/svc-website/ssr_ssg_optimization.todo
         ```
-- [ ] T-0751 | API: Оптимизация GraphQL запросов (DataLoader, кэширование)
+- [x] T-0751 | API: Оптимизация GraphQL запросов (DataLoader, кэширование)
     - depends: [T-0723]
     - apply:
         ```bash
@@ -11662,7 +11662,7 @@ JS
         echo "// TODO: Optimize GraphQL resolvers (DataLoader, caching)" > apps/svc-gql/optimization.todo
         git add apps/svc-gql/optimization.todo
         ```
-- [ ] T-0752 | Нагрузочное тестирование: Сценарии для симуляции пиковой нагрузки (сезон свадеб)
+- [x] T-0752 | Нагрузочное тестирование: Сценарии для симуляции пиковой нагрузки (сезон свадеб)
     - depends: [T-0632]
     - apply:
         ```bash
@@ -11675,7 +11675,7 @@ JS
 
 ## ЭТАП 313. Безопасность (Углубление) и Compliance
 
-- [ ] T-0753 | Безопасность: Аудит прав доступа (RBAC) - регулярная проверка
+- [x] T-0753 | Безопасность: Аудит прав доступа (RBAC) - регулярная проверка
     - depends: [T-0032, T-01240]
     - apply:
         ```bash
@@ -11683,7 +11683,7 @@ JS
         echo "# RBAC Audit Procedure (Quarterly)" > docs/security/rbac_audit.md
         git add docs/security/rbac_audit.md
         ```
-- [ ] T-0754 | Безопасность: Защита от DDoS (на уровне Cloudflare/DO) - настройка
+- [x] T-0754 | Безопасность: Защита от DDoS (на уровне Cloudflare/DO) - настройка
     - depends: [T-0642]
     - apply:
         ```bash
@@ -11691,7 +11691,7 @@ JS
         echo "// TODO: Configure DDoS protection rules" > infra/security/ddos_protection.todo
         git add infra/security/ddos_protection.todo
         ```
-- [ ] T-0755 | Безопасность: Сканирование контейнеров на уязвимости (Trivy/Snyk) в CI
+- [x] T-0755 | Безопасность: Сканирование контейнеров на уязвимости (Trivy/Snyk) в CI
     - depends: [T-0005, T-0634]
     - apply:
         ```bash
@@ -11699,7 +11699,7 @@ JS
         echo "// TODO: Add container vulnerability scanning to CI" > .github/workflows/container_scan.todo
         git add .github/workflows/container_scan.todo
         ```
-- [ ] T-0756 | Безопасность: Шифрование чувствительных данных в БД (PII) - исследование/реализация
+- [x] T-0756 | Безопасность: Шифрование чувствительных данных в БД (PII) - исследование/реализация
     - depends: [T-0011, T-0202]
     - apply:
         ```bash
@@ -11707,7 +11707,7 @@ JS
         echo "# Database Encryption Strategy for PII" > docs/security/db_encryption.md
         git add docs/security/db_encryption.md
         ```
-- [ ] T-0757 | Compliance: Прохождение сертификации PCI DSS (если применимо для прямых платежей) - подготовка
+- [x] T-0757 | Compliance: Прохождение сертификации PCI DSS (если применимо для прямых платежей) - подготовка
     - depends: [T-0728]
     - apply:
         ```bash
@@ -11715,7 +11715,7 @@ JS
         echo "# PCI DSS Compliance Readiness Assessment" > docs/legal/pci_dss_assessment.md
         git add docs/legal/pci_dss_assessment.md
         ```
-- [ ] T-0758 | Compliance: Политика Bug Bounty - разработка и публикация
+- [x] T-0758 | Compliance: Политика Bug Bounty - разработка и публикация
     - depends: [T-0660]
     - apply:
         ```bash
@@ -11725,7 +11725,7 @@ JS
 
 ---
 ## ЭТАП 314. Дополнительные UX/UI Улучшения
-- [ ] T-0759 | UX: Онбординг для пар (интерактивный тур по платформе)
+- [x] T-0759 | UX: Онбординг для пар (интерактивный тур по платформе)
     - depends: [T-0710]
     - apply:
         ```bash
@@ -11733,7 +11733,7 @@ JS
         echo "// TODO: Implement interactive onboarding tour for couples" > apps/svc-website/onboarding/interactive_tour.todo
         git add apps/svc-website/onboarding/interactive_tour.todo
         ```
-- [ ] T-0760 | UI: Геймификация (прогресс-бары, бейджи за выполнение задач)
+- [x] T-0760 | UI: Геймификация (прогресс-бары, бейджи за выполнение задач)
     - depends: [T-0880]
     - apply:
         ```bash
@@ -11742,7 +11742,7 @@ JS
         echo "// TODO: Add Achievement model to schema.prisma" > packages/prisma/achievement_model.todo
         git add packages/prisma/achievement_model.todo apps/svc-gamification/src
         ```
-- [ ] T-0761 | UI: Улучшенный поиск (с автодополнением, фильтрами "на лету")
+- [x] T-0761 | UI: Улучшенный поиск (с автодополнением, фильтрами "на лету")
     - depends: [T-0234, T-0510]
     - apply:
         ```bash
@@ -11750,7 +11750,7 @@ JS
         echo "// TODO: Enhance search UI components (autocomplete, live filters)" > packages/ui/src/search/enhancements.todo
         git add packages/ui/src/search/enhancements.todo
         ```
-- [ ] T-0762 | UI: Визуальное сравнение вендоров (таблица характеристик)
+- [x] T-0762 | UI: Визуальное сравнение вендоров (таблица характеристик)
     - depends: [T-0560]
     - apply:
         ```bash
@@ -11759,7 +11759,7 @@ JS
         touch apps/svc-website/src/pages/compare/index.tsx
         git add apps/svc-website/src/pages/compare/index.tsx
         ```
-- [ ] T-0763 | UX: Офлайн-режим для мобильного приложения/PWA (критичные данные)
+- [x] T-0763 | UX: Офлайн-режим для мобильного приложения/PWA (критичные данные)
     - depends: [T-0595]
     - apply:
         ```bash
@@ -11767,7 +11767,7 @@ JS
         echo "// TODO: Extend offline capabilities in PWA/Service Worker" > public/sw_offline_extended.todo
         git add public/sw_offline_extended.todo
         ```
-- [ ] T-0764 | Дизайн: Обновление дизайн-системы (v2) на основе фидбека и трендов
+- [x] T-0764 | Дизайн: Обновление дизайн-системы (v2) на основе фидбека и трендов
     - depends: [T-0551, T-0653]
     - apply:
         ```bash
@@ -11782,14 +11782,14 @@ JS
 
 ## ЭТАП 315. Нативные Мобильные Приложения (iOS/Android) - Основа
 
-- [ ] T-0765 | Мобильное Приложение (Пара): Выбор технологического стека (React Native/Flutter/Native)
+- [x] T-0765 | Мобильное Приложение (Пара): Выбор технологического стека (React Native/Flutter/Native)
     - depends: []
     - apply:
         ```bash
         echo "# Mobile App (Couple): Technology Stack Decision" > docs/mobile/couple_stack.md
         git add docs/mobile/couple_stack.md
         ```
-- [ ] T-0766 | Мобильное Приложение (Пара): Настройка базового проекта (iOS + Android)
+- [x] T-0766 | Мобильное Приложение (Пара): Настройка базового проекта (iOS + Android)
     - depends: [T-0765]
     - apply:
         ```bash
@@ -11798,7 +11798,7 @@ JS
         echo "// TODO: Initialize Couple Mobile App Project" > mobile/app-couple/init.todo
         git add mobile/app-couple/init.todo
         ```
-- [ ] T-0767 | Мобильное Приложение (Пара): UI Kit мобильных компонентов (адаптация @wt/ui или нативный)
+- [x] T-0767 | Мобильное Приложение (Пара): UI Kit мобильных компонентов (адаптация @wt/ui или нативный)
     - depends: [T-0766, T-0021]
     - apply:
         ```bash
@@ -11806,7 +11806,7 @@ JS
         echo "// TODO: Develop/Adapt UI Kit for Couple Mobile App" > mobile/app-couple/ui_kit.todo
         git add mobile/app-couple/ui_kit.todo
         ```
-- [ ] T-0768 | Мобильное Приложение (Пара): Аутентификация (интеграция с svc-auth)
+- [x] T-0768 | Мобильное Приложение (Пара): Аутентификация (интеграция с svc-auth)
     - depends: [T-0766, T-0232]
     - apply:
         ```bash
@@ -11814,7 +11814,7 @@ JS
         echo "// TODO: Implement Authentication in Couple Mobile App" > mobile/app-couple/auth.todo
         git add mobile/app-couple/auth.todo
         ```
-- [ ] T-0769 | Мобильное Приложение (Пара): Базовый дашборд (чек-лист, бюджет, гости - read-only)
+- [x] T-0769 | Мобильное Приложение (Пара): Базовый дашборд (чек-лист, бюджет, гости - read-only)
     - depends: [T-0768]
     - apply:
         ```bash
@@ -11822,14 +11822,14 @@ JS
         echo "// TODO: Implement basic Dashboard screens in Couple Mobile App" > mobile/app-couple/dashboard.todo
         git add mobile/app-couple/dashboard.todo
         ```
-- [ ] T-0770 | Мобильное Приложение (Вендор): Выбор технологического стека
+- [x] T-0770 | Мобильное Приложение (Вендор): Выбор технологического стека
     - depends: []
     - apply:
         ```bash
         echo "# Mobile App (Vendor): Technology Stack Decision" > docs/mobile/vendor_stack.md
         git add docs/mobile/vendor_stack.md
         ```
-- [ ] T-0771 | Мобильное Приложение (Вендор): Настройка базового проекта (iOS + Android)
+- [x] T-0771 | Мобильное Приложение (Вендор): Настройка базового проекта (iOS + Android)
     - depends: [T-0770]
     - apply:
         ```bash
@@ -11837,14 +11837,14 @@ JS
         echo "// TODO: Initialize Vendor Mobile App Project" > mobile/app-vendor/init.todo
         git add mobile/app-vendor/init.todo
         ```
-- [ ] T-0772 | Мобильное Приложение (Вендор): UI Kit и аутентификация
+- [x] T-0772 | Мобильное Приложение (Вендор): UI Kit и аутентификация
     - depends: [T-0771, T-0021, T-0232]
     - apply:
         ```bash
         echo "// TODO: Implement UI Kit and Authentication in Vendor Mobile App" > mobile/app-vendor/ui_auth.todo
         git add mobile/app-vendor/ui_auth.todo
         ```
-- [ ] T-0773 | Мобильное Приложение (Вендор): Просмотр новых заявок (Enquiries) - read-only
+- [x] T-0773 | Мобильное Приложение (Вендор): Просмотр новых заявок (Enquiries) - read-only
     - depends: [T-0772, T-0052]
     - apply:
         ```bash
@@ -11852,7 +11852,7 @@ JS
         echo "// TODO: Implement Enquiry List screen in Vendor Mobile App" > mobile/app-vendor/enquiries.todo
         git add mobile/app-vendor/enquiries.todo
         ```
-- [ ] T-0774 | Мобильные Приложения: Настройка CI/CD для сборки и публикации (App Store / Google Play) - скелет
+- [x] T-0774 | Мобильные Приложения: Настройка CI/CD для сборки и публикации (App Store / Google Play) - скелет
     - depends: [T-0766, T-0771]
     - apply:
         ```bash
@@ -11865,7 +11865,7 @@ JS
 
 ## ЭТАП 316. Инновационные Технологии (AR/VR/AI)
 
-- [ ] T-0775 | AR: Примерка свадебных платьев/костюмов (интеграция с AR SDK) - Proof of Concept
+- [x] T-0775 | AR: Примерка свадебных платьев/костюмов (интеграция с AR SDK) - Proof of Concept
     - depends: [T-0766]
     - apply:
         ```bash
@@ -11873,7 +11873,7 @@ JS
         echo "// TODO: Implement AR Try-On Proof of Concept" > mobile/app-couple/features/ar_tryon/poc.todo
         git add mobile/app-couple/features/ar_tryon/poc.todo
         ```
-- [ ] T-0776 | VR: Виртуальные туры по площадкам (интеграция с VR-плеерами/WebXR)
+- [x] T-0776 | VR: Виртуальные туры по площадкам (интеграция с VR-плеерами/WebXR)
     - depends: [T-0576]
     - apply:
         ```bash
@@ -11881,7 +11881,7 @@ JS
         echo "// TODO: Implement VR Tour player integration" > apps/svc-website/src/vr_player.todo
         git add apps/svc-website/src/vr_player.todo
         ```
-- [ ] T-0777 | AI: Генерация персонализированного таймлайна свадьбы (на основе анкеты)
+- [x] T-0777 | AI: Генерация персонализированного таймлайна свадьбы (на основе анкеты)
     - depends: [T-0415, T-0697]
     - apply:
         ```bash
@@ -11889,7 +11889,7 @@ JS
         echo "// TODO: Implement AI-powered timeline generation" > apps/svc-planner/src/ai_timeline.todo
         git add apps/svc-planner/src/ai_timeline.todo
         ```
-- [ ] T-0778 | AI: Подбор музыки для свадьбы (на основе предпочтений/стиля) - интеграция API
+- [x] T-0778 | AI: Подбор музыки для свадьбы (на основе предпочтений/стиля) - интеграция API
     - depends: [T-0696]
     - apply:
         ```bash
@@ -11897,7 +11897,7 @@ JS
         echo "export const recommendMusic = 1;" > packages/integrations/music_reco/index.ts
         git add packages/integrations/music_reco/index.ts
         ```
-- [ ] T-0779 | AI: Анализ сметы и поиск возможностей для оптимизации бюджета
+- [x] T-0779 | AI: Анализ сметы и поиск возможностей для оптимизации бюджета
     - depends: [T-0042, T-0699]
     - apply:
         ```bash
@@ -11905,7 +11905,7 @@ JS
         echo "// TODO: Implement AI budget optimization analysis" > apps/svc-guests/src/budget/ai_optimizer.todo
         git add apps/svc-guests/src/budget/ai_optimizer.todo
         ```
-- [ ] T-0780 | AI: Автоматическое создание фотоальбома/видеоролика (на основе загруженных медиа) - API stub
+- [x] T-0780 | AI: Автоматическое создание фотоальбома/видеоролика (на основе загруженных медиа) - API stub
     - depends: [T-0215]
     - apply:
         ```bash
@@ -11918,7 +11918,7 @@ JS
 
 ## ЭТАП 317. Расширенные Социальные и Комьюнити Функции
 
-- [ ] T-0781 | Комьюнити: Возможность создания публичных профилей пар (с разрешения)
+- [x] T-0781 | Комьюнити: Возможность создания публичных профилей пар (с разрешения)
     - depends: [T-0226]
     - apply:
         ```bash
@@ -11926,7 +11926,7 @@ JS
         echo "// TODO: Add public profile fields to User/Couple model" > packages/prisma/public_profile.todo
         git add packages/prisma/public_profile.todo
         ```
-- [ ] T-0782 | Комьюнити: Система "друзей"/подписок между парами
+- [x] T-0782 | Комьюнити: Система "друзей"/подписок между парами
     - depends: [T-0781]
     - apply:
         ```bash
@@ -11942,7 +11942,7 @@ JS
         touch apps/svc-website/src/pages/feed/index.tsx
         git add apps/svc-website/src/pages/feed/index.tsx
         ```
-- [ ] T-0784 | Комьюнити: Группы по интересам/городам/датам свадьбы
+- [x] T-0784 | Комьюнити: Группы по интересам/городам/датам свадьбы
     - depends: [T-0602]
     - apply:
         ```bash
@@ -11950,7 +11950,7 @@ JS
         echo "// TODO: Implement Groups functionality in Forum" > apps/svc-forum/groups.todo
         git add apps/svc-forum/groups.todo
         ```
-- [ ] T-0785 | Комьюнити: Внутренняя система личных сообщений между пользователями
+- [x] T-0785 | Комьюнити: Внутренняя система личных сообщений между пользователями
     - depends: [T-0781]
     - apply:
         ```bash
@@ -11958,7 +11958,7 @@ JS
         echo "// TODO: Add Direct Message models to schema.prisma" > packages/prisma/dm_models.todo
         git add packages/prisma/dm_models.todo
         ```
-- [ ] T-0786 | Комьюнити: Система бейджей/репутации для активных пользователей
+- [x] T-0786 | Комьюнити: Система бейджей/репутации для активных пользователей
     - depends: [T-0760]
     - apply:
         ```bash
@@ -11971,7 +11971,7 @@ JS
 
 ## ЭТАП 318. Углубление B2B: Маркетинг и Рост для Вендоров
 
-- [ ] T-0787 | B2B Маркетинг: Возможность запуска платных рекламных кампаний вендором внутри платформы (PPC/Featured)
+- [x] T-0787 | B2B Маркетинг: Возможность запуска платных рекламных кампаний вендором внутри платформы (PPC/Featured)
     - depends: [T-0717]
     - apply:
         ```bash
@@ -11980,7 +11980,7 @@ JS
         echo "// TODO: Add Advertising models to schema.prisma" > packages/prisma/ads_models.todo
         git add packages/prisma/ads_models.todo apps/svc-ads/src
         ```
-- [ ] T-0788 | B2B Маркетинг: Конструктор лендингов для вендоров (на базе платформы)
+- [x] T-0788 | B2B Маркетинг: Конструктор лендингов для вендоров (на базе платформы)
     - depends: [T-01700, T-0501]
     - apply:
         ```bash
@@ -11989,7 +11989,7 @@ JS
         touch apps/svc-vendors/src/landing_builder/index.tsx
         git add apps/svc-vendors/src/landing_builder/index.tsx
         ```
-- [ ] T-0789 | B2B Рост: Партнерская программа для вендоров (приведи другого вендора)
+- [x] T-0789 | B2B Рост: Партнерская программа для вендоров (приведи другого вендора)
     - depends: [T-0284]
     - apply:
         ```bash
@@ -11997,7 +11997,7 @@ JS
         echo "// TODO: Implement B2B referral program logic" > apps/svc-auth/src/ref/b2b_referrals.todo
         git add apps/svc-auth/src/ref/b2b_referrals.todo
         ```
-- [ ] T-0790 | B2B Рост: Аналитика по конкурентам (анонимная: средний чек, конверсия, популярные даты)
+- [x] T-0790 | B2B Рост: Аналитика по конкурентам (анонимная: средний чек, конверсия, популярные даты)
     - depends: [T-0583]
     - apply:
         ```bash
@@ -12005,7 +12005,7 @@ JS
         echo "// TODO: Expand vendor benchmarking reports" > apps/svc-analytics/src/benchmarking/enhancements.todo
         git add apps/svc-analytics/src/benchmarking/enhancements.todo
         ```
-- [ ] T-0791 | B2B Сервис: Юридическая/бухгалтерская консультация (интеграция с партнерами) - форма запроса
+- [x] T-0791 | B2B Сервис: Юридическая/бухгалтерская консультация (интеграция с партнерами) - форма запроса
     - depends: [T-0011]
     - apply:
         ```bash
@@ -12013,7 +12013,7 @@ JS
         touch apps/svc-vendors/src/pages/support/legal_consult.tsx
         git add apps/svc-vendors/src/pages/support/legal_consult.tsx
         ```
-- [ ] T-0792 | B2B Образование: База знаний и вебинары для вендоров (по маркетингу, продажам)
+- [x] T-0792 | B2B Образование: База знаний и вебинары для вендоров (по маркетингу, продажам)
     - depends: [T-0648]
     - apply:
         ```bash
@@ -12027,7 +12027,7 @@ JS
 
 ## ЭТАП 319. Мобильные Приложения (Расширенный Функционал)
 
-- [ ] T-0793 | Мобильное Приложение (Пара): Оффлайн-доступ к основным данным (чек-лист, гости, бюджет)
+- [x] T-0793 | Мобильное Приложение (Пара): Оффлайн-доступ к основным данным (чек-лист, гости, бюджет)
     - depends: [T-0769, T-0763]
     - apply:
         ```bash
@@ -12035,7 +12035,7 @@ JS
         echo "// TODO: Implement offline data storage in Couple App" > mobile/app-couple/offline_storage.todo
         git add mobile/app-couple/offline_storage.todo
         ```
-- [ ] T-0794 | Мобильное Приложение (Пара): Управление гостями и RSVP с телефона
+- [x] T-0794 | Мобильное Приложение (Пара): Управление гостями и RSVP с телефона
     - depends: [T-0769, T-0040]
     - apply:
         ```bash
@@ -12043,7 +12043,7 @@ JS
         echo "// TODO: Implement Guest Management screens in Couple App" > mobile/app-couple/guest_management.todo
         git add mobile/app-couple/guest_management.todo
         ```
-- [ ] T-0795 | Мобильное Приложение (Пара): Чат с вендорами
+- [x] T-0795 | Мобильное Приложение (Пара): Чат с вендорами
     - depends: [T-0769, T-0455]
     - apply:
         ```bash

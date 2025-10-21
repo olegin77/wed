@@ -1,3 +1,1 @@
-export function vendorPdf(): number {
-  return 1;
-}
+export const vendorPdf=1;

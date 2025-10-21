@@ -88,3 +88,6 @@ createServer(async (req, res) => {
 }).listen(port, "0.0.0.0", () => {
   console.log("booking confirm api listening", port);
 });
+
+// health
+
