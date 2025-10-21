@@ -1,6 +1,8 @@
 import http from "http";
 import { PrismaClient } from "@prisma/client";
 
+import { handleCatalogSearch } from "./api/search.js";
+
 const prisma = new PrismaClient();
 const port = process.env.PORT || 3000;
 
@@ -55,6 +57,11 @@ http
           date: target.toISOString().slice(0, 10),
           vendors: availableVendors,
         });
+      }
+
+      if (req.method === "GET" && req.url?.startsWith("/catalog/search")) {
+        await handleCatalogSearch(req, res, { prisma, json });
+        return;
       }
 
       res.writeHead(404);
