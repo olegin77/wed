@@ -7796,7 +7796,7 @@ JS
 
 ## ЭТАП 256. A11y и i18n-полировки
 
-- [ ] T-0426 | Док а11y + skip-link компонент
+- [x] T-0426 | Док а11y + skip-link компонент
   - depends: [T-0208]
   - apply:
     ```bash
@@ -7813,7 +7813,7 @@ TSX
     git add docs/a11y/checklist.md apps/svc-website/src/ui/a11y/SkipLink.tsx
     ```
 
-- [ ] T-0427 | Фокус-стили для кнопок и ссылок
+- [x] T-0427 | Фокус-стили для кнопок и ссылок
   - depends: [T-0207]
   - apply:
     ```bash
@@ -7822,7 +7822,7 @@ TSX
     git add apps/svc-website/src/styles/base.css
     ```
 
-- [ ] T-0428 | Переключатель языка (RU/UZ) — виджет
+- [x] T-0428 | Переключатель языка (RU/UZ) — виджет
   - depends: [T-0210]
   - apply:
     ```bash
@@ -11934,7 +11934,7 @@ JS
         echo "// TODO: Add Follow model to schema.prisma" > packages/prisma/follow_model.todo
         git add packages/prisma/follow_model.todo
         ```
-- [ ] T-0783 | Комьюнити: Лента активности (новые посты в блоге, реальные свадьбы, Q&A)
+- [x] T-0783 | Комьюнити: Лента активности (новые посты в блоге, реальные свадьбы, Q&A)
     - depends: [T-0601, T-0603, T-0604]
     - apply:
         ```bash

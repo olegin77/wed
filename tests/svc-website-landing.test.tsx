@@ -13,12 +13,15 @@ import FirstBlogPost, { loadFirstArticle } from "../apps/svc-website/src/pages/b
 import FaqPage, { FAQ_ITEMS } from "../apps/svc-website/src/pages/faq";
 import ComingSoonLanding from "../apps/svc-website/src/pages/landing/coming-soon";
 import { buildFaqJsonLd, buildOrganizationJsonLd } from "../apps/svc-website/src/seo/org-jsonld";
+import CommunityFeedPage, { FEED_ITEMS } from "../apps/svc-website/src/pages/feed";
 
 describe("svc-website marketing surface", () => {
   it("renders hero metrics and call-to-actions", () => {
     const markup = renderToStaticMarkup(React.createElement(HomeLanding));
     assert.ok(markup.includes("WeddingTech UZ"));
     assert.ok(markup.includes("Открыть каталог"));
+    assert.ok(markup.includes("data-testid=\"skip-link\""));
+    assert.ok(markup.includes("data-testid=\"language-switcher\""));
     for (const metric of HERO_METRICS) {
       assert.ok(markup.includes(metric.value));
     }
@@ -56,5 +59,15 @@ describe("svc-website marketing surface", () => {
     const markup = renderToStaticMarkup(React.createElement(ComingSoonLanding));
     assert.ok(markup.includes("Станьте первыми пользователями"));
     assert.ok(markup.includes("coming-soon-email"));
+  });
+
+  it("lists curated community feed items", () => {
+    const markup = renderToStaticMarkup(React.createElement(CommunityFeedPage));
+    assert.ok(markup.includes("data-testid=\"community-feed-list\""));
+    assert.ok(FEED_ITEMS.length >= 3);
+    for (const item of FEED_ITEMS) {
+      assert.ok(markup.includes(item.title));
+      assert.ok(markup.includes(item.href));
+    }
   });
 });

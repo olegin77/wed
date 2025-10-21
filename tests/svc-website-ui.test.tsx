@@ -8,6 +8,8 @@ import { Breadcrumbs } from "../apps/svc-website/src/ui/nav/Breadcrumbs";
 import SearchEmpty from "../apps/svc-website/src/ui/empty/SearchEmpty";
 import { FeatureHighlights } from "../apps/svc-website/src/ui/marketing/FeatureHighlights";
 import { LoadingButton } from "../apps/svc-website/src/ui/LoadingButton";
+import { LanguageSwitcher } from "../apps/svc-website/src/ui/i18n/LanguageSwitcher";
+import SkipLink from "../apps/svc-website/src/ui/a11y/SkipLink";
 import { MARKETING_FEATURES } from "../apps/svc-website/app/marketing-features";
 
 void describe("svc-website shared UI", () => {
@@ -89,5 +91,21 @@ void describe("svc-website shared UI", () => {
         assert.ok(markup.includes(`href=\"${feature.ctaHref}\"`));
       }
     }
+  });
+
+  void it("renders language switcher controls with radio semantics", () => {
+    const markup = renderToStaticMarkup(React.createElement(LanguageSwitcher, { defaultLanguage: "uz" }));
+
+    assert.ok(markup.includes("data-testid=\"language-switcher\""));
+    assert.ok(markup.includes("aria-label=\"Выбор языка интерфейса\""));
+    assert.match(markup, /role=\"radio\"/);
+    assert.ok(markup.includes("aria-checked=\"true\""));
+  });
+
+  void it("links skip component to the provided target", () => {
+    const markup = renderToStaticMarkup(React.createElement(SkipLink, { targetId: "content", label: "К контенту" }));
+
+    assert.ok(markup.includes("href=\"#content\""));
+    assert.ok(markup.includes("К контенту"));
   });
 });

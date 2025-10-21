@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 
+import SkipLink from "../src/ui/a11y/SkipLink";
+
 export const metadata: Metadata = {
   title: "WeddingTech – Celebrate without the busywork",
   description:
@@ -18,9 +20,10 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body>
-        <main>{children}</main>
+        <SkipLink targetId="next-main" />
+        <main id="next-main">{children}</main>
       </body>
     </html>
   );

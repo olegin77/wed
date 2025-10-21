@@ -5,6 +5,8 @@ import Card from "../ui/Card";
 import Container from "../ui/Container";
 import Section from "../ui/Section";
 import Banner from "../ui/banner/Banner";
+import SkipLink from "../ui/a11y/SkipLink";
+import { LanguageSwitcher } from "../ui/i18n/LanguageSwitcher";
 
 /**
  * Key metrics surfaced on the landing hero. Values are stored as strings to
@@ -137,17 +139,22 @@ function navigateTo(href: string) {
  */
 export default function HomeLanding() {
   return (
-    <main className="bg-[var(--bg)] text-[var(--fg)]">
+    <>
+      <SkipLink targetId="main-content" />
+      <main id="main-content" className="bg-[var(--bg)] text-[var(--fg)]">
       <Banner
         message="Предзапись на запуск в Ташкенте открыта — первые пары получают 3 месяца премиум-подписки."
         action={{ href: "#signup", label: "Оставить заявку" }}
       />
-      <Container className="pb-20 pt-16">
+        <Container className="pb-20 pt-16">
+        <div className="flex flex-col items-start gap-4 pb-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="inline-flex items-center rounded-full bg-white/60 px-4 py-2 text-sm font-medium uppercase tracking-wide text-[var(--brand)] shadow-sm ring-1 ring-black/5 backdrop-blur">
+            Сервис №1 для подготовки свадьбы в Узбекистане
+          </p>
+          <LanguageSwitcher />
+        </div>
         <section className="grid items-center gap-16 lg:grid-cols-[1.2fr,1fr]">
           <div className="space-y-6">
-            <p className="inline-flex items-center rounded-full bg-white/60 px-4 py-2 text-sm font-medium uppercase tracking-wide text-[var(--brand)] shadow-sm ring-1 ring-black/5 backdrop-blur">
-              Сервис №1 для подготовки свадьбы в Узбекистане
-            </p>
             <h1 className="text-5xl font-extrabold leading-tight text-[var(--fg)]">
               WeddingTech UZ
               <span className="block text-3xl font-semibold text-[var(--muted)]">
@@ -217,5 +224,6 @@ export default function HomeLanding() {
         </Section>
       </Container>
     </main>
+  </>
   );
 }

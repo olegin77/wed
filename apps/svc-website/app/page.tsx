@@ -6,6 +6,7 @@ import { LoadingButton } from "../src/ui/LoadingButton";
 import { FeatureHighlights } from "../src/ui/marketing/FeatureHighlights";
 import type { BreadcrumbItem } from "../src/ui/nav/Breadcrumbs";
 import { Breadcrumbs } from "../src/ui/nav/Breadcrumbs";
+import { LanguageSwitcher } from "../src/ui/i18n/LanguageSwitcher";
 import { MARKETING_FEATURES } from "./marketing-features";
 
 /**
@@ -70,7 +71,18 @@ const HERO_CRUMBS: BreadcrumbItem[] = [
 export default function HomePage() {
   return (
     <section style={{ textAlign: "center", maxWidth: "48rem" }}>
-      <Breadcrumbs items={HERO_CRUMBS} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1rem",
+          flexWrap: "wrap",
+        }}
+      >
+        <Breadcrumbs items={HERO_CRUMBS} />
+        <LanguageSwitcher />
+      </div>
       <p style={{ letterSpacing: "0.2em", textTransform: "uppercase", color: "#6366f1" }}>
         Vendor Operations Platform
       </p>
