@@ -1,0 +1,1 @@
+export function validate(items){ const bad=[]; items.forEach((it,i)=>{ const e=[]; if(!it.title) e.push("title"); if(!(it.priceUZS>0)) e.push("priceUZS"); if(e.length) bad.push({row:i+1, fields:e}); }); return bad; }

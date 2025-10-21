@@ -107,3 +107,6 @@ test("login rejects invalid credentials", async () => {
   const result2 = await handlers.login({ email: "fail@example.com", password: "Password1" });
   assert.equal(result2.status, 401);
 });
+
+// health
+

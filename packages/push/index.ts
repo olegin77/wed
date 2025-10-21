@@ -1,18 +1,7 @@
-export interface WebPushSubscription {
-  endpoint: string;
-  keys: { p256dh: string; auth: string };
-}
-
-export interface WebPushPayload {
-  title: string;
-  body: string;
-  url?: string;
-}
-
-export async function sendWebPush(
-  subscription: WebPushSubscription,
-  payload: WebPushPayload,
-): Promise<void> {
-  // In production we'd call web-push library; here we simply log.
-  console.info("webpush", subscription.endpoint, payload.title);
+// Stub interface to abstract web push (external sender configured elsewhere)
+export type Subscription={endpoint:string;keys:{p256dh:string;auth:string}};
+export async function sendPush(sub:Subscription, payload:{title:string;body:string;url?:string}){
+  // In production: use 'web-push' or a push gateway. Here we log only.
+  console.log("PUSH_STUB", sub.endpoint.slice(0,32), payload.title);
+  return {ok:true};
 }

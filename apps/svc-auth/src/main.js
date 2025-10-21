@@ -14,3 +14,6 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
     server.close(() => process.exit(0));
   });
 }
+
+// health
+
