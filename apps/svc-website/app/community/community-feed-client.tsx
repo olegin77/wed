@@ -1,10 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
-import Container from "../../src/ui/Container";
-import Section from "../../src/ui/Section";
-import Card from "../../src/ui/Card";
 import { Breadcrumbs, type BreadcrumbItem } from "../../src/ui/nav/Breadcrumbs";
 import { LanguageSwitcher } from "../../src/ui/i18n/LanguageSwitcher";
 import {
@@ -34,18 +32,21 @@ function FeedCard({ item }: { readonly item: FeedItem }) {
     (item.type === "blog" ? "Блог" : item.type === "wedding" ? "Реальные свадьбы" : "Q&A");
 
   return (
-    <Card className="wt-community-feed__card" title={item.title}>
-      <p className="wt-community-feed__badge" aria-label={badgeLabel}>
-        {badgeLabel}
-      </p>
+    <article className="wt-community-feed__card">
+      <header className="wt-community-feed__card-header">
+        <p className="wt-community-feed__badge" aria-label={badgeLabel}>
+          {badgeLabel}
+        </p>
+        <h2 className="wt-community-feed__card-title">{item.title}</h2>
+      </header>
       <p className="wt-community-feed__excerpt">{item.excerpt}</p>
-      <div className="wt-community-feed__meta">
+      <footer className="wt-community-feed__meta">
         <time dateTime={item.publishedAt}>{formatDate(item.publishedAt)}</time>
-        <a className="wt-community-feed__link" href={item.href}>
+        <Link className="wt-community-feed__link" href={item.href}>
           Читать далее
-        </a>
-      </div>
-    </Card>
+        </Link>
+      </footer>
+    </article>
   );
 }
 
@@ -61,15 +62,21 @@ export default function CommunityFeedClient() {
 
   return (
     <main className="wt-community-feed" id="community-feed">
-      <Container className="wt-community-feed__container">
+      <div className="wt-community-feed__container">
         <header className="wt-community-feed__header">
           <Breadcrumbs items={COMMUNITY_CRUMBS} />
           <LanguageSwitcher />
         </header>
-        <Section
-          title="Лента WeddingTech"
-          description="Следите за обновлениями платформы, историями реальных пар и ответами экспертов комьюнити."
+        <section
+          aria-labelledby="community-feed-heading"
+          className="wt-community-feed__section"
         >
+          <div className="wt-community-feed__intro">
+            <h1 id="community-feed-heading">Лента WeddingTech</h1>
+            <p className="wt-community-feed__description">
+              Следите за обновлениями платформы, историями реальных пар и ответами экспертов комьюнити.
+            </p>
+          </div>
           <div className="wt-community-feed__filters" role="toolbar" aria-label="Фильтр материалов">
             {FEED_FILTERS.map((entry) => {
               const isActive = filter === entry.value;
@@ -96,8 +103,8 @@ export default function CommunityFeedClient() {
               Материалы выбранного типа появятся в ближайшее время.
             </p>
           ) : null}
-        </Section>
-      </Container>
+        </section>
+      </div>
     </main>
   );
 }

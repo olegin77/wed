@@ -329,6 +329,31 @@ button:focus-visible {
   padding: 4rem 1.5rem;
 }
 
+.wt-community-feed__section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.wt-community-feed__intro {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.wt-community-feed__intro h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.wt-community-feed__description {
+  margin: 0;
+  font-size: 1.05rem;
+  color: rgba(15, 23, 42, 0.68);
+}
+
 .wt-community-feed__header {
   display: flex;
   flex-wrap: wrap;
@@ -385,6 +410,12 @@ button:focus-visible {
   min-height: 100%;
 }
 
+.wt-community-feed__card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .wt-community-feed__badge {
   font-size: 0.75rem;
   font-weight: 700;
@@ -392,6 +423,13 @@ button:focus-visible {
   text-transform: uppercase;
   color: var(--brand);
   margin-bottom: 0.5rem;
+}
+
+.wt-community-feed__card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.92);
 }
 
 .wt-community-feed__excerpt {
