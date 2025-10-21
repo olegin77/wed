@@ -1,0 +1,10 @@
+POST http://localhost:3004/pay/create-intent
+Content-Type: application/json
+
+{"amount":1500000,"currency":"UZS"}
+
+###
+POST http://localhost:3004/pay/capture
+Content-Type: application/json
+
+{"id":"pi_demo_id"}

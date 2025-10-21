@@ -4,6 +4,7 @@ function body(req){return new Promise(r=>{let b="";req.on("data",c=>b+=c);req.on
 createServer(async (req,res)=>{
   if(req.method==="POST" && req.url==="/pricing/create"){
     const b=await body(req); const pkg=await db.pricePackage.create({data:{vendorId:b.vendorId,title:b.title,price:b.price,currency:b.currency||"UZS"}});
+    // TODO: проверить VendorMember (stub допускает всех авторизованных)
     res.writeHead(201,{"Content-Type":"application/json"}); return res.end(JSON.stringify(pkg));
   }
   if(req.method==="GET" && req.url.startsWith("/pricing/list")){
@@ -13,3 +14,6 @@ createServer(async (req,res)=>{
   }
   res.writeHead(404); res.end();
 }).listen(port,"0.0.0.0");
+
+// health
+

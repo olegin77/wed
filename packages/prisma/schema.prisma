@@ -47,6 +47,8 @@ enum AgencyRole {
 
 /// User keeps authentication credentials and links to domain profiles.
 model User {
+  trustScore Int @default(100)
+  bonusBalance Int @default(0)
   id           String   @id @default(cuid())
   email        String   @unique
   phone        String?  @unique
@@ -188,6 +190,8 @@ model CatalogCategory {
 
 /// Venue captures bookable spaces exposed by vendors.
 model Venue {
+  lat  Float?
+  lng  Float?
   id          String  @id @default(cuid())
   vendorId    String
   title       String
@@ -296,6 +300,7 @@ model EnquiryNote {
 
 /// Review represents post-event vendor feedback authored by couples.
 model Review {
+  images   String? // JSON массив URL
   id              String  @id @default(cuid())
   enquiryId       String  @unique
   rating          Int
@@ -531,5 +536,304 @@ model Referral {
   inviterId String
   inviteeId String
   reward    Int    @default(0)
+  createdAt DateTime @default(now())
+}
+
+model PricePackage {
+  id        String @id @default(cuid())
+  vendorId  String
+  title     String
+  price     Int
+  currency  String @default("UZS")
+  items     PriceItem[]
+}
+
+model PriceItem {
+  id        String @id @default(cuid())
+  packageId String
+  pkg       PricePackage @relation(fields: [packageId], references: [id])
+  label     String
+}
+
+model PromoCode {
+  id        String @id @default(cuid())
+  code      String  @unique
+  discount  Int     // процент 0..100
+  validTill DateTime
+  vendorId  String?
+}
+
+model Referral {
+  id        String @id @default(cuid())
+  inviterId String
+  inviteeId String
+  reward    Int    @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ApiKey {
+  id        String @id @default(cuid())
+  name      String
+  key       String  @unique
+  createdAt DateTime @default(now())
+  active    Boolean @default(true)
+}
+
+model EventLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  name      String
+  payload   String
+  createdAt DateTime @default(now())
+  city      String?
+}
+
+model CoupleSite {
+  locale   String  @default("ru")
+  id        String  @id @default(cuid())
+  userId    String
+  slug      String  @unique
+  theme     String  @default("classic")
+  blocks    String  // JSON
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FraudEvent {
+  id        String  @id @default(cuid())
+  userId    String?
+  kind      String
+  payload   String
+  createdAt DateTime @default(now())
+}
+
+model CurrencyRate {
+  code     String @id
+  rateUZS  Float
+  updatedAt DateTime @default(now())
+}
+
+model UserPrefs {
+  userId   String  @id
+  user     User    @relation(fields: [userId], references: [id])
+  cities   String? // JSON: ["Tashkent","Samarkand"]
+  cats     String? // JSON: ["venues","photo"]
+  budgetUZS Int?
+  updatedAt DateTime @default(now())
+}
+
+model GiftRegistry {
+  id       String  @id @default(cuid())
+  userId   String
+  title    String
+  items    GiftItem[]
+  createdAt DateTime @default(now())
+}
+
+model GiftItem {
+  id        String @id @default(cuid())
+  registryId String
+  registry  GiftRegistry @relation(fields:[registryId], references:[id])
+  name      String
+  priceUZS  Int
+  url       String?
+  reserved  Boolean @default(false)
+}
+
+model Reservation {
+  id      String @id @default(cuid())
+  itemId  String
+  name    String
+  phone   String
+  createdAt DateTime @default(now())
+}
+
+model EventPlan {
+  id        String @id @default(cuid())
+  userId    String
+  title     String
+  tasks     EventTask[]
+  createdAt DateTime @default(now())
+}
+
+model EventTask {
+  id        String @id @default(cuid())
+  planId    String
+  plan      EventPlan @relation(fields:[planId], references:[id])
+  time      String
+  title     String
+  done      Boolean @default(false)
+}
+
+model VendorMember {
+  id        String @id @default(cuid())
+  vendorId  String
+  userId    String
+  role      String  @default("MANAGER")
+  createdAt DateTime @default(now())
+}
+
+model ChatThread {
+  id         String   @id @default(cuid())
+  enquiryId  String
+  createdAt  DateTime @default(now())
+  messages   ChatMessage[]
+}
+
+model ChatMessage {
+  id         String   @id @default(cuid())
+  threadId   String
+  thread     ChatThread @relation(fields:[threadId], references:[id])
+  authorId   String
+  role       String   // "user" | "vendor"
+  text       String?
+  mediaUrl   String?
+  createdAt  DateTime @default(now())
+}
+
+model VerificationCode {
+  id        String  @id @default(cuid())
+  userId    String?
+  channel   String  // sms/email
+  target    String
+  code      String
+  expiresAt DateTime
+  used      Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+
+model ResponseMetric {
+  id             String  @id @default(cuid())
+  threadId       String
+  firstReplySec  Int
+  createdAt      DateTime @default(now())
+}
+
+model Collection {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  title     String
+  filters   String  // JSON: {city:"Tashkent", category:"venues", minRating:4.5}
+  createdAt DateTime @default(now())
+}
+
+model RevenueEvent {
+  id        String  @id @default(cuid())
+  type      String  // "booking_fee" | "subscription" | "refund"
+  amountUZS Int
+  refId     String?
+  createdAt DateTime @default(now())
+}
+
+model GiftCard {
+  id        String  @id @default(cuid())
+  code      String  @unique
+  amount    Int
+  currency  String  @default("UZS")
+  active    Boolean @default(true)
+  issuedAt  DateTime @default(now())
+  redeemedAt DateTime?
+  ownerId   String?
+}
+
+model ModerationQueue {
+  id        String  @id @default(cuid())
+  entity    String  // "vendor" | "review" | "photo"
+  refId     String
+  reason    String
+  state     String  @default("PENDING") // PENDING | APPROVED | REJECTED
+  createdAt DateTime @default(now())
+  decidedAt DateTime?
+  moderator String?
+}
+
+model VendorPlan {
+  id        String  @id @default(cuid())
+  code      String  @unique
+  title     String
+  priceUZS  Int
+  limits    String   // JSON: {maxListings:10, highlight:true}
+  createdAt DateTime @default(now())
+}
+
+model VendorSubscription {
+  id        String  @id @default(cuid())
+  vendorId  String
+  planId    String
+  startedAt DateTime @default(now())
+  endsAt    DateTime
+  active    Boolean  @default(true)
+}
+
+model Contract {
+  id        String  @id @default(cuid())
+  bookingId String
+  title     String
+  html      String
+  status    String  @default("DRAFT") // DRAFT | SENT | SIGNED
+  createdAt DateTime @default(now())
+  signedAt  DateTime?
+}
+
+model Resource {
+  id        String  @id @default(cuid())
+  vendorId  String
+  name      String
+  capacity  Int     @default(1)
+  createdAt DateTime @default(now())
+}
+
+model ResourceBooking {
+  id        String  @id @default(cuid())
+  resourceId String
+  date      DateTime
+  qty       Int     @default(1)
+  createdAt DateTime @default(now())
+}
+
+model Channel {
+  id        String  @id @default(cuid())
+  code      String  @unique
+  title     String
+  createdAt DateTime @default(now())
+}
+
+model CommissionRule {
+  id        String  @id @default(cuid())
+  channelId String
+  channel   Channel @relation(fields:[channelId], references:[id])
+  percent   Int     // 0..100
+  createdAt DateTime @default(now())
+}
+
+model AgencyCommission {
+  id        String  @id @default(cuid())
+  agencyId  String
+  bookingId String
+  amountUZS Int
+  createdAt DateTime @default(now())
+}
+
+model VendorBadge {
+  id        String  @id @default(cuid())
+  code      String  @unique
+  title     String
+  icon      String
+  createdAt DateTime @default(now())
+}
+
+model VendorBadgeLink {
+  id        String  @id @default(cuid())
+  vendorId  String
+  badgeId   String
+}
+
+model Promo {
+  id        String  @id @default(cuid())
+  code      String  @unique
+  type      String  // PERCENT|FIXED
+  value     Int
+  active    Boolean @default(true)
+  expiresAt DateTime?
   createdAt DateTime @default(now())
 }

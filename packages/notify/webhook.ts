@@ -1,0 +1,1 @@
+export async function notify(url:string, payload:any){ try{ const u=new URL(url); const http=require("http"); const body=JSON.stringify(payload); const req=http.request({hostname:u.hostname,port:u.port||80,path:u.pathname,method:"POST",headers:{"Content-Type":"application/json"}},res=>res.resume()); req.on("error",()=>{}); req.write(body); req.end(); }catch(e){} }

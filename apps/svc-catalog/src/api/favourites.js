@@ -12,3 +12,6 @@ createServer(async (req,res)=>{
     const list=await db.favourite.findMany({where:{userId:uid}, include:{vendor:true}}); res.writeHead(200,{"Content-Type":"application/json"}); return res.end(JSON.stringify(list)); }
   res.writeHead(404); res.end();
 }).listen(port,"0.0.0.0");
+
+// health
+

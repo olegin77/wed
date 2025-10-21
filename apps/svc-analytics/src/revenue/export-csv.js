@@ -1,0 +1,1 @@
+import fs from "fs"; export function exportCSV(rows){ const csv="period,amountUZS\n"+rows.map(r=>`${r.period},${r.amountUZS}`).join("\n"); fs.mkdirSync("exports",{recursive:true}); const p="exports/revenue.csv"; fs.writeFileSync(p,csv); return p; }
