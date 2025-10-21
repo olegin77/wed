@@ -1,5 +1,8 @@
-import { ArgonType, hash as argonHash, verify as argonVerify } from "@node-rs/argon2";
+import argon2 from "@node-rs/argon2";
 import crypto from "node:crypto";
+
+const { hash: argonHash, verify: argonVerify } = argon2;
+const ARGON_ALGORITHM = argon2.Algorithm?.Argon2id ?? 2;
 
 const DEFAULT_HASH_LENGTH = 32;
 const DEFAULT_MEMORY_COST = 19456; // 19 MiB keeps the hash strong but lightweight for tests.
@@ -70,11 +73,11 @@ export async function hashPassword(password, options) {
   assertPassword(password);
   const resolved = resolveHashOptions(options);
   return argonHash(password, {
-    type: ArgonType.Argon2id,
+    algorithm: ARGON_ALGORITHM,
     memoryCost: resolved.memoryCost,
     timeCost: resolved.timeCost,
     parallelism: resolved.parallelism,
-    hashLength: resolved.hashLength,
+    outputLen: resolved.hashLength,
     salt: resolved.salt,
   });
 }
@@ -97,7 +100,7 @@ export async function verifyPassword(password, digest) {
   }
 
   try {
-    return await argonVerify(digest, password, { type: ArgonType.Argon2id });
+    return await argonVerify(digest, password, { algorithm: ARGON_ALGORITHM });
   } catch (error) {
     if (error instanceof Error && /hash verify failed/i.test(error.message)) {
       return false;
