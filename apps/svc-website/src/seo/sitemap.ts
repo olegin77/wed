@@ -5,11 +5,19 @@ const cities = ["tashkent", "samarkand", "bukhara", "namangan", "andijan"] as co
 const categories = ["venues", "catering", "photo", "video", "music", "decor"] as const;
 
 export function buildSitemap(baseUrl = "https://weddingtech.uz") {
-  const urls = [
+  const catalogRoutes = cities.flatMap((city) =>
+    categories.map((category) => `/catalog/${city}/${category}`)
+  );
+  const staticPages = [
     "/",
     "/catalog",
-    ...cities.flatMap((city) => categories.map((category) => `/catalog/${city}/${category}`)),
+    "/blog",
+    "/blog/first",
+    "/faq",
+    "/landing/coming-soon",
   ];
+
+  const urls = Array.from(new Set([...staticPages, ...catalogRoutes]));
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls
     .map((slug) => `<url><loc>${baseUrl}${slug}</loc></url>`)
