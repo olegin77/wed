@@ -18,8 +18,22 @@ type WeightVector = Record<WeightKey, number>;
  */
 type UpdateEvent = {
   type: "click" | "book";
-  delta: number;
-};
+  delta?: number;
+  timestamp?: Date;
+}
+
+/** Параметры обновления (дополнительное сглаживание и ограничения). */
+export interface OnlineUpdateOptions {
+  /**
+   * Насколько быстро веса «стягиваются» к дефолтным значениям перед обработкой
+   * события. Диапазон 0..1. Значение 0 — без затухания.
+   */
+  decay?: number;
+  /** Минимальная доля одного фактора после нормализации. */
+  floor?: number;
+  /** Максимальная доля одного фактора после нормализации. */
+  ceiling?: number;
+}
 
 /**
  * Baseline values calibrated offline (must sum up to 1.0).
@@ -107,5 +121,27 @@ export function update(event: UpdateEvent): WeightVector {
  * Return a defensive copy of the current weight vector.
  */
 export function getWeights(): WeightVector {
-  return { ...weights };
+  return { ...state.weights };
+}
+
+/**
+ * Сбрасывает веса к значениям по умолчанию.
+ * Полезно при запуске экспериментов или ошибочных апдейтах.
+ */
+export function resetWeights(): void {
+  (Object.keys(state.weights) as WeightKey[]).forEach((key) => {
+    state.weights[key] = DEFAULT_WEIGHTS[key];
+  });
+  state.totalUpdates = 0;
+  state.lastUpdatedAt = null;
+}
+
+/**
+ * Возвращает метаданные онлайн-обновлений: кол-во апдейтов и временную метку.
+ */
+export function getUpdateMetadata(): { totalUpdates: number; lastUpdatedAt: Date | null } {
+  return {
+    totalUpdates: state.totalUpdates,
+    lastUpdatedAt: state.lastUpdatedAt,
+  };
 }
