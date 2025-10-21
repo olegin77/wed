@@ -4789,7 +4789,7 @@ TS
 
 ## ЭТАП 203. Статические страницы и SEO-скелеты
 
-- [ ] T-0256 | robots.txt и humans.txt
+- [x] T-0256 | robots.txt и humans.txt
   - depends: []
   - apply:
     ```bash
@@ -4806,7 +4806,7 @@ TXT
     git add public/robots.txt public/humans.txt
     ```
 
-- [ ] T-0257 | Политики: privacy.md и terms.md
+- [x] T-0257 | Политики: privacy.md и terms.md
   - depends: [T-0201]
   - apply:
     ```bash
@@ -5777,7 +5777,7 @@ JS
 
 ## ЭТАП 219. PWA и производительность
 
-- [ ] T-0308 | manifest.json и иконка
+- [x] T-0308 | manifest.json и иконка
   - depends: [T-0060]
   - apply:
     ```bash
@@ -5863,7 +5863,7 @@ TSX
     git add apps/svc-website/src/onboarding/VendorWizard.tsx
     ```
 
-- [ ] T-0313 | Страницы ошибок 404/500
+- [x] T-0313 | Страницы ошибок 404/500
   - depends: [T-0060]
   - apply:
     ```bash
@@ -6426,7 +6426,7 @@ TF
 
 ## ЭТАП 234. Финальные UX-полировки
 
-- [ ] T-0344 | Breadcrumbs компонент
+- [x] T-0344 | Breadcrumbs компонент
   - depends: [T-0207]
   - apply:
     ```bash
@@ -6441,7 +6441,7 @@ TSX
     git add apps/svc-website/src/ui/nav/Breadcrumbs.tsx
     ```
 
-- [ ] T-0345 | Empty state для поиска (ничего не найдено)
+- [x] T-0345 | Empty state для поиска (ничего не найдено)
   - depends: [T-0234]
   - apply:
     ```bash
@@ -6454,7 +6454,7 @@ TSX
     git add apps/svc-website/src/ui/empty/SearchEmpty.tsx
     ```
 
-- [ ] T-0346 | Loading state для кнопок (disabled + spinner)
+- [x] T-0346 | Loading state для кнопок (disabled + spinner)
   - depends: [T-0207]
   - apply:
     ```bash
