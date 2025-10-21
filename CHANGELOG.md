@@ -25,6 +25,7 @@
 - Curated hall+decor+music bundles under `apps/svc-catalog/src/bundles` with price allocation helpers and documentation in `docs/catalog/bundles.md`.
 - Enhanced `apps/svc-notifier/src/index.ts` with a persistent notification feed, delivery tracking, and documented error handling helpers.
 - Documented and extended `@wt/mlrank` with configurable offline score weights and clamped output helpers for catalogue ranking.
+- Enriched `@wt/mlrank/online/update` with decay-aware click/booking adjustments, metadata helpers, and documentation in `docs/mlrank/online-learning.md`.
 - Hardened `infra/feast/extract-features.ts` to normalise vendor metrics from mixed data sources and documented the supported fields in `docs/analytics/catalog-features.md`.
 - Published `@wt/features` to centralise vendor feature vectors, registry metadata, and normalisation helpers for ML pipelines.
 - Added a snapshot exporter in `infra/feast/export.ts` to persist feature dumps with optional metadata blocks.
