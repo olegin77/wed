@@ -1,7 +1,3 @@
-export function subscribe(): boolean {
-  return true;
-}
-
 type EventName = "invoice.created" | "payment.completed" | "enquiry.status";
 
 type Subscriber = {
@@ -12,8 +8,12 @@ type Subscriber = {
 
 const registry = new Map<string, Subscriber>();
 
-export function subscribe(id: string, payload: Subscriber): void {
-  registry.set(id, payload);
+export function subscribe(id?: string, payload?: Subscriber): boolean | void {
+  if (id && payload) {
+    registry.set(id, payload);
+  } else {
+    return true;
+  }
 }
 
 export function unsubscribe(id: string): void {
