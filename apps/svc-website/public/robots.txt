@@ -19,3 +19,5 @@ Crawl-delay: 10
 # Public sitemaps advertised for search engines.
 Sitemap: https://wed.weddingtech.uz/sitemap-index.xml
 Sitemap: https://wed.weddingtech.uz/vendors/sitemap.xml
+
+# Human-readable metadata about the team and project lives at /humans.txt.

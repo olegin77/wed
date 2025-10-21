@@ -1,0 +1,14 @@
+/* TEAM */
+Product: WeddingTech UZ
+Team Lead: Dilshod Rakhimov
+Design: @wt/design
+Engineering: @wt/frontend, @wt/backend
+Location: Tashkent, Uzbekistan
+
+/* CONTACT */
+Email: hello@weddingtech.uz
+Support: support@weddingtech.uz
+Careers: jobs@weddingtech.uz
+
+/* THANKS */
+Thanks to our early vendor partners and the couples who shared feedback.

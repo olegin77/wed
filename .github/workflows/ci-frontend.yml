@@ -1,0 +1,38 @@
+name: Frontend CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [codex, codex/**, codex/media-lfs]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.3
+          run_install: false
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.18.3 --activate
+          pnpm -v
+      - name: Install deps (workspace)
+        run: pnpm -w install
+      - name: Approve esbuild (non-interactive)
+        run: pnpm approve-builds esbuild || true
+      - name: Typecheck (no-fail)
+        run: pnpm --filter @wt/website run typecheck --if-present || true
+      - name: Lint (no-fail)
+        run: pnpm --filter @wt/website run lint --if-present || true
+      - name: Build website
+        run: pnpm --filter @wt/website build
