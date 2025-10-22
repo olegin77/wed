@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import type { Metadata } from "next";
 
@@ -97,13 +98,13 @@ export default function HomePage() {
         <form action="/vendors" method="get">
           <LoadingButton type="submit">Открыть каталог</LoadingButton>
         </form>
-        <a
+        <Link
           href="/w/partners"
           className="wt-search-empty__link"
           style={{ textDecoration: "none" }}
         >
           Узнать о подходе к онбордингу
-        </a>
+        </Link>
       </div>
       <HeroArtwork />
       <FeatureHighlights
@@ -119,9 +120,9 @@ export default function HomePage() {
         <LoadingButton loading spinnerLabel="Синхронизируем каталоги">
           Обновляем результаты…
         </LoadingButton>
-        <a className="wt-search-empty__link" href="/vendors">
+        <Link className="wt-search-empty__link" href="/vendors">
           Вернуться в каталог
-        </a>
+        </Link>
       </SearchEmpty>
     </section>
   );

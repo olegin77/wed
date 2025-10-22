@@ -1,3 +1,1 @@
-export function badges(): any[] {
-  return [];
-}
+export const badges=()=>[];

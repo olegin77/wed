@@ -591,3 +591,4 @@ async function main() {
 }
 
 main();
+console.log('seed vendors demo');

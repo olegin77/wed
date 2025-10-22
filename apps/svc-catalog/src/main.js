@@ -72,3 +72,6 @@ http
     }
   })
   .listen(port, "0.0.0.0", () => console.log("svc ok", port));
+
+// health
+

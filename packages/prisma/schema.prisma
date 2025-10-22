@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// Role enumerates top-level access types recognised by the platform.
 enum Role {
   PAIR
   VENDOR
@@ -15,7 +14,6 @@ enum Role {
   MODERATOR
 }
 
-/// EnquiryStatus captures the lifecycle of a couple ↔ vendor conversation.
 enum EnquiryStatus {
   NEW
   QUOTE_SENT
@@ -24,7 +22,6 @@ enum EnquiryStatus {
   LOST
 }
 
-/// RSVPStatus stores guest responses for couple websites.
 enum RSVPStatus {
   INVITED
   GOING
@@ -32,20 +29,12 @@ enum RSVPStatus {
   NO_RESPONSE
 }
 
-/// AvailabilityStatus represents vendor calendar slot availability.
 enum AvailabilityStatus {
   OPEN
   BUSY
   LATE
 }
 
-/// AgencyRole enumerates the access level a member has within an agency account.
-enum AgencyRole {
-  OWNER
-  AGENT
-}
-
-/// User keeps authentication credentials and links to domain profiles.
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -55,138 +44,52 @@ model User {
   passwordHash String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  /// Couple profile owned by the account when acting as a pair.
-  couple      Couple?
-  /// Vendors owned by the account when acting as a business.
-  vendors     Vendor[]
-  /// Bookings initiated by the user regardless of vendor.
-  bookings    Booking[]
-  /// Direct enquiries initiated from catalogue or chats.
-  enquiries   Enquiry[] @relation("UserEnquiries")
-  /// Short-term slot locks created while negotiating availability.
-  slotLocks   SlotLock[] @relation("UserSlotLocks")
-  /// Vendors bookmarked by the account for quick access.
-  favourites  Favourite[]
-  /// Chat channels where the account represents a vendor or agency.
-  vendorChatChannels EnquiryChannel[] @relation("EnquiryVendorChannelUser")
-  /// Chat channels anchored to the couple owner account.
-  coupleChatChannels EnquiryChannel[] @relation("EnquiryCoupleChannelUser")
-  /// List of agency memberships that allow acting on behalf of collectives.
-  agencyMemberships AgencyMember[]
+  vendors    Vendor[]
+  couple     Couple?
+  prefs        UserPrefs?
 }
 
-/// Couple stores extended profile and planning context for the pair.
+model UserPrefs {
+  userId   String  @id
+  user     User    @relation(fields: [userId], references: [id])
+  cities   String? // JSON: ["Tashkent","Samarkand"]
+  cats     String? // JSON: ["venues","photo"]
+  budgetUZS Int?
+  updatedAt DateTime @default(now())
+}
+
 model Couple {
-  id           String      @id @default(cuid())
-  userId       String      @unique
-  weddingDate  DateTime?
-  city         String?
-  preferences  Json?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-
-  user     User      @relation(fields: [userId], references: [id])
-  guests   Guest[]
-  tables   Table[]
-  budget   BudgetItem[]
-  website  Website?
-  enquiries Enquiry[]
-  /// Channels opened to facilitate direct vendor communication.
-  chatChannels EnquiryChannel[]
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  weddingDate DateTime?
+  city        String?
+  preferences Json?
+  user        User     @relation(fields: [userId], references: [id])
+  guests      Guest[]
+  tables      Table[]
+  budget      BudgetItem[]
+  website     Website?
 }
 
-/// Vendor represents a commercial supplier listed in the marketplace.
 model Vendor {
-  id            String            @id @default(cuid())
+  id            String   @id @default(cuid())
   ownerUserId   String
-  agencyId      String?
   type          String
   title         String
   city          String
   address       String?
   priceFrom     Int?
-  rating        Float?            @default(0)
-  verified      Boolean           @default(false)
-  profileScore  Int               @default(0)
+  rating        Float    @default(0)
+  verified      Boolean  @default(false)
+  profileScore  Int      @default(0)
   media         Json?
   docs          Json?
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
-
-  owner         User              @relation(fields: [ownerUserId], references: [id])
-  /// Owning agency when the vendor is operated by a collective account.
-  agency        Agency?           @relation(fields: [agencyId], references: [id])
+  owner         User     @relation(fields: [ownerUserId], references: [id])
   venues        Venue[]
   offers        Offer[]
   availabilities AvailabilitySlot[]
-  enquiries     Enquiry[]
-  rankSignals   RankSignal[]
-  bookings      Booking[]
-  slotLocks     SlotLock[]
-  /// Conversation channels initiated from enquiries with this vendor.
-  chatChannels  EnquiryChannel[]
-  /// Structured compliance documents uploaded by the vendor.
-  documents     VendorDocument[]
-  /// Accounts that favourited the vendor profile.
-  favourites    Favourite[]
 }
 
-/// Agency groups multiple vendor operators under a shared organisation account.
-model Agency {
-  id        String          @id @default(cuid())
-  title     String
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-
-  /// Members that can act on behalf of the agency.
-  members   AgencyMember[]
-  /// Vendors managed collectively by the agency.
-  vendors   Vendor[]
-}
-
-/// AgencyMember links a platform user to an agency with a defined responsibility.
-model AgencyMember {
-  id        String      @id @default(cuid())
-  agencyId  String
-  userId    String
-  role      AgencyRole  @default(AGENT)
-  createdAt DateTime    @default(now())
-
-  agency Agency @relation(fields: [agencyId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-
-  @@unique([agencyId, userId])
-}
-
-/// CatalogCity keeps a curated list of geographies exposed to couples
-/// browsing the marketplace. The dataset stays relatively small and is
-/// maintained via seeds so local environments mirror production defaults.
-model CatalogCity {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  region      String?
-  countryCode String   @default("UZ")
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-/// CatalogCategory enumerates primary service types within the marketplace
-/// (venues, catering, photo/video, etc.). Keeping the list in Prisma allows
-/// API consumers to fetch canonical metadata without hardcoding constants.
-model CatalogCategory {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  title     String
-  summary   String?
-  icon      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-/// Venue captures bookable spaces exposed by vendors.
 model Venue {
   id          String  @id @default(cuid())
   vendorId    String
@@ -194,201 +97,129 @@ model Venue {
   capacityMin Int?
   capacityMax Int?
   features    Json?
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-  slots  AvailabilitySlot[]
-  enquiries Enquiry[]
-  rankSignals RankSignal[]
-
+  vendor      Vendor  @relation(fields: [vendorId], references: [id])
   @@index([capacityMin, capacityMax])
 }
 
-/// AvailabilitySlot stores vendor availability to accelerate booking.
 model AvailabilitySlot {
-  id       String             @id @default(cuid())
-  vendorId String
-  venueId  String?
-  date     DateTime
-  status   AvailabilityStatus
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-  venue  Venue? @relation(fields: [venueId], references: [id])
-
+  id        String            @id @default(cuid())
+  vendorId  String
+  venueId   String?
+  date      DateTime
+  status    AvailabilityStatus
+  vendor    Vendor            @relation(fields: [vendorId], references: [id])
+  venue     Venue?            @relation(fields: [venueId], references: [id])
   @@index([vendorId, date])
 }
 
-/// Offer exposes vendor promotional packages for marketing surfaces.
 model Offer {
-  id            String   @id @default(cuid())
-  vendorId      String
-  title         String
-  description   String?
-  price         Int?
-  validFrom     DateTime?
-  validTo       DateTime?
+  id           String    @id @default(cuid())
+  vendorId     String
+  title        String
+  description  String?
+  price        Int?
+  validFrom    DateTime?
+  validTo      DateTime?
   isHighlighted Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
+  vendor       Vendor    @relation(fields: [vendorId], references: [id])
 }
 
-/// Enquiry is the central negotiation thread between couples and vendors.
 model Enquiry {
-  id         String         @id @default(cuid())
-  coupleId   String
-  /// Optional direct user reference for flows that bypass Couple creation.
-  userId     String?
-  vendorId   String
-  venueId    String?
-  eventDate  DateTime?
-  guests     Int?
-  budget     Int?
-  status     EnquiryStatus  @default(NEW)
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-
-  couple Couple @relation(fields: [coupleId], references: [id])
-  /// User account owning the enquiry when created outside planner onboarding.
-  user   User?   @relation("UserEnquiries", fields: [userId], references: [id])
-  vendor Vendor  @relation(fields: [vendorId], references: [id])
-  venue  Venue?  @relation(fields: [venueId], references: [id])
-  notes  EnquiryNote[]
-  reviews Review[]
-  booking Booking?
-  /// Chat channel connecting the couple and the vendor for this enquiry.
-  channel EnquiryChannel?
-
+  id        String        @id @default(cuid())
+  coupleId  String
+  vendorId  String
+  venueId   String?
+  eventDate DateTime?
+  guests    Int?
+  budget    Int?
+  status    EnquiryStatus @default(NEW)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  couple    Couple        @relation(fields: [coupleId], references: [id])
+  vendor    Vendor        @relation(fields: [vendorId], references: [id])
+  venue     Venue?        @relation(fields: [venueId], references: [id])
+  notes     EnquiryNote[]
+  reviews   Review[]
   @@index([status, eventDate])
 }
 
-/// EnquiryChannel stores the conversation channel metadata for a specific enquiry.
-model EnquiryChannel {
-  id                   String   @id @default(cuid())
-  enquiryId            String   @unique
-  coupleId             String
-  vendorId             String
-  coupleUserId         String?
-  primaryVendorUserId  String?
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-
-  enquiry Enquiry @relation(fields: [enquiryId], references: [id])
-  couple  Couple  @relation(fields: [coupleId], references: [id])
-  vendor  Vendor  @relation(fields: [vendorId], references: [id])
-  coupleUser        User?   @relation("EnquiryCoupleChannelUser", fields: [coupleUserId], references: [id])
-  primaryVendorUser User?   @relation("EnquiryVendorChannelUser", fields: [primaryVendorUserId], references: [id])
-
-  @@index([vendorId])
-  @@index([coupleId])
-}
-
-/// EnquiryNote records internal collaboration between teammates.
 model EnquiryNote {
   id        String   @id @default(cuid())
   enquiryId String
   authorId  String
   text      String
   createdAt DateTime @default(now())
-
-  enquiry Enquiry @relation(fields: [enquiryId], references: [id])
+  enquiry   Enquiry  @relation(fields: [enquiryId], references: [id])
 }
 
-/// Review represents post-event vendor feedback authored by couples.
 model Review {
-  id              String  @id @default(cuid())
-  enquiryId       String  @unique
-  rating          Int
-  text            String?
-  isPublished     Boolean @default(false)
+  id               String  @id @default(cuid())
+  enquiryId        String  @unique
+  rating           Int
+  text             String?
+  isPublished      Boolean @default(false)
   moderationStatus String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  enquiry Enquiry @relation(fields: [enquiryId], references: [id])
+  enquiry          Enquiry @relation(fields: [enquiryId], references: [id])
 }
 
-/// Guest stores invitee information for couple planning flows.
 model Guest {
-  id        String     @id @default(cuid())
-  coupleId  String
-  name      String
-  phone     String?
-  email     String?
-  diet      String?
-  plusOne   Boolean    @default(false)
-  status    RSVPStatus @default(INVITED)
-  tableId   String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-
-  couple Couple @relation(fields: [coupleId], references: [id])
-  table  Table?  @relation(fields: [tableId], references: [id])
-  rsvps  RSVP[]
-
+  id      String    @id @default(cuid())
+  coupleId String
+  name    String
+  phone   String?
+  email   String?
+  diet    String?
+  plusOne Boolean  @default(false)
+  status  RSVPStatus @default(INVITED)
+  couple  Couple   @relation(fields: [coupleId], references: [id])
+  tableId String?
+  table   Table?   @relation(fields: [tableId], references: [id])
   @@index([coupleId, status])
 }
 
-/// Table maps guests to seating arrangements for the reception.
 model Table {
-  id        String  @id @default(cuid())
-  coupleId  String
-  name      String
-  seats     Int
-  sort      Int     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  couple Couple @relation(fields: [coupleId], references: [id])
-  guests Guest[]
+  id      String  @id @default(cuid())
+  coupleId String
+  name    String
+  seats   Int
+  sort    Int     @default(0)
+  couple  Couple  @relation(fields: [coupleId], references: [id])
+  guests  Guest[]
 }
 
-/// BudgetItem keeps planned versus actual expenses for key categories.
 model BudgetItem {
-  id        String  @id @default(cuid())
-  coupleId  String
-  category  String
-  planned   Int     @default(0)
-  actual    Int     @default(0)
-  note      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  couple Couple @relation(fields: [coupleId], references: [id])
+  id      String  @id @default(cuid())
+  coupleId String
+  category String
+  planned  Int     @default(0)
+  actual   Int     @default(0)
+  note    String?
+  couple  Couple  @relation(fields: [coupleId], references: [id])
 }
 
-/// Website configures the public couple microsite and RSVP preferences.
 model Website {
-  id                String   @id @default(cuid())
-  coupleId          String   @unique
-  slug              String   @unique
+  id                String @id @default(cuid())
+  coupleId          String @unique
+  slug              String @unique
   themeId           String
-  isPublished       Boolean  @default(false)
-  rsvpPublicEnabled Boolean  @default(true)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  couple Couple @relation(fields: [coupleId], references: [id])
-  rsvps  RSVP[]
+  isPublished       Boolean @default(false)
+  rsvpPublicEnabled Boolean @default(true)
+  couple            Couple @relation(fields: [coupleId], references: [id])
+  rsvps             RSVP[]
 }
 
-/// RSVP links responses captured through the couple website or manual entry.
 model RSVP {
-  id         String     @id @default(cuid())
-  websiteId  String
-  guestId    String?
-  name       String
-  contact    String?
-  response   RSVPStatus
-  message    String?
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-
-  website Website @relation(fields: [websiteId], references: [id])
-  guest   Guest?   @relation(fields: [guestId], references: [id])
+  id        String    @id @default(cuid())
+  websiteId String
+  guestId   String?
+  name      String
+  contact   String?
+  response  RSVPStatus
+  message   String?
+  createdAt DateTime  @default(now())
+  website   Website   @relation(fields: [websiteId], references: [id])
 }
 
-/// AuditEvent provides a lightweight audit trail for notable actions.
 model AuditEvent {
   id        String   @id @default(cuid())
   entity    String
@@ -399,7 +230,6 @@ model AuditEvent {
   createdAt DateTime @default(now())
 }
 
-/// RankSignal stores derived metrics that feed catalogue ranking heuristics.
 model RankSignal {
   id         String   @id @default(cuid())
   vendorId   String
@@ -407,97 +237,5 @@ model RankSignal {
   signalType String
   weight     Float    @default(0)
   ttl        DateTime?
-  createdAt  DateTime @default(now())
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-  venue  Venue?  @relation(fields: [venueId], references: [id])
-
   @@index([vendorId, signalType])
-}
-
-enum BookingStatus {
-  PENDING_PAYMENT
-  PAID
-  CANCELED
-}
-
-/// Booking represents confirmed reservations against vendor resources.
-model Booking {
-  id        String         @id @default(cuid())
-  vendorId  String
-  userId    String
-  enquiryId String?        @unique
-  startAt   DateTime
-  endAt     DateTime
-  status    BookingStatus  @default(PENDING_PAYMENT)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-
-  vendor  Vendor  @relation(fields: [vendorId], references: [id])
-  user    User    @relation(fields: [userId], references: [id])
-  enquiry Enquiry? @relation(fields: [enquiryId], references: [id])
-
-  @@index([vendorId, startAt, endAt])
-}
-
-/// SlotLock temporarily reserves availability slots during checkout flows.
-model SlotLock {
-  id          String   @id @default(cuid())
-  vendorId    String
-  startAt     DateTime
-  endAt       DateTime
-  lockedUntil DateTime
-  byUserId    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-  byUser User?  @relation("UserSlotLocks", fields: [byUserId], references: [id])
-
-  @@index([vendorId, startAt, endAt])
-}
-
-/// BookingIndex stores a denormalised summary of reservations per day.
-model BookingIndex {
-  vendorId String
-  day      DateTime
-  slots    String   // JSON array of time ranges
-
-  @@id([vendorId, day])
-}
-
-/// WebhookEndpoint keeps partner webhook subscriptions and their shared secrets.
-model WebhookEndpoint {
-  id        String  @id @default(cuid())
-  url       String
-  secret    String
-  active    Boolean @default(true)
-  createdAt DateTime @default(now())
-}
-
-/// Favourite bookmarks a vendor for a given user profile.
-model Favourite {
-  id        String   @id @default(cuid())
-  userId    String
-  vendorId  String
-  createdAt DateTime @default(now())
-
-  user   User   @relation(fields: [userId], references: [id])
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-
-  @@unique([userId, vendorId])
-}
-
-/// VendorDocument keeps track of uploaded compliance artefacts for vendors.
-model VendorDocument {
-  id        String   @id @default(cuid())
-  vendorId  String
-  title     String
-  url       String
-  verified  Boolean  @default(false)
-  createdAt DateTime @default(now())
-
-  vendor Vendor @relation(fields: [vendorId], references: [id])
-
-  @@index([vendorId, verified])
 }

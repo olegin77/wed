@@ -1,3 +1,11 @@
+export type ImageVariant = { name: 'thumb' | 'preview' | 'full'; w: number };
+
+export const variants: ImageVariant[] = [
+  { name: 'thumb', w: 240 },
+  { name: 'preview', w: 960 },
+  { name: 'full', w: 2048 },
+];
+
 export type VariantName = "thumb" | "preview" | "full";
 
 export interface MediaVariant {

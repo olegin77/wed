@@ -1,0 +1,1 @@
+import fs from "fs"; export function exportCsv(items){ const csv="name,priceUZS,url,reserved\n"+items.map(i=>`${i.name},${i.priceUZS},${i.url||""},${i.reserved}`).join("\n"); fs.mkdirSync("exports",{recursive:true}); const p="exports/registry.csv"; fs.writeFileSync(p,csv); return p; }
