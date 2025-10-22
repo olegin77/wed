@@ -1,3 +1,1 @@
-export function normalize(phone: string): string {
-  return phone.replace(/[^\d+]/g, "");
-}
+export const normalize=(p:string)=>p.replace(/[^\d+]/g,'');

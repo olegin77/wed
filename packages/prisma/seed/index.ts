@@ -582,3 +582,15 @@ async function main() {
 }
 
 void main();
+
+await db.promoCode.upsert({
+  where:{code:"WELCOME10"},
+  update:{},
+  create:{code:"WELCOME10",discount:10,validTill:new Date(Date.now()+30*86400000)}
+});
+
+await db.promoCode.upsert({
+  where:{code:"WELCOME10"},
+  update:{},
+  create:{code:"WELCOME10",discount:10,validTill:new Date(Date.now()+30*86400000)}
+});

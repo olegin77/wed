@@ -1,3 +1,1 @@
-export function googleImport(): any[] {
-  return [];
-}
+export const googleImport=()=>[];

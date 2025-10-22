@@ -1,3 +1,1 @@
-export function exportSettings(): Record<string, never> {
-  return {};
-}
+export const exportSettings=()=>({});

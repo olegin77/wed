@@ -72,3 +72,6 @@ export function handleAvailabilityIcs(req, res) {
 }
 
 export const availabilityIcsRoute = ROUTE_PATH;
+
+// health
+

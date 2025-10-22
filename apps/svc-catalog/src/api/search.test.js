@@ -88,3 +88,6 @@ test("handleCatalogSearch proxies filters, pagination and sorting", async () => 
     totalPages: 4,
   });
 });
+
+// health
+

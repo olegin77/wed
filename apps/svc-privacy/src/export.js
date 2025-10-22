@@ -1,0 +1,1 @@
+import fs from "fs"; export async function exportUser(userId){ const data={userId, enquiries:[], favourites:[]}; fs.mkdirSync("exports",{recursive:true}); const p=`exports/user-${userId}.json`; fs.writeFileSync(p,JSON.stringify(data)); return p; }

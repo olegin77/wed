@@ -1,1 +1,1 @@
-export const enquiryLimit = 5;
+export const enquiryLimit=5;
