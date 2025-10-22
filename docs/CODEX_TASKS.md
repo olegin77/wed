@@ -1081,7 +1081,7 @@ JS
 
 ## ЭТАП 43. Hardening
 
-- [x] T-0430 | Security headers
+- [ ] T-0430 | Security headers
   - depends: [T-0004]
   - apply:
     ```bash
@@ -3877,7 +3877,7 @@ TS
 
 ## ЭТАП 187. Медиа: галереи, оптимизация изображений и превью
 
-- [x] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
+- [ ] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
   - depends: [T-0003]
   - apply:
     ```bash
@@ -5777,7 +5777,7 @@ JS
 
 ## ЭТАП 219. PWA и производительность
 
-- [x] T-0308 | manifest.json и иконка
+- [ ] T-0308 | manifest.json и иконка
   - depends: [T-0060]
   - apply:
     ```bash
@@ -9912,7 +9912,7 @@ JS
         touch packages/ui/src/feedback/{Tooltip,SkeletonLoader}.tsx packages/ui/src/navigation/{Breadcrumbs,Pagination}.tsx packages/ui/src/extended/Dropdown.tsx
         git add packages/ui/src/feedback/*.tsx packages/ui/src/navigation/*.tsx packages/ui/src/extended/Dropdown.tsx
         ```
-- [x] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
+- [ ] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
     - depends: [T-0020]
     - apply:
         ```bash
@@ -9935,7 +9935,7 @@ JS
         echo "# Detailed User Flows (Booking, Guest Add, Website Creation)" > docs/ux/research/user_flows.md
         git add docs/ux/research/user_flows.md
         ```
-- [x] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
+- [ ] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
     - depends: [T-0021, T-0024]
     - apply:
         ```bash
@@ -9959,7 +9959,7 @@ JS
         touch apps/website-mvp/src/error_pages/{NotFound,ServerError,Forbidden}.tsx
         git add apps/website-mvp/src/error_pages/*.tsx
         ```
-- [x] T-0558 | Анимации и переходы: Базовые правила для UI
+- [ ] T-0558 | Анимации и переходы: Базовые правила для UI
     - depends: [T-0020]
     - apply:
         ```bash
@@ -10002,7 +10002,7 @@ JS
         touch packages/ui/src/charts/BudgetChart.tsx
         git add packages/ui/src/charts/BudgetChart.tsx
         ```
-- [x] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
+- [ ] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
     - depends: [T-0011, T-0040]
     - apply:
         ```bash
@@ -10010,7 +10010,7 @@ JS
         echo "// TODO: Enhance Guest Card UI" > apps/website-mvp/src/guest_card_enhancement.todo
         git add apps/website-mvp/src/guest_card_enhancement.todo
         ```
-- [x] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
+- [ ] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10043,7 +10043,7 @@ JS
         touch apps/svc-guests/src/checklist/templates/default.json
         git add apps/svc-guests/src/checklist/templates/default.json
         ```
-- [x] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
+- [ ] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
     - depends: [T-0043]
     - apply:
         ```bash
@@ -10051,7 +10051,7 @@ JS
         echo "// TODO: Add 'assignee' field to Checklist tasks" > apps/svc-guests/src/checklist/assignee.todo
         git add apps/svc-guests/src/checklist/assignee.todo
         ```
-- [x] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
+- [ ] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
     - depends: [T-0320]
     - apply:
         ```bash
@@ -10067,7 +10067,7 @@ JS
         touch apps/svc-website/src/couples/editor/PageBuilder.tsx
         git add apps/svc-website/src/couples/editor/PageBuilder.tsx
         ```
-- [x] T-0571 | Сайт Пары: Интеграция с Gift Registry
+- [ ] T-0571 | Сайт Пары: Интеграция с Gift Registry
     - depends: [T-0373, T-0408]
     - apply:
         ```bash
@@ -10075,7 +10075,7 @@ JS
         echo "// TODO: Add GiftRegistry block to Couple Site Builder" > apps/svc-website/src/couples/gift_registry_block.todo
         git add apps/svc-website/src/couples/gift_registry_block.todo
         ```
-- [x] T-0572 | Inspiration Board (Доска вдохновения): Сохранение фото/идей
+- [ ] T-0572 | Inspiration Board (Доска вдохновения): Сохранение фото/идей
     - depends: [T-0011, T-0700]
     - apply:
         ```bash
@@ -10096,7 +10096,7 @@ JS
 
 ## ЭТАП 284. Расширенный Маркетплейс и B2B Инструменты
 
-- [x] T-0574 | Профиль Вендора: Расширенные поля (опыт, награды, языки, команда, соцсети)
+- [ ] T-0574 | Профиль Вендора: Расширенные поля (опыт, награды, языки, команда, соцсети)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10104,7 +10104,7 @@ JS
         echo "// TODO: Extend Vendor model in schema.prisma" > packages/prisma/vendor_extended_profile.todo
         git add packages/prisma/vendor_extended_profile.todo
         ```
-- [x] T-0575 | Профиль Вендора: Видео-визитка (загрузка/встраивание Youtube/Vimeo)
+- [ ] T-0575 | Профиль Вендора: Видео-визитка (загрузка/встраивание Youtube/Vimeo)
     - depends: [T-0574, T-0270]
     - apply:
         ```bash
@@ -10112,7 +10112,7 @@ JS
         echo "// TODO: Add videoUrl field to Vendor model" > packages/prisma/vendor_video.todo
         git add packages/prisma/vendor_video.todo
         ```
-- [x] T-0576 | Профиль Вендора: Интеграция 3D туров (Matterport/Kuula)
+- [ ] T-0576 | Профиль Вендора: Интеграция 3D туров (Matterport/Kuula)
     - depends: [T-0192]
     - apply:
         ```bash
@@ -10120,7 +10120,7 @@ JS
         echo "// TODO: Add 3D tours field to Venue model" > packages/prisma/venue_3d_tours.todo
         git add packages/prisma/venue_3d_tours.todo
         ```
-- [x] T-0577 | Календарь Вендора: Синхронизация с Google Calendar (2-way sync)
+- [ ] T-0577 | Календарь Вендора: Синхронизация с Google Calendar (2-way sync)
     - depends: [T-0051, T-0166]
     - apply:
         ```bash
@@ -10128,7 +10128,7 @@ JS
         echo "// TODO: Implement Google Calendar 2-way sync" > packages/ical/google/two_way_sync.todo
         git add packages/ical/google/two_way_sync.todo
         ```
-- [x] T-0578 | Календарь Вендора: Настройка буферного времени до/после бронирования
+- [ ] T-0578 | Календарь Вендора: Настройка буферного времени до/после бронирования
     - depends: [T-0051]
     - apply:
         ```bash
@@ -10160,7 +10160,7 @@ JS
         echo "export const setEnquiryReminder = 1;" > apps/svc-vendors/src/enquiries/reminders/index.ts
         git add apps/svc-vendors/src/enquiries/reminders/index.ts
         ```
-- [x] T-0582 | Аналитика Вендора (B2B): Воронка (просмотры → клики → заявки → контракты → оплаты)
+- [ ] T-0582 | Аналитика Вендора (B2B): Воронка (просмотры → клики → заявки → контракты → оплаты)
     - depends: [T-0090, T-0193]
     - apply:
         ```bash
