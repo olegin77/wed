@@ -190,8 +190,12 @@ export function validateObject<T>(
 ): ValidationResult {
   const errors: string[] = [];
   
-  for (const [key, validator] of Object.entries(schema)) {
-    const result = validator(obj[key as keyof T]);
+  // Cast Object.entries to preserve key and validator types in strict mode
+  for (const [key, validator] of Object.entries(schema) as [
+    keyof T,
+    (value: any) => ValidationResult,
+  ][]) {
+    const result = validator(obj[key]);
     if (!result.isValid) {
       errors.push(...result.errors);
     }
