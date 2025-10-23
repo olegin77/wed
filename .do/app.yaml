@@ -22,10 +22,6 @@ services:
       - key: PORT
         value: "3000"
     build_command: |
-      corepack enable
-      corepack prepare pnpm@9.12.0 --activate
-      cd ../..
-      pnpm -w install --frozen-lockfile
-      cd apps/svc-website
-      pnpm build
+      npm install
+      npm run build
     run_command: pnpm start
