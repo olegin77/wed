@@ -1,2 +1,77 @@
-:root{--wt-bg:#ffffff;--wt-fg:#0b0f19;--wt-accent:#7c3aed;--wt-muted:#6b7280;--wt-radius:16px;}
-[data-theme="dark"]{--wt-bg:#0b0f19;--wt-fg:#e5e7eb;--wt-accent:#a78bfa;--wt-muted:#9ca3af;}
+:root {
+  /* Colors */
+  --wt-bg: #ffffff;
+  --wt-fg: #0b0f19;
+  --wt-accent: #7c3aed;
+  --wt-muted: #6b7280;
+  --wt-success: #10b981;
+  --wt-warning: #f59e0b;
+  --wt-error: #ef4444;
+  --wt-info: #3b82f6;
+  
+  /* Spacing */
+  --wt-space-xs: 4px;
+  --wt-space-sm: 8px;
+  --wt-space-md: 16px;
+  --wt-space-lg: 24px;
+  --wt-space-xl: 32px;
+  --wt-space-2xl: 48px;
+  
+  /* Border radius */
+  --wt-radius: 16px;
+  --wt-radius-sm: 8px;
+  --wt-radius-lg: 24px;
+  
+  /* Typography */
+  --wt-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --wt-font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  
+  /* Font sizes */
+  --wt-text-xs: 12px;
+  --wt-text-sm: 14px;
+  --wt-text-base: 16px;
+  --wt-text-lg: 18px;
+  --wt-text-xl: 20px;
+  --wt-text-2xl: 24px;
+  --wt-text-3xl: 30px;
+  --wt-text-4xl: 36px;
+  --wt-text-5xl: 48px;
+  
+  /* Font weights */
+  --wt-font-light: 300;
+  --wt-font-normal: 400;
+  --wt-font-medium: 500;
+  --wt-font-semibold: 600;
+  --wt-font-bold: 700;
+  --wt-font-extrabold: 800;
+  
+  /* Line heights */
+  --wt-leading-tight: 1.25;
+  --wt-leading-snug: 1.375;
+  --wt-leading-normal: 1.5;
+  --wt-leading-relaxed: 1.625;
+  --wt-leading-loose: 2;
+  
+  /* Shadows */
+  --wt-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --wt-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --wt-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --wt-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --wt-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Transitions */
+  --wt-transition-fast: 150ms ease-in-out;
+  --wt-transition-normal: 250ms ease-in-out;
+  --wt-transition-slow: 350ms ease-in-out;
+}
+
+[data-theme="dark"] {
+  --wt-bg: #0b0f19;
+  --wt-fg: #e5e7eb;
+  --wt-accent: #a78bfa;
+  --wt-muted: #9ca3af;
+  --wt-success: #34d399;
+  --wt-warning: #fbbf24;
+  --wt-error: #f87171;
+  --wt-info: #60a5fa;
+}
