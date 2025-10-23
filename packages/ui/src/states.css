@@ -1,0 +1,196 @@
+/* Component States */
+
+/* Button States */
+.wt-button {
+  --wt-button-bg: var(--wt-accent);
+  --wt-button-color: white;
+  --wt-button-border: transparent;
+  --wt-button-shadow: var(--wt-shadow-sm);
+  
+  /* Hover state */
+  --wt-button-hover-bg: var(--wt-accent);
+  --wt-button-hover-color: white;
+  --wt-button-hover-shadow: var(--wt-shadow-md);
+  --wt-button-hover-transform: translateY(-1px);
+  
+  /* Active state */
+  --wt-button-active-bg: var(--wt-accent);
+  --wt-button-active-color: white;
+  --wt-button-active-shadow: var(--wt-shadow-sm);
+  --wt-button-active-transform: translateY(0);
+  
+  /* Focus state */
+  --wt-button-focus-bg: var(--wt-accent);
+  --wt-button-focus-color: white;
+  --wt-button-focus-shadow: var(--wt-shadow-lg);
+  --wt-button-focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.3);
+  
+  /* Disabled state */
+  --wt-button-disabled-bg: var(--wt-muted);
+  --wt-button-disabled-color: white;
+  --wt-button-disabled-opacity: 0.5;
+  --wt-button-disabled-cursor: not-allowed;
+  
+  /* Error state */
+  --wt-button-error-bg: var(--wt-error);
+  --wt-button-error-color: white;
+  --wt-button-error-border: var(--wt-error);
+}
+
+/* Button Variants */
+.wt-button--primary {
+  --wt-button-bg: var(--wt-accent);
+  --wt-button-color: white;
+  --wt-button-hover-bg: #6d28d9;
+  --wt-button-active-bg: #5b21b6;
+}
+
+.wt-button--secondary {
+  --wt-button-bg: var(--wt-muted);
+  --wt-button-color: white;
+  --wt-button-hover-bg: #4b5563;
+  --wt-button-active-bg: #374151;
+}
+
+.wt-button--outline {
+  --wt-button-bg: transparent;
+  --wt-button-color: var(--wt-accent);
+  --wt-button-border: 1px solid var(--wt-accent);
+  --wt-button-hover-bg: var(--wt-accent);
+  --wt-button-hover-color: white;
+}
+
+.wt-button--ghost {
+  --wt-button-bg: transparent;
+  --wt-button-color: var(--wt-accent);
+  --wt-button-hover-bg: rgba(124, 58, 237, 0.1);
+  --wt-button-hover-color: var(--wt-accent);
+}
+
+.wt-button--danger {
+  --wt-button-bg: var(--wt-error);
+  --wt-button-color: white;
+  --wt-button-hover-bg: #dc2626;
+  --wt-button-active-bg: #b91c1c;
+}
+
+/* Button Sizes */
+.wt-button--sm {
+  padding: 6px 12px;
+  font-size: var(--wt-text-sm);
+  min-height: 32px;
+}
+
+.wt-button--md {
+  padding: 10px 16px;
+  font-size: var(--wt-text-base);
+  min-height: 40px;
+}
+
+.wt-button--lg {
+  padding: 12px 24px;
+  font-size: var(--wt-text-lg);
+  min-height: 48px;
+}
+
+/* Input States */
+.wt-input {
+  --wt-input-bg: var(--wt-bg);
+  --wt-input-color: var(--wt-fg);
+  --wt-input-border: 1px solid #e5e7eb;
+  --wt-input-shadow: none;
+  
+  /* Hover state */
+  --wt-input-hover-border: 1px solid var(--wt-accent);
+  --wt-input-hover-shadow: var(--wt-shadow-sm);
+  
+  /* Focus state */
+  --wt-input-focus-border: 1px solid var(--wt-accent);
+  --wt-input-focus-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  --wt-input-focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  
+  /* Disabled state */
+  --wt-input-disabled-bg: #f9fafb;
+  --wt-input-disabled-color: var(--wt-muted);
+  --wt-input-disabled-border: 1px solid #e5e7eb;
+  --wt-input-disabled-cursor: not-allowed;
+  
+  /* Error state */
+  --wt-input-error-border: 1px solid var(--wt-error);
+  --wt-input-error-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  --wt-input-error-ring: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  
+  /* Success state */
+  --wt-input-success-border: 1px solid var(--wt-success);
+  --wt-input-success-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  --wt-input-success-ring: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Card States */
+.wt-card {
+  --wt-card-bg: var(--wt-bg);
+  --wt-card-border: 1px solid #e5e7eb;
+  --wt-card-shadow: var(--wt-shadow);
+  
+  /* Hover state */
+  --wt-card-hover-shadow: var(--wt-shadow-lg);
+  --wt-card-hover-transform: translateY(-2px);
+  
+  /* Active state */
+  --wt-card-active-shadow: var(--wt-shadow-md);
+  --wt-card-active-transform: translateY(0);
+  
+  /* Focus state */
+  --wt-card-focus-shadow: var(--wt-shadow-xl);
+  --wt-card-focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* Common state classes */
+.wt-state-hover:hover {
+  background-color: var(--wt-button-hover-bg, var(--wt-button-bg));
+  color: var(--wt-button-hover-color, var(--wt-button-color));
+  box-shadow: var(--wt-button-hover-shadow, var(--wt-button-shadow));
+  transform: var(--wt-button-hover-transform, none);
+}
+
+.wt-state-active:active {
+  background-color: var(--wt-button-active-bg, var(--wt-button-bg));
+  color: var(--wt-button-active-color, var(--wt-button-color));
+  box-shadow: var(--wt-button-active-shadow, var(--wt-button-shadow));
+  transform: var(--wt-button-active-transform, none);
+}
+
+.wt-state-focus:focus {
+  background-color: var(--wt-button-focus-bg, var(--wt-button-bg));
+  color: var(--wt-button-focus-color, var(--wt-button-color));
+  box-shadow: var(--wt-button-focus-shadow, var(--wt-button-shadow));
+  outline: var(--wt-button-focus-ring, none);
+}
+
+.wt-state-disabled:disabled {
+  background-color: var(--wt-button-disabled-bg, var(--wt-button-bg));
+  color: var(--wt-button-disabled-color, var(--wt-button-color));
+  opacity: var(--wt-button-disabled-opacity, 1);
+  cursor: var(--wt-button-disabled-cursor, default);
+}
+
+.wt-state-error {
+  background-color: var(--wt-button-error-bg, var(--wt-button-bg));
+  color: var(--wt-button-error-color, var(--wt-button-color));
+  border-color: var(--wt-button-error-border, var(--wt-button-border));
+}
+
+/* Transitions */
+.wt-button,
+.wt-input,
+.wt-card {
+  transition: all var(--wt-transition-fast);
+}
+
+/* Focus visible for better accessibility */
+.wt-button:focus-visible,
+.wt-input:focus-visible,
+.wt-card:focus-visible {
+  outline: 2px solid var(--wt-accent);
+  outline-offset: 2px;
+}
