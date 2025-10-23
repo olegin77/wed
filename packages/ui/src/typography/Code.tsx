@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface CodeProps {
+export interface CodeProps {
   children: React.ReactNode;
   size?: 'xs' | 'sm' | 'base' | 'lg';
   weight?: 'normal' | 'medium' | 'semibold' | 'bold';

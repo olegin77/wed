@@ -60,7 +60,7 @@ export function withLazyLoading<T extends ComponentType<any>>(
   
   return React.forwardRef<any, React.ComponentProps<T>>((props, ref) => (
     <Suspense fallback={fallback || <SkeletonLoader />}>
-      <LazyComponent {...props} ref={ref} />
+      <LazyComponent {...props} />
     </Suspense>
   ));
 }
@@ -148,9 +148,9 @@ export function useDynamicImport<T>(
  */
 export function useIntersectionObserver(
   options: IntersectionObserverInit = {}
-): [React.RefObject<HTMLElement>, boolean] {
+): [React.RefObject<HTMLDivElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = React.useState(false);
-  const ref = React.useRef<HTMLElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const element = ref.current;

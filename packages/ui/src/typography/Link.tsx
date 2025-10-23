@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface LinkProps {
+export interface LinkProps {
   children: React.ReactNode;
   href?: string;
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';

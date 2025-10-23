@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToString as reactRenderToString } from 'react-dom/server';
 
 export interface SSRConfig {
   template: string;
@@ -31,7 +31,7 @@ export interface SSROptions {
  * Render a React component to HTML string
  */
 export function renderToString(component: React.ReactElement): string {
-  return renderToString(component);
+  return reactRenderToString(component);
 }
 
 /**

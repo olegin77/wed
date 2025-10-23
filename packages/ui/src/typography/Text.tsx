@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface TextProps {
+export interface TextProps {
   children: React.ReactNode;
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';

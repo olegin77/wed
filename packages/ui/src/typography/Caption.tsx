@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface CaptionProps {
+export interface CaptionProps {
   children: React.ReactNode;
   size?: 'xs' | 'sm';
   weight?: 'light' | 'normal' | 'medium' | 'semibold';

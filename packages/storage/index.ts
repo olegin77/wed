@@ -1,7 +1,7 @@
 import type { Readable } from "node:stream";
 import type { S3Client } from "@aws-sdk/client-s3";
 
-import { createS3Storage as createS3StorageImpl, StorageError } from "./index.js";
+// StorageError will be defined below
 
 /** Credentials used by the S3-compatible provider. */
 export interface StorageCredentials {
