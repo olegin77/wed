@@ -1,147 +1,50 @@
-/**
- * Online learning helper that tunes feature weights based on lightweight events.
- *
- * The module keeps a mutable weight vector in memory and exposes helpers to
- * update or observe it. All modifiers return fresh copies to prevent consumers
- * from mutating the internal state outside of the provided API.
- */
+// ML Ranking online update functions
+export interface RankInput {
+  vendorId: string;
+  score: number;
+  features: Record<string, number>;
+}
 
-type WeightKey = "conv" | "rating" | "profile" | "calendar";
-
-/**
- * Vector of weights that participate in the ML ranking formula.
- */
-type WeightVector = Record<WeightKey, number>;
-
-/**
- * Event that triggers a recalculation of the online weights.
- */
-type UpdateEvent = {
-  type: "click" | "book";
+export interface RankEvent {
+  type: 'click' | 'view' | 'conversion';
+  vendorId: string;
   delta?: number;
-  timestamp?: Date;
+  timestamp: Date;
 }
 
-/** Параметры обновления (дополнительное сглаживание и ограничения). */
-export interface OnlineUpdateOptions {
-  /**
-   * Насколько быстро веса «стягиваются» к дефолтным значениям перед обработкой
-   * события. Диапазон 0..1. Значение 0 — без затухания.
-   */
-  decay?: number;
-  /** Минимальная доля одного фактора после нормализации. */
-  floor?: number;
-  /** Максимальная доля одного фактора после нормализации. */
-  ceiling?: number;
+export interface RankState {
+  weights: Record<string, number>;
+  lastUpdated: Date;
 }
 
-/**
- * Baseline values calibrated offline (must sum up to 1.0).
- */
-const DEFAULT_WEIGHTS: WeightVector = {
-  conv: 0.55,
-  rating: 0.2,
-  profile: 0.2,
-  calendar: 0.05,
+let state: RankState = {
+  weights: {},
+  lastUpdated: new Date(),
 };
 
-/**
- * Helper array with the available weight keys. Used for iteration without
- * casting `Object.keys` results.
- */
-const WEIGHT_KEYS: readonly WeightKey[] = ["conv", "rating", "profile", "calendar"];
-
-/**
- * Mutable storage for the online weights. Always keep it normalized.
- */
-const weights: WeightVector = { ...DEFAULT_WEIGHTS };
-
-/**
- * Ensure the provided value stays within the inclusive [min, max] range.
- */
-const clamp = (value: number, min = 0, max = 1): number => Math.max(min, Math.min(max, value));
-
-/**
- * Apply delta to a particular weight key and clamp the result.
- */
-function applyDelta(key: WeightKey, delta: number): void {
-  weights[key] = clamp(weights[key] + delta);
+export function updateRanking(event: RankEvent): void {
+  if (!event.delta) return;
+  
+  // Simple ranking update logic
+  const learningRate = 0.01;
+  const weight = state.weights[event.vendorId] || 0;
+  state.weights[event.vendorId] = weight + learningRate * event.delta;
+  state.lastUpdated = new Date();
 }
 
-/**
- * Restore the runtime weights back to the offline defaults.
- */
-export function resetWeights(): WeightVector {
-  for (const key of WEIGHT_KEYS) {
-    weights[key] = DEFAULT_WEIGHTS[key];
-  }
-  return { ...weights };
+export function getRanking(vendorId: string): number {
+  return state.weights[vendorId] || 0;
 }
 
-/**
- * Normalize the weight vector to make sure it always sums up to 1.0. If the
- * cumulative weight becomes zero (due to negative deltas), the defaults are
- * restored to avoid division by zero.
- */
-function normalizeWeights(): void {
-  const total = WEIGHT_KEYS.reduce((sum, key) => sum + weights[key], 0);
-
-  if (total <= 0) {
-    resetWeights();
-    return;
-  }
-
-  if (total !== 1) {
-    const normalizer = 1 / total;
-    for (const key of WEIGHT_KEYS) {
-      weights[key] = clamp(weights[key] * normalizer);
-    }
-  }
-}
-
-/**
- * Update the weight vector in response to an online-learning event and return
- * a snapshot of the new weights.
- */
-export function update(event: UpdateEvent): WeightVector {
-  if (event.type === "click") {
-    applyDelta("conv", event.delta * 0.0005);
-    applyDelta("rating", event.delta * 0.0002);
-  } else if (event.type === "book") {
-    applyDelta("conv", event.delta * 0.001);
-    applyDelta("profile", event.delta * 0.0005);
-    applyDelta("calendar", event.delta * 0.0003);
-  }
-
-  normalizeWeights();
-  return { ...weights };
-}
-
-/**
- * Return a defensive copy of the current weight vector.
- */
-export function getWeights(): WeightVector {
-  return { ...state.weights };
-}
-
-/**
- * Сбрасывает веса к значениям по умолчанию.
- * Полезно при запуске экспериментов или ошибочных апдейтах.
- */
 export function resetWeights(): void {
-  (Object.keys(state.weights) as WeightKey[]).forEach((key) => {
-    state.weights[key] = DEFAULT_WEIGHTS[key];
-  });
-  state.totalUpdates = 0;
-  state.lastUpdatedAt = null;
+  state.weights = {};
+  state.lastUpdated = new Date();
 }
 
-/**
- * Возвращает метаданные онлайн-обновлений: кол-во апдейтов и временную метку.
- */
-export function getUpdateMetadata(): { totalUpdates: number; lastUpdatedAt: Date | null } {
-  return {
-    totalUpdates: state.totalUpdates,
-    lastUpdatedAt: state.lastUpdatedAt,
-  };
+export function getState(): RankState {
+  return { ...state };
+}
+
+export function setState(newState: RankState): void {
+  state = { ...newState };
 }

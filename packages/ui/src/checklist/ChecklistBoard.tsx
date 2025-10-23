@@ -57,7 +57,7 @@ export function ChecklistBoard({
       task,
       onUpdate: onUpdateTask,
       onDelete: onDeleteTask,
-      onAssign: (assignee?: ChecklistTask['assignee']) => openAssignModal(task.id, assignee),
+      onAssign: (taskId: string, assignee?: ChecklistTask['assignee']) => openAssignModal(taskId, assignee),
     };
 
     switch (viewMode) {
