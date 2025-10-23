@@ -1279,8 +1279,9 @@ TS
 
 ## ЭТАП 55. Сохранённые списки/избранное
 
-- [x] T-0550 | Избранное пары (скелет)
+ - [ ] T-0550 | Избранное пары (скелет)
   - depends: [T-0011]
+  - status: не выполнено — отсутствует модель Favourite в активной schema.prisma
   - apply:
     ```bash
     mkdir -p apps/svc-catalog/src/favorites
@@ -4393,8 +4394,9 @@ JS
     git add apps/svc-catalog/src/api/search.js
     ```
 
-- [x] T-0236 | Избранное: API add/remove/list (требует USER)
+ - [ ] T-0236 | Избранное: API add/remove/list (требует USER)
   - depends: [T-0232, T-0226]
+  - status: не выполнено — отсутствует модель Favourite в активной schema.prisma (есть только в packages/prisma/schema.prisma.backup)
   - apply:
     ```bash
     set -euo pipefail
@@ -10274,8 +10276,9 @@ JS
         echo "// TODO: Ensure all pages are responsive (mobile-first)" > apps/svc-website/responsive_audit.todo
         git add apps/svc-website/responsive_audit.todo
         ```
-- [x] T-0595 | PWA: Оффлайн-доступ к избранному и чек-листу (Service Worker caching)
+ - [ ] T-0595 | PWA: Оффлайн-доступ к избранному и чек-листу (Service Worker caching)
     - depends: [T-0451, T-0236, T-0043]
+    - status: не выполнено — отсутствует кэширование избранного/чек-листа в Service Worker; имеются TODO: public/sw_offline_cache.todo, public/sw_offline_extended.todo
     - apply:
         ```bash
         # Обновить sw.js для кэширования API-запросов избранного и чек-листа
@@ -10622,8 +10625,9 @@ JS
         echo "// TODO: Setup visual regression testing (Percy/Chromatic)" > infra/visual_testing.todo
         git add infra/visual_testing.todo
         ```
-- [x] T-0634 | Тесты: Тестирование безопасности (OWASP ZAP/SAST сканеры) - интеграция в CI
+ - [ ] T-0634 | Тесты: Тестирование безопасности (OWASP ZAP/SAST сканеры) - интеграция в CI
     - depends: [T-0005]
+    - status: не выполнено — .github/workflows/security_scan.todo, шаги в CI отсутствуют
     - apply:
         ```bash
         # Добавить шаги SAST и DAST сканирования в ci.yml
@@ -10840,8 +10844,9 @@ JS
         echo "// TODO: Add NSFW check to CV package" > packages/integrations/cv/nsfw.todo
         git add packages/integrations/cv/nsfw.todo
         ```
-- [x] T-0659 | Безопасность: Двухфакторная аутентификация (2FA) для пользователей/админов (SMS/TOTP)
+ - [ ] T-0659 | Безопасность: Двухфакторная аутентификация (2FA) для пользователей/админов (SMS/TOTP)
     - depends: [T-0030, T-0458]
+    - status: не выполнено — есть заглушка apps/svc-auth/2fa.todo, отсутствует реализация
     - apply:
         ```bash
         # Добавить логику 2FA в svc-auth
@@ -11246,8 +11251,9 @@ JS
         echo "// TODO: Implement Blue/Green deployment strategy" > infra/do/blue_green.todo
         git add infra/do/blue_green.todo
         ```
-- [x] T-0706 | DevOps: Канареечные релизы (Canary Releases) - автоматизация
+ - [ ] T-0706 | DevOps: Канареечные релизы (Canary Releases) - автоматизация
     - depends: [T-01480, T-0335]
+    - status: не выполнено — .github/workflows/canary_release.todo, автоматизация не добавлена
     - apply:
         ```bash
         # Автоматизировать процесс канареечных релизов в CI/CD
@@ -11691,8 +11697,9 @@ JS
         echo "// TODO: Configure DDoS protection rules" > infra/security/ddos_protection.todo
         git add infra/security/ddos_protection.todo
         ```
-- [x] T-0755 | Безопасность: Сканирование контейнеров на уязвимости (Trivy/Snyk) в CI
+ - [ ] T-0755 | Безопасность: Сканирование контейнеров на уязвимости (Trivy/Snyk) в CI
     - depends: [T-0005, T-0634]
+    - status: не выполнено — .github/workflows/container_scan.todo, шаги в CI отсутствуют
     - apply:
         ```bash
         # Добавить шаг сканирования Docker-образов в ci.yml
@@ -11759,8 +11766,9 @@ JS
         touch apps/svc-website/src/pages/compare/index.tsx
         git add apps/svc-website/src/pages/compare/index.tsx
         ```
-- [x] T-0763 | UX: Офлайн-режим для мобильного приложения/PWA (критичные данные)
+ - [ ] T-0763 | UX: Офлайн-режим для мобильного приложения/PWA (критичные данные)
     - depends: [T-0595]
+    - status: не выполнено — заблокировано невыполненной T-0595
     - apply:
         ```bash
         # Расширить кэширование в Service Worker для большего объема данных
