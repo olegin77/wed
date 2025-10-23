@@ -1,7 +1,14 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client";
-const db=new PrismaClient(); const port=process.env.PORT||3120;
-function body(req){return new Promise(r=>{let b="";req.on("data",c=>b+=c);req.on("end",()=>r(JSON.parse(b||"{}")))})}
-createServer(async (req,res)=>{
+import { createServer } from "http";
+import { PrismaClient } from "@prisma/client";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
+
+const db = new PrismaClient();
+const port = process.env.PORT || 3120;
+
+function body(req) { return new Promise(r => { let b = ""; req.on("data", c => b += c); req.on("end", () => r(JSON.parse(b || "{}"))); }); }
+
+createServer(async (req, res) => {
+  applySecurityHeaders(res);
   if(req.method==="POST" && req.url==="/registry/create"){ const b=await body(req);
     const r=await db.giftRegistry.create({data:{userId:b.userId,title:b.title}}); res.writeHead(201,{"Content-Type":"application/json"}); return res.end(JSON.stringify(r)); }
   if(req.method==="POST" && req.url==="/registry/item"){ const b=await body(req);

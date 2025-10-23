@@ -1,4 +1,5 @@
 import http from "http";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
 
 import "./api/slots.js";
 import "./api/booking.js";
@@ -7,6 +8,8 @@ const port = process.env.PORT || 3000;
 
 http
   .createServer((req, res) => {
+    applySecurityHeaders(res);
+    
     if (req.url === "/health") {
       const db = true; // TODO: заменить stub на реальный ping БД
       res.writeHead(200, { "Content-Type": "application/json" });
