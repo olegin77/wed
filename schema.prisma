@@ -45,6 +45,7 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   prefs        UserPrefs?
+  favourites   Favourite[]
 }
 
 model UserPrefs {
@@ -86,6 +87,7 @@ model Vendor {
   venues        Venue[]
   offers        Offer[]
   availabilities AvailabilitySlot[]
+  favourites    Favourite[]
 }
 
 model Venue {
@@ -236,4 +238,18 @@ model RankSignal {
   weight     Float    @default(0)
   ttl        DateTime?
   @@index([vendorId, signalType])
+}
+
+model Favourite {
+  id        String   @id @default(cuid())
+  userId    String
+  vendorId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  vendor Vendor @relation(fields: [vendorId], references: [id])
+
+  @@unique([userId, vendorId])
+  @@index([userId])
+  @@index([vendorId])
 }
