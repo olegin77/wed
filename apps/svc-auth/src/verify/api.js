@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client"; import { sendCode } from "./send.js";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg; import { sendCode } from "./send.js";
 const db=new PrismaClient(); const port=process.env.PORT||3160;
 function body(req){return new Promise(r=>{let b="";req.on("data",c=>b+=c);req.on("end",()=>r(JSON.parse(b||"{}")))})}
 createServer(async (req,res)=>{

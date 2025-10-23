@@ -1,6 +1,7 @@
 import http from "node:http";
 
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 import { __internal as jwtInternal, signJwt } from "../../../packages/auth/jwt.js";
 import { hashPassword, verifyPassword } from "../../../packages/auth/password.js";

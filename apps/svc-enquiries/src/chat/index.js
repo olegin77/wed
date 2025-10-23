@@ -1,5 +1,6 @@
 // @ts-check
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 /**
  * @typedef {Object} ChannelParticipant

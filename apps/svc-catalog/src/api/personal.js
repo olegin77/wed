@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 import { similarity } from "../reco/sim.js";
 const db=new PrismaClient(); const port=process.env.PORT||3110;
 function uid(req){const c=(req.headers.cookie||"").split(";").find(c=>c.trim().startsWith("jwt=")); if(!c) return null; return JSON.parse(Buffer.from(c.split(".")[1],"base64").toString()).sub;}

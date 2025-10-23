@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 const db=new PrismaClient(); const port=process.env.PORT||3188;
 function uid(req){const c=(req.headers.cookie||"").split(";").find(x=>x.trim().startsWith("jwt=")); if(!c) return null; return JSON.parse(Buffer.from(c.split(".")[1],"base64").toString()).sub;}
 function body(req){return new Promise(r=>{let b="";req.on("data",c=>b+=c);req.on("end",()=>r(JSON.parse(b||"{}")))})}

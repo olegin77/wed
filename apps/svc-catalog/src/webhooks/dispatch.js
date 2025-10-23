@@ -1,6 +1,7 @@
 import http from "node:http";
 import https from "node:https";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 import { sign } from "../../../packages/webhooks/sign.js";
 

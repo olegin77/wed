@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client"; const db=new PrismaClient();
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg; const db=new PrismaClient();
 export async function vendorICS(vendorId){
   const bs=await db.booking.findMany({where:{vendorId,status:"PAID"}});
   const fmt=(d)=>d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z/,"Z");

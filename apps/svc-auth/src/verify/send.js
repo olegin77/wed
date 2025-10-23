@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client"; import { send as sendMail } from "../../../packages/mail/index.js"; import { eskiz } from "../../../packages/sms/adapters/eskiz.js";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg; import { send as sendMail } from "../../../packages/mail/index.js"; import { eskiz } from "../../../packages/sms/adapters/eskiz.js";
 const db=new PrismaClient();
 function code(){ return (Math.floor(100000+Math.random()*900000)).toString(); }
 export async function sendCode({channel,target,userId}){

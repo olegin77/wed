@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client"; import { genContractHTML } from "../../../packages/contracts/generate.js"; import { send } from "../../../packages/mail/index.js";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg; import { genContractHTML } from "../../../packages/contracts/generate.js"; import { send } from "../../../packages/mail/index.js";
 const db=new PrismaClient(); const port=process.env.PORT||3220;
 function body(req){return new Promise(r=>{let b="";req.on("data",c=>b+=c);req.on("end",()=>r(JSON.parse(b||"{}")))})}
 createServer(async (req,res)=>{

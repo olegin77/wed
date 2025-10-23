@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 const db=new PrismaClient(); const port=process.env.PORT||3170;
 createServer(async (req,res)=>{
   if(req.method==="GET" && req.url.startsWith("/collections/")){

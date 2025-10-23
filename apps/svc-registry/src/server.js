@@ -1,5 +1,6 @@
 import { createServer } from "http";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 import { applySecurityHeaders } from "../../../packages/security/headers.js";
 
 const db = new PrismaClient();

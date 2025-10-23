@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client"; const db=new PrismaClient();
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg; const db=new PrismaClient();
 export async function botReply(threadId){
   const v={title:"Вендор", city:"Tashkent", minPriceUZS:1000000}; // demo lookup
   const answers={
