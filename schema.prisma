@@ -46,6 +46,8 @@ model User {
   updatedAt    DateTime @updatedAt
   prefs        UserPrefs?
   favourites   Favourite[]
+  couple       Couple?
+  vendors      Vendor[]
 }
 
 model UserPrefs {
@@ -68,6 +70,7 @@ model Couple {
   tables      Table[]
   budget      BudgetItem[]
   website     Website?
+  enquiries   Enquiry[]
 }
 
 model Vendor {
@@ -88,6 +91,7 @@ model Vendor {
   offers        Offer[]
   availabilities AvailabilitySlot[]
   favourites    Favourite[]
+  enquiries     Enquiry[]
 }
 
 model Venue {
@@ -98,6 +102,8 @@ model Venue {
   capacityMax Int?
   features    Json?
   vendor      Vendor  @relation(fields: [vendorId], references: [id])
+  availabilities AvailabilitySlot[]
+  enquiries   Enquiry[]
   @@index([capacityMin, capacityMax])
 }
 
