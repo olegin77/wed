@@ -40,6 +40,23 @@ export { EnquiryKanban } from './kanban/EnquiryKanban';
 // Seating
 export { SeatingPlanEditor } from './seating/SeatingPlanEditor';
 
+// Guests
+export { GuestCard, GuestCardCompact } from './guests/GuestCard';
+export { GuestEditModal } from './guests/GuestEditModal';
+export { GuestGroup, GuestGroups } from './guests/GuestGroup';
+export type { Guest } from './guests/GuestCard';
+
+// Checklist
+export { TaskCard, TaskCardCompact } from './checklist/TaskCard';
+export { AssigneeModal, QuickAssign } from './checklist/AssigneeModal';
+export { ChecklistBoard } from './checklist/ChecklistBoard';
+export type { 
+  ChecklistTask, 
+  ChecklistCategory, 
+  ChecklistTemplate, 
+  AssigneeType 
+} from './checklist/types';
+
 // Meta
 export { Meta } from './meta/Meta';
 

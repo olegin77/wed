@@ -171,10 +171,13 @@ model Guest {
   diet    String?
   plusOne Boolean  @default(false)
   status  RSVPStatus @default(INVITED)
+  group   String?   // family, groom_friends, bride_friends, colleagues, other
+  notes   String?   // Additional notes about the guest
   couple  Couple   @relation(fields: [coupleId], references: [id])
   tableId String?
   table   Table?   @relation(fields: [tableId], references: [id])
   @@index([coupleId, status])
+  @@index([coupleId, group])
 }
 
 model Table {
