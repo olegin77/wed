@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Restrict private and internal surfaces that should never be indexed.
+Disallow: /admin/
+Disallow: /vendors/dashboard/
+Disallow: /auth/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /preview/
+
+# Explicitly slow down generic scrapers while allowing mainstream bots full speed.
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+# Public sitemaps advertised for search engines.
+Sitemap: https://wed.weddingtech.uz/sitemap-index.xml
+Sitemap: https://wed.weddingtech.uz/vendors/sitemap.xml
+
+# Human-readable metadata about the team and project lives at /humans.txt.
