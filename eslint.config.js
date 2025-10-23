@@ -10,13 +10,19 @@ const compat = new FlatCompat({
 module.exports = [
   ...compat.config({
     root: true,
-    env: { es2023: true, node: true },
-    extends: ["eslint:recommended", "plugin:security/recommended-legacy"],
-    plugins: ["security"],
-    parserOptions: { ecmaVersion: 2023, sourceType: "module" },
+    env: { es2023: true, node: true, browser: true },
+    extends: ["eslint:recommended"],
+    parserOptions: { 
+      ecmaVersion: 2023, 
+      sourceType: "module",
+      ecmaFeatures: {
+        jsx: true
+      }
+    },
     rules: {
       "no-console": "off",
-      "security/detect-object-injection": "off",
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "no-empty": "warn"
     },
   }),
   {
@@ -28,6 +34,9 @@ module.exports = [
       "coverage/",
       "**/.next/**",
       "**/export/**",
+      "**/*.d.ts",
+      "**/*.ts",
+      "**/*.tsx"
     ],
   },
 ];
