@@ -1,10 +1,1 @@
-import type { ServerResponse } from "http";
-
-export type SecurityHeader = readonly [string, string];
-
-export declare const securityHeaders: readonly SecurityHeader[];
-
-export declare function applySecurityHeaders(
-  res: ServerResponse,
-  overrides?: readonly SecurityHeader[]
-): ServerResponse;
+export declare const securityHeaders: readonly [readonly ["X-Frame-Options", "DENY"], readonly ["X-Content-Type-Options", "nosniff"], readonly ["Referrer-Policy", "strict-origin-when-cross-origin"], readonly ["Cross-Origin-Resource-Policy", "same-origin"], readonly ["Cross-Origin-Opener-Policy", "same-origin"], readonly ["Permissions-Policy", "camera=(), microphone=(), geolocation=()"], readonly ["X-DNS-Prefetch-Control", "off"], readonly ["X-XSS-Protection", "1; mode=block"], readonly ["Strict-Transport-Security", "max-age=31536000; includeSubDomains"], readonly ["Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"]];

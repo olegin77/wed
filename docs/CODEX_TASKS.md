@@ -1081,7 +1081,7 @@ JS
 
 ## ЭТАП 43. Hardening
 
-- [ ] T-0430 | Security headers
+- [x] T-0430 | Security headers
   - depends: [T-0004]
   - apply:
     ```bash
@@ -3878,7 +3878,7 @@ TS
 
 ## ЭТАП 187. Медиа: галереи, оптимизация изображений и превью
 
-- [ ] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
+- [x] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
   - depends: [T-0003]
   - apply:
     ```bash
@@ -5779,7 +5779,7 @@ JS
 
 ## ЭТАП 219. PWA и производительность
 
-- [ ] T-0308 | manifest.json и иконка
+- [x] T-0308 | manifest.json и иконка
   - depends: [T-0060]
   - apply:
     ```bash
@@ -9914,7 +9914,7 @@ JS
         touch packages/ui/src/feedback/{Tooltip,SkeletonLoader}.tsx packages/ui/src/navigation/{Breadcrumbs,Pagination}.tsx packages/ui/src/extended/Dropdown.tsx
         git add packages/ui/src/feedback/*.tsx packages/ui/src/navigation/*.tsx packages/ui/src/extended/Dropdown.tsx
         ```
-- [ ] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
+- [x] T-0552 | Дизайн-система: Определить типографику (шрифты, размеры, стили)
     - depends: [T-0020]
     - apply:
         ```bash
@@ -9937,7 +9937,7 @@ JS
         echo "# Detailed User Flows (Booking, Guest Add, Website Creation)" > docs/ux/research/user_flows.md
         git add docs/ux/research/user_flows.md
         ```
-- [ ] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
+- [x] T-0555 | UI: Дизайн состояний компонентов (hover, focus, active, disabled, error)
     - depends: [T-0021, T-0024]
     - apply:
         ```bash

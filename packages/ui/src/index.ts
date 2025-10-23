@@ -4,8 +4,7 @@ export { Input } from './Input';
 export { Card } from './Card';
 
 // Typography
-export { Heading } from './typography/Heading';
-export { Text } from './typography/Text';
+export * from './typography';
 
 // Animations
 export { 
@@ -49,4 +48,5 @@ export * from './optimized';
 
 // Styles
 import './tokens.css';
+import './states.css';
 import './animations/animations.css';

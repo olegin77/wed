@@ -1,160 +1,104 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-  helperText?: string;
-  variant?: 'default' | 'filled' | 'outlined';
+  success?: boolean;
+  state?: 'default' | 'hover' | 'focus' | 'disabled' | 'error' | 'success';
   size?: 'sm' | 'md' | 'lg';
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({
+export function Input({
   label,
   error,
-  helperText,
-  variant = 'default',
+  success = false,
+  state = 'default',
   size = 'md',
-  leftIcon,
-  rightIcon,
   className = '',
   style,
   ...props
-}, ref) => {
-  const baseStyles = {
+}: InputProps) {
+  const inputClasses = [
+    'wt-input',
+    `wt-input--${size}`,
+    state !== 'default' && `wt-state-${state}`,
+    error && 'wt-state-error',
+    success && 'wt-state-success',
+    className
+  ].filter(Boolean).join(' ');
+
+  const inputStyles: React.CSSProperties = {
     width: '100%',
     borderRadius: 'var(--wt-radius)',
-    border: '1px solid #e5e7eb',
-    backgroundColor: 'var(--wt-bg)',
-    color: 'var(--wt-fg)',
-    transition: 'all 0.2s ease-in-out',
+    border: 'var(--wt-input-border)',
+    backgroundColor: 'var(--wt-input-bg)',
+    color: 'var(--wt-input-color)',
+    boxShadow: 'var(--wt-input-shadow)',
+    transition: 'all var(--wt-transition-fast)',
     outline: 'none',
-    '&:focus': {
-      borderColor: 'var(--wt-accent)',
-      boxShadow: '0 0 0 3px rgba(124, 58, 237, 0.1)',
-    },
-    '&:disabled': {
-      opacity: 0.5,
-      cursor: 'not-allowed',
-    },
-  };
-
-  const variantStyles = {
-    default: {
-      border: '1px solid #e5e7eb',
-      backgroundColor: 'var(--wt-bg)',
-    },
-    filled: {
-      border: 'none',
-      backgroundColor: '#f3f4f6',
-      '&:focus': {
-        backgroundColor: 'var(--wt-bg)',
-      },
-    },
-    outlined: {
-      border: '2px solid #e5e7eb',
-      backgroundColor: 'transparent',
-      '&:focus': {
-        borderColor: 'var(--wt-accent)',
-      },
-    },
-  };
-
-  const sizeStyles = {
-    sm: { padding: '6px 12px', fontSize: '14px' },
-    md: { padding: '10px 12px', fontSize: '16px' },
-    lg: { padding: '12px 16px', fontSize: '18px' },
-  };
-
-  const inputStyles = {
-    ...baseStyles,
-    ...variantStyles[variant],
-    ...sizeStyles[size],
-    ...(error && {
-      borderColor: '#ef4444',
-      '&:focus': {
-        borderColor: '#ef4444',
-        boxShadow: '0 0 0 3px rgba(239, 68, 68, 0.1)',
-      },
+    ...(props.disabled && {
+      backgroundColor: 'var(--wt-input-disabled-bg)',
+      color: 'var(--wt-input-disabled-color)',
+      cursor: 'var(--wt-input-disabled-cursor)',
     }),
     ...style,
   };
 
+  const sizeStyles = {
+    sm: { padding: '6px 12px', fontSize: 'var(--wt-text-sm)', minHeight: '32px' },
+    md: { padding: '10px 12px', fontSize: 'var(--wt-text-base)', minHeight: '40px' },
+    lg: { padding: '12px 16px', fontSize: 'var(--wt-text-lg)', minHeight: '48px' },
+  };
+
+  const finalStyles = {
+    ...inputStyles,
+    ...sizeStyles[size],
+  };
+
   return (
-    <div className={className} style={{ width: '100%' }}>
+    <div style={{ width: '100%' }}>
       {label && (
         <label
           style={{
             display: 'block',
             marginBottom: '4px',
-            fontSize: '14px',
+            fontSize: 'var(--wt-text-sm)',
             fontWeight: '500',
-            color: 'var(--wt-fg)',
+            color: error ? 'var(--wt-error)' : 'var(--wt-fg)',
           }}
         >
           {label}
         </label>
       )}
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-        {leftIcon && (
-          <div
-            style={{
-              position: 'absolute',
-              left: '12px',
-              zIndex: 1,
-              color: 'var(--wt-muted)',
-            }}
-          >
-            {leftIcon}
-          </div>
-        )}
-        <input
-          ref={ref}
-          style={{
-            ...inputStyles,
-            ...(leftIcon && { paddingLeft: '40px' }),
-            ...(rightIcon && { paddingRight: '40px' }),
-          }}
-          {...props}
-        />
-        {rightIcon && (
-          <div
-            style={{
-              position: 'absolute',
-              right: '12px',
-              zIndex: 1,
-              color: 'var(--wt-muted)',
-            }}
-          >
-            {rightIcon}
-          </div>
-        )}
-      </div>
+      <input
+        className={inputClasses}
+        style={finalStyles}
+        {...props}
+      />
       {error && (
-        <p
+        <div
           style={{
             marginTop: '4px',
-            fontSize: '12px',
-            color: '#ef4444',
+            fontSize: 'var(--wt-text-sm)',
+            color: 'var(--wt-error)',
           }}
         >
           {error}
-        </p>
+        </div>
       )}
-      {helperText && !error && (
-        <p
+      {success && !error && (
+        <div
           style={{
             marginTop: '4px',
-            fontSize: '12px',
-            color: 'var(--wt-muted)',
+            fontSize: 'var(--wt-text-sm)',
+            color: 'var(--wt-success)',
           }}
         >
-          {helperText}
-        </p>
+          ✓ Поле заполнено корректно
+        </div>
       )}
     </div>
   );
-});
-
-Input.displayName = 'Input';
+}
