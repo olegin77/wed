@@ -1081,7 +1081,7 @@ JS
 
 ## ЭТАП 43. Hardening
 
-- [ ] T-0430 | Security headers
+- [x] T-0430 | Security headers
   - depends: [T-0004]
   - apply:
     ```bash
@@ -3878,7 +3878,7 @@ TS
 
 ## ЭТАП 187. Медиа: галереи, оптимизация изображений и превью
 
-- [ ] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
+- [x] T-0215 | Пакет @wt/media: оптимизация изображений (sharp)
   - depends: [T-0003]
   - apply:
     ```bash

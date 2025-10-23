@@ -1,0 +1,22 @@
+{
+  "name": "@wt/security",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "headers.js",
+  "types": "headers.d.ts",
+  "exports": {
+    ".": {
+      "types": "./headers.d.ts",
+      "import": "./headers.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
