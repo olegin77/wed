@@ -1,5 +1,6 @@
 {
   "name": "@wt/website",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,5 +21,9 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
