@@ -9961,7 +9961,7 @@ JS
         touch apps/website-mvp/src/error_pages/{NotFound,ServerError,Forbidden}.tsx
         git add apps/website-mvp/src/error_pages/*.tsx
         ```
-- [ ] T-0558 | Анимации и переходы: Базовые правила для UI
+- [x] T-0558 | Анимации и переходы: Базовые правила для UI
     - depends: [T-0020]
     - apply:
         ```bash
@@ -10004,7 +10004,7 @@ JS
         touch packages/ui/src/charts/BudgetChart.tsx
         git add packages/ui/src/charts/BudgetChart.tsx
         ```
-- [ ] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
+- [x] T-0563 | Гости: Расширенная карточка гостя (статус RSVP, стол, +1, диета, контакты, заметки)
     - depends: [T-0011, T-0040]
     - apply:
         ```bash
@@ -10012,7 +10012,7 @@ JS
         echo "// TODO: Enhance Guest Card UI" > apps/website-mvp/src/guest_card_enhancement.todo
         git add apps/website-mvp/src/guest_card_enhancement.todo
         ```
-- [ ] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
+- [x] T-0564 | Гости: Группировка гостей (семья, друзья жениха/невесты, коллеги)
     - depends: [T-0011]
     - apply:
         ```bash
@@ -10045,7 +10045,7 @@ JS
         touch apps/svc-guests/src/checklist/templates/default.json
         git add apps/svc-guests/src/checklist/templates/default.json
         ```
-- [ ] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
+- [x] T-0568 | Чек-лист: Назначение ответственных (жених/невеста/организатор)
     - depends: [T-0043]
     - apply:
         ```bash
@@ -10053,7 +10053,7 @@ JS
         echo "// TODO: Add 'assignee' field to Checklist tasks" > apps/svc-guests/src/checklist/assignee.todo
         git add apps/svc-guests/src/checklist/assignee.todo
         ```
-- [ ] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
+- [x] T-0569 | Сайт Пары: Больше тем оформления (Modern, Rustic, Minimalist)
     - depends: [T-0320]
     - apply:
         ```bash
