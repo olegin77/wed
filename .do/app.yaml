@@ -1,4 +1,4 @@
-name: wed
+name: weddingtech
 region: fra
 
 services:
@@ -12,17 +12,20 @@ services:
     instance_count: 1
     routes:
       - path: /
-    source_dir: /
-    http_port: 8080
+    source_dir: apps/svc-website
+    http_port: 3000
     envs:
       - key: NODE_ENV
         value: production
       - key: NODE_VERSION
         value: "20"
+      - key: PORT
+        value: "3000"
     build_command: |
       corepack enable
       corepack prepare pnpm@9.12.0 --activate
-      pnpm -v
+      cd ../..
       pnpm -w install --frozen-lockfile
-      pnpm -w build
-    run_command: pnpm -w start
+      cd apps/svc-website
+      pnpm build
+    run_command: pnpm start
