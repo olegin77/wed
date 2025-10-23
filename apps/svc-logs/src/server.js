@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { appendFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
 
 /**
  * TCP port on which the ingestion service listens.
@@ -27,6 +28,8 @@ function resolveLogFile() {
  * HTTP server that accepts log lines and appends them to the daily file.
  */
 createServer(async (req, res) => {
+  applySecurityHeaders(res);
+  
   if (req.method === "POST" && req.url === "/logs/ingest") {
     try {
       // eslint-disable-next-line security/detect-non-literal-fs-filename -- path derived from static module URL

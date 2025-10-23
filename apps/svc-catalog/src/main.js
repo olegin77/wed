@@ -2,6 +2,7 @@ import http from "http";
 import { PrismaClient } from "@prisma/client";
 
 import { handleCatalogSearch } from "./api/search.js";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
 
 const prisma = new PrismaClient();
 const port = process.env.PORT || 3000;
@@ -16,6 +17,8 @@ const startOfDayUtc = (date) =>
 
 http
   .createServer(async (req, res) => {
+    applySecurityHeaders(res);
+    
     try {
       if (req.url === "/health") {
         let db = false;

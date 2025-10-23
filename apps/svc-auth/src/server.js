@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 import { __internal as jwtInternal, signJwt } from "../../../packages/auth/jwt.js";
 import { hashPassword, verifyPassword } from "../../../packages/auth/password.js";
+import { applySecurityHeaders } from "../../../packages/security/headers.js";
 
 const prisma = new PrismaClient();
 
@@ -351,6 +352,8 @@ export function createAuthServer(overrides = {}) {
   const handlers = overrides.handlers ?? createAuthHandlers({ userRepository: repository });
 
   return http.createServer(async (req, res) => {
+    applySecurityHeaders(res);
+    
     try {
       if (req.method === "GET" && req.url === "/health") {
         return sendJson(res, 200, { status: "ok" });
