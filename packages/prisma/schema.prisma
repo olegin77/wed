@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  engineType = "binary"
 }
 
 datasource db {
@@ -69,6 +70,7 @@ model Couple {
   tables      Table[]
   budget      BudgetItem[]
   website     Website?
+  enquiries   Enquiry[]
 }
 
 model Vendor {
@@ -88,6 +90,7 @@ model Vendor {
   venues        Venue[]
   offers        Offer[]
   availabilities AvailabilitySlot[]
+  enquiries     Enquiry[]
 }
 
 model Venue {
@@ -98,6 +101,8 @@ model Venue {
   capacityMax Int?
   features    Json?
   vendor      Vendor  @relation(fields: [vendorId], references: [id])
+  availabilities AvailabilitySlot[]
+  enquiries   Enquiry[]
   @@index([capacityMin, capacityMax])
 }
 

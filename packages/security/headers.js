@@ -10,3 +10,9 @@ export const securityHeaders = [
     ["Strict-Transport-Security", "max-age=31536000; includeSubDomains"],
     ["Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"],
 ];
+
+export function applySecurityHeaders(res) {
+    for (const [header, value] of securityHeaders) {
+        res.setHeader(header, value);
+    }
+}

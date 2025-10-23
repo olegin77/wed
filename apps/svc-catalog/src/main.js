@@ -1,5 +1,6 @@
 import http from "http";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 import { handleCatalogSearch } from "./api/search.js";
 import { applySecurityHeaders } from "../../../packages/security/headers.js";

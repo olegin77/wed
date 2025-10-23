@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client"; import { haversine } from "../../../packages/geo/distance.js";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg; import { haversine } from "../../../packages/geo/distance.js";
 const db=new PrismaClient(); const port=process.env.PORT||3130;
 createServer(async (req,res)=>{
   if(req.method==="GET" && req.url.startsWith("/catalog/near")){

@@ -1,4 +1,5 @@
-import { createServer } from "http"; import { PrismaClient } from "@prisma/client"; import { ics } from "../../../packages/calendar/ics.js";
+import { createServer } from "http"; import pkg from "@prisma/client";
+const { PrismaClient } = pkg; import { ics } from "../../../packages/calendar/ics.js";
 const db=new PrismaClient(); const port=process.env.PORT||3013;
 createServer(async (req,res)=>{
   if(req.method==="GET" && req.url.startsWith("/booking/ics")){

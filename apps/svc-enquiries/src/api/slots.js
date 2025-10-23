@@ -1,5 +1,6 @@
 import { createServer } from "http";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
 const port = process.env.SLOTS_PORT || 3010;
