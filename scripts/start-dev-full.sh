@@ -67,8 +67,8 @@ done
 
 # Создаем базу данных, если её нет
 echo -e "${YELLOW}📝 Проверка базы данных 'wt'...${NC}"
-docker-compose exec -T db psql -U pg -tc "SELECT 1 FROM pg_database WHERE datname = 'wt'" | grep -q 1 || \
-    docker-compose exec -T db psql -U pg -c "CREATE DATABASE wt" && \
+docker-compose exec -T db psql -U pg -d postgres -tc "SELECT 1 FROM pg_database WHERE datname = 'wt'" | grep -q 1 || \
+    docker-compose exec -T db psql -U pg -d postgres -c "CREATE DATABASE wt" && \
     echo -e "${GREEN}✓ База данных 'wt' готова${NC}"
 
 # Применение миграций
