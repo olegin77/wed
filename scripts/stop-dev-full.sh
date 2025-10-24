@@ -17,9 +17,8 @@ for pid_file in /tmp/svc-*.pid /tmp/next.pid; do
     fi
 done
 
-# Остановка PostgreSQL
-echo -e "${YELLOW}🗄️  Остановка PostgreSQL...${NC}"
-sudo -u postgres /usr/lib/postgresql/17/bin/pg_ctl -D /var/lib/postgresql/17/main stop 2>/dev/null || true
+# Очистка логов
+rm -f /tmp/svc-*.log /tmp/next.log 2>/dev/null || true
 
 # Остановка Docker контейнеров (если доступны)
 if command -v docker-compose &> /dev/null; then
