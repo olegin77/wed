@@ -2,12 +2,16 @@
   "name": "weddingtech-website",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev -p 3000",
     "dev:full": "./scripts/start-dev-full.sh",
     "build": "next build",
     "start": "next start -p 3000",
     "stop": "./scripts/stop-dev-full.sh",
+    "test:smoke": "./scripts/smoke.sh",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:build": "docker-compose build",
@@ -33,6 +37,7 @@
   },
   "devDependencies": {
     "@node-rs/argon2": "^1.8.3",
+    "@playwright/test": "^1.40.0",
     "prisma": "^6.18.0"
   }
 }

@@ -15,5 +15,3 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
   });
 }
 
-// health
-

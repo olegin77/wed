@@ -52,7 +52,7 @@ async function readJson(req) {
 const server = createServer(async (req, res) => {
   try {
     // Health check endpoint
-    if (req.method === "GET" && req.url === "/health") {
+    if (req.method === "GET" && req.url === "/healthz") {
       return respondJson(res, 200, { status: "ok", service: "billing" });
     }
 
@@ -174,5 +174,3 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
     server.close(() => process.exit(0));
   });
 }
-
-// health

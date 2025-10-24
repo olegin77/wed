@@ -16,6 +16,14 @@ echo "🚀 ЗАПУСК ПРОЕКТА WEDDINGTECH (Full Stack)"
 echo "==================================================${NC}"
 echo ""
 
+# Создание директории для PID файлов
+PID_DIR="/run/wed"
+if [ ! -d "$PID_DIR" ]; then
+    echo -e "${YELLOW}📁 Создание директории для PID файлов...${NC}"
+    sudo mkdir -p "$PID_DIR"
+    sudo chmod 777 "$PID_DIR"
+fi
+
 # Проверка наличия .env
 if [ ! -f .env ]; then
     echo -e "${YELLOW}⚠️  Создание .env файла...${NC}"
@@ -29,6 +37,7 @@ INTERNAL_API_URL=http://localhost
 # Application
 NODE_ENV=development
 PORT=3000
+HOST=0.0.0.0
 
 # Auth
 NEXTAUTH_SECRET=dev-secret-change-in-production
@@ -45,6 +54,43 @@ fi
 
 # Загрузка переменных окружения
 export $(cat .env | grep -v '^#' | xargs)
+
+# Функция для проверки и освобождения порта
+check_and_free_port() {
+    local port=$1
+    local service=$2
+    
+    # Проверяем, занят ли порт
+    if ss -lntp 2>/dev/null | grep -q ":${port} "; then
+        echo -e "${YELLOW}⚠️  Порт ${port} занят. Освобождаем...${NC}"
+        
+        # Пытаемся найти PID из файла
+        local pid_file="${PID_DIR}/${service}.pid"
+        if [ -f "$pid_file" ]; then
+            local old_pid=$(cat "$pid_file")
+            if kill -0 "$old_pid" 2>/dev/null; then
+                echo -e "${YELLOW}   Останавливаем старый процесс (PID: $old_pid)${NC}"
+                kill "$old_pid" 2>/dev/null || true
+                sleep 1
+                # Если процесс всё ещё жив, убиваем принудительно
+                if kill -0 "$old_pid" 2>/dev/null; then
+                    kill -9 "$old_pid" 2>/dev/null || true
+                fi
+            fi
+            rm -f "$pid_file"
+        fi
+        
+        # Дополнительная проверка и освобождение порта через lsof
+        local pids=$(lsof -ti :${port} 2>/dev/null || true)
+        if [ -n "$pids" ]; then
+            echo -e "${YELLOW}   Убиваем процессы на порту ${port}: $pids${NC}"
+            echo "$pids" | xargs -r kill -9 2>/dev/null || true
+        fi
+        
+        sleep 1
+        echo -e "${GREEN}✓ Порт ${port} освобождён${NC}"
+    fi
+}
 
 # Запуск базы данных и Minio
 echo -e "${GREEN}🐳 Запуск инфраструктуры...${NC}"
@@ -80,10 +126,29 @@ npx prisma migrate deploy 2>/dev/null || npx prisma migrate dev --name init
 run_service() {
     local service=$1
     local port=$2
+    
+    check_and_free_port "$port" "$service"
+    
     echo -e "${BLUE}▶️  Запуск ${service} на порту ${port}...${NC}"
     cd "apps/${service}"
-    PORT=${port} npm start > "/tmp/${service}.log" 2>&1 &
-    echo $! > "/tmp/${service}.pid"
+    
+    # Создаём лог-файл с ротацией
+    local log_file="/tmp/${service}.log"
+    if [ -f "$log_file" ]; then
+        # Простая ротация: если файл больше 5 МБ, создаём бэкап
+        local size=$(stat -f%z "$log_file" 2>/dev/null || stat -c%s "$log_file" 2>/dev/null)
+        if [ "$size" -gt 5242880 ]; then
+            for i in 4 3 2 1; do
+                [ -f "${log_file}.$i" ] && mv "${log_file}.$i" "${log_file}.$((i+1))"
+            done
+            mv "$log_file" "${log_file}.1"
+        fi
+    fi
+    
+    PORT=${port} HOST=${HOST:-0.0.0.0} npm start > "$log_file" 2>&1 &
+    local pid=$!
+    echo $pid > "${PID_DIR}/${service}.pid"
+    echo -e "${GREEN}✓ ${service} запущен (PID: $pid, порт: ${port})${NC}"
     cd ../..
 }
 
@@ -123,10 +188,13 @@ echo -e "${YELLOW}⏳ Ожидание инициализации сервисо
 sleep 5
 
 # Запуск Next.js приложения
+check_and_free_port 3000 "next"
+
 echo -e "${GREEN}🌐 Запуск Next.js фронтенда...${NC}"
-npm run dev > /tmp/next.log 2>&1 &
+npm run dev -- -H ${HOST:-0.0.0.0} -p 3000 > /tmp/next.log 2>&1 &
 NEXT_PID=$!
-echo $NEXT_PID > /tmp/next.pid
+echo $NEXT_PID > "${PID_DIR}/next.pid"
+echo -e "${GREEN}✓ Next.js запущен (PID: $NEXT_PID, порт: 3000)${NC}"
 
 echo ""
 echo -e "${GREEN}=================================================="
@@ -134,22 +202,27 @@ echo "✅ ПРОЕКТ УСПЕШНО ЗАПУЩЕН!"
 echo "==================================================${NC}"
 echo ""
 echo -e "${BLUE}🌐 Доступные сервисы:${NC}"
-echo "   Frontend:        http://localhost:3000"
-echo "   Auth Service:    http://localhost:3001"
-echo "   Catalog Service: http://localhost:3002"
-echo "   Enquiries:       http://localhost:3003"
-echo "   Billing:         http://localhost:3004"
-echo "   Vendors:         http://localhost:3005"
-echo "   Guests:          http://localhost:3006"
-echo "   Payments:        http://localhost:3007"
-echo "   PostgreSQL:      localhost:5434"
-echo "   MinIO Console:   http://localhost:9001"
+echo ""
+printf "%-20s %-25s %s\n" "Сервис" "URL" "Статус"
+echo "─────────────────────────────────────────────────────────────"
+printf "%-20s %-25s %s\n" "Frontend" "http://localhost:3000" "$(ss -lntp 2>/dev/null | grep -q ':3000 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Auth Service" "http://localhost:3001" "$(ss -lntp 2>/dev/null | grep -q ':3001 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Catalog Service" "http://localhost:3002" "$(ss -lntp 2>/dev/null | grep -q ':3002 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Enquiries" "http://localhost:3003" "$(ss -lntp 2>/dev/null | grep -q ':3003 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Billing" "http://localhost:3004" "$(ss -lntp 2>/dev/null | grep -q ':3004 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Vendors" "http://localhost:3005" "$(ss -lntp 2>/dev/null | grep -q ':3005 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Guests" "http://localhost:3006" "$(ss -lntp 2>/dev/null | grep -q ':3006 ' && echo '✓' || echo '✗')"
+printf "%-20s %-25s %s\n" "Payments" "http://localhost:3007" "$(ss -lntp 2>/dev/null | grep -q ':3007 ' && echo '✓' || echo '✗')"
+echo "─────────────────────────────────────────────────────────────"
+printf "%-20s %-25s\n" "PostgreSQL" "localhost:5434"
+printf "%-20s %-25s\n" "MinIO Console" "http://localhost:9001"
 echo ""
 echo -e "${YELLOW}📋 Управление:${NC}"
 echo "   Ctrl+C           - Остановить все сервисы"
 echo "   ./scripts/stop-dev-full.sh - Остановить сервисы скриптом"
 echo ""
 echo -e "${GREEN}💡 Логи сервисов в /tmp/*.log${NC}"
+echo -e "${GREEN}💡 PID файлы в ${PID_DIR}/*.pid${NC}"
 echo "=================================================="
 
 # Функция для корректной остановки
@@ -158,10 +231,20 @@ cleanup() {
     echo -e "${YELLOW}🛑 Остановка сервисов...${NC}"
     
     # Остановка всех процессов
-    for pid_file in /tmp/svc-*.pid /tmp/next.pid; do
+    for pid_file in "${PID_DIR}"/*.pid; do
         if [ -f "$pid_file" ]; then
-            kill $(cat "$pid_file") 2>/dev/null || true
-            rm "$pid_file"
+            local pid=$(cat "$pid_file")
+            local service=$(basename "$pid_file" .pid)
+            if kill -0 "$pid" 2>/dev/null; then
+                echo -e "${YELLOW}   Останавливаем ${service} (PID: ${pid})${NC}"
+                kill "$pid" 2>/dev/null || true
+                sleep 0.5
+                # Если процесс всё ещё жив, убиваем принудительно
+                if kill -0 "$pid" 2>/dev/null; then
+                    kill -9 "$pid" 2>/dev/null || true
+                fi
+            fi
+            rm -f "$pid_file"
         fi
     done
     
