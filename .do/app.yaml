@@ -1,14 +1,116 @@
 name: weddingtech
 region: fra
 
+databases:
+  - name: wt-db
+    engine: PG
+    version: "15"
+
 services:
-  - name: web
+  # Auth Service
+  - name: svc-auth
     github:
       repo: olegin77/wed
       branch: main
       deploy_on_push: true
     environment_slug: node-js
     instance_size_slug: basic-xxs
+    instance_count: 1
+    source_dir: apps/svc-auth
+    http_port: 3001
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: ${wt-db.DATABASE_URL}
+      - key: PORT
+        value: "3001"
+    build_command: |
+      cd ../.. && npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm exec prisma generate
+    run_command: pnpm start
+
+  # Catalog Service
+  - name: svc-catalog
+    github:
+      repo: olegin77/wed
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    source_dir: apps/svc-catalog
+    http_port: 3002
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: ${wt-db.DATABASE_URL}
+      - key: PORT
+        value: "3002"
+    build_command: |
+      cd ../.. && npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm exec prisma generate
+    run_command: pnpm start
+
+  # Enquiries Service
+  - name: svc-enquiries
+    github:
+      repo: olegin77/wed
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    source_dir: apps/svc-enquiries
+    http_port: 3003
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: ${wt-db.DATABASE_URL}
+      - key: PORT
+        value: "3003"
+    build_command: |
+      cd ../.. && npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm exec prisma generate
+    run_command: pnpm start
+
+  # Billing Service
+  - name: svc-billing
+    github:
+      repo: olegin77/wed
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    source_dir: apps/svc-billing
+    http_port: 3004
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: ${wt-db.DATABASE_URL}
+      - key: PORT
+        value: "3004"
+    build_command: |
+      cd ../.. && npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm exec prisma generate
+    run_command: pnpm start
+
+  # Web Frontend (Next.js)
+  - name: web
+    github:
+      repo: olegin77/wed
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    instance_size_slug: basic-xs
     instance_count: 1
     routes:
       - path: /
@@ -17,11 +119,22 @@ services:
     envs:
       - key: NODE_ENV
         value: production
-      - key: NODE_VERSION
-        value: "20"
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: ${wt-db.DATABASE_URL}
+      - key: INTERNAL_API_URL
+        value: "http://localhost"
       - key: PORT
         value: "3000"
+      - key: NEXTAUTH_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      - key: NEXTAUTH_URL
+        value: "https://weddingtech-app.ondigitalocean.app"
     build_command: |
-      npm install
-      npm run build
+      npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm exec prisma generate
+      pnpm run build
     run_command: pnpm start

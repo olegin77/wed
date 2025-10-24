@@ -17,6 +17,48 @@ const nextConfig = {
 
     return config;
   },
+  // API rewrites для интеграции микросервисов
+  async rewrites() {
+    const API_BASE = process.env.INTERNAL_API_URL || 'http://localhost';
+    
+    return [
+      // Auth service
+      {
+        source: '/api/auth/:path*',
+        destination: `${API_BASE}:3001/auth/:path*`,
+      },
+      // Catalog service
+      {
+        source: '/api/catalog/:path*',
+        destination: `${API_BASE}:3002/catalog/:path*`,
+      },
+      // Enquiries service
+      {
+        source: '/api/enquiries/:path*',
+        destination: `${API_BASE}:3003/enquiries/:path*`,
+      },
+      // Billing service
+      {
+        source: '/api/billing/:path*',
+        destination: `${API_BASE}:3004/billing/:path*`,
+      },
+      // Vendors service
+      {
+        source: '/api/vendors/:path*',
+        destination: `${API_BASE}:3005/vendors/:path*`,
+      },
+      // Guests service
+      {
+        source: '/api/guests/:path*',
+        destination: `${API_BASE}:3006/guests/:path*`,
+      },
+      // Payments service
+      {
+        source: '/api/payments/:path*',
+        destination: `${API_BASE}:3007/payments/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

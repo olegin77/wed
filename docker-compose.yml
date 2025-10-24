@@ -1,5 +1,7 @@
 version: "3.8"
+
 services:
+  # Database
   db:
     image: postgres:15
     environment:
@@ -7,10 +9,162 @@ services:
       POSTGRES_USER: pg
       POSTGRES_DB: wt
     ports: ["5434:5432"]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pg"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Object Storage
   minio:
     image: minio/minio
-    command: server /data
+    command: server /data --console-address ":9001"
     environment:
-      MINIO_ACCESS_KEY: minio
-      MINIO_SECRET_KEY: minio123
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
     ports: ["9000:9000","9001:9001"]
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Auth Service
+  svc-auth:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-auth
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3001
+    ports: ["3001:3001"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Catalog Service
+  svc-catalog:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-catalog
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3002
+    ports: ["3002:3002"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Enquiries Service
+  svc-enquiries:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-enquiries
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3003
+    ports: ["3003:3003"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Billing Service
+  svc-billing:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-billing
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3004
+    ports: ["3004:3004"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Vendors Service
+  svc-vendors:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-vendors
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3005
+    ports: ["3005:3005"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Guests Service
+  svc-guests:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-guests
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3006
+    ports: ["3006:3006"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Payments Service
+  svc-payments:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE_NAME: svc-payments
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      PORT: 3007
+    ports: ["3007:3007"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Frontend (Next.js)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      INTERNAL_API_URL: http://localhost
+      PORT: 3000
+    ports: ["3000:3000"]
+    depends_on:
+      - svc-auth
+      - svc-catalog
+      - svc-enquiries
+      - svc-billing
+      - svc-vendors
+      - svc-guests
+      - svc-payments
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  minio_data:
