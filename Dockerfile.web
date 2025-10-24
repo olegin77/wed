@@ -1,0 +1,59 @@
+# Dockerfile для Next.js приложения
+FROM node:20-alpine AS base
+
+# Установка pnpm
+RUN npm install -g pnpm
+
+# Рабочая директория
+WORKDIR /app
+
+# Копирование файлов зависимостей
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY schema.prisma ./
+
+# Копирование исходников
+COPY packages ./packages
+COPY apps ./apps
+COPY app ./app
+COPY src ./src
+COPY public ./public
+
+# Копирование конфигурационных файлов
+COPY next.config.mjs ./
+COPY tsconfig.json ./
+COPY tailwind.config.js ./
+COPY eslint.config.js ./
+
+# Установка зависимостей
+RUN pnpm install --frozen-lockfile
+
+# Генерация Prisma Client
+RUN pnpm exec prisma generate
+
+# Сборка Next.js приложения
+FROM base AS builder
+WORKDIR /app
+RUN pnpm run build
+
+# Production образ
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Копирование необходимых файлов
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# Создание пользователя без прав root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]

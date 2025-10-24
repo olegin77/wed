@@ -1,0 +1,37 @@
+# Dockerfile для микросервисов
+FROM node:20-alpine AS base
+
+# Установка pnpm
+RUN npm install -g pnpm
+
+# Рабочая директория
+WORKDIR /app
+
+# Копирование конфигурационных файлов
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY schema.prisma ./
+
+# Копирование общих пакетов
+COPY packages ./packages
+
+# Копирование всех микросервисов
+COPY apps ./apps
+
+# Установка зависимостей
+RUN pnpm install --frozen-lockfile
+
+# Генерация Prisma Client
+RUN pnpm exec prisma generate
+
+# Аргумент для выбора сервиса
+ARG SERVICE_NAME
+ENV SERVICE_NAME=${SERVICE_NAME}
+
+# Рабочая директория сервиса
+WORKDIR /app/apps/${SERVICE_NAME}
+
+# Порт по умолчанию
+EXPOSE 3000
+
+# Команда запуска
+CMD ["pnpm", "start"]
