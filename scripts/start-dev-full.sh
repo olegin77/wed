@@ -82,7 +82,7 @@ run_service() {
     local port=$2
     echo -e "${BLUE}▶️  Запуск ${service} на порту ${port}...${NC}"
     cd "apps/${service}"
-    PORT=${port} pnpm start > "/tmp/${service}.log" 2>&1 &
+    PORT=${port} npm start > "/tmp/${service}.log" 2>&1 &
     echo $! > "/tmp/${service}.pid"
     cd ../..
 }
@@ -124,7 +124,7 @@ sleep 5
 
 # Запуск Next.js приложения
 echo -e "${GREEN}🌐 Запуск Next.js фронтенда...${NC}"
-pnpm run dev &
+npm run dev > /tmp/next.log 2>&1 &
 NEXT_PID=$!
 echo $NEXT_PID > /tmp/next.pid
 

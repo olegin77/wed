@@ -1,8 +1,0 @@
-// ✅ COMPLETED: Implemented 2FA (SMS/TOTP)
-// - Created comprehensive TwoFactorAuth class with TOTP and SMS support
-// - Implemented TwoFactorSetup component for initial configuration
-// - Built TwoFactorInput component for authentication
-// - Added backup codes support for account recovery
-// - Implemented security features (rate limiting, timing-safe comparison)
-// - Added QR code generation for easy setup
-// - Created proper TypeScript interfaces and error handling

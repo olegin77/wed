@@ -1,7 +1,0 @@
-// ✅ COMPLETED: Added 'group' field to Guest model
-// - Added 'group' field to Guest model in schema.prisma
-// - Added 'notes' field for additional guest information
-// - Added index on [coupleId, group] for efficient querying
-// - Group values: family, groom_friends, bride_friends, colleagues, other
-// - Updated Guest interface in UI components to include group field
-// - Implemented GuestGroup and GuestGroups components for organizing guests
