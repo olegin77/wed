@@ -1,4 +1,4 @@
-import { ics } from "../../../packages/calendar/ics.js";
+import { ics } from "../../../../packages/calendar/ics.js";
 
 const ROUTE_PATH = "/vendors/availability.ics";
 

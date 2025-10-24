@@ -1,12 +1,11 @@
 {
-  "name": "svc-auth",
+  "name": "svc-billing",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "echo build-ok",
     "start": "node src/main.js",
-    "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js",
-    "test": "node --test src/server.test.js"
+    "start:migrate": "pnpm -C ../../packages/prisma run migrate:deploy && node src/main.js"
   },
   "dependencies": {
     "@prisma/client": "^6.18.0"

@@ -33,6 +33,9 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
     devDependencies:
+      '@node-rs/argon2':
+        specifier: ^1.8.3
+        version: 1.8.3
       prisma:
         specifier: ^6.18.0
         version: 6.18.0(typescript@5.4.5)
@@ -44,8 +47,14 @@ importers:
   apps/svc-auth:
     dependencies:
       '@prisma/client':
-        specifier: ^5.19.0
-        version: 5.22.0(prisma@6.18.0(typescript@5.9.3))
+        specifier: ^6.18.0
+        version: 6.18.0(prisma@6.18.0(typescript@5.9.3))(typescript@5.9.3)
+
+  apps/svc-billing:
+    dependencies:
+      '@prisma/client':
+        specifier: ^6.18.0
+        version: 6.18.0(prisma@6.18.0(typescript@5.9.3))(typescript@5.9.3)
 
   apps/svc-catalog: {}
 
@@ -709,15 +718,6 @@ packages:
   '@node-rs/argon2@1.8.3':
     resolution: {integrity: sha512-sf/QAEI59hsMEEE2J8vO4hKrXrv4Oplte3KI2N4MhMDYpytH0drkVfErmHBfWFZxxIEK03fX1WsBNswS2nIZKg==}
     engines: {node: '>= 10'}
-
-  '@prisma/client@5.22.0':
-    resolution: {integrity: sha512-M0SVXfyHnQREBKxCgyo7sffrKttwE6R8PMq330MIUF0pTwjUhLbW84pFDlf06B27XyCR++VtjugEnIHdr07SVA==}
-    engines: {node: '>=16.13'}
-    peerDependencies:
-      prisma: '*'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
 
   '@prisma/client@6.18.0':
     resolution: {integrity: sha512-jnL2I9gDnPnw4A+4h5SuNn8Gc+1mL1Z79U/3I9eE2gbxJG1oSA+62ByPW4xkeDgwE0fqMzzpAZ7IHxYnLZ4iQA==}
@@ -2271,10 +2271,6 @@ snapshots:
       '@node-rs/argon2-win32-arm64-msvc': 1.8.3
       '@node-rs/argon2-win32-ia32-msvc': 1.8.3
       '@node-rs/argon2-win32-x64-msvc': 1.8.3
-
-  '@prisma/client@5.22.0(prisma@6.18.0(typescript@5.9.3))':
-    optionalDependencies:
-      prisma: 6.18.0(typescript@5.9.3)
 
   '@prisma/client@6.18.0(prisma@6.18.0(typescript@5.4.5))(typescript@5.4.5)':
     optionalDependencies:
