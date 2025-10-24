@@ -50,8 +50,26 @@ export $(cat .env | grep -v '^#' | xargs)
 echo -e "${GREEN}🐳 Запуск инфраструктуры...${NC}"
 docker-compose up -d db minio
 
-echo -e "${YELLOW}⏳ Ожидание готовности PostgreSQL (10 сек)...${NC}"
-sleep 10
+echo -e "${YELLOW}⏳ Ожидание готовности PostgreSQL...${NC}"
+# Ждем готовности базы данных (до 60 секунд)
+for i in {1..60}; do
+    if docker-compose exec -T db pg_isready -U pg > /dev/null 2>&1; then
+        echo -e "${GREEN}✓ PostgreSQL готов!${NC}"
+        break
+    fi
+    if [ $i -eq 60 ]; then
+        echo -e "${RED}✗ Timeout: PostgreSQL не готов после 60 секунд${NC}"
+        exit 1
+    fi
+    echo -n "."
+    sleep 1
+done
+
+# Создаем базу данных, если её нет
+echo -e "${YELLOW}📝 Проверка базы данных 'wt'...${NC}"
+docker-compose exec -T db psql -U pg -tc "SELECT 1 FROM pg_database WHERE datname = 'wt'" | grep -q 1 || \
+    docker-compose exec -T db psql -U pg -c "CREATE DATABASE wt" && \
+    echo -e "${GREEN}✓ База данных 'wt' готова${NC}"
 
 # Применение миграций
 echo -e "${GREEN}🗄️  Применение миграций базы данных...${NC}"
