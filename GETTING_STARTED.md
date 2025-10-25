@@ -268,14 +268,14 @@ MINIO_SECRET_KEY=minio123
 1. ✅ **Explore the Frontend:** http://localhost:3000
 2. ✅ **Open Prisma Studio:** `npm run prisma:studio`
 3. ✅ **Read Architecture Docs:** [docs/architecture/](./docs/architecture/)
-4. ✅ **Deploy Guide:** [DEPLOYMENT.md](./DEPLOYMENT.md)
+4. ✅ **Production Deployment:** [INSTALL.md](./INSTALL.md)
 
 ## 🆘 Getting Help
 
 - **Documentation:** [docs/](./docs/)
 - **Architecture:** [docs/architecture/flows.md](./docs/architecture/flows.md)
 - **API Docs:** [docs/api/](./docs/api/)
-- **Deployment:** [DEPLOYMENT.md](./DEPLOYMENT.md)
+- **Production Setup:** [INSTALL.md](./INSTALL.md)
 
 ---
 
