@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_PASSWORD: pg
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-pg}
       POSTGRES_USER: pg
       POSTGRES_DB: wt
     ports: ["5434:5432"]
@@ -39,7 +39,7 @@ services:
       args:
         SERVICE_NAME: svc-auth
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3001
       HOST: 0.0.0.0
     ports: ["3001:3001"]
@@ -62,7 +62,7 @@ services:
       args:
         SERVICE_NAME: svc-catalog
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3002
       HOST: 0.0.0.0
     ports: ["3002:3002"]
@@ -85,7 +85,7 @@ services:
       args:
         SERVICE_NAME: svc-enquiries
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3003
       HOST: 0.0.0.0
     ports: ["3003:3003"]
@@ -108,7 +108,7 @@ services:
       args:
         SERVICE_NAME: svc-billing
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3004
       HOST: 0.0.0.0
     ports: ["3004:3004"]
@@ -131,7 +131,7 @@ services:
       args:
         SERVICE_NAME: svc-vendors
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3005
       HOST: 0.0.0.0
     ports: ["3005:3005"]
@@ -154,7 +154,7 @@ services:
       args:
         SERVICE_NAME: svc-guests
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3006
       HOST: 0.0.0.0
     ports: ["3006:3006"]
@@ -177,7 +177,7 @@ services:
       args:
         SERVICE_NAME: svc-payments
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       PORT: 3007
       HOST: 0.0.0.0
     ports: ["3007:3007"]
@@ -198,7 +198,7 @@ services:
       context: .
       dockerfile: Dockerfile.web
     environment:
-      DATABASE_URL: postgresql://pg:pg@db:5432/wt
+      DATABASE_URL: postgresql://pg:${DB_PASSWORD:-pg}@db:5432/wt
       INTERNAL_API_URL: http://host.docker.internal
       PORT: 3000
       HOST: 0.0.0.0
@@ -219,6 +219,12 @@ services:
       svc-payments:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
     extra_hosts:
       - "host.docker.internal:host-gateway"
 

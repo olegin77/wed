@@ -306,6 +306,7 @@ step7_configure_environment() {
     cat > "$env_file" << EOF
 # Database
 DATABASE_URL=postgresql://pg:${db_password}@db:5432/wt
+DB_PASSWORD=${db_password}
 
 # Application
 NODE_ENV=production
@@ -377,32 +378,167 @@ step9_build_docker_images() {
     log_success "Docker images built successfully"
 }
 
+check_ports_available() {
+    log_info "Checking if required ports are available..."
+    
+    local ports=(3000 3001 3002 3003 3004 3005 3006 3007 5434 9000 9001)
+    local occupied_ports=()
+    
+    for port in "${ports[@]}"; do
+        if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null 2>&1; then
+            occupied_ports+=($port)
+            log_warning "Port $port is already in use"
+            lsof -Pi :$port -sTCP:LISTEN | grep -v "COMMAND" || true
+        fi
+    done
+    
+    if [ ${#occupied_ports[@]} -gt 0 ]; then
+        log_error "The following ports are occupied: ${occupied_ports[*]}"
+        log_info "You can free these ports by stopping the processes using them"
+        read -p "Do you want to continue anyway? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            return 1
+        fi
+    else
+        log_success "All required ports are available"
+    fi
+    
+    return 0
+}
+
+wait_for_healthy_containers() {
+    local max_wait=300  # 5 minutes
+    local wait_interval=10
+    local elapsed=0
+    
+    log_info "Waiting for all containers to become healthy..."
+    
+    while [ $elapsed -lt $max_wait ]; do
+        local unhealthy_count=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps --format json" | grep -c '"Health":"unhealthy"' || echo "0")
+        local starting_count=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps --format json" | grep -c '"Health":"starting"' || echo "0")
+        
+        if [ "$unhealthy_count" -eq 0 ] && [ "$starting_count" -eq 0 ]; then
+            log_success "All containers are healthy"
+            return 0
+        fi
+        
+        log_info "Still waiting... ($elapsed/$max_wait seconds) - Unhealthy: $unhealthy_count, Starting: $starting_count"
+        sleep $wait_interval
+        elapsed=$((elapsed + wait_interval))
+    done
+    
+    log_warning "Timeout waiting for containers to become healthy"
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
+    return 1
+}
+
 step10_start_services() {
     log_info "Step 10: Starting services..."
     
-    # Start services
-    su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d"
-    
-    # Wait for services to start
-    log_info "Waiting for services to initialize (60 seconds)..."
-    sleep 60
-    
-    # Check service status
-    su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
-    
-    # Initialize database
-    log_info "Initializing database..."
-    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T web pnpm run prisma:migrate deploy"; then
-        log_success "Database initialized"
-    else
-        log_warning "Database migration failed, you may need to run it manually later"
+    # Check ports availability
+    if ! check_ports_available; then
+        log_error "Cannot proceed with occupied ports"
+        return 1
     fi
     
-    log_success "Services started"
+    # Start services
+    log_info "Starting Docker Compose services..."
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d"
+    
+    # Wait for services to become healthy
+    if ! wait_for_healthy_containers; then
+        log_warning "Some containers may not be healthy. Checking logs..."
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=20"
+    fi
+    
+    # Check service status
+    log_info "Current service status:"
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
+    
+    # Initialize database with retries
+    log_info "Initializing database..."
+    local max_db_attempts=3
+    local db_attempt=1
+    
+    while [ $db_attempt -le $max_db_attempts ]; do
+        log_info "Database migration attempt $db_attempt of $max_db_attempts"
+        
+        # Try migration through svc-auth service (it has Prisma installed)
+        if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T svc-auth sh -c 'cd /app && pnpm exec prisma migrate deploy'"; then
+            log_success "Database initialized successfully"
+            
+            # Verify tables exist
+            if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c '\dt' | grep -q 'User'"; then
+                log_success "Database tables verified"
+                break
+            else
+                log_warning "Migration succeeded but tables not found, retrying..."
+            fi
+        else
+            log_warning "Database migration failed on attempt $db_attempt"
+        fi
+        
+        if [ $db_attempt -eq $max_db_attempts ]; then
+            log_error "Database migration failed after $max_db_attempts attempts"
+            log_info "You can manually run: docker-compose exec svc-auth sh -c 'cd /app && pnpm exec prisma migrate deploy'"
+            return 1
+        fi
+        
+        db_attempt=$((db_attempt + 1))
+        sleep 10
+    done
+    
+    # Check web container specifically
+    log_info "Checking web container status..."
+    local web_status=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps web --format '{{.Status}}'" || echo "not running")
+    
+    if echo "$web_status" | grep -qi "unhealthy"; then
+        log_warning "Web container is unhealthy, checking logs..."
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=50 web"
+        
+        log_info "Attempting to rebuild web container..."
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose build --no-cache web"
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d web"
+        
+        log_info "Waiting for web container to start..."
+        sleep 30
+        
+        web_status=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps web --format '{{.Status}}'" || echo "not running")
+        if echo "$web_status" | grep -qi "unhealthy"; then
+            log_error "Web container still unhealthy after rebuild. Please check logs manually."
+            return 1
+        fi
+    fi
+    
+    log_success "Services started successfully"
 }
 
 step11_configure_nginx() {
     log_info "Step 11: Configuring Nginx reverse proxy..."
+    
+    # Check if port 3000 is accessible
+    log_info "Verifying port 3000 is accessible..."
+    local max_attempts=10
+    local attempt=1
+    
+    while [ $attempt -le $max_attempts ]; do
+        if curl -f http://localhost:3000 > /dev/null 2>&1; then
+            log_success "Port 3000 is accessible"
+            break
+        fi
+        
+        if [ $attempt -eq $max_attempts ]; then
+            log_error "Port 3000 is not accessible after $max_attempts attempts"
+            log_info "Checking web container status..."
+            su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=50 web"
+            return 1
+        fi
+        
+        log_info "Waiting for port 3000 to become accessible (attempt $attempt/$max_attempts)..."
+        sleep 5
+        attempt=$((attempt + 1))
+    done
     
     if ! check_command nginx; then
         apt-get install -y nginx
@@ -448,6 +584,15 @@ EOF
         systemctl enable nginx
         systemctl restart nginx
         log_success "Nginx configured"
+        
+        # Verify nginx is proxying correctly
+        log_info "Testing nginx proxy..."
+        sleep 2
+        if curl -f http://localhost > /dev/null 2>&1; then
+            log_success "Nginx proxy is working correctly"
+        else
+            log_warning "Nginx proxy may not be working correctly. Check logs with: journalctl -u nginx -n 50"
+        fi
     else
         log_error "Nginx configuration test failed"
         return 1
@@ -563,28 +708,176 @@ EOF
 }
 
 step16_health_check() {
-    log_info "Step 16: Running health checks..."
+    log_info "Step 16: Running comprehensive health checks..."
     
     # Check Docker containers
-    log_info "Checking Docker containers..."
+    log_info "Checking Docker containers status..."
     su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
     
-    # Check web endpoint
-    log_info "Checking web endpoint..."
-    if curl -f http://localhost:3000 > /dev/null 2>&1; then
-        log_success "Web endpoint responding"
+    # Check each service health
+    log_info "Checking individual service health..."
+    local services=("svc-auth:3001" "svc-catalog:3002" "svc-enquiries:3003" "svc-billing:3004" "svc-vendors:3005" "svc-guests:3006" "svc-payments:3007" "web:3000")
+    local failed_services=()
+    
+    for service in "${services[@]}"; do
+        local name="${service%%:*}"
+        local port="${service##*:}"
+        
+        if curl -f http://localhost:$port/healthz > /dev/null 2>&1 || curl -f http://localhost:$port > /dev/null 2>&1; then
+            log_success "$name is responding on port $port"
+        else
+            log_warning "$name is NOT responding on port $port"
+            failed_services+=($name)
+        fi
+    done
+    
+    # Check database connectivity
+    log_info "Checking database connectivity..."
+    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c 'SELECT 1' > /dev/null 2>&1"; then
+        log_success "Database is accessible"
+        
+        # Check if tables exist
+        local table_count=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c '\dt' | grep -c 'table' || echo '0'")
+        if [ "$table_count" -gt 0 ]; then
+            log_success "Database has $table_count tables"
+        else
+            log_error "Database has no tables! Migration may have failed."
+            failed_services+=("database-migration")
+        fi
     else
-        log_warning "Web endpoint not responding yet, may need more time to start"
+        log_error "Database is NOT accessible"
+        failed_services+=("database")
     fi
     
-    # Check logs for errors
-    log_info "Checking for critical errors in logs..."
-    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=50 | grep -i 'error\|failed\|fatal'" > /tmp/errors.log 2>&1; then
-        log_warning "Some errors found in logs (this may be normal during startup)"
-        head -20 /tmp/errors.log
+    # Check nginx
+    if systemctl is-active nginx > /dev/null 2>&1; then
+        log_success "Nginx is running"
+        
+        if curl -f http://localhost > /dev/null 2>&1; then
+            log_success "Nginx proxy is working"
+        else
+            log_warning "Nginx is running but proxy may not be working"
+        fi
+    else
+        log_warning "Nginx is not running"
     fi
+    
+    # Check disk space
+    local disk_usage=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+    if [ "$disk_usage" -gt 80 ]; then
+        log_warning "Disk usage is at ${disk_usage}%"
+    else
+        log_success "Disk usage is at ${disk_usage}%"
+    fi
+    
+    # Check memory
+    local mem_free=$(free -m | awk 'NR==2 {print $7}')
+    if [ "$mem_free" -lt 500 ]; then
+        log_warning "Low free memory: ${mem_free}MB"
+    else
+        log_success "Available memory: ${mem_free}MB"
+    fi
+    
+    # Check logs for critical errors
+    log_info "Checking for critical errors in logs..."
+    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=100 | grep -i 'fatal\|critical'" > /tmp/critical_errors.log 2>&1; then
+        if [ -s /tmp/critical_errors.log ]; then
+            log_error "Critical errors found in logs:"
+            head -10 /tmp/critical_errors.log
+        fi
+    fi
+    
+    # Summary
+    log_info ""
+    log_info "========== HEALTH CHECK SUMMARY =========="
+    if [ ${#failed_services[@]} -eq 0 ]; then
+        log_success "All services are healthy! ✓"
+    else
+        log_error "The following services have issues: ${failed_services[*]}"
+        log_info "Please check the logs for these services:"
+        for failed in "${failed_services[@]}"; do
+            log_info "  docker-compose -f $APP_DIR/docker-compose.yml logs --tail=50 $failed"
+        done
+    fi
+    log_info "=========================================="
     
     log_success "Health checks completed"
+}
+
+################################################################################
+# Troubleshooting Guide
+################################################################################
+
+print_troubleshooting_guide() {
+    cat << 'TROUBLESHOOTING'
+
+================================================================================
+                         TROUBLESHOOTING GUIDE
+================================================================================
+
+If you encounter issues, here are common problems and solutions:
+
+1. DATABASE HAS NO TABLES
+   Symptom: Services start but APIs return errors
+   Solution:
+   ```
+   docker-compose -f /home/weddingtech/app/docker-compose.yml exec svc-auth sh -c 'cd /app && pnpm exec prisma migrate deploy'
+   ```
+
+2. WEB SERVICE UNHEALTHY
+   Symptom: web container shows as unhealthy
+   Solution:
+   ```
+   docker-compose -f /home/weddingtech/app/docker-compose.yml logs --tail=50 web
+   # If build errors, rebuild:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml build --no-cache web
+   docker-compose -f /home/weddingtech/app/docker-compose.yml up -d web
+   ```
+
+3. NGINX NOT PROXYING
+   Symptom: curl http://localhost works but external IP doesn't respond
+   Solution:
+   - Check nginx status: systemctl status nginx
+   - Test config: nginx -t
+   - Check logs: journalctl -u nginx -n 50
+   - Verify port 3000: curl http://localhost:3000
+
+4. PORT ALREADY IN USE
+   Symptom: Error "port already in use"
+   Solution:
+   ```
+   # Find process using port
+   sudo lsof -i :3000
+   # Kill process if needed
+   sudo kill -9 <PID>
+   ```
+
+5. SERVICES NOT STARTING
+   Solution:
+   ```
+   # Check all services
+   docker-compose -f /home/weddingtech/app/docker-compose.yml ps
+   # Check specific service logs
+   docker-compose -f /home/weddingtech/app/docker-compose.yml logs --tail=100 <service-name>
+   # Restart services
+   docker-compose -f /home/weddingtech/app/docker-compose.yml restart
+   ```
+
+6. OUT OF MEMORY
+   Solution: The script automatically creates swap, but you can increase it:
+   ```
+   sudo fallocate -l 8G /swapfile2
+   sudo chmod 600 /swapfile2
+   sudo mkswap /swapfile2
+   sudo swapon /swapfile2
+   ```
+
+For more help, check:
+- Installation log: /var/log/weddingtech-install.log
+- Docker logs: docker-compose -f /home/weddingtech/app/docker-compose.yml logs -f
+================================================================================
+
+TROUBLESHOOTING
 }
 
 ################################################################################
@@ -608,8 +901,8 @@ main() {
     step7_configure_environment || { log_error "Step 7 failed"; exit 1; }
     step8_install_dependencies || { log_error "Step 8 failed"; exit 1; }
     step9_build_docker_images || { log_error "Step 9 failed"; exit 1; }
-    step10_start_services || { log_error "Step 10 failed"; exit 1; }
-    step11_configure_nginx || { log_error "Step 11 failed"; exit 1; }
+    step10_start_services || { log_error "Step 10 failed"; print_troubleshooting_guide; exit 1; }
+    step11_configure_nginx || { log_error "Step 11 failed"; print_troubleshooting_guide; exit 1; }
     step12_configure_ssl || log_warning "Step 12 completed with warnings"
     step13_configure_firewall || log_warning "Step 13 completed with warnings"
     step14_configure_systemd || { log_error "Step 14 failed"; exit 1; }
@@ -648,6 +941,9 @@ main() {
     log_info ""
     log_info "Installation log saved to: $LOG_FILE"
     log_info "Completed at $(date)"
+    log_info ""
+    log_info "💡 If you encounter any issues, run this command to see the troubleshooting guide:"
+    log_info "   cat $LOG_FILE | grep -A 100 'TROUBLESHOOTING GUIDE'"
 }
 
 # Run main installation

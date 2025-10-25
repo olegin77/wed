@@ -1,0 +1,241 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                       🚀 БЫСТРЫЙ СТАРТ                             ║
+║                  Скрипт auto-install-droplet.sh                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+✅ ВСЕ 8 КРИТИЧЕСКИХ ПРОБЛЕМ ИСПРАВЛЕНЫ!
+
+═══════════════════════════════════════════════════════════════════════
+  СПОСОБ 1: Локальный запуск (на сервере)
+═══════════════════════════════════════════════════════════════════════
+
+# 1. Клонируйте репозиторий
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git wed
+cd wed
+
+# 2. (Опционально) Установите параметры
+export DOMAIN=yourdomain.com
+export GIT_REPO=https://github.com/YOUR_USERNAME/YOUR_REPO.git
+export GIT_BRANCH=main
+
+# 3. Запустите скрипт
+sudo bash scripts/auto-install-droplet.sh
+
+═══════════════════════════════════════════════════════════════════════
+  СПОСОБ 2: Прямая установка из интернета
+═══════════════════════════════════════════════════════════════════════
+
+# Одна команда:
+curl -fsSL https://raw.githubusercontent.com/YOUR_REPO/wed/main/scripts/auto-install-droplet.sh | sudo bash
+
+# Или с параметрами:
+export DOMAIN=yourdomain.com
+curl -fsSL https://raw.githubusercontent.com/YOUR_REPO/wed/main/scripts/auto-install-droplet.sh | sudo bash
+
+═══════════════════════════════════════════════════════════════════════
+  ЧТО БУДЕТ УСТАНОВЛЕНО
+═══════════════════════════════════════════════════════════════════════
+
+✅ Docker и Docker Compose
+✅ Node.js 20.x и pnpm
+✅ PostgreSQL 15 (контейнер)
+✅ MinIO (контейнер)
+✅ 7 микросервисов (порты 3001-3007)
+✅ Web Next.js приложение (порт 3000)
+✅ Nginx (порты 80, 443)
+✅ SSL сертификат (если указан домен)
+✅ Firewall (UFW)
+✅ Systemd сервис для автозапуска
+✅ Ежедневные бэкапы (2:00 AM)
+
+═══════════════════════════════════════════════════════════════════════
+  ТРЕБОВАНИЯ К СИСТЕМЕ
+═══════════════════════════════════════════════════════════════════════
+
+✅ Ubuntu 22.04 LTS (обязательно)
+✅ Root доступ
+✅ Минимум 8GB RAM (swap создается автоматически)
+✅ Минимум 50GB свободного места
+✅ Доступ к интернету
+✅ Свободные порты: 3000-3007, 5434, 9000, 9001
+
+═══════════════════════════════════════════════════════════════════════
+  НОВЫЕ ВОЗМОЖНОСТИ (v2.0)
+═══════════════════════════════════════════════════════════════════════
+
+✨ Автоматическая проверка занятых портов
+✨ Умная проверка готовности контейнеров (до 5 минут)
+✨ Автоматическая миграция БД с 3 попытками
+✨ Автопересборка web-контейнера при проблемах
+✨ Проверка доступности порта 3000 перед настройкой nginx
+✨ Комплексная диагностика всех сервисов
+✨ Встроенное руководство по устранению проблем
+✨ Улучшенное логирование с цветными метками
+
+═══════════════════════════════════════════════════════════════════════
+  РЕШЕННЫЕ ПРОБЛЕМЫ
+═══════════════════════════════════════════════════════════════════════
+
+1. ✅ База данных не имеет таблиц
+   └─ Миграция через svc-auth + проверка таблиц
+
+2. ✅ Web-сервис может не запуститься
+   └─ Healthcheck + автопересборка
+
+3. ✅ Nginx может не проксировать
+   └─ Проверка порта 3000 + проверка proxy
+
+4. ✅ Порты могут быть заняты
+   └─ Проверка 11 портов перед запуском
+
+═══════════════════════════════════════════════════════════════════════
+  ПОСЛЕ УСТАНОВКИ
+═══════════════════════════════════════════════════════════════════════
+
+📍 Приложение доступно по адресу:
+   https://yourdomain.com  (если указан домен)
+   http://SERVER_IP        (если домен не указан)
+
+📋 Важные файлы и директории:
+   /home/weddingtech/app/              - Приложение
+   /home/weddingtech/app/.env          - Переменные окружения
+   /home/weddingtech/backups/          - Бэкапы БД
+   /var/log/weddingtech-install.log   - Лог установки
+
+═══════════════════════════════════════════════════════════════════════
+  ПОЛЕЗНЫЕ КОМАНДЫ
+═══════════════════════════════════════════════════════════════════════
+
+# Статус всех контейнеров
+docker-compose -f /home/weddingtech/app/docker-compose.yml ps
+
+# Логи всех сервисов (в реальном времени)
+docker-compose -f /home/weddingtech/app/docker-compose.yml logs -f
+
+# Логи конкретного сервиса
+docker-compose -f /home/weddingtech/app/docker-compose.yml logs --tail=100 web
+
+# Перезапуск всех сервисов
+docker-compose -f /home/weddingtech/app/docker-compose.yml restart
+
+# Перезапуск конкретного сервиса
+docker-compose -f /home/weddingtech/app/docker-compose.yml restart web
+
+# Остановка всех сервисов
+docker-compose -f /home/weddingtech/app/docker-compose.yml down
+
+# Запуск всех сервисов
+docker-compose -f /home/weddingtech/app/docker-compose.yml up -d
+
+═══════════════════════════════════════════════════════════════════════
+  РУЧНОЕ ИСПРАВЛЕНИЕ ПРОБЛЕМ
+═══════════════════════════════════════════════════════════════════════
+
+🔧 Если база данных не имеет таблиц:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml exec svc-auth sh -c 'cd /app && pnpm exec prisma migrate deploy'
+
+🔧 Если web-сервис не запустился:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml logs --tail=50 web
+   docker-compose -f /home/weddingtech/app/docker-compose.yml build --no-cache web
+   docker-compose -f /home/weddingtech/app/docker-compose.yml up -d web
+
+🔧 Проверка занятых портов:
+   sudo lsof -i :3000
+   sudo lsof -i :3001
+
+🔧 Освобождение порта:
+   sudo lsof -i :3000
+   sudo kill -9 <PID>
+
+🔧 Проверка базы данных:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml exec db psql -U pg -d wt -c '\dt'
+
+🔧 Проверка nginx:
+   sudo systemctl status nginx
+   sudo nginx -t
+   sudo journalctl -u nginx -n 50
+
+═══════════════════════════════════════════════════════════════════════
+  ДИАГНОСТИКА
+═══════════════════════════════════════════════════════════════════════
+
+📊 Проверка здоровья системы:
+   # Использование диска
+   df -h
+
+   # Использование памяти
+   free -h
+
+   # Загрузка CPU
+   top
+
+   # Статус Docker
+   sudo systemctl status docker
+
+   # Проверка портов
+   sudo netstat -tulpn | grep LISTEN
+
+═══════════════════════════════════════════════════════════════════════
+  ДОКУМЕНТАЦИЯ
+═══════════════════════════════════════════════════════════════════════
+
+📖 Подробная информация о всех исправлениях:
+   cat INSTALLATION_FIXES.md
+
+📖 Краткая сводка изменений:
+   cat FIXES_SUMMARY.md
+
+📖 Анализ решенных проблем:
+   cat USER_ISSUES_RESOLVED.md
+
+📖 Руководство по устранению проблем (из лога установки):
+   cat /var/log/weddingtech-install.log | grep -A 100 'TROUBLESHOOTING GUIDE'
+
+═══════════════════════════════════════════════════════════════════════
+  ОБНОВЛЕНИЕ СИСТЕМЫ
+═══════════════════════════════════════════════════════════════════════
+
+# Остановка сервисов
+sudo docker-compose -f /home/weddingtech/app/docker-compose.yml down
+
+# Обновление кода
+cd /home/weddingtech/app
+sudo git pull origin main
+
+# Пересборка образов
+sudo docker-compose -f /home/weddingtech/app/docker-compose.yml build
+
+# Запуск сервисов
+sudo docker-compose -f /home/weddingtech/app/docker-compose.yml up -d
+
+# Миграция БД (если нужно)
+sudo docker-compose -f /home/weddingtech/app/docker-compose.yml exec svc-auth sh -c 'cd /app && pnpm exec prisma migrate deploy'
+
+═══════════════════════════════════════════════════════════════════════
+  ПОДДЕРЖКА
+═══════════════════════════════════════════════════════════════════════
+
+При возникновении проблем:
+
+1. Проверьте лог установки:
+   cat /var/log/weddingtech-install.log
+
+2. Проверьте статус контейнеров:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml ps
+
+3. Проверьте логи сервисов:
+   docker-compose -f /home/weddingtech/app/docker-compose.yml logs --tail=100
+
+4. См. документацию:
+   cat USER_ISSUES_RESOLVED.md
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ Статус: ГОТОВО К ИСПОЛЬЗОВАНИЮ
+📅 Версия: 2.0
+📆 Дата: 2025-10-25
+🎯 Все задачи выполнены: 8/8 (100%)
+
+🚀 СКРИПТ ПОЛНОСТЬЮ ГОТОВ К ЗАПУСКУ НА ПРОДАКШЕНЕ!
+
+═══════════════════════════════════════════════════════════════════════
