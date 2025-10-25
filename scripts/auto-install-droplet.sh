@@ -158,7 +158,7 @@ step2_update_system() {
     fi
     
     retry_command "apt-get upgrade -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'"
-    retry_command "apt-get install -y curl wget git vim build-essential software-properties-common apt-transport-https ca-certificates gnupg lsb-release"
+    retry_command "apt-get install -y curl wget git vim build-essential software-properties-common apt-transport-https ca-certificates gnupg lsb-release lsof net-tools"
     
     log_success "System updated successfully"
 }
@@ -380,23 +380,102 @@ step9_build_docker_images() {
 step10_start_services() {
     log_info "Step 10: Starting services..."
     
-    # Start services
-    su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d"
+    # Check and free up ports if needed
+    log_info "Checking for port conflicts..."
+    local ports_to_check=(3000 3001 3002 3003 3004 3005 3006 3007 5432 9000 9001)
+    for port in "${ports_to_check[@]}"; do
+        if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null 2>&1; then
+            log_warning "Port $port is in use, attempting to free it..."
+            local pid=$(lsof -Pi :$port -sTCP:LISTEN -t)
+            kill -9 $pid 2>/dev/null || true
+            sleep 2
+        fi
+    done
     
-    # Wait for services to start
-    log_info "Waiting for services to initialize (60 seconds)..."
+    # Start database and minio first
+    log_info "Starting database and storage services..."
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d db minio"
+    
+    # Wait for database to be ready
+    log_info "Waiting for database to be ready (30 seconds)..."
+    sleep 30
+    
+    # Check if database is healthy
+    local db_attempts=0
+    while [ $db_attempts -lt 6 ]; do
+        if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db pg_isready -U pg" >/dev/null 2>&1; then
+            log_success "Database is ready"
+            break
+        fi
+        log_info "Database not ready yet, waiting 10 more seconds..."
+        sleep 10
+        db_attempts=$((db_attempts + 1))
+    done
+    
+    # Run database migrations
+    log_info "Running database migrations..."
+    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose run --rm svc-auth sh -c 'cd /app && pnpm prisma migrate deploy'" 2>/dev/null; then
+        log_success "Database migrations completed"
+    else
+        log_warning "Migration failed or no migrations to run"
+    fi
+    
+    # Start all microservices (except web)
+    log_info "Starting microservices..."
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d svc-auth svc-catalog svc-enquiries svc-billing svc-vendors svc-guests svc-payments"
+    
+    # Wait for services to be healthy
+    log_info "Waiting for services to become healthy (60 seconds)..."
     sleep 60
     
-    # Check service status
-    su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
+    # Check service health
+    local unhealthy_services=""
+    for service in svc-auth svc-catalog svc-enquiries svc-billing svc-vendors svc-guests svc-payments; do
+        local health=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps $service" | grep -o "healthy\|unhealthy\|starting" | head -1)
+        if [ "$health" != "healthy" ]; then
+            log_warning "$service is $health"
+            unhealthy_services="$unhealthy_services $service"
+        else
+            log_success "$service is healthy"
+        fi
+    done
     
-    # Initialize database
-    log_info "Initializing database..."
-    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T web pnpm run prisma:migrate deploy"; then
-        log_success "Database initialized"
-    else
-        log_warning "Database migration failed, you may need to run it manually later"
+    # Start web service (with retries)
+    log_info "Starting web application..."
+    local web_attempts=0
+    local web_started=false
+    
+    while [ $web_attempts -lt 3 ] && [ "$web_started" = false ]; do
+        if [ $web_attempts -gt 0 ]; then
+            log_info "Rebuilding web service (attempt $((web_attempts + 1))/3)..."
+            su - "$APP_USER" -c "cd $APP_DIR && docker-compose build --no-cache web"
+        fi
+        
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose up -d web" || true
+        
+        log_info "Waiting for web service to start (45 seconds)..."
+        sleep 45
+        
+        # Check if web is responding
+        if curl -f -s http://localhost:3000 >/dev/null 2>&1; then
+            log_success "Web service is responding"
+            web_started=true
+        else
+            log_warning "Web service not responding yet"
+            su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=30 web" || true
+        fi
+        
+        web_attempts=$((web_attempts + 1))
+    done
+    
+    if [ "$web_started" = false ]; then
+        log_warning "Web service may need more time or manual intervention"
+        log_info "Check logs with: docker-compose logs web"
     fi
+    
+    # Final status check
+    log_info "Final service status:"
+    su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
     
     log_success "Services started"
 }
@@ -563,28 +642,135 @@ EOF
 }
 
 step16_health_check() {
-    log_info "Step 16: Running health checks..."
+    log_info "Step 16: Running comprehensive health checks..."
     
     # Check Docker containers
     log_info "Checking Docker containers..."
     su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps"
     
-    # Check web endpoint
-    log_info "Checking web endpoint..."
-    if curl -f http://localhost:3000 > /dev/null 2>&1; then
-        log_success "Web endpoint responding"
-    else
-        log_warning "Web endpoint not responding yet, may need more time to start"
+    # Count healthy services
+    local healthy_count=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose ps" | grep -c "healthy" || echo "0")
+    local total_services=9  # db, minio, 7 microservices
+    log_info "Healthy services: $healthy_count/$total_services"
+    
+    # Check each service endpoint
+    log_info "Checking service endpoints..."
+    local endpoints=(
+        "3001:svc-auth"
+        "3002:svc-catalog"
+        "3003:svc-enquiries"
+        "3004:svc-billing"
+        "3005:svc-vendors"
+        "3006:svc-guests"
+        "3007:svc-payments"
+    )
+    
+    for endpoint in "${endpoints[@]}"; do
+        local port="${endpoint%%:*}"
+        local service="${endpoint##*:}"
+        if curl -f -s "http://localhost:$port/healthz" >/dev/null 2>&1; then
+            log_success "$service responding on port $port"
+        else
+            log_warning "$service not responding on port $port"
+        fi
+    done
+    
+    # Check web endpoint (main application)
+    log_info "Checking main web application..."
+    local web_attempts=0
+    local web_ok=false
+    
+    while [ $web_attempts -lt 5 ]; do
+        if curl -f -s http://localhost:3000 >/dev/null 2>&1; then
+            log_success "Web application responding on port 3000"
+            web_ok=true
+            break
+        fi
+        log_info "Web not ready, waiting 10 seconds... (attempt $((web_attempts + 1))/5)"
+        sleep 10
+        web_attempts=$((web_attempts + 1))
+    done
+    
+    if [ "$web_ok" = false ]; then
+        log_warning "Web application not responding after multiple attempts"
+        log_info "Checking web container logs..."
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=50 web" || true
     fi
     
-    # Check logs for errors
-    log_info "Checking for critical errors in logs..."
-    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --tail=50 | grep -i 'error\|failed\|fatal'" > /tmp/errors.log 2>&1; then
-        log_warning "Some errors found in logs (this may be normal during startup)"
-        head -20 /tmp/errors.log
+    # Check Nginx proxy
+    log_info "Checking Nginx reverse proxy..."
+    if systemctl is-active nginx >/dev/null 2>&1; then
+        log_success "Nginx is running"
+        
+        # Test proxy
+        if curl -f -s -H "Host: $DOMAIN" http://localhost >/dev/null 2>&1; then
+            log_success "Nginx proxy is working"
+        else
+            log_warning "Nginx proxy may not be configured correctly"
+        fi
+    else
+        log_warning "Nginx is not running"
+    fi
+    
+    # Check database
+    log_info "Checking database..."
+    if su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c 'SELECT 1'" >/dev/null 2>&1; then
+        log_success "Database is accessible"
+        
+        # Check if tables exist
+        local table_count=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -t -c \"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public'\"" 2>/dev/null | tr -d ' ' || echo "0")
+        log_info "Database has $table_count tables"
+        
+        if [ "$table_count" -lt 5 ]; then
+            log_warning "Database may not be fully initialized. Run migrations manually if needed:"
+            log_info "  cd $APP_DIR && docker-compose run --rm svc-auth sh -c 'cd /app && pnpm prisma migrate deploy'"
+        fi
+    else
+        log_warning "Cannot connect to database"
+    fi
+    
+    # Check disk space
+    log_info "Checking disk space..."
+    local disk_usage=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+    if [ "$disk_usage" -gt 80 ]; then
+        log_warning "Disk usage is high: ${disk_usage}%"
+    else
+        log_success "Disk usage is OK: ${disk_usage}%"
+    fi
+    
+    # Check memory
+    log_info "Checking memory usage..."
+    local mem_usage=$(free | awk 'NR==2 {printf "%.0f", $3*100/$2}')
+    if [ "$mem_usage" -gt 90 ]; then
+        log_warning "Memory usage is high: ${mem_usage}%"
+    else
+        log_success "Memory usage is OK: ${mem_usage}%"
+    fi
+    
+    # Check critical errors in recent logs
+    log_info "Scanning for critical errors..."
+    local critical_errors=$(su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --since 5m 2>&1 | grep -i 'FATAL\|Cannot find module\|ECONNREFUSED' | wc -l" || echo "0")
+    
+    if [ "$critical_errors" -gt 0 ]; then
+        log_warning "Found $critical_errors critical errors in recent logs"
+        su - "$APP_USER" -c "cd $APP_DIR && docker-compose logs --since 5m 2>&1 | grep -i 'FATAL\|Cannot find module\|ECONNREFUSED' | head -10"
+    else
+        log_success "No critical errors in recent logs"
     fi
     
     log_success "Health checks completed"
+    
+    # Summary
+    echo ""
+    log_info "=========================================="
+    log_info "HEALTH CHECK SUMMARY"
+    log_info "=========================================="
+    log_info "Healthy Services: $healthy_count/$total_services"
+    log_info "Web Application: $([ "$web_ok" = true ] && echo "✓ OK" || echo "✗ NOT RESPONDING")"
+    log_info "Database: $(su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c 'SELECT 1'" >/dev/null 2>&1 && echo "✓ OK" || echo "✗ ERROR")"
+    log_info "Nginx: $(systemctl is-active nginx >/dev/null 2>&1 && echo "✓ RUNNING" || echo "✗ NOT RUNNING")"
+    log_info "=========================================="
+    echo ""
 }
 
 ################################################################################
@@ -621,13 +807,32 @@ main() {
     log_success "Installation completed successfully!"
     log_info "=========================================="
     log_info ""
-    log_info "🎉 Your WeddingTech platform is now running!"
+    
+    # Final verification
+    log_info "Running final verification..."
+    local final_check_ok=true
+    
+    # Check if web is accessible
+    if curl -f -s http://localhost:3000 >/dev/null 2>&1; then
+        log_success "✓ Web application is accessible"
+    else
+        log_warning "✗ Web application is not accessible yet"
+        log_info "  This might be normal - the application may need a few more minutes to start"
+        log_info "  Monitor with: docker-compose -f $APP_DIR/docker-compose.yml logs -f web"
+        final_check_ok=false
+    fi
+    
+    # Get public IP
+    local public_ip=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "UNKNOWN")
+    
+    log_info ""
+    log_info "🎉 Your WeddingTech platform installation is complete!"
     log_info ""
     log_info "📍 Access your application at:"
-    if [ "$DOMAIN" == "localhost" ]; then
-        log_info "   http://localhost"
-    else
-        log_info "   https://$DOMAIN"
+    log_info "   - Local: http://localhost"
+    log_info "   - Public IP: http://$public_ip"
+    if [ "$DOMAIN" != "localhost" ] && [ -n "$DOMAIN" ]; then
+        log_info "   - Domain: https://$DOMAIN (after DNS propagation)"
     fi
     log_info ""
     log_info "📋 Important files:"
@@ -639,14 +844,25 @@ main() {
     log_info "🔧 Useful commands:"
     log_info "   - View logs: docker-compose -f $APP_DIR/docker-compose.yml logs -f"
     log_info "   - Check status: docker-compose -f $APP_DIR/docker-compose.yml ps"
-    log_info "   - Restart: systemctl restart weddingtech"
+    log_info "   - Restart all: systemctl restart weddingtech"
+    log_info "   - Restart web: docker-compose -f $APP_DIR/docker-compose.yml restart web"
     log_info ""
-    log_info "⚠️  Don't forget to:"
+    log_info "🔍 Troubleshooting:"
+    if [ "$final_check_ok" = false ]; then
+        log_info "   If web is not responding:"
+        log_info "   1. Check logs: docker-compose -f $APP_DIR/docker-compose.yml logs web"
+        log_info "   2. Check service health: docker-compose -f $APP_DIR/docker-compose.yml ps"
+        log_info "   3. Rebuild if needed: cd $APP_DIR && docker-compose up -d --build web"
+        log_info "   4. Run migrations: cd $APP_DIR && docker-compose run --rm svc-auth sh -c 'cd /app && pnpm prisma migrate deploy'"
+    fi
+    log_info ""
+    log_info "⚠️  Next steps:"
     log_info "   1. Review and secure $APP_DIR/.env"
-    log_info "   2. Update your domain DNS to point to this server"
-    log_info "   3. Configure your application settings"
+    log_info "   2. Update your domain DNS to point to $public_ip"
+    log_info "   3. Wait 5-10 minutes for all services to fully initialize"
+    log_info "   4. Access the application and complete setup"
     log_info ""
-    log_info "Installation log saved to: $LOG_FILE"
+    log_info "📝 Installation log saved to: $LOG_FILE"
     log_info "Completed at $(date)"
 }
 
