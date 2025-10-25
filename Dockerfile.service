@@ -30,11 +30,18 @@ RUN pnpm exec prisma generate
 ARG SERVICE_NAME
 ENV SERVICE_NAME=${SERVICE_NAME}
 
+# Копирование entrypoint script
+COPY docker-entrypoint-service.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint-service.sh
+
 # Рабочая директория сервиса
 WORKDIR /app/apps/${SERVICE_NAME}
 
 # Порт по умолчанию
 EXPOSE 3000
+
+# Entrypoint для генерации Prisma перед запуском
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint-service.sh"]
 
 # Команда запуска
 CMD ["pnpm", "start"]
