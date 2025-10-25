@@ -5,37 +5,45 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-PID_DIR="/run/wed"
+# Поддержка обеих директорий для PID файлов
+PID_DIR_OLD="/run/wed"
+PID_DIR_NEW="/tmp/weddingtech-pids"
 
 echo -e "${YELLOW}🛑 Остановка всех сервисов WeddingTech...${NC}"
 
-# Остановка Node.js процессов по PID файлам
-if [ -d "$PID_DIR" ]; then
-    for pid_file in "${PID_DIR}"/*.pid; do
-        if [ -f "$pid_file" ]; then
-            PID=$(cat "$pid_file")
-            SERVICE=$(basename "$pid_file" .pid)
-            
-            if kill -0 "$PID" 2>/dev/null; then
-                echo -e "${YELLOW}Останавливаем ${SERVICE} (PID: ${PID})${NC}"
-                kill "$PID" 2>/dev/null || true
-                sleep 0.5
+# Функция для остановки процессов из директории
+stop_from_dir() {
+    local dir=$1
+    
+    if [ -d "$dir" ]; then
+        for pid_file in "${dir}"/*.pid; do
+            if [ -f "$pid_file" ]; then
+                PID=$(cat "$pid_file")
+                SERVICE=$(basename "$pid_file" .pid)
                 
-                # Если процесс всё ещё жив, убиваем принудительно
                 if kill -0 "$PID" 2>/dev/null; then
-                    echo -e "${YELLOW}Принудительная остановка ${SERVICE}${NC}"
-                    kill -9 "$PID" 2>/dev/null || true
+                    echo -e "${YELLOW}Останавливаем ${SERVICE} (PID: ${PID})${NC}"
+                    kill "$PID" 2>/dev/null || true
+                    sleep 0.5
+                    
+                    # Если процесс всё ещё жив, убиваем принудительно
+                    if kill -0 "$PID" 2>/dev/null; then
+                        echo -e "${YELLOW}Принудительная остановка ${SERVICE}${NC}"
+                        kill -9 "$PID" 2>/dev/null || true
+                    fi
+                else
+                    echo -e "${YELLOW}Процесс ${SERVICE} (PID: ${PID}) уже остановлен${NC}"
                 fi
-            else
-                echo -e "${YELLOW}Процесс ${SERVICE} (PID: ${PID}) уже остановлен${NC}"
+                
+                rm -f "$pid_file"
             fi
-            
-            rm -f "$pid_file"
-        fi
-    done
-else
-    echo -e "${YELLOW}Директория ${PID_DIR} не найдена${NC}"
-fi
+        done
+    fi
+}
+
+# Остановка Node.js процессов по PID файлам из обеих директорий
+stop_from_dir "$PID_DIR_OLD"
+stop_from_dir "$PID_DIR_NEW"
 
 # Дополнительная очистка процессов на портах
 echo -e "${YELLOW}🔍 Проверка портов на оставшиеся процессы...${NC}"

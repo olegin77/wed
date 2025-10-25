@@ -41,11 +41,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3001
+      HOST: 0.0.0.0
     ports: ["3001:3001"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Catalog Service
   svc-catalog:
@@ -57,11 +64,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3002
+      HOST: 0.0.0.0
     ports: ["3002:3002"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3002/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Enquiries Service
   svc-enquiries:
@@ -73,11 +87,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3003
+      HOST: 0.0.0.0
     ports: ["3003:3003"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3003/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Billing Service
   svc-billing:
@@ -89,11 +110,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3004
+      HOST: 0.0.0.0
     ports: ["3004:3004"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3004/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Vendors Service
   svc-vendors:
@@ -105,11 +133,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3005
+      HOST: 0.0.0.0
     ports: ["3005:3005"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3005/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Guests Service
   svc-guests:
@@ -121,11 +156,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3006
+      HOST: 0.0.0.0
     ports: ["3006:3006"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3006/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Payments Service
   svc-payments:
@@ -137,11 +179,18 @@ services:
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
       PORT: 3007
+      HOST: 0.0.0.0
     ports: ["3007:3007"]
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3007/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   # Frontend (Next.js)
   web:
@@ -150,18 +199,28 @@ services:
       dockerfile: Dockerfile.web
     environment:
       DATABASE_URL: postgresql://pg:pg@db:5432/wt
-      INTERNAL_API_URL: http://localhost
+      INTERNAL_API_URL: http://host.docker.internal
       PORT: 3000
+      HOST: 0.0.0.0
     ports: ["3000:3000"]
     depends_on:
-      - svc-auth
-      - svc-catalog
-      - svc-enquiries
-      - svc-billing
-      - svc-vendors
-      - svc-guests
-      - svc-payments
+      svc-auth:
+        condition: service_healthy
+      svc-catalog:
+        condition: service_healthy
+      svc-enquiries:
+        condition: service_healthy
+      svc-billing:
+        condition: service_healthy
+      svc-vendors:
+        condition: service_healthy
+      svc-guests:
+        condition: service_healthy
+      svc-payments:
+        condition: service_healthy
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres_data:

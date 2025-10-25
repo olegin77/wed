@@ -1,6 +1,9 @@
 # Dockerfile для микросервисов
 FROM node:20-alpine AS base
 
+# Установка системных зависимостей для health checks
+RUN apk add --no-cache wget curl
+
 # Установка pnpm
 RUN npm install -g pnpm
 
