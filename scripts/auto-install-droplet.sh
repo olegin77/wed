@@ -811,6 +811,18 @@ step16_health_check() {
     log_info "=========================================="
     
     log_success "Health checks completed"
+    
+    # Summary
+    echo ""
+    log_info "=========================================="
+    log_info "HEALTH CHECK SUMMARY"
+    log_info "=========================================="
+    log_info "Healthy Services: $healthy_count/$total_services"
+    log_info "Web Application: $([ "$web_ok" = true ] && echo "✓ OK" || echo "✗ NOT RESPONDING")"
+    log_info "Database: $(su - "$APP_USER" -c "cd $APP_DIR && docker-compose exec -T db psql -U pg -d wt -c 'SELECT 1'" >/dev/null 2>&1 && echo "✓ OK" || echo "✗ ERROR")"
+    log_info "Nginx: $(systemctl is-active nginx >/dev/null 2>&1 && echo "✓ RUNNING" || echo "✗ NOT RUNNING")"
+    log_info "=========================================="
+    echo ""
 }
 
 ################################################################################
@@ -923,13 +935,32 @@ main() {
     log_success "Installation completed successfully!"
     log_info "=========================================="
     log_info ""
-    log_info "🎉 Your WeddingTech platform is now running!"
+    
+    # Final verification
+    log_info "Running final verification..."
+    local final_check_ok=true
+    
+    # Check if web is accessible
+    if curl -f -s http://localhost:3000 >/dev/null 2>&1; then
+        log_success "✓ Web application is accessible"
+    else
+        log_warning "✗ Web application is not accessible yet"
+        log_info "  This might be normal - the application may need a few more minutes to start"
+        log_info "  Monitor with: docker-compose -f $APP_DIR/docker-compose.yml logs -f web"
+        final_check_ok=false
+    fi
+    
+    # Get public IP
+    local public_ip=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "UNKNOWN")
+    
+    log_info ""
+    log_info "🎉 Your WeddingTech platform installation is complete!"
     log_info ""
     log_info "📍 Access your application at:"
-    if [ "$DOMAIN" == "localhost" ]; then
-        log_info "   http://localhost"
-    else
-        log_info "   https://$DOMAIN"
+    log_info "   - Local: http://localhost"
+    log_info "   - Public IP: http://$public_ip"
+    if [ "$DOMAIN" != "localhost" ] && [ -n "$DOMAIN" ]; then
+        log_info "   - Domain: https://$DOMAIN (after DNS propagation)"
     fi
     log_info ""
     log_info "📋 Important files:"
@@ -941,14 +972,25 @@ main() {
     log_info "🔧 Useful commands:"
     log_info "   - View logs: docker-compose -f $APP_DIR/docker-compose.yml logs -f"
     log_info "   - Check status: docker-compose -f $APP_DIR/docker-compose.yml ps"
-    log_info "   - Restart: systemctl restart weddingtech"
+    log_info "   - Restart all: systemctl restart weddingtech"
+    log_info "   - Restart web: docker-compose -f $APP_DIR/docker-compose.yml restart web"
     log_info ""
-    log_info "⚠️  Don't forget to:"
+    log_info "🔍 Troubleshooting:"
+    if [ "$final_check_ok" = false ]; then
+        log_info "   If web is not responding:"
+        log_info "   1. Check logs: docker-compose -f $APP_DIR/docker-compose.yml logs web"
+        log_info "   2. Check service health: docker-compose -f $APP_DIR/docker-compose.yml ps"
+        log_info "   3. Rebuild if needed: cd $APP_DIR && docker-compose up -d --build web"
+        log_info "   4. Run migrations: cd $APP_DIR && docker-compose run --rm svc-auth sh -c 'cd /app && pnpm prisma migrate deploy'"
+    fi
+    log_info ""
+    log_info "⚠️  Next steps:"
     log_info "   1. Review and secure $APP_DIR/.env"
-    log_info "   2. Update your domain DNS to point to this server"
-    log_info "   3. Configure your application settings"
+    log_info "   2. Update your domain DNS to point to $public_ip"
+    log_info "   3. Wait 5-10 minutes for all services to fully initialize"
+    log_info "   4. Access the application and complete setup"
     log_info ""
-    log_info "Installation log saved to: $LOG_FILE"
+    log_info "📝 Installation log saved to: $LOG_FILE"
     log_info "Completed at $(date)"
     log_info ""
     log_info "💡 If you encounter any issues, run this command to see the troubleshooting guide:"
