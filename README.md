@@ -1,135 +1,90 @@
 # 💍 WeddingTech Platform
 
-**A comprehensive microservices-based wedding marketplace platform** built with Next.js, TypeScript, and PostgreSQL.
+Платформа для организации свадеб на базе микросервисной архитектуры с Next.js, TypeScript и PostgreSQL.
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![License](https://img.shields.io/badge/license-MIT-blue)]()
-[![Node Version](https://img.shields.io/badge/node-20.x-green)]()
-
-## ✨ Features
-
-- 🎯 **Full-Stack Wedding Marketplace** - Connect couples with wedding vendors
-- 🏗️ **Microservices Architecture** - 7 independent, scalable services
-- 🔐 **Authentication & Authorization** - Secure user management
-- 📋 **Enquiry Management** - Handle vendor inquiries efficiently
-- 💳 **Payment Processing** - Integrated billing and payments
-- 👥 **Guest List Management** - Complete wedding guest tracking
-- 📸 **Vendor Catalog** - Searchable vendor directory with filters
-- 🌐 **Multi-language Support** - i18n ready
-- 📱 **Responsive Design** - Works on all devices
-
-## 🚀 Quick Start
-
-Get the entire platform running with one command:
+## 🚀 Быстрый Старт (Разработка)
 
 ```bash
+# Клонировать репозиторий
+git clone <your-repo-url>
+cd weddingtech
+
+# Установить зависимости
+npm install
+
+# Запустить все сервисы
 npm run dev:full
 ```
 
-Access the app at **http://localhost:3000**
+Откройте **http://localhost:3000** в браузере.
 
-Stop everything with:
+## 📚 Документация
 
-```bash
-npm run stop
+### Основные Руководства
+
+- 🚀 **[INSTALL.md](./INSTALL.md)** - Полная установка на чистый сервер (Ubuntu, Docker, Node.js, nginx, SSL)
+- 🛠️ **[GETTING_STARTED.md](./GETTING_STARTED.md)** - Быстрый старт для локальной разработки
+- 🔀 **[GIT_WORKFLOW.md](./GIT_WORKFLOW.md)** - Работа с Git без конфликтов в PR
+
+### Дополнительно
+
+- 📝 **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Правила контрибуции
+- 📜 **[CHANGELOG.md](./CHANGELOG.md)** - История изменений
+- 🗺️ **[ROADMAP.md](./ROADMAP.md)** - Планы развития
+- 📋 **[SUMMARY.md](./SUMMARY.md)** - Обзор всей документации
+
+## 🏗️ Архитектура
+
+```
+Browser → Next.js (3000) → Микросервисы (3001-3007) → PostgreSQL (5434)
 ```
 
-**👉 For detailed setup instructions, see [GETTING_STARTED.md](./GETTING_STARTED.md)**
+**Микросервисы:**
+- svc-auth (3001) - Аутентификация
+- svc-catalog (3002) - Каталог поставщиков
+- svc-enquiries (3003) - Запросы
+- svc-billing (3004) - Биллинг
+- svc-vendors (3005) - Управление поставщиками  
+- svc-guests (3006) - Списки гостей
+- svc-payments (3007) - Платежи
 
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────┐
-│           Browser / Client                   │
-└────────────────┬────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────────────┐
-│   Next.js Frontend + API Gateway (3000)     │
-└────────────────┬────────────────────────────┘
-                 │
-     ┌───────────┼───────────┐
-     ▼           ▼           ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐
-│  Auth   │ │ Catalog │ │Enquiries│
-│  :3001  │ │  :3002  │ │  :3003  │
-└────┬────┘ └────┬────┘ └────┬────┘
-     │           │           │
-     ▼           ▼           ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐
-│ Billing │ │ Vendors │ │ Guests  │
-│  :3004  │ │  :3005  │ │  :3006  │
-└────┬────┘ └────┬────┘ └────┬────┘
-     │           │           │
-     └───────────┼───────────┘
-                 ▼
-         ┌──────────────┐
-         │  PostgreSQL  │
-         │    :5434     │
-         └──────────────┘
-```
-
-## 📦 Tech Stack
+## 📦 Технологии
 
 - **Frontend:** Next.js 14, React 18, TypeScript, TailwindCSS
 - **Backend:** Node.js 20, Microservices
 - **Database:** PostgreSQL 15, Prisma ORM
 - **Storage:** MinIO (S3-compatible)
-- **Deployment:** Docker, DigitalOcean App Platform
+- **Deployment:** Docker, DigitalOcean
 
-## 🛠️ Development
-
-### Prerequisites
-
-- Node.js 20.x
-- npm 10.x
-- Docker (optional, for PostgreSQL)
-
-### Available Commands
+## 🔧 Основные Команды
 
 ```bash
-# Development
-npm run dev              # Frontend only
-npm run dev:full         # All services
-npm run stop             # Stop all services
+# Разработка
+npm run dev              # Только frontend
+npm run dev:full         # Все сервисы
+npm run stop             # Остановить все
 
-# Database
-npm run prisma:gen       # Generate Prisma Client
-npm run prisma:migrate   # Apply migrations
-npm run prisma:studio    # Open Prisma Studio GUI
+# База данных
+npm run prisma:gen       # Генерация Prisma Client
+npm run prisma:migrate   # Применить миграции
+npm run prisma:studio    # Открыть Prisma Studio
 
 # Production
-npm run build            # Build Next.js
-npm start                # Start production server
+npm run build            # Собрать проект
+npm start                # Запустить production сервер
+
+# Docker
+docker-compose up -d     # Запустить все контейнеры
+docker-compose down      # Остановить все
 ```
 
-### Microservices
-
-| Service | Port | Description |
-|---------|------|-------------|
-| svc-auth | 3001 | Authentication & user management |
-| svc-catalog | 3002 | Vendor catalog & search |
-| svc-enquiries | 3003 | Enquiry management system |
-| svc-billing | 3004 | Billing & invoicing |
-| svc-vendors | 3005 | Vendor profile management |
-| svc-guests | 3006 | Guest list management |
-| svc-payments | 3007 | Payment processing |
-
-## 📚 Documentation
-
-- **[Getting Started](./GETTING_STARTED.md)** - Complete setup guide
-- **[Deployment](./DEPLOYMENT.md)** - Production deployment guide
-- **[API Documentation](./docs/api/)** - API reference
-- **[Architecture](./docs/architecture/)** - System design docs
-- **[Contributing](./CONTRIBUTING.md)** - Contribution guidelines
-
-## 📁 Project Structure
+## 📁 Структура Проекта
 
 ```
 /workspace
-├── app/                   # Next.js pages (App Router)
-├── src/                   # UI components & utilities
-├── apps/                  # Microservices
+├── app/                 # Next.js страницы
+├── src/                 # React компоненты
+├── apps/                # Микросервисы
 │   ├── svc-auth/
 │   ├── svc-catalog/
 │   ├── svc-enquiries/
@@ -137,94 +92,41 @@ npm start                # Start production server
 │   ├── svc-vendors/
 │   ├── svc-guests/
 │   └── svc-payments/
-├── packages/              # Shared packages
-│   ├── prisma/
-│   ├── security/
-│   └── ...
-├── docs/                  # Documentation
-├── scripts/               # Dev & deployment scripts
-├── docker-compose.yml     # Docker services
-├── next.config.mjs        # Next.js + API Gateway
-└── schema.prisma          # Database schema
+├── packages/            # Общие пакеты
+├── scripts/             # Скрипты развертывания
+├── docker-compose.yml   # Docker конфигурация
+└── schema.prisma        # Схема базы данных
 ```
 
-## 🚀 Deployment
+## 🚀 Production Deployment
 
-Deploy to production in minutes:
+Для установки на сервер см. **[INSTALL.md](./INSTALL.md)**
 
-### DigitalOcean App Platform
-
-```bash
-doctl apps create --spec .do/app.yaml
-```
-
-### Docker (VPS)
+Быстрый запуск с Docker:
 
 ```bash
 docker-compose up -d --build
 ```
 
-**👉 Full deployment guide: [DEPLOYMENT.md](./DEPLOYMENT.md)**
+## 🔒 Безопасность
 
-## 🔒 Security
+- HTTPS/SSL обязателен
+- JWT аутентификация
+- CORS настроен
+- Rate limiting включен
+- SQL injection защита (Prisma)
+- XSS защита
 
-- ✅ HTTPS/SSL enforced
-- ✅ JWT-based authentication
-- ✅ CORS configured
-- ✅ Rate limiting
-- ✅ SQL injection protection (Prisma)
-- ✅ XSS protection
-- ✅ Security headers configured
+## 🆘 Помощь
 
-## 🧪 Testing
+- Документация: см. файлы `*.md`
+- Проблемы: проверьте логи в `/tmp/*.log`
+- Health checks: `curl http://localhost:300X/health`
 
-```bash
-# Run all tests
-npm test
+## 📝 Лицензия
 
-# Run specific service tests
-npm test --workspace=apps/svc-auth
-```
-
-## 📊 Performance
-
-- **Lighthouse Score:** 90+ (Performance)
-- **First Contentful Paint:** < 1.5s
-- **Time to Interactive:** < 3s
-- **Database Queries:** Optimized with indexing
-- **API Response Time:** < 200ms (avg)
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-## 🆘 Support
-
-- **Documentation:** [docs/](./docs/)
-- **Issues:** [GitHub Issues](https://github.com/your-org/weddingtech/issues)
-- **Email:** support@weddingtech.uz
-
-## 🎯 Roadmap
-
-- [ ] Mobile apps (React Native)
-- [ ] Advanced analytics dashboard
-- [ ] AI-powered vendor recommendations
-- [ ] Real-time chat system
-- [ ] Multi-currency support
-- [ ] White-label solution for partners
+MIT License
 
 ---
 
-**Built with ❤️ for the wedding industry**
-
-*Version 2.0 | Last updated: 2025-10-24*
+**Версия 2.0** | Обновлено: 2025-10-25
