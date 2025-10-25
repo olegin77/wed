@@ -158,7 +158,7 @@ step2_update_system() {
     fi
     
     retry_command "apt-get upgrade -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'"
-    retry_command "apt-get install -y curl wget git vim build-essential software-properties-common apt-transport-https ca-certificates gnupg lsb-release"
+    retry_command "apt-get install -y curl wget git vim build-essential software-properties-common apt-transport-https ca-certificates gnupg lsb-release lsof net-tools"
     
     log_success "System updated successfully"
 }
@@ -304,13 +304,16 @@ step7_configure_environment() {
     fi
     
     cat > "$env_file" << EOF
-# Database
+# Database Configuration
 DATABASE_URL=postgresql://pg:${db_password}@db:5432/wt
 DB_PASSWORD=${db_password}
+POSTGRES_USER=pg
+POSTGRES_DB=wt
 
 # Application
 NODE_ENV=production
 PORT=3000
+HOST=0.0.0.0
 
 # Auth
 NEXTAUTH_SECRET=${nextauth_secret}
@@ -321,8 +324,10 @@ MINIO_ENDPOINT=minio
 MINIO_PORT=9000
 MINIO_ACCESS_KEY=minioadmin
 MINIO_SECRET_KEY=${minio_password}
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=${minio_password}
 
-# Service URLs (internal)
+# Service URLs (internal Docker network)
 AUTH_SERVICE_URL=http://svc-auth:3001
 CATALOG_SERVICE_URL=http://svc-catalog:3002
 ENQUIRIES_SERVICE_URL=http://svc-enquiries:3003
@@ -330,6 +335,10 @@ BILLING_SERVICE_URL=http://svc-billing:3004
 VENDORS_SERVICE_URL=http://svc-vendors:3005
 GUESTS_SERVICE_URL=http://svc-guests:3006
 PAYMENTS_SERVICE_URL=http://svc-payments:3007
+
+# External API URLs (for Next.js)
+NEXT_PUBLIC_API_URL=http://localhost:3000
+INTERNAL_API_URL=http://host.docker.internal
 EOF
     
     chown "$APP_USER:$APP_USER" "$env_file"
