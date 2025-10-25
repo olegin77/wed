@@ -7,7 +7,7 @@ http
   .createServer((req, res) => {
     applySecurityHeaders(res);
     
-    if (req.url === "/health") {
+    if (req.url === "/healthz") {
       const db = true; // TODO: заменить stub на реальный ping БД
       res.writeHead(200, { "Content-Type": "application/json" });
       return res.end(
@@ -19,6 +19,4 @@ http
     res.end();
   })
   .listen(port, "0.0.0.0", () => console.log("svc ok", port));
-
-// health
 

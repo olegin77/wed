@@ -21,7 +21,7 @@ http
     applySecurityHeaders(res);
     
     try {
-      if (req.url === "/health") {
+      if (req.url === "/healthz") {
         let db = false;
         try {
           await prisma.$queryRaw`SELECT 1`;
@@ -76,6 +76,4 @@ http
     }
   })
   .listen(port, "0.0.0.0", () => console.log("svc ok", port));
-
-// health
 

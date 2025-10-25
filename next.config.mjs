@@ -8,6 +8,14 @@ const nextConfig = {
     // Next.js invokes its own ESLint runner during builds; we rely on workspace linting instead.
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // Allow development server access from external IPs
+    allowedDevOrigins: [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'http://0.0.0.0:3000'
+    ],
+  },
   webpack: (config) => {
     config.externals = config.externals ?? [];
     config.externals.push({

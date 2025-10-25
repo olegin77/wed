@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 http.createServer((req, res) => {
   applySecurityHeaders(res);
   
-  if (req.url === "/health") {
+  if (req.url === "/healthz") {
     res.writeHead(200, { "Content-Type": "application/json" });
     return res.end(JSON.stringify({ status: "ok" }));
   }
@@ -14,6 +14,4 @@ http.createServer((req, res) => {
   res.writeHead(404);
   res.end();
 }).listen(port, "0.0.0.0", () => console.log("svc ok", port));
-
-// health
 

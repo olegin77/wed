@@ -356,7 +356,7 @@ export function createAuthServer(overrides = {}) {
     applySecurityHeaders(res);
     
     try {
-      if (req.method === "GET" && req.url === "/health") {
+      if (req.method === "GET" && req.url === "/healthz") {
         return sendJson(res, 200, { status: "ok" });
       }
 
